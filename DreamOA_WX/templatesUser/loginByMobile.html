@@ -1,0 +1,38 @@
+﻿<ion-view title="" style="font-size:30px" >
+    <ion-header-bar id="headBar" align-title="center" class="bar-assertive">
+        <div><img ng-init="$scope.showLogo=true;" ng-if="showLogo" style=" vertical-align:top;" width="33" height="33" ng-src="../img/{{LogoPath}}" /></div>
+        <h1 class="title">登录</h1>
+        <button class="button button-clear button-white ion-android-social" ng-if="showVister==true" ng-click="visterLogin()">访客登录</button>
+    </ion-header-bar>
+
+    <ion-content class="padding-top bg-gray">
+        <ion-slide-box does-continue="true" auto-play="true" show-pager="false" ng-if="needShowImage" ng-show="loginImg.length>0">
+            <ion-slide ng-repeat="img in loginImg">
+                <div class="center-block text-center"><img style="border-radius:5%" ng-src="../img/loginImg/{{img.imgSrc}}"></div>
+            </ion-slide>
+        </ion-slide-box>
+        <div class="list padding-top padding-left padding-right">
+            <label class="item item-input">
+                <span class="input-label icon ion-person">&nbsp;&nbsp;手机号码</span>
+                <input type="text" placeholder="手机号码" ng-model="registerObj.logname" required>
+            </label>
+            <div class="item item-input">
+                <span class="input-label icon ion-locked">&nbsp;&nbsp;验证码</span>
+                <input type="number" placeholder="验证码" ng-model="registerObj.password" required />
+
+
+            </div>
+            <div class="item">
+                <span>
+                    <button ng-if="!registerObj.hasSend" class="button button-assertive button-block" ng-click="sendSMS()" ng-disabled="registerObj.logname.length!=11">发送验证码</button>
+                    <button ng-if="registerObj.hasSend" class="button button-assertive button-block" disabled>{{registerObj.timer}}</button>
+                </span>
+            </div>
+
+        </div>
+        <div class="padding-left padding-right" style="text-align:center;">
+            <button class="button button-large button-assertive" ng-click="teacherLogin()" ng-disabled="registerObj.logname.length!=11">登  录</button>
+        </div>
+    </ion-content>
+</ion-view>
+

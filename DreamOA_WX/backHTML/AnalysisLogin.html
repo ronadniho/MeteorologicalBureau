@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <title>学在中浦院后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap/css/site.css" rel="stylesheet">
+    <script src="../Script/ztree/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript">
+
+
+        function firstLoad() {
+            // 存储查询条件
+            var tyear = $("#selYear option:selected").text();
+            var tmonth = $("#selMonth option:selected").text();
+
+            $("#hidyear").val(tyear);
+            $("#hidmonth").val(tmonth);
+            var html = "";
+            $.ajax({
+                type: "post",
+                url: "backHtmlHelp.ashx",
+                data: { tyear: tyear, tmonth: tmonth, func: "getLoginData" },
+                success: function (data) {
+                    if (data != "" && data != null) {
+                        var content = eval("(" + data + ")");
+                        if (content.length > 0) {
+                            for (var i = 0; i < content.length; i++) {
+                                html += "<tr>";
+                                html += "<td>" + content[i].classname + "</td>";
+                                html += "<td><a onclick='loadStudent(" + content[i].classid + ")' style='cursor: pointer;'>" + content[i].loginCount + "</a></td>";
+                                var appLv = ((content[i].app / content[i].loginCount) * 100).toFixed(2);
+                                var weixinLv = ((content[i].weixin / content[i].loginCount) * 100).toFixed(2);
+                                html += "<td>" + content[i].app + "  (" + appLv + "%)</td>";
+                                html += "<td>" + content[i].weixin + "  (" + weixinLv + "%)</td>";
+                                html += "</tr>";
+                            }
+                        } else {
+                            html += "<tr>";
+                            html += "<td colspan='4' style='text-align:center;'>暂无数据</td>";
+                            html += "</tr>";
+                        }
+                    }
+                    $("#tbody").html(html);
+                }
+            });
+        }
+
+        function loadStudent(classid) {
+            var tyear = $("#hidyear").val();
+            var tmonth = $("#hidmonth").val();
+
+            $("#mainQuery").attr("style", "display:none;");
+            $("#mainContent").attr("style", "display:none;");
+            $("#studentDiv").attr("style", "");
+            $("#student").attr("style", "");
+
+            var html = "";
+            $.ajax({
+                type: "post",
+                url: "backHtmlHelp.ashx",
+                data: { tyear: tyear, tmonth: tmonth, classid: classid, func: "getStudentLoginData" },
+                success: function (data) {
+                    if (data != "" && data != null) {
+                        var content = eval("(" + data + ")");
+                        if (content.length > 0) {
+                            for (var i = 0; i < content.length; i++) {
+                                html += "<tr>";
+                                html += "<td>" + content[i].username + "</td>";
+                                html += "<td>" + content[i].logcount + "</td>";
+                                html += "</tr>";
+                            }
+                        } else {
+                            html += "<tr>";
+                            html += "<td colspan='2' style='text-align:center;'>暂无数据</td>";
+                            html += "</tr>";
+                        }
+                    }
+                    $("#studentbody").html(html);
+                }
+            });
+        }
+
+        function goBack() {
+            $("#mainQuery").attr("style", "");
+            $("#mainContent").attr("style", "");
+            $("#studentDiv").attr("style", "display:none;");
+            $("#student").attr("style", "display:none;");
+        }
+
+        $(document).ready(function () {
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth();
+            var option = "";
+            for (var i = 0; i < 5; i++) {
+                option += "<option value='" + (year - i) + "'>" + (year - i) + "</option>";
+            }
+            $("#selYear").append(option);
+            $("#selMonth option")[month].selected = true;
+
+            firstLoad();
+
+        })
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="span2">
+                <div class="well" style="padding: 8px 0;">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">
+                            统计分析
+                        </li>
+                        <li>
+                            <a href="Analysis.html"><i class="icon-home"></i> 总体状态</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisCompare.html"><i class="icon-refresh"></i> 对比统计</a>
+                        </li>
+                        <li class="active">
+                            <a href="#"><i class="icon-folder-open"></i> 登录统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisFunction.html"><i class="icon-check"></i> 访问统计</a>
+                        </li>
+                        <li>
+                            <a href="DemandInfo.html"><i class="icon-envelope"></i> 需求统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisQuestion.html"><i class="icon-file"></i> 问答统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisMenu.html"><i class="icon-list-alt"></i> 栏目统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisContent.html"><i class="icon-user"></i> 内容统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisGrades.html"><i class="icon-cog"></i> 积分统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisGroup.html"><i class="icon-info-sign"></i> 群组统计</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span11">
+                <legend>登录统计</legend>
+                <input type="hidden" id="hidyear" />
+                <input type="hidden" id="hidmonth" />
+                <div class="nav-collapse" id="mainQuery">
+                    <a>登录时间</a>
+                    <select class="btn btn-default dropdown-toggle" style="width:90px;" id="selYear"></select>
+                    <select class="btn btn-default dropdown-toggle" style="width:70px;" id="selMonth">
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                    <input type="button" class="btn btn-small" style="float:right;" onclick="firstLoad()" value="查询" />
+                </div>                
+                <div class="row" id="mainContent">
+                    <div class="span12">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        班级名称
+                                    </th>
+                                    <th>
+                                        登录人次
+                                    </th>
+                                    <th>
+                                        APP人次(占比)
+                                    </th>
+                                    <th>
+                                        微信人次(占比)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="nav-collapse" id="studentDiv" style="display:none;">
+                    <input type="button" class="btn btn-small" style="float:right;" onclick="goBack()" value="返回" />
+                </div>
+                <div class="row" id="student" style="display:none;">
+                    <div class="span12">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        姓名
+                                    </th>
+                                    <th>
+                                        登录次数
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/site.js"></script>
+    <script src="bootstrap/js/extendPagination.js"></script>
+</body>
+</html>

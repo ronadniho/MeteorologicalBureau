@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+
+ <script type="text/javascript" charset="utf-8" src="native.js"></script>
+        <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+    //
+    function onDeviceReady() {
+        alert('onDeviceReady');
+    }
+
+    function play(){
+      alert("play");
+      xsfMedia.play("abc/1.mp3");//wwww/abc
+      //
+    }
+    function pause(){
+      alert("pause");
+      xsfMedia.pause();
+      //
+    }
+    function resume(){
+      alert("resume");
+      xsfMedia.resume();
+      //
+    }
+    function stop(){
+      alert("stop");
+      xsfMedia.stop();
+      //
+    }
+        
+    </script>
+  </head>
+  <body>
+      <a href="#" onclick="play()">play</a><br />
+      <a href="#" onclick="pause()">pause</a><br />
+      <a href="#" onclick="resume()">resume</a><br />
+      <a href="#" onclick="stop()">stop</a><br />
+  </body>
+</html>

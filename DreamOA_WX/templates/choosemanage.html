@@ -1,0 +1,29 @@
+﻿<ion-view title="选修管理" style="font-size:30px; ">
+    <go-back my-title="选修管理"></go-back>
+    <ion-content class="has-header">
+        <div class="card" ng-repeat="dataxxk in dataSource">
+            <div class="bar title item item-divider">
+                <div class="pull-left">{{dataxxk.time}}&nbsp;已选：<span ng-click="openStu(1,dataxxk.info_id)" class="red" style="text-decoration:underline;">{{dataxxk.yx}}</span>人&nbsp;未选：<span ng-click="openStu(0,dataxxk.info_id)" class="red" style="text-decoration:underline;">{{dataxxk.wx}}</span>人</div>
+                <!--<div class="pull-right"></div>-->
+            </div>
+            <div class="item item-text-wrap" ng-repeat="dataRow in dataxxk.data">
+                <div class="timetable-title" ng-click="gokcdetail(dataRow)">{{dataRow.name}}</div>
+                <div class="pull-left">
+                    <span style="height:35px;display:inline-table;line-height:35px;margin-right:10px;color: #e60000" ng-bind="dataRow.mark"></span>
+                </div>
+                <div class="pull-left">
+                    <span class="ion-ios-person-outline" style="font-size:24px;color:#C0C3C5;"></span>
+                </div>
+                <div class="pull-left">
+                    <span class="course-info-name" style="height:35px;display:inline-table;line-height:35px;margin-left:10px;">{{dataRow.teacher}}</span>
+                </div>
+                <div style="clear:both;">
+                </div>
+            </div>
+        </div>
+        <div ng-show="unshow" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+            暂无选修课
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,41 @@
+﻿<style>
+    .tabs-striped .tab-item.tab-item-active {
+        color: #e60000;
+        border-color: #e60000;
+        margin-left: 0px;
+    }
+</style>
+<ion-view>
+    <go-back my-title="训前需求"></go-back>
+    <ion-tabs class="tabs-striped tabs-top">
+        <ion-tab title="总览">
+            <ion-content style="margin-top:90px;">
+                <ion-list>
+                    <div ng-repeat="hotItem in dataDcwjSource" style="padding:1px 10px 1px 10px;">
+                        <ion-item class="item" style="border-top:0px; border-left:0px; border-right:0px;">
+                            <div style="margin-top:15px; width:100%;">
+                                <h4 style="float:right;"><span>已提交人数: {{hotItem.xycount}}</span>&nbsp;&nbsp;&nbsp;<span ng-click="gotoDetail(hotItem)">未提交人数：<i style="color:#ff0000">{{hotItem.wjcount}}</i>&nbsp;&nbsp;</span></h4>
+                            </div>
+                        </ion-item>
+                    </div>
+                </ion-list>
+            </ion-content>
+        </ion-tab>
+        <ion-tab title="需求汇总">
+            <ion-content style="margin-top:90px;">
+                <ion-list>
+                    <div ng-repeat="hotItem in dataDcwjSource" style="padding:1px 10px 1px 10px;">
+                        <ion-item class="item" style="border-top:0px; border-left:0px; border-right:0px;">
+                            <div style="margin-top:15px; width:100%;">
+                                <h2><a>{{hotItem.name}}</a></h2>
+                            </div>
+                            <div style="margin-top:15px; width:100%;">
+                                <h4 style="float:right;"><span>已提交人数: {{hotItem.xycount}}</span>&nbsp;&nbsp;&nbsp;<span ng-click="gotoDetail(hotItem)">未提交人数：<i style="color:#ff0000">{{hotItem.wjcount}}</i>&nbsp;&nbsp;</span></h4>
+                            </div>
+                        </ion-item>
+                    </div>
+                </ion-list>
+            </ion-content>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+        <script type="text/javascript" charset="utf-8" src="native.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+		function onBackKeyDown() {     
+			alert("BackKeyDown");  
+		}  
+        function onDeviceReady() {
+            alert('onDeviceReady');
+            document.addEventListener("backbutton", onBackKeyDown, false);  
+        }
+    function test_get() {
+        alert('test_get');
+        //getJSON 返回值为JSON格式
+        xsfHttp.get("http://www.baidu.com","{\"id\":1}",
+                    function (result) {
+                    alert(result);
+                    },
+                    function (error) {
+                    alert("open failed: " + error);
+                    }
+                    );
+                                 
+    }
+    function test_post() {
+        alert('test_post');
+                    //postJSON 返回值为JSON格式
+                    xsfHttp.post("http://192.168.1.105:8080/Demo/test.iphone","12345sssss sss&&<sspsdfa inao\r\ns12345",
+                                 function (result) {
+                                 alert(result);
+                                 },
+                                 function (error) {
+                                 alert("open failed: " + error);
+                                 }
+                                 );
+                                 
+    }
+    //
+    //window.open = xsfWindow.open;
+    //$.ajax = xsfHttp.ajax;
+    function ajax() {
+        alert('ajax');
+        //var optians = "{datType:'text',url:'http://wwww.baidu.com/'}";
+        //$.ajax(optians);//datType = 'json'
+        xsfHttp.ajax({
+                url: "http://www.baidu.com",
+                dataType: "text",
+                type: "POST",
+                timeout: 20000,
+                async: false,
+                //data: "",
+                success: function (response) {
+                    alert("success")
+                },
+                error: function () {
+                    alert("error")
+                },
+                complete: function () {
+                    alert("complete")
+                }
+            });
+        //alert('ajax');
+                     
+    }
+    function upload(){
+        var url = "http://192.168.1.75:6080/ezweb/action?uploadFile=test";
+        xsfHttp.upload("record.caf",url,
+                       function (result) {
+                        alert(result);
+                       },
+                       function (error) {
+                       alert("open failed: " + error);
+                       }
+                       );
+                       
+    }
+    function download1(){
+        var url = "http://117.184.89.78:7080/ezweb/upload/1.doc";
+        var filePath = "/storage/emulated/0/2.doc";
+        var downlaoder = xsfHttp.download(url,filePath,
+                       function (result) {
+                        alert("下载成功:" + result.fullPath);
+                       },
+                       function (error) {
+                       alert("open failed: " + error);
+                       }
+                       );
+        downlaoder.onprogress = function(progressEvent) {
+        if(progressEvent.lengthComputable){
+        	alert("" + progressEvent.total + "/" + progressEvent.loaded);
+        }
+    	//downlaoder.abort();
+    };        
+    }
+
+    
+    </script>
+  </head>
+  <body>
+    <p><a href="#" onclick="ajax()">ajax</a></p>
+    <p><a href="#" onclick="test_get()">http get</a></p>
+    <p><a href="#" onclick="test_post()">http post</a></p>
+    <p><a href="#" onclick="upload()">http upload</a></p>
+	<p><a href="#" onclick="download1()">http download</a></p>
+    <p><a href="index.html">index</a></p>
+  </body>
+</html>

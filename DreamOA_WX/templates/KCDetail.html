@@ -1,0 +1,127 @@
+﻿<ion-view title="课程详情">
+	<go-back my-title="课程详情"></go-back>
+	<ion-content class="has-header">
+		<ion-refresher on-refresh="LoadPageData()"
+					   pulling-text="拖动刷新"
+					   refreshing-text="加载中"
+					   refreshing-icon="ion-loading-c">
+		</ion-refresher>
+        <div style="margin-left:0px; margin-right:0px; padding:0px;">
+			<div class="course-info-kwname">{{kcwh.kcname}}</div>
+			<div class="course-info-zjrname" style="display:block; padding-left:10px;">
+				<span>
+					<i class="icon ion-ios-person-outline" style="font-size:20px;"></i>
+					{{kcwh.zjr}}
+				</span>
+				<span style="float:right; padding-right:10px;">
+					<i class="icon ion-clock"></i>&nbsp;{{kcwh.sktime}}
+				</span>
+			</div>
+            <div class="row">
+                <div class="col" style="position:relative;" ng-if="kcwh.remark.length>0">
+                    <a class=" beizhu" style="margin-left:0;color:#f00;">
+                        <i class="icon ion-flag size-20 red" ></i>
+                        {{kcwh.remark}}
+                    </a> 
+					<div class="course-info-data" ng-show="kcwh.jxzlnum>0">
+						教学资料：<a href="#" style="text-decoration:none;" ng-click="HrefTo('clxz');">{{kcwh.jxzlnum}}</a>
+					</div>
+                </div>
+            </div>
+        </div>
+
+		<div class="row border-none" style="position:relative;">
+			<div class="padding-0 margin-0" style="position:relative;left:10px;height:38px;line-height:38px;">
+				<span class="border-none size-16 line-h-20 red" style="display:inline-block;margin-top:7px;">
+                    问题
+					&nbsp;{{WenTiNum}}
+				</span>
+			</div>
+            <!--综合排序-->
+            <div class="sort" style="position:absolute;right:10px">
+				<button class="button-clear sort-time" ng-click="SortQuestion(0,sortDesc);">
+					<span style="{{sortCheckedStyle}};"> 时间&nbsp;<i ng-class="sortClass" ng-show="showArrow"></i></span>
+				</button>
+				<button class="button-clear sort-hot" ng-click="SortQuestion(1,sortHotDesc);" style="border-left:1px solid #efefef;">
+					<span style="{{sortHotCheckedStyle}};">热度&nbsp;<i ng-class="sortHotClass" ng-show="showHotArrow"></i></span>
+				</button>
+            </div>
+		</div>
+        <!--消息界面-->
+
+		<ion-list>
+			<div class="item text-center" ng-show="ShowNoRecord" style="color:#ccc; font-size:30px; border-bottom:0px;">
+			<i class="ion-clipboard" style="font-size:90px"></i>
+			<br />
+			<br />
+			暂无提问</div>
+            <ion-item class="padding-0"  ng-repeat="q in QuestionList">
+                <!--标题-->
+                <div class="news-parents" style="position:relative;">
+                    <div class="text-center line-h-20 radius-50" style="position:absolute;top:7px;left:8px;width:20px;height:20px;border:1px solid #f00;">
+                        <i class="icon ion-help" style="color:#f00;"> </i>
+                    </div>
+                    <div class="news">
+                        <div style="position:relative;padding:5px 10px;margin:10px 0px;">
+                            <div class="publish-name"> {{q.username}}: </div>
+                            <!--时间-->
+                            <div class="publish-time">{{q.createdatestr}}</div>
+                            <button class="button button-small delete border-none"  ng-show="q.delAnswer" ng-click="showConfirm(q);">
+                                <label class="blue">删除</label>
+                            </button>
+                            <!--内容-->
+                            <div class="publish-content" style="">{{q.title}}</div>
+                        </div>
+
+                        <div style="position:relative;text-align:right;margin-bottom:3px;padding-right:5px;font-size:16px;">
+                            <!--同问-->
+							<button class="button button-small has-same-question" style="border:0px; display:inline-block; "
+									ng-click="showSaveSameQuestionConfirm(q)" ng-disabled="!(q.enedit==1&&q.iask==0)">
+								<label style="color:#4e7fa1;">同问({{q.samequestionnum}})</label>
+							</button>
+                            <!--观点-->
+							<button class="button button-small view-view" style="border:0px;margin:0px 10px;" ng-click="openAnswerModal(q);">
+								<label style="color:#4e7fa1;">观点({{q.answernum}})</label>
+							</button>
+                            <!--删除-->
+                               
+                            <!--我有同问-->
+							<button class="button button-small has-same-question" style="border:0px;margin:0px 10px;" ng-disabled="q.hasanswer==0" ng-click="ShowCommentInfo(q);">
+								<i ng-class="q.showCommentIcon" style="color:#4e7fa1;font-size:22px"></i>
+							</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--没有评论的时，隐藏-->
+                    
+                <div style="background:#F8F8F8;margin:15px;margin-left:30px;">
+                    <div  ng-show="q.questionComment.length>0" >
+                        <div class="" style="white-space:normal; line-height:20px;color:#4e7fa1;padding:10px;">
+                            <i class="icon ion-thumbsup" style="color:#4e7fa1;"></i>
+                            <span ng-repeat="qc in q.questionComment">{{qc.username}}<span ng-if="$index!=q.questionComment.length-1">,</span></span>
+                        </div>
+                    </div>
+					<div class="list" ng-show="q.showCommentInfo" style=" line-height:25px; margin-bottom:0px;padding:10px;border-top:1px solid #dfdfdf ;border-bottom:1px solid #dfdfdf ;">
+						<div class="" ng-repeat="answer in q.questionAnswer" style="position:relative;margin:5px 0px;">
+							<span class="" style="font-size:16px; color:#4e7fa1; ">
+								{{answer.username}}:
+							</span>
+							<span style="white-space:normal">
+								{{answer.answer}}
+							</span>
+						</div>
+					</div>
+                </div>
+            </ion-item>
+			<!--<ion-infinite-scroll 
+				on-infinite="LoadMoreData()"
+				distance="1%">
+			</ion-infinite-scroll>-->
+		</ion-list>
+	</ion-content>
+	<ion-footer-bar align-title="center" class="bar-assertive">
+		<h1 class="title" ng-click="openModal()">我要提问</h1>
+	</ion-footer-bar>
+</ion-view>

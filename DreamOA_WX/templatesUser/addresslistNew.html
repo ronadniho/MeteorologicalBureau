@@ -1,0 +1,184 @@
+<style>
+    .nodisplay {
+        display: none;
+    }
+    
+    .needDisplay {
+        display: block;
+    }
+    
+    .app_icon {
+        height: 5.5rem;
+        width: 5.3rem;
+    }
+    
+    h2.time {
+        color: #369;
+        float: right;
+        margin-right: 10px;
+    }
+    
+    span.user_count {
+        color: #369;
+        float: right;
+        margin-right: 10px;
+    }
+    
+    .icon-photo {
+        height: 2.5rem;
+        width: 2.3rem;
+    }
+    
+    .buttonStyle {
+        height: 50px;
+        width: 60px;
+    }
+    
+    .breadcrumb-header {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        margin-top: 10px;
+    }
+    
+    .breadcrumb-header-item:active {
+        background-color: #ddd;
+    }
+    
+    .breadcrumb-header-bar,
+    .breadcrumb-header-item {
+        background-color: #f5f5f5;
+    }
+    
+    .bar {
+        padding: 0;
+    }
+    
+    .bar-subheader {
+        top: 44px;
+        display: block;
+        height: 44px;
+    }
+    
+    .bar-header {
+        border-top-width: 0;
+        border-bottom-width: 1px;
+    }
+    
+    .breadcrumb-header {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        margin-top: 10px;
+    }
+    
+    .breadcrumb {
+        padding: 8px 15px;
+        margin-bottom: 20px;
+        list-style: none;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+    }
+    
+    .item-complex,
+    a.item.item-complex,
+    button.item.item-complex {
+        padding: 0;
+    }
+    
+    .item-complex .item-content,
+    .item-radio .item-content {
+        position: relative;
+        z-index: 2;
+        padding: 16px 16px 16px 16px;
+        border: none;
+        background-color: white;
+    }
+    
+    .breadcrumb > li {
+        display: inline-block;
+    }
+    
+    img {
+        vertical-align: middle;
+    }
+    
+    .breadcrumb > li + li:before {
+        padding: 0 5px;
+        color: #ccc;
+        content: "/\00a0";
+    }
+    
+    .has-subheader {
+        top: 131px;
+        bottom: 50px;
+    }
+    
+    .item-complex .item-content,
+    .item-radio .item-content {
+        position: relative;
+        z-index: 2;
+        padding: 16px 16px 16px 16px;
+        border: none;
+        background-color: #fff;
+        height: 64px;
+    }
+
+    .item-complex.item-icon-left .item-content {
+        padding-left: 16px;
+    }
+
+    .bar.bar-assertive {
+        background-color: #18acef;
+    }
+
+    .item-content {
+        padding-right: 16px !important;
+    }
+
+</style>
+<ion-view title="">
+    <go-back my-title="通讯录" ng-click='closeWin();'></go-back>
+
+    <ion-header-bar align-title="center" class="bar bar-subheader breadcrumb-header-bar" style="height:88px;">
+        <label class="item item-input" style="padding:1px">
+            <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+            <input type="text" placeholder="查询" ng-model="query" maxlength="10">
+        </label>
+        <ol class="breadcrumb breadcrumb-header">
+            <li class="breadcrumb-header-item" ng-click="showUserByDept(parent.id)" ng-repeat="parent in parents">{{parent.name}}</li>
+        </ol>
+    </ion-header-bar>
+    <ion-content class="has-subheader" overflow-scroll="true">
+        <ion-list>
+            <ion-item class="item item-checkbox item-icon-right item-icon-left" ng-if="users && users.length > 0" ng-repeat="user in users" style="line-height:28px;">
+                <i class="ion-android-person"></i>
+                <span style="margin-left:15px;line-height:21px;">{{user.name}}</span> 
+                <span style="float:right;">
+                    <span ng-click="showConfirm(user.companyAddress);" style="color:#18acef"> {{user.companyAddress}}</span> 
+                    <span style="padding-left: 5px; padding-right: 5px;" ng-if="user.companyAddress && user.mobile">/</span> 
+                    <span ng-click="showConfirm(user.mobile);" style="color:#18acef">{{user.mobile}}</span> 
+                </span>
+                <span style="margin-left:15px;line-height:21px;position: initial;overflow:hidden;    white-space: nowrap;text-overflow:ellipsis; padding-top: 0px;" class="badge"><!--display: inline-block;-->{{user.depts}}</span>
+                
+                <!--<ion-option-button class="button-icon icon ion-ios-telephone buttonStyle" style="background-color: #31aa6a" ng-click="phone({{user.mobile}})">
+                </ion-option-button>
+                <ion-option-button class=" button-icon icon ion-email-unread buttonStyle" style="background-color:#145fd7" ng-click="message({{user.mobile}})">
+                </ion-option-button>
+                <ion-option-button ng-if="chat" class=" button-icon icon buttonStyle" style="background-image:url('../images/chat.jpg');background-size:100%" ng-click="openChat(user)">
+                </ion-option-button>-->
+            </ion-item>
+            <div ng-if="items && items.length > 0" ng-repeat="item in items">
+                <div class="item item-divider" ng-click="showUserByDept(item.id)">
+                    <span><i class="icon ion-arrow-right-b padding-right"></i>{{item.name}}</span><span class="user_count" ng-if="item.user_count != undefined">{{item.user_count}}</span>
+                </div>
+            </div>
+        </ion-list>
+        
+        <!--*********空白页**********-->
+        <div ng-if="items.length == 0 && users.length == 0">
+            <div style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                <i class="ion-clipboard" style="font-size:90px"></i><br /><br /> 暂无联系人
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,36 @@
+﻿<ion-view>
+    <go-back my-title="带班信息"></go-back>
+    <ion-content class="has-header consumeInfo">
+        <ion-list>
+            <ion-item>
+                <div class="center className"><div class="item-text-wrap size-18">{{dataBcinfo[0].bt}}</div></div>
+                <div class="line-h-30">
+                    <div class="item-text-wrap size-12">开班时间：{{dataBcinfo[0].kssj|date:'yyyy-MM-dd'}}</div>
+                    <div class="item-text-wrap size-12">结束时间：{{dataBcinfo[0].jssj|date:'yyyy-MM-dd'}}</div>
+                </div>
+                <div class="line-h-30">
+                    <div class="item-text-wrap size-12">学年：{{dataBcinfo[0].xn}}</div>
+                    <div class="item-text-wrap size-12">学期：{{dataBcinfo[0].xq}}</div>
+                </div>
+                <div class="line-h-30">
+                    <div class="item-text-wrap size-12">班次类型：{{dataBcinfo[0].bctype}}</div>
+                </div>
+                <div class="line-h-30">
+                    <div class="item-text-wrap size-12">班主任：{{bzr}}</div>
+                </div>
+                <div class="line-h-30">
+                    <div class="item-text-wrap size-12">指导老师：{{zdls}}</div>
+                </div>
+                <div class="line-h-30">
+                    <div class="item-text-wrap size-12">随班领导：{{sbld}}</div>
+                </div>
+            </ion-item>
+        </ion-list>
+        <div ng-show="false" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+            <table>
+                <tr></tr>
+            </table>
+        </div>
+    </ion-content>
+</ion-view>

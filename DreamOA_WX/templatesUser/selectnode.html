@@ -1,0 +1,116 @@
+﻿﻿<style>
+   .platform-ios.platform-cordova:not(.fullscreen) .tabs-top > .tabs,
+    .platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
+        top: 35px;
+    }
+    
+    .tabs-striped.tabs-background-positive .tabs {
+        margin-left: -10px;
+    }
+    
+    .popup-container .popup { width: 100%; }
+
+    .breadcrumb > li + li:before {
+        padding: 0 5px;
+        color: #ccc;
+        content: "/\00a0";
+    }
+
+    .breadcrumb-header-item:active {
+        background-color: #ddd;
+    }
+
+    .breadcrumb > li {
+        display: inline-block;
+    }
+
+    .breadcrumb { padding: 8px 15px; margin-bottom: 20px; list-style: none; background-color: #f5f5f5; border-radius: 4px; }
+
+    #selectUsersDom .icon-photo {
+        height: 2.5rem;
+        width: 2.3rem;
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+    .popup-container .popup {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 90%;
+        border-radius: 0px;
+        background-color: rgba(255, 255, 255, 0.9);
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-direction: normal;
+        -webkit-box-orient: vertical;
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }	
+    .popup-body {
+        padding: 10px;
+        overflow: scroll;
+        height: 80%;
+    }
+    .checkbox input, .checkbox-icon	{
+        width:8px;
+        height:12px;
+    }
+    .checkbox input:before, .checkbox-icon:before{
+        width:17px;
+        height:17px;
+        margin-top:4px;
+        background:#eee;
+    }
+    .ion-android-person:before{
+        font-size:20px;
+        color:#717f8f;
+    }.selectedStudent{
+        display:inline-block;
+        padding:16px 50px;
+    }
+    .button.button-positive {
+        border-color: #0c60ee !important;
+    background-color: #387ef5 !important;
+    }
+</style>
+<ion-view title="">
+    <ion-header-bar align-title='center' class='bar-positive'>
+        <a class="button button-icon icon ion-ios-arrow-back" ng-click='goback()'></a>
+        <h3 class='title'>
+            选择节点
+        </h3>
+    </ion-header-bar>
+    <ion-content class="has-header">
+        <div ng-repeat="item in items">
+            <div class="item item-checkbox item-icon-right item-icon-left" style="padding-left: 50px;">
+                    <label class="checkbox checkbox-stable">
+                        <input id="cbnode_{{$index}}" ng-checked="item.senduser[0].orgusers.length == 1" type="checkbox" ng-click="chickuser({{$index}},$event)">
+                    </label>
+                    <span>{{item.nodename}}</span>
+            </div>
+            <span id="node_{{item.nodeid}}">
+                <span ng-if="item.senduser[0].orgusers.length == 1">{{item.senduser[0].orgusers[0].username}}</span>
+            </span>
+        </div>
+
+        <div ng-show="isflowPcHandle">
+            <img style="width:50%;height:50%;margin-top:30%;margin-left:30%;" src="../img/blank_page.png"></img>
+            <span style="width:50%;height:50%;margin-top:30px;;margin-left:40%;font-weight:bold;color:red;">{{message}}</span>
+        </div>
+    </ion-content>
+</ion-view>
+<ion-footer-bar ng-show="!isflowPcHandle"   class="bar-positive">
+	 <div class="bar-positive" style="width:100%;">
+	<button ng-show="istz" class="button button-icon icon ion-ios7-arrow-back" ng-click="istzBack()" >后退</button>
+ 	<div class="" style="text-align:center;"> <button id="sendFlow" ng-click="send()" class="button button-clear "><img class="button-icon" height=40 src="../img/texticon_send.png"></img></button></div>
+	</div>
+</ion-footer-bar>

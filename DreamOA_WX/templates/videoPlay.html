@@ -1,0 +1,121 @@
+﻿<style>
+    .videogular-container {
+        width: 100%;
+        height: 200px;
+        margin: auto;
+        overflow: hidden;
+        vertical-align: top;
+    }
+
+    .videogular-container_audio_wx {
+        width: 100%;
+        height: 0px;
+        vertical-align: top;
+    }
+
+    .videogular-container_audio {
+        width: 100%;
+        height: 50px;
+        margin: auto;
+        overflow: hidden;
+        vertical-align: top;
+    }
+
+    .videoPadding_wx {
+        padding-top: 50px;
+    }
+</style>
+
+<ion-view id="videoHead">
+    <go-back my-title="{{form.title}}"></go-back>
+    <ion-content class="has-header">
+        <div id="myplayer" ng-if="isvideo" class="videogular-container" ng-click="changeTop()">
+            <videogular vg-theme="config.theme" vg-auto-play="true">
+                <vg-media vg-src="config.sources" vg-type="video">
+                </vg-media>
+                <vg-controls>
+                    <vg-play-pause-button></vg-play-pause-button>
+                    <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+                    <vg-scrub-bar>
+                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                    </vg-scrub-bar>
+                    <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                    <vg-volume>
+                        <vg-mute-button></vg-mute-button>
+                        <vg-volume-bar></vg-volume-bar>
+                    </vg-volume>
+                    <vg-fullscreen-button ng-if="isvideo"></vg-fullscreen-button>
+                </vg-controls>
+                <vg-overlay-play ng-if="isvideo"></vg-overlay-play>
+
+            </videogular>
+        </div>
+        <div ng-if="!isvideo" style="{{marginTop}}" ng-class="{true: 'videogular-container_audio_wx', false: 'videogular-container_audio'}[formweixin]">
+            <videogular vg-theme="config.theme" vg-auto-play="true">
+                <vg-media vg-src="config.sources" vg-type="audio">
+                </vg-media>
+                <vg-controls>
+                    <vg-play-pause-button></vg-play-pause-button>
+                    <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+                    <vg-scrub-bar>
+                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                    </vg-scrub-bar>
+                    <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                    <vg-volume>
+                        <vg-mute-button></vg-mute-button>
+                        <vg-volume-bar></vg-volume-bar>
+                    </vg-volume>
+                </vg-controls>
+            </videogular>
+        </div>
+        <div>
+            {{nowtime}}
+        </div>
+        <div>
+            <h3 class="text-center">{{form.title}}</h3>
+        </div>
+        <div style="position:relative; padding-top:5px;{{xgzlmarginTop}}">
+            <div>
+                &nbsp;&nbsp;<a style="font-size:18px;" ng-click="changeIndex(1)">简介</a> &nbsp;&nbsp;| &nbsp;&nbsp;<a style="font-size:18px;" ng-click="changeIndex(2)">相关资料</a> &nbsp;&nbsp;|&nbsp;&nbsp;<i ng-click="Addgood();" class="ion-thumbsup" style="font-size:20px;color:{{isgood ==1?'#EF473A':'#C6C3C6'}}"></i>
+            </div>
+            <div>
+                <div class="padding" ng-if="ishow">
+                    <!--<img src="../img/zjzp.jpg" style="width:100%;" class="md-whiteframe-z2 border_radius" />-->
+                    <span id="wishContent" ng-bind-html="form.safeContent">
+
+                    </span>
+                </div>
+                <div class="padding" ng-if="!ishow">
+                    <div ng-repeat="hotItem in dataZpywSource" style="padding:1px 10px 1px 10px;">
+                        <ion-item class="item item-thumbnail-left" style="border-top:0px; border-left:0px; border-right:0px; padding-left:80px;" ng-click="loadData(hotItem)">
+                            <img style="width:60px;height:60px;margin-top:10px;" src="{{loadDataType(hotItem.filename)}}" />
+                            <div style="margin-top:30px;">
+                                <h2 style="width:95%; float:left;"><a>{{hotItem.orginname}}</a></h2>
+                                <i class="icon ion-ios-arrow-right" style="float:right;"></i>
+                            </div>
+                        </ion-item>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div ng-class="{true: 'videoPadding_wx padding', false: 'padding'}[formweixin]" ng-bind-html="form.safeContent">
+        </div>
+        <div>
+            <div class="tabs has-tabs tabs-striped tabs-color-assertive" style="position:inherit">
+                <a class="tab-item" ng-class="{true: 'active', false: ''}[tab.active]" ng-repeat="tab in tabs" ng-click="go(tab)">
+                    <span style="font-weight:bold;font-size:1.3em"> {{tab.name}}</span>
+                </a>
+            </div>
+        </div>
+        <ion-scroll ng-show="nowtab=='简介'" zooming="true" direction="y" style="width:100%; height:400px;">
+            <div style="padding:5px" ng-bind-html="form.safeContent">
+
+            </div>
+        </ion-scroll>
+        <ion-scroll ng-show="nowtab=='互动'" zooming="true" direction="y" style="width:100%; height:400px;">
+            <div style="padding:5px">
+                <span><button ng-click="setVideo(1)">qiehuan</button></span>
+            </div>
+        </ion-scroll>-->
+    </ion-content>
+</ion-view>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+        <script type="text/javascript" charset="utf-8" src="native.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            alert('onDeviceReady');
+                xsfWPS.open('http://117.184.89.78:90/CollegeAPP/Html/1.doc',"1.doc",
+                           function (result) {
+                            alert("open seccess");
+                           },
+                           function (error) {
+                           alert("open failed: " + error);
+                           }
+		   );
+        }
+    </script>
+  </head>
+  <body>
+    <p>wps</p>
+    <p><a href="index.html">back</a></p>
+  </body>
+</html>

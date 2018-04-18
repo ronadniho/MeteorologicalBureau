@@ -1,0 +1,74 @@
+﻿<style>
+    .tabs-striped .tab-item.tab-item-active {
+        border-color:#c00000;
+    }
+    .controls-container {
+background-color:white        
+    }
+</style>
+<ion-view style="font-size:30px;">
+    <go-back my-title="{{loadTitle}}"></go-back>
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-refresher on-refresh="doRefresh()"
+                           pulling-text="拖动刷新"
+                           refreshing-text="加载中"
+                           refreshing-icon="ion-loading-c">
+            </ion-refresher>
+            <div ng-repeat="hotItem in dataZpywSource" >
+                <ion-item class="item item-thumbnail-left video-list" >
+                    <img src="../staticresource/{{hotItem.title_pic}}" ng-click="goDetail($index,hotItem);" class="md-whiteframe-z2 border_radius" />
+                    <span ng-click="goDetail($index,hotItem);" class="video-lis-text">{{hotItem.title | limitTo: 25}}{{hotItem.title.length > 25 ? '...' : ''}}</span>
+                    <span ng-show="{{hotItem.minutes ==null ? 'false' : 'true'}}" class=" video-lis-time grey" >
+                        <i class="ion-clock" style="font-size:14px;"></i>
+                       时长:&nbsp;{{hotItem.minutes}} 分钟
+                    </span>
+                    <span class=" video-lis-data grey" ng-click="goDocuments(hotItem)" ng-show="{{hotItem.docucount ==0 ? 'false' : 'true'}}">
+                        <i class="ion-folder" style="font-size:16px;"></i>
+                       相关资料:&nbsp;{{hotItem.docucount}}
+                    </span>
+                  
+                    <p style="font-size:14px;margin-top:3px;">
+                        <span style="float:right;" ng-show="false" ng-click="addGood(hotItem)">
+                            <i class="ion-thumbsup" style="font-size:16px;"></i>
+                            &nbsp;点赞:&nbsp;{{hotItem.goodcount}}
+                        </span>
+                    </p>
+                </ion-item>
+                <!--<div class="item text-center" layout="row" style="padding:8px">                    
+                    <div style="width:30%; float:left;"><i class="ion-clock" style="font-size:18px;color:pink"></i>
+                        <span style="font-size:14px;">&nbsp;时长:&nbsp;&nbsp;&nbsp;3</span>
+                    </div>
+                    <div style="width:30%; float:left;" ng-click="addGood(item);">
+                        <i class="ion-heart" style="font-size:18px;color:pink"></i>
+                        <span style="font-size:14px">&nbsp;点赞:&nbsp;1</span>
+                    </div>
+                    <div style="width:30%; float:left;" ng-click="goDeital(item);">
+                        
+                        <span style="font-size:14px">&nbsp;<i ng-click="goCailiao()"><i class="ion-paperclip" style="color:pink"></i>相关材料:&nbsp;1</i></span>
+                    </div>
+                </div>-->
+            </div>
+        </ion-list>
+        <div style="display:none">
+            <videogular style="background-color:white" vg-player-ready="onPlayerReady($API)" vg-update-time="onUpdateTime($currentTime, $duration)" vg-theme="controller.config.theme">
+                <vg-media vg-src="controller.config.sources"
+                          vg-tracks="controller.config.tracks">
+                </vg-media>
+                <vg-controls>
+
+                </vg-controls>
+
+
+                <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+                <vg-analytics vg-track-info="config.plugins.analytics.events"></vg-analytics>
+            </videogular>
+        </div>
+        <div ng-show="isShow" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-monitor" style="font-size:90px"></i><br /><br />
+            暂无直播
+        </div>
+        <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMore();" distance="1%" icon="ion-loading-d">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

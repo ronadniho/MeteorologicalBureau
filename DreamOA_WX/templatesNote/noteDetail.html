@@ -1,0 +1,264 @@
+<style>
+.html_bg{background: #f1f1f1;}
+
+
+
+.avatar-64{border-radius: 5px; width: 20px; height: 20px;}
+
+
+
+
+.list-pro{background: #fff; margin: 10px 0px; box-shadow: 0px 1px 1px #aaa;}
+.list-pro-t{padding: 14px 13px 5px 13px; border-top: solid 1px #ddd;}
+.list-pro-t-l{float: left;}
+.list-pro-t-l .avatar-64{vertical-align: -4px; margin-right: 4px;}
+.list-pro-t-l h2{display: inline-block; font-size: 14px; color: #333;}
+
+.list-pro-t-r{float: right;}
+.list-tip-img img{width: 16px; height: 16px; vertical-align: -2px;}
+.list-time{font-size: 8px; color: #999;}
+.list-pro-m{padding: 3px 13px 10px 13px;}
+.list-pro-m p{font-size: 14px;}
+.unread{
+	overflow:hidden;
+	font-weight: bold;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	text-overflow: ellipsis;/* IE/Safari */
+	-ms-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;/* Opera */
+	-moz-binding: url("ellipsis.xml#ellipsis");/*FireFox*/
+}
+
+.unread-red{
+	overflow:hidden;
+	font-weight: bold;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	text-overflow: ellipsis;/* IE/Safari */
+	-ms-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;/* Opera */
+	-moz-binding: url("ellipsis.xml#ellipsis");/*FireFox*/
+	color:red;
+}
+
+.read{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	text-overflow: ellipsis;/* IE/Safari */
+	-ms-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;/* Opera */
+	-moz-binding: url("ellipsis.xml#ellipsis");/*FireFox*/
+}
+
+
+.reply{background: #f8f8f8; padding: 5px 0px; margin: 10px 0px; position: relative;}
+
+.reply-hock{display: inline-block; width: 0px; height: 0px; overflow: hidden;  border:solid 6px #f00; border-color: #fff #fff #f8f8f8 #fff; position: absolute; left: 10px; top: -12px;}
+.reply .list-pro{box-shadow: none; background: none; margin: 0px 0px; padding: 0px 10px; border-bottom: solid 1px #ddd;}
+
+.reply .list-pro:last-child, .reply .list-pro:first-child{border-bottom: none;}
+
+
+.reply .list-pro p{font-size: 13px; color: #666;}
+.reply .list-pro-t{padding: 13px 0px 5px 0px;}
+.reply .list-pro-m{padding: 3px 0px 8px 0px;}
+.reply .list-pro-m p{overflow:visible; text-overflow:ellipsis; white-space:normal;}
+.reply .list-pro:first-child, .reply .list-pro:last-child{border-bottom: none;}
+
+
+.list-pro-more{background: #fff; border: solid 1px #ccc; display: block; height: 32px; line-height: 32px; text-align: center; border-radius: 3px; font-size: 13px; color: #666;}
+.reply .list-pro-more{margin: 0px 10px 6px 10px;}
+.list-pro-more:hover{background: #eee; color: #666 !important;}
+
+
+.list-pro-b{border-top: solid 1px #ddd; text-align: center;}
+.list-pro-b{padding: 6px 0px;}
+.list-pro-b a{display: inline-block; width: 32%; font-size: 13px; color: #666; text-align: center; border-left: solid 1px #ddd; height: 28px; line-height: 28px;}
+.list-pro-b a:first-child{border-left: none;}
+.list-pro-b a img{width:16px; height: 16px; vertical-align: -2px; margin-right: 5px;}
+
+.list-pro-c{border-top: solid 1px #ddd; text-align: center;}
+.list-pro-c{padding: 6px 0px;}
+.list-pro-c a{display: inline-block; width: 50%; font-size: 13px; color: #666; text-align: center; border-left: solid 1px #ddd; height: 28px; line-height: 28px;}
+.list-pro-c a:first-child{border-left: none;}
+.list-pro-c a img{width:16px; height: 16px; vertical-align: -2px; margin-right: 5px;}
+
+.login_btn{width: 100px; height: 10px; line-height: 10px;  margin: 10px;}
+.login-font-size{font-size: 12px; font-family: 宋体; height: 20px; line-height: 20px;}
+.login-forgot-pwd{width: 100px; text-align: right; float: right;}
+
+.button{min-height: 30px; font-size: 14px; font-family: 宋体}
+.item-checkbox{margin-left: 1px; padding-left: 16px; font-size: 14px; font-family: 宋体}
+.ng-valid .ng-dirty{ margin-right: 5px;}
+.ng-pristine .ng-valid{ margin-right: 5px;}
+
+
+
+.avatar-65{border-radius: 5px; width: 25px; height: 25px; vertical-align: -4px; margin-right: 4px;}
+
+
+a{ text-decoration:none;}
+a:hover{ text-decoration:none;}
+
+/**意见表单**/
+.comment{margin-top:1.5rem;}
+.comment h3 {overflow:visible; text-overflow:ellipsis; white-space:normal;}
+
+
+/**
+菜单样式
+**/
+
+.expander {
+	border: 1px solid;
+	border-color: #dddddd;
+	width: 100%;
+	font-size: 14px;
+}
+
+.expander>.title {
+	color: #333333;
+  	background-color: #f5f5f5;
+  	border-color: #dddddd;
+  	padding: 10px 15px;
+	cursor: pointer;
+	border-bottom: 1px solid transparent;
+	
+}
+/*右边模块背景*/
+.bar-usersetindex{
+   	background-color: #444;
+}
+.expander>.body {
+	padding: .1em .3em;
+}
+
+.item-clear{border-width:0;}
+.item-no-bottom{
+	border-bottom: none;
+}
+
+/*登录页面图标*/
+.login-icon{
+	width:100px;
+	height:100px; 
+	margin: auto; 
+	padding:20px;
+}
+
+/*列表选中背景背景*/
+.read:active, .unread:active, .item-active:active{
+	background-color:#ddd;
+}
+
+.item-active{
+	background-color:#fff;
+}
+
+/*右侧菜单选中背景*/
+.usersetindex-active:active{
+	background-color:#00468c;
+}
+
+/*blue*/
+.common-active:active{
+	background-color:#33B5E5;
+}
+
+.margin-title{
+	margin-top: 43px;
+}
+</style>
+<ion-view >
+	<ion-header-bar align-title="center" class="bar-positive">
+		<div class="buttons">
+			<button class="button button-icon icon ion-ios-arrow-back" ng-click="closeWin();">关闭</button>
+		</div>
+		<h1 class="title">{{title}}</h1>
+		<div ng-if="bar.edit" class="buttons">
+			<button class="button" ng-click="noteReply(item);">回复</button>
+			<button class="button" ng-click="noteForward(item)">转发</button>
+			<button class="button" ng-click="noteFinish(item)">办结</button>
+		</div>
+	</ion-header-bar> 
+	  	<ion-content >
+	  		<div class="list">
+				  <div class=" item item-input" >
+				    <span>发件人：</span>
+				    <input type="text" readonly="readonly"  ng-model="item.createUserName">
+				     <a style="padding-right:15px;" ng-if='item.documents.length>0' class="list-tip-img" href="javascript:void(0);" ng-click='openDocList(item.documents);'><img
+							ng-src="../img/file_status_attachment.png" alt="附件信息"
+							title="附件信息"></a>
+				  </div>
+				  <label class=" item item-input">
+				    <span class="">时&nbsp;&nbsp;&nbsp;&nbsp;间：</span>
+				     <span class="input-label">{{item.sendTime}}</span>
+				  </label>
+				   <label class=" item ">
+				    <span class="input-label">收件人：</span>
+				     <span class="input-label">{{item.receivers}}</span>
+				  </label>
+				
+				 <div class="list-pro-m">
+				 
+					<div style="font-weight: bold;" ng-click="openFormUrl(item)"><a href="javascript:void(0);" >{{item.content}}</a></div>
+					
+					<div class="reply" ng-if='item.countCommnet>0'>
+						<i class="reply-hock"></i>
+						<!-- 首条意见 -->
+						<div class="list-pro" style="border-bottom-width: 0px;">
+							<div class="list-pro-t fn-clear" style="border-top-width: 0px;">
+								<div class="list-pro-t-l">
+									<a href=""><i class="ion-android-person"></i></a>
+									<h2>{{item.comment.name}}</h2>
+								</div>
+								<div class="list-pro-t-r">
+									<a ng-if='item.comment.documents.length > 0' class="list-tip-img" style="margin-left:5px;margin-right:5px;" ng-click="showCommentFileByData(item.comment.documents);">
+										<img ng-src="../img/file_status_attachment.png" alt=""></a>
+									<span class="list-time">{{item.comment.time}}</span>
+								</div>
+							</div>
+							<div class="list-pro-m">
+								<p style="padding-top: 10px;">&nbsp;&nbsp;{{item.comment.itemsContent}}</p>
+							</div>
+						</div>
+						
+						<a ng-if='item.countCommnet>1 && item.openMoreComments != true' href="javascript:void(0);" ng-click="clkComment({{$index}});" class="list-pro-more">展开剩余回复</a>
+						<a ng-if='item.openMoreComments == true' href="javascript:void(0);" ng-click="clkComment({{$index}});" class="list-pro-more">收起剩余回复</a>
+						<div ng-repeat="comment in item.comments" ng-if="$index!=0">
+							<div class="list-pro">
+								<!--第一条显示-->
+								<div class="list-pro-t fn-clear" style="border-top-width: 0px;" ng-if="$index == 1">
+									<div class="list-pro-t-l">
+										<a href=""><i class="ion-android-person"></i></a>
+										<h2>{{comment.name}}</h2>
+									</div>
+									<div class="list-pro-t-r">
+										<a ng-if='comment.documents.length>0' class="list-tip-img" href=""><img ng-src="../img/file_status_attachment.png" alt=""></a>
+										<span class="list-time">{{comment.time}}</span>
+									</div>
+								</div>
+								<!--非第一条-->
+								<div class="list-pro-t fn-clear" ng-if="$index != 1">
+									<div class="list-pro-t-l">
+										<a href=""><i class="ion-android-person"></i></a>
+										<h2>{{comment.name}}</h2>
+									</div>
+									<div class="list-pro-t-r">
+										<a ng-if='comment.documents.length>0' class="list-tip-img" href=""><img ng-src="../img/file_status_attachment.png" alt=""></a>
+										<span class="list-time">{{comment.time}}</span>
+									</div>
+								</div>
+
+								<div class="list-pro-m">
+									<p style="padding-top: 10px;">&nbsp;&nbsp;{{comment.itemsContent}}</p>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+	  	</ion-content>
+</ion-view>

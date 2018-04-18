@@ -1,0 +1,37 @@
+﻿<style>
+    .btn-start {
+        top: initial;
+        bottom: -10px;
+        width: 100px;
+        margin: 0 auto;
+        display: block;
+    }.slider-pager {
+        color:#C00000;
+         font-size:8px;
+         bottom:8px;
+         margin-bottom:90px;
+    }
+    .ion-record:before {
+        color: #C00000;
+    }
+</style>
+<ion-view>
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false" auto-play="false">
+        <ion-slide>
+            <div class="center-block text-center" style="height:100%;"><img style="width:100%; height:100%;" ng-src="../staticresource/guidance1.jpg"></div>
+        </ion-slide>
+        <ion-slide>
+            <div class="center-block text-center" style="height:100%;"><img style="width:100%; height:100%;" ng-src="../staticresource/guidance2.jpg"></div>
+        </ion-slide>
+        <ion-slide>
+            <div class="center-block text-center" style="height:100%;">
+                <img style="width:100%; height:100%;" ng-src="../staticresource/guidance3.jpg" />
+            </div>
+        </ion-slide>
+    </ion-slide-box>
+    <div class="center" ng-if="ishow">
+        <button class="button btn-start button-large button-assertive button-block" ng-click="goMain()" style="display:flexbox; position:absolute;">
+            立即体验
+        </button>
+    </div>
+</ion-view>

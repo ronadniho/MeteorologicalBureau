@@ -1,0 +1,46 @@
+﻿<ion-view title="观点列表" style="font-size:30px; ">
+	<go-back my-title="观点列表"></go-back>
+	<ion-content class="has-header">
+		<ion-list>
+			<div class="item text-center" ng-show="ShowNoRecord" style="color:#ccc; font-size:30px;border-bottom:0px;">
+				<i class="ion-clipboard" style="font-size:90px"></i>
+				<br />
+				<br />
+				暂无观点
+			</div>
+			<ion-item style="padding:5px;position:relative" ng-repeat="q in QuestionList">
+				<div style="margin-left:25px;">
+					<div class="row">
+						<span style="position:absolute;top:15px;left:10px;display:inline-block;border:1px solid #f00;color:#f00;border-radius:50px;width:17px;height:17px;line-height:13px;text-align:center;">
+							<i class="icon ion-help" style="font-size:14px;"></i>
+						</span>
+						<div class="text-left publish-name">{{q.username}}:</div>
+						<div class="text-left publish-time">{{q.createdatestr}}</div>
+						<div class="text-left publish-time" ng-show="q.deleted==-1">[已删除]</div>
+					</div>
+					<div class="row">
+						<div class="timetable-title" style="margin:0px; padding:0px;">{{q.title}}</div>
+					</div>
+					<a class="row item-text-wrap" ng-click="HrefTo('KCDetail',q.kwid)" style="color:#C0C3C5;margin:0;margin-top:5px;margin-bottom:5px;padding:0;white-space:normal;line-height:24px;">
+						【相关课程】：{{q.kcname}}
+					</a>
+					<div style="background:#F8F8F8;margin:15px 5px;">
+						<div class="list" style=" line-height:25px; margin-bottom:0px;padding:10px;">
+							<div ng-repeat="answer in q.questionAnswer" style="position:relative;margin:5px 0px;">
+								<span class="" style="font-size:16px; color:#4e7fa1; ">
+									{{answer.username}}:
+								</span>
+								<span class="item-text-wrap" style="white-space:normal">
+									{{answer.answer}}
+
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</ion-item>
+
+		</ion-list>
+	</ion-content>
+</ion-view>

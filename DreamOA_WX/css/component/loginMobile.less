@@ -1,0 +1,107 @@
+@white:rgb(255,255,255);
+@buttonColor:#38adff;
+@borderColor:#e0e0e0;
+@max:100%;
+@url:'../img/component/loginMobile';
+ion-content.bg-gray {
+  background: #f8f8f8;
+  .list {
+    margin-bottom:.41rem;
+    .logo {
+      text-align: center;
+      img {
+        margin-top: 1.17rem;
+        margin-bottom: .69rem;
+        width: 1.55rem;
+        height: 1.55rem;
+      }
+    }
+    .input-item{
+      @icon-user:'/user.png';
+      @icon-pwd:'/pwd.png';
+      border-top:1px solid @borderColor;
+      border-bottom:1px solid @borderColor;
+      padding:0 .35rem;
+      background-color:@white;
+      .items{
+        width:@max;
+        position: relative;
+        span{
+          position: absolute;
+          display: block;
+          //width:.32rem;
+          //height:.32rem;
+          width:.68rem;
+          height:.81rem;
+          background:url("@{url}@{icon-user}") no-repeat @max/2 @max/2;
+          background-size:.32rem;
+        }
+        input{
+          width:@max;
+          padding-left:.68rem;
+          height:.81rem;
+          font-size: .25rem;
+          border-bottom:1px solid @borderColor;
+        }
+      }
+      .items:last-child{
+        input{
+          border-bottom:0;
+        }
+        span{
+          background-image:url("@{url}@{icon-pwd}");
+        }
+      }
+    }
+
+  }
+  .submit {
+    margin-bottom:.39rem;
+    button {
+      border: 0;
+      border-radius: 5px;
+      background-color:@buttonColor;
+      color: @white;
+      font-size: .26rem;
+      width: 5.98rem;
+      height: .67rem;
+    }
+    button:disabled{
+      background-color: #afdeff;
+    }
+  }
+  .help{
+    width:@max;
+    padding:0 .27rem 0 .23rem;
+    div.rt{
+      text-align: right;
+    }
+    span{
+      font-size: .25rem;
+      color:#999;
+    }
+    #myCheck + label{
+      background-color: white;
+      border:1px solid #d3d3d3;
+      width:20px;
+      height:20px;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 20px;
+    }
+    #myCheck:checked + label{
+      background-color: @buttonColor;
+      color:@white;
+      border:0;
+      border-radius: 3px;
+    }
+    #myCheck:checked + label:after{
+      content:"\2714";
+    }
+    input[type="checkbox"]{
+      display: none;
+    }
+  }
+}
+

@@ -1,0 +1,41 @@
+﻿<ion-modal-view>
+	<ion-header-bar align-title='center' class='bar-assertive'>
+		<div class='buttons'>
+			<button class='button button-icon icon ion-ios-arrow-back' style='font-size:12px' ng-click='closeModal();'></button>
+		</div>
+		<h3 class='title'>教学评价</h3>
+		<div class='buttons'>
+		</div>
+	</ion-header-bar>
+	<ion-content class="has-header techevaluation-content">
+		<div ng-repeat="group in PJGroupList" ng-switch="group.groupname">
+			<div ng-switch-when="课程评价">
+				<div class="row item-text-wrap" style="font-size:22px;margin:8px 2px;line-height:24px">
+					{{kcwhInfo.kcname}}
+				</div>
+				<div class="row" style="font-size: 16px; color: #999; border-bottom: 1px solid #ddd;">
+					<div class="col" style="text-align:left">
+						<i class="ion-ios-person-outline" style="font-size:20px;"></i> {{kcwhInfo.zjr}}
+					</div>
+					<div class="col" style="text-align:right">
+						<i class="ion-clock"></i> {{kcwhInfo.sktime}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="citem" ng-repeat="group in PJGroupList" >
+            <div ng-switch="control.type" class="formtrstyle" id="{{control.elementid}}" controltype="control.type" ng-repeat="control in group.PJCurrentItemList" >
+				<sytextarea ng-switch-when="YJ" assignobj="control"></sytextarea>
+				<sycheckbox ng-switch-when="YJ2" assignobj="control" ></sycheckbox>
+                <syradio ng-switch-when="DJ" assignobj="control"></syradio>
+            </div>
+		</div>
+
+		<div class="footer">
+			<button class="button button-full button-my" ng-disabled="disabledSubmit" ng-show="showSubmit" ng-click="CheckSubmit(kcwhInfo);">
+				提交
+			</button>
+		</div>
+	</ion-content>
+</ion-modal-view>
+

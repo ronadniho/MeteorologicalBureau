@@ -1,0 +1,93 @@
+﻿
+<ion-view title="">
+    <ion-header-bar class="bar bar-header bar-positive">
+        <div class="classBar">
+            <div style="text-align:center"><span class="selectedClass size-16" ng-if="bclist.length>0" ng-click="dropDown()">{{classNmae}}<i class="icon ion-chevron-down" ng-if="bclist.length>1" ng-class="{true:'ion-chevron-up',false:'ion-chevron-down'}[classShow]"></i></span></div>
+            <ul class="chooseClass" ng-show="classShow">
+                <li ng-repeat="item in bclist" ng-click="checked(item)">{{item.bt2}}</li>
+            </ul>
+        </div>
+    </ion-header-bar>
+    <ion-content class="has-tabs">
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="拖动刷新"
+                       refreshing-text="加载中"
+                       refreshing-icon="ion-android-refresh">
+        </ion-refresher>
+        <!--功能按钮-->
+        <div class="div_space"></div>
+        <ion-list class="index-middle">
+            <ion-item class="item mainpage">
+                <ion-slide-box show-pager="false" auto-play="false">
+                    <ion-slide ng-repeat="dataPage in datameSource">
+                        <div class="row" ng-repeat="dataRows in dataPage.data">
+                            <div class="row-div rowDiv" ng-if="dataRow.icontype=='all'||dataRow.icontype==user.type||dataRow.icontype=='lt'" ng-repeat="dataRow in dataRows.data" ng-click="gosub(dataRow)">
+                                <div>
+                                    <img class="img-50" ng-src="{{dataRow.image}}">
+                                    <div class="elective-number danru" id="{{iconitem.key}}" ng-if="dataRow.showicon&&iconitem.key==dataRow.keyname&&iconitem.val>0" ng-repeat="iconitem in iconvalArray">{{iconitem.val}}</div>
+                                </div>
+                                <p class="size-14">{{dataRow.title}}</p>
+                            </div>
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
+            </ion-item>
+        </ion-list>
+        <!--班级公告-->
+        <div class="div_space"></div>
+        <ion-list>
+            <div class="noticeBtn" ng-click="goGGList()"><span>班级公告</span></div>
+            <ion-item style="padding:13px 10px;color:#999" ng-if="ggList.length<=0">
+                暂无公告
+            </ion-item>
+            <div class="noticeList" ng-repeat="gg in ggList " ng-click="gogg(gg)">
+                <div class="listRow clearfix">
+                    <span class="size-14 listRight">{{gg.ggsj|date:'MM-dd'}}</span>
+                    <span ng-if="gg.hasreader==0">
+                        <span class="size-16 listLeft">{{gg.ggbt}}</span>
+                    </span>
+                    <span ng-if="gg.hasreader>0">
+                        <span class="size-16 listLeft">{{gg.ggbt}}</span>
+                    </span>
+                </div>
+            </div>
+        </ion-list>
+        <!--今日课程-->
+        <ion-list>
+            <div class="noticeCourse_bg">
+                <div class="noticeBtn noticeCourse" ng-click="gokb()"><span>今日课程</span></div>
+            </div>
+            <div style="background:#e4e4e4;">
+                <ion-item class="size-16" ng-if="KCList.length<=0" style="border:none;">暂无课程</ion-item>
+                <div class="item " style="padding:0px;border-bottom:none;" ng-repeat="kc in KCList" ng-click="OpenKCDetail(kc)">
+                    <div style="margin-left:0px; margin-right:0px; padding:0px;">
+                        <div class="course-info">
+                            <div class="course-info-description size-18"><div class="course-info-time size-22">{{kc.kssj|date:'HH:mm'}}&nbsp;</div>{{kc.kcname}}</div>
+                            <div class="col-20-name course-info-name size-16"><i class="ion-ios-person-outline size-22" ng-show="kc.zjr">&nbsp;</i>{{kc.zjr}}</div>
+                            <div class=" course-info-address" style="width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:16px;"><i ng-show="kc.kcdd" class="ion-ios-location-outline size-20">&nbsp;</i>{{kc.kcdd}}</div>
+                        </div>
+                    </div>
+                    <div style="margin:0px 0px;" ng-if="!kc.remark==''">
+                        <span class="beizhu"><i class="icon ion-flag " style="color:#f00;display:inline-block;margin-right:3px;"></i>{{kc.remark}}</span>
+                    </div>
+                </div>
+                <!--<div class="courseList clearfix">
+                    <div class="courseLeft">
+                        <p class="courseName size-16"><span>课程名称11111</span></p>
+                        <p class="courseTeacher"><span class="size-14">张鑫</span></p>
+                        <p class="courseAddress"><span class="size-14">教学中心201</span></p>
+                    </div>
+                    <div class="courseRight">08:30</div>
+                </div>
+                <div class="courseList clearfix">
+                    <div class="courseLeft">
+                        <p class="courseName size-16"><span>课程名称22222课程名称课程名称课程名称</span></p>
+                        <p class="courseTeacher"><span class="size-14">张鑫</span></p>
+                        <p class="courseAddress"><span class="size-14">教学中心201</span></p>
+                    </div>
+                    <div class="courseRight">14:30</div>
+                </div>-->
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

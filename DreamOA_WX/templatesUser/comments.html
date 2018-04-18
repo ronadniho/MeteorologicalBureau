@@ -1,0 +1,48 @@
+<style>
+	.attach_icon{
+		height:2.3rem;
+		width: 2rem;
+	}
+    .ion-android-person:before{
+        font-size:24px;
+        color:#717f8f;
+    }
+</style>
+
+<ion-view>
+<ion-content ng-class="{true: 'asf-has-inputview' }[inputviewContainerState]">
+<ion-list>
+     <div ng-repeat="comment in comments">
+       <div class="item">
+           <div class="clearfix">
+                <div class="todoCommentsLeft">
+		            <!--<i class="icon icon-left"><img class='attach_icon' src='../img/drawable-hdpi/user_default_icon.png' err-src="{{defaultUserIcon }}"></i>-->
+                    <i class="icon ion-android-person"></i>
+                    <!--<span class="comment"> <h3>{{comment.itemsContent}}</h3> </span>-->
+		        </div>
+		        <h2 ng-if="comment.name" class="todoCommentsRight">
+                    <span>{{comment.name}}</span>
+                    <p class="time" ng-if="comment.time">
+                        <img class='attach_icon' ng-if='comment.hasFile' ng-click='openAttachmentsList(comment.documents)' src='../img/drawable-hdpi/file_status_attachment.png'> {{comment.time}}
+                    </p>
+                </h2>
+            </div>
+           <div class="comment todoCommentsContent">
+               <h3>{{comment.itemsContent}}</h3>
+           </div>
+       </div>     
+    </div>
+</ion-list>
+ 
+<div ng-if="!isExistComments">
+<div>
+<img style="width:50%;height:50%;margin-top:30%;margin-left:30%;" src="../img/blank_page.png"></img>
+ <span style="width:50%;height:50%;margin-top:30%;margin-left:40%;font-weight:bold">暂无内容...</span>
+</div>
+</div>
+
+<ion-content> 
+</ion-view>
+<ion-footer-bar ng-if="inputviewContainerState" id="inputview-container" ng-class="{true: 'asf-inputview-container-expand', false: 'asf-inputview-container'}[inputViewMoreBlockActive]">
+    <inputview></inputview>
+</ion-footer-bar>

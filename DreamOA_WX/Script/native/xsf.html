@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+        <script type="text/javascript" charset="utf-8" src="native.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            alert('onDeviceReady');
+                xsf.open("path",
+                           function (result) {
+                            alert("open seccess");
+                           },
+                           function (error) {
+                           alert("open failed: " + error);
+                           }
+		   );
+        }
+    </script>
+  </head>
+  <body>
+    <p>xsf</p>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+﻿<ion-view>
+    <go-back my-title="新增问卷"></go-back>
+    <ion-content class="padding-top bg-gray has-header">
+        <div id="divWish1" style="position:absolute;width:100%;height:800px; text-align:center;">
+            <div class="scroll-content padding">
+                <div>
+                    <label class="item item-input">
+                        <label><span class="input-label icon ion-chatbubble-working" style="font-size:22px">&nbsp;&nbsp;</span></label>
+                        <input type="text" placeholder="输入标题"  required>
+                    </label>                    
+                    <label class="item item-input">
+                        <label><span class="input-label icon ion-android-home" style="font-size:22px">&nbsp;&nbsp;</span></label>
+                        <select>
+                            <option value="">请选择问卷类型</option>
+                            <option value="">训前需求表</option>
+                            <option value="">调查问卷</option>
+                        </select>
+                    </label>
+                    <label class="item item-input">
+                        <label><span class="input-label icon ion-person-stalker" style="font-size:22px">&nbsp;&nbsp;</span></label>
+                        <input type="text" ng-disabled="true" placeholder="请选择关系班级" required>
+                    </label>
+                </div>
+                <div class="padding">
+                    <div class="padding-left padding-right" style="text-align:center; margin-top:10px;">
+                        <md-button class="md-raised  md-warn " ng-click="YesNo(yes,no)" style="width:150px;font-size:20px;">选择范围</md-button>
+                        <md-button class="md-raised  md-warn " ng-click="YesNo(yes,no)" style="width:150px;font-size:20px;">添加</md-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,47 @@
+﻿<ion-modal-view>
+    <ion-header-bar align-title="center" class="bar-header">
+        <h1 class="title">
+            联系方式
+        </h1>
+    </ion-header-bar>
+    <ion-content class="has-header has-footer">
+        <div class="list">
+            <div class="item text-center">
+                <img style="width:100px;height:100px;border-radius:100px" src="{{userdefault}}" />
+                <br />
+                <span ng-bind="addressUser.uname"></span>
+            </div>
+            <a class="item item-icon-left" ng-click="goHref(0)" ng-show="addressUser.phone!=null">
+                <i class="icon ion-iphone assertive"></i>
+                打手机
+            </a>
+            <a class="item item-icon-left" ng-click="goHref(1)" ng-show="addressUser.fj!=null&&addressUser.utype==1">
+                <i class="icon ion-android-call assertive"></i>
+                打办公室分机
+            </a>
+            <a class="item item-icon-left" ng-click="goHref(2)" ng-show="addressUser.fjdh!=null">
+                <i class="icon ion-ios-telephone assertive"></i>
+                打房间分机
+            </a>
+            <a class="item item-icon-left" ng-click="goHref(3)" ng-show="addressUser.phone!=null">
+                <i class="icon ion-email assertive"></i>
+                发短信
+            </a>
+            <a class="item item-icon-left" ng-click="goHref(5)" ng-show="{{showChange}}">
+                <i class="icon ion-locked assertive"></i>
+                重置班级信息密码
+            </a>
+            <a class="item item-icon-left" ng-click="goHref(6)" ng-show="{{showChange}}">
+                <i class="icon ion-ios-cloud-upload assertive"></i>
+                修改手机号码 <span class="item-note">{{addressUser.phone}}</span>
+</a>
+            <!--<a class="item item-icon-left" ng-click="goHref(4)" >
+                <i class="icon ion-chatbubble-working assertive"></i>
+                发消息
+            </a>-->
+        </div>
+    </ion-content>
+    <ion-footer-bar align-title="cneter" class="bar-assertive">
+        <h1 class="title" ng-click="closeModal()">返 回</h1>
+    </ion-footer-bar>
+</ion-modal-view>

@@ -1,0 +1,17 @@
+﻿<ion-view>
+	<go-back my-title="未评学员"></go-back>
+	<ion-content class="has-header">
+		<ion-list class="list">
+			<div ng-repeat="dataRepeat in OtherWPXYList">
+				<a class="item item-avatar" style="border-left:none;border-right:none;border-top:none;margin-bottom:2px;" ng-click="openModal(dataRepeat)">
+					<img ng-src="{{userdefaultpng}}">
+					<h2><span ng-bind="dataRepeat.bt"></span>&nbsp;<span ng-bind="dataRepeat.szdw" style="color:#a99e9e"></span></h2>
+					<p>
+						<div class="pull-left" ng-show="dataRepeat.fjh!=null">房间号：<span ng-bind="dataRepeat.fjh"></span>&nbsp;&nbsp;</div>
+						<div class="pull-left" ng-show="dataRepeat.fjdh!=null">分机号：<span ng-bind="dataRepeat.fjdh"></span></div>
+					</p>
+				</a>
+			</div>
+		</ion-list>
+	</ion-content>
+</ion-view>

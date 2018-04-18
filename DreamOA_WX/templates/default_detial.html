@@ -1,0 +1,31 @@
+﻿<ion-view title="{{title}}">
+    <go-main-page></go-main-page>
+    <ion-content>
+        <div class="list">
+            <div class="item item-input" style="white-space:normal" ng-repeat="item in data" ng-if="!item.subTitle&&item.isTitle">
+                <span class="input-label" ng-if="item.isTitle!='true'&&item.isHTML!=true">{{item.title}}</span>
+                <div style="font-size:22px;font-weight:300; line-height:50px; text-align:center;word-break:break-all;overflow:hidden " ng-if="item.isTitle=='true'">{{item.value}}</div>
+                <span ng-if="item.isTitle!='true'&&item.src==''&&item.isHTML!=true">{{item|columnDisplayFilter}}</span>
+                <a ng-click="downfile('{{item.attrSrc}}','{{item.filename}}')" ng-if="item.src!=''">{{item.filename}}</a>
+            </div>
+            <div class="row text-center " style="margin-left:0px; margin-right:0px">
+                <div class="col bg-info" ng-repeat="item in data" ng-if="item.subTitle">
+                    <p style="text-align:center"><b>{{item.title}}</b>:{{item|columnDisplayFilter}}</p>
+                </div>
+            </div>
+            <div class="item item-input padding-right" style="white-space:normal;" ng-repeat="item in data" ng-if="!item.isTitle&&!item.subTitle&&!item.attachs">
+                <span class="input-label" ng-if="item.isTitle!='true'&&item.isHTML!=true">{{item.title}}</span>
+                <div style="overflow:hidden; word-break:break-all; width:65%" ng-if="item.isTitle!='true'&&item.src==''&&item.isHTML!=true">{{item|columnDisplayFilter}}</div>
+            </div>
+            <div class="item" ng-repeat="item in data" ng-if="!item.isTitle&&!item.subTitle&&item.attachs">
+                <span class="input-label" ng-if="item.isTitle!='true'&&item.isHTML!=true">{{item.title}}</span>
+                <a style="width:500px; float:left" ng-click="downfile('{{attach.filePath}}','{{attach.filename}}')" ng-repeat="attach in item.attachs.attachs" ng-if="item.attachs.attachs.length>0">{{attach.filename}}</a>
+            </div>
+            <div ng-repeat="item in data">
+                <ion-scroll ng-if="item.isHTML==true&&item.isTitle!='true'" zooming="true" direction="y" style="height:400px; padding:5px;">
+                    <div ng-if="item.isHTML==true&&item.isTitle!='true'" ng-bind-html="item.value" style="width:100%;word-wrap:break-word; font-size:18px"></div>
+                </ion-scroll>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,18 @@
+﻿--手机端答卷统计页面
+http://10.100.2.32:9901/DSFA/admin_client/questionnaire/analyze/views/index.html?id=0dcae3370a164c0283ec39f82cc9e701&token=cZ6EO2abT9TlVdrvuDKC4rgGJSMnteIXts/mAkEwX7aFLAp7v1fNExJfIWqaCWno3/rMFDwE7zDKTj3Bf3PWsw==
+--手机端答题页面
+http://10.100.2.32:9901/DSFA/admin_client/questionnaire/moblie/views/questionnaire.html?q=1443143188355
+--pc端设计页面
+http://10.100.2.32:9901/DSFA/admin_client/questionnaire/design/views/nlayout.htm?id=0dcae3370a164c0283ec39f82cc9e701
+
+
+
+  select dq.name,dq.id,
+  (select count(*) from vw_xyfrombc xy where xy.bcinfo_id =[classid]) as xyCount,
+  (select count(*) from dsfa_question_publish_user qa where qa.qid=[qid] and cid=[classid]) as qaCount
+  from dsfa_question dq 
+  where id='0dcae3370a164c0283ec39f82cc9e701' 
+
+
+style="color:{{hotItem.qacount >0 ? 'red' : 'true'}}"
+  

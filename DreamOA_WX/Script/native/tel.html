@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+        <script type="text/javascript" charset="utf-8" src="native.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+	    document.addEventListener("deviceready", onDeviceReady, false);
+		function onDeviceReady() {
+			alert("onDeviceReady");
+		}
+		function telto(tel){
+			xsfMobile.telto(tel);
+		}
+		function smsto(tel){
+			xsfMobile.smsto(tel);
+		}
+    </script>
+  </head>
+  <body>
+  <a href="tel://138000000">telto</a><br />
+  <a href="smsto://138000000">smsto</a><br />
+    <input type="button" onclick="telto('138')" value="拨打电话" /><br />
+    <input type="button" onclick="smsto('138')" value="拨打电话" /><br />
+  </body>
+</html>

@@ -1,0 +1,74 @@
+create table celap_news
+(info_id nvarchar2(50) not null,	--主键,
+category nvarchar2(50) null,   --新闻分类用r_code
+title  nvarchar2(50) null,--标题
+title_pic  nvarchar2(50) null,--标题图片
+source  nvarchar2(50) null,--来源
+createtime date null,-- 创建时间
+author nvarchar2(50) null,  --作者
+ncontent clob null, --正文内容
+status number null	--0,拟稿，1已发布
+)
+
+create table celap_mobilemenu	
+(info_id nvarchar2(50) not null,--	主键
+	finfo_id nvarchar2(50) not null,--	父类，0为一级分类
+	title nvarchar2(50) null,--	标题
+	url nvarchar2(100) null,--	URL
+	pic	nvarchar2(50) not null,--图片
+	orderby	number null --显示顺序
+  )
+  
+  
+  create table celap_videostudy	
+  (info_id	nvarchar2(50) not null,--	主键
+  title	nvarchar2(50) not null,--	标题
+	title_pic	nvarchar2(50)  null,--	标题图片
+	source	nvarchar2(50)  null,--	来源
+	createtime	date  null,--	创建时间
+	author	nvarchar2(50)  null,--	作者
+	ncontent	clob  null,--	正文内容	
+	status	number  null,--	0,拟稿，1已发布
+	menuid	nvarchar2(50)  null,--	所属模块
+	category	number  null--	0,图文，1视频，2音频
+  )
+  
+  create  table celap_videocomment	
+  (info_id 	nvarchar2(50) not null,--主键
+	userid	nvarchar2(50) not null,--评论人ID
+	username	nvarchar2(50)  null,--评论人
+	videoid	nvarchar2(50) not null,--celap_videostudy的主键
+	ncontent	nvarchar2(300)  null,--回复内容
+	isgood	number  null,--是否点赞  0 未点赞1 已点赞
+	replaydate	date  null,--回复时间
+	replayid	nvarchar2(50) null --celap_videocomment主键，为空第一次评论。
+  )
+
+ 
+
+
+你不还钱，我有九种办法治你，九种！我已通过一些渠道摸清你老家石家庄辛集市的详细住址了，你要是不还钱今年就别想回老家过好年了，到过年的时候我找人去堵你门，让你街坊邻居亲友们都知道，再把你搞大小姑娘肚子的事也宣传出去，此其一。其二，我还可以选择走司法程序。我把你的身份证号130181199593116739给人民法院申请支付令，即督促程序，你作为债务人收到法院支付令，十五日内如果拒绝偿还债务，我可以申请法院强制执行，反正我的成本很低，支付令申请费只要100元。其三，我向你们当地的派出所报警，2000元已够立案标准，让警察叔叔出警到你家门口，治治你这个年满十八周岁的小孩儿……以上。前提都是‘如果你不还钱’，如果你能还，那就什么事都没有，皆大欢喜。大家都是出来打工挣钱的，当初要不是看你说得那么可怜我怎么会动恻隐之心借你那么多钱？你这么久借钱不还，实在是太过分了。
+
+贾攀 男 身份证号：130181199503116739
+出生地：河北省石家庄市辛集市
+生日：1995年03月11日
+手机号：15507369648
+QQ:319198236
+
+你这样欠钱不还，同时还删除一切联系方式，已经构成诈骗
+欠钱2000不还，足以在公安局立案
+
+如果你还不主动联系我，那我就通过一下方式找到你或你的家人：
+1. 直接找到你的父母，说明一切，并要求他们替你还钱
+2. 我提供你发给我的短信信息和支付宝转账记录，要求当地公安局立案侦查，公安局可以根据身份证直接查找你的家人强制要求还钱,并刑事拘留你，关你几天，到时候你和你爸妈还能不能见人
+3.请携带着您的身份证，向人民法院申请支付令，即督促程序，债务人收到法院支付令，十五日内拒绝偿还债务，您可以申请法院强制执行，支付令申请费是100元
+
+申请支付令，您需要满足下列条件：
+
+1、您与债务人没有其他债务纠纷
+
+2、支付令可以送达债务人，比如债务人的工作单位或住所地
+
+3、填写申请书，注明欠款数额和相关证据
+
+最后要注意向债务人住所地或常住地的人民法院申请。

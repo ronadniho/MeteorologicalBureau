@@ -1,0 +1,21 @@
+﻿<ion-view title="详情">
+    <go-back my-title="通知公告"></go-back>    
+    <ion-content class="scroll-content bg-gray has-header">
+        <div class="line-h-24">
+            <div class="size-22 black line-h-24 text-left" style="margin:5px 10px;">
+                {{dataSource.noticetitle}}
+            </div>
+            <div class=" gray size-22 text-left" ng-show="{{dataSource.subtitle==''?'false':'true'}}" style="margin:5px 10px;">
+                {{dataSource.subtitle}}
+            </div>
+        </div>
+        <div class="size-16 gray" style=" padding:5px 10px;border-bottom:1px solid #ddd;">
+            <div class="col" style="text-align:left;">
+                <i class="ion-clock">&nbsp;时间:&nbsp;&nbsp;<span>{{dataSource.releasetime|date:'MM月dd日 HH:mm'}}</span></i>
+            </div>
+        </div>
+        <div class="size-18  line-h-30" style="padding-top:5px;">
+            <div class="padding" ng-bind-html="dataSource.ggnr">&nbsp;&nbsp;</div>
+        </div>
+    </ion-content>
+</ion-view>

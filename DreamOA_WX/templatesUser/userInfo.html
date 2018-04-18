@@ -1,0 +1,68 @@
+﻿<ion-view title="我" style="background:url(../content/bg.png)  no-repeat;background-size:100% 300px;font-size:30px; ">
+    <ion-content class="has-tabs" style="background:rgba(0,0,0,0);">
+        <ion-list>
+            <div style="padding:0px;background:rgba(0,0,0,0);">
+                <div class="item" style="border:none;text-align:center;background:rgba(0,0,0,0);background-size:100% 100%;">
+                    <div style="" ng-click="goUser()">
+                        <img style="width:60px;height:60px;border-radius:60px;border-radius:50px;overflow:hidden;" src="{{myImg}}" style="width:100%;height:100%;border-radius:50px;" />
+                    </div>
+                    <div style="color:#fff;">
+                        <div ng-bind="user.username" style="display:inline-block;font-size:18px;"></div>
+                        <div style="display:inline-block"><span ng-repeat="star in userInfo.starArr"><i ng-class="star.starClass" style="color:#FFE38C"></i></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="transparent-bg">
+                <div class="item item-text-wrap" style="font-weight:bold;">
+                    {{deptname}}
+                </div>
+                <a class="item " ng-click="HrefTo('userinfo');">
+                    <i class="icon ion-android-person" style="color:#f00;font-size:20px;"></i>
+                    <span style="padding-left:10px;">我的信息</span>
+                    <span class="more"><i class="icon ion-ios-arrow-right"></i></span>
+                </a>
+                <a class="item" ng-click="gotoOneCardList(user.workno);">
+                    <i class="icon ion-ios-list-outline" style="color:#f00;font-size:20px;"></i>
+                    <span style="padding-left:15px;">
+                        一卡通余额明细
+                    </span>
+                    <span class="badge badge-assertive"></span>
+                </a>
+                <a class="item" ng-click="gotoOneCard(user.workno);">
+                    <i class="icon ion-ios-list-outline" style="color:#f00;font-size:20px;"></i>
+                    <span style=" padding-left:10px;">
+                        一卡通积点明细
+                    </span>
+                    <span class="badge badge-assertive"></span>
+                </a>
+                <a class="item" ng-click="HrefTo('mylike');">
+                    <i class="ion-android-favorite" style="color:#f00;font-size:20px;"></i>
+                    &nbsp;&nbsp;我的收藏
+                    <span class="badge badge-assertive">{{userInfo.mymark}}</span>
+                </a>
+                <a class="item" ng-click="HrefTo('todolist');">
+                    <i class="ion-android-favorite" style="color:#f00;font-size:20px;"></i>
+                    &nbsp;&nbsp;待办文件
+                    <span class="badge badge-assertive">{{userInfo.mymark}}</span>
+                </a>
+                <a class="item" ng-click="HrefTo('wifiInfo');">
+                    <i class="ion-wifi" style="color:#f00;font-size:20px;"></i>
+                    &nbsp;&nbsp;Wifi账户
+                </a>
+                <li class="item item-toggle">
+                    <i class="ion-grid" style="color:#f00;font-size:20px;"></i>
+                    &nbsp;&nbsp;开启手势密码
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" ng-model="ischecked.checked" ng-click="gotohandLogin()">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </li>
+            </div>
+            <button ng-show="!formweixin&&!isIOS" class="button button-full button-my " ng-click="Logout();">
+                安全退出
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,45 @@
+﻿<style>
+    .bottom60 {
+        bottom: 60px;
+    }
+</style>
+<ion-side-menus>
+    <ion-side-menu-content class="bar-positive">
+        <ion-nav-bar class="bar-positive">
+            <ion-nav-buttons side="left">
+                <img ng-init="$scope.showLogo=true;" style="width:33px;height:33px" ng-src="../img/{{LogoPath}}" />
+                <button ng-click='goMain()' class='button button-icon icon ion-navicon' style='font-size:12px'>菜单</button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+
+
+    </ion-side-menu-content>
+    <ion-side-menu side="left">
+        <ion-header-bar align-title="center" class="bar-stable">
+            <div class="buttons" nav-clear>
+                <button class="button button-icon icon ion-gear-b" ng-click="goMysettings()"></button>
+            </div>
+            <h1 class="title">导&nbsp;&nbsp;航</h1>
+            <div class="buttons pull-right" nav-clear menu-close ng-click="settings()" ng-if="usertype=='student'">
+                <button menu-close class="button button-icon icon ion-social-windows" style="color:#145fd7"></button>
+            </div>
+        </ion-header-bar>
+        <ion-content class="has-header" ng-class="{'bottom60':showChaoxing}">
+            <ion-list>
+                <ion-item nav-clear ng-repeat="menu in menus" ng-class="{true: 'background_gray', false: 'background_white'}[menu.checked==true]" ng-click="goMenu('{{menu.groupId}}',menu)">
+                    <i class="icon ion-ios7-arrow-right"></i> {{menu.title}} <span class="badge badge-assertive" ng-if="menu.badge>0">{{menu.badge}}</span>
+                    <a nav-clear menu-close ng-if="menu.checked" ng-class="{true: 'background_gray', false: 'background_white'}[submenu.checked]" class="item item-icon-left" ng-click="goMenu('{{submenu.groupId}}',submenu)" ng-repeat="submenu in menu.subMenus" style="border:0px">
+                        <span style="font-size:14px"><span style="width:3px; background-color:red"></span><i class="icon ion-ios7-arrow-right" style="font-size:16px"></i>{{submenu.title}}</span>
+                    </a>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+        <ion-footer-bar class="bar-stable" ng-if="showChaoxing" style="height:60px">
+            <div class="button-bar">
+                <a class="button button-clear" ng-click="openSuper()"><img src="../img/chaoxing.jpg" height="40" width="40"><br />进入超新</a>
+            </div>
+        </ion-footer-bar>
+    </ion-side-menu>
+
+</ion-side-menus>

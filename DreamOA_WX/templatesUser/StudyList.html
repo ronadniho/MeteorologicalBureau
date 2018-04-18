@@ -1,0 +1,105 @@
+﻿
+<ion-view>
+    <go-back my-title="学习圈"></go-back>
+    <ion-tabs class="tabs-striped tabs-top" style="color:red;border-color:red;">
+        <ion-tab title="微学习">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list>
+                        <ion-refresher on-refresh="doRefresh(0)"
+                                       pulling-text="拖动刷新"
+                                       refreshing-text="加载中"
+                                       refreshing-icon="ion-loading-c">
+                        </ion-refresher>
+                        <div style="background:#F0F0F0;padding:5px;margin-bottom:45px;">
+                            <div ng-repeat="hotItem in dataStudySource" style="margin-bottom:5px">
+                                <div class="item item-thumbnail-right video-list ydjx1-list" ng-click="goNewsDetail(hotItem);" style="border:none">
+                                    <img src="../staticresource/{{hotItem.title_pic}}" class="md-whiteframe-z2" />
+                                    <img src="../img/Play.png" class="md-whiteframe-z2 ydjx1-list-img" style="{{marLeft}}" />
+                                    <p class="ydjx1-list-title">{{::hotItem.title | limitTo: 25}}{{::hotItem.title.length > 25 ? '...' : ''}}</p>
+                                    <div class="ydjx1-liebiao">
+                                        <span class="ydjx1-liebiao-right" style="display:inline-block;margin-top:0px;">
+                                            <span class="grey ydjx1-list-time" ng-show="{{hotItem.minutes ==0 ? 'false' : 'true'}}">
+                                                <i class="ion-clock" style="font-size:14px;"></i>
+                                                时长:&nbsp;{{::hotItem.minutes}}分钟
+                                            </span>
+                                            <span class="grey ydjx1-list-auth" ng-show="{{hotItem.author ==null ? 'false' : 'true'}}">
+                                                作者:&nbsp;{{::hotItem.author}}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="item text-center" layout="row" style="height:20px; padding:1px 0px 3px 0px;border:none;margin:0; background:#F7F7F7">
+                                    <div class="grey ydjx1-list-time" style="width:30%; float:left;cursor: pointer;">
+                                        <i class="ion-play" style="font-size:16px;color:#C6C3C6"></i>
+                                        <span style="font-size:12px;">播放数:&nbsp;{{hotItem.playcount}}</span>
+                                    </div>
+                                    <div class="grey ydjx1-list-time" style="width:30%; float:left;cursor: pointer;" ng-click="{{hotItem.isgood ==1?'':'Addgood(hotItem);'}}">
+                                        <i class="ion-thumbsup" style="font-size:16px;color:{{hotItem.isgood ==1?'#EF473A':'#C6C3C6'}}"></i>
+                                        <span style="font-size:12px">点赞数:&nbsp;{{hotItem.goodcount}}</span>
+                                    </div>
+                                    <div class="grey ydjx1-list-time" style="width:30%; float:left;cursor: pointer;" ng-click="{{hotItem.islike ==1?'Deletelike(hotItem);':'Addlike(hotItem);'}}">
+                                        <i class="ion-heart" style="font-size:16px;color:{{hotItem.islike ==1?'#EF473A':'#C6C3C6'}}"></i>
+                                        <span style="font-size:12px">收藏数:&nbsp;{{hotItem.docucount}}</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-list>
+                    <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMore(0);" distance="1%" icon="ion-loading-d">
+                    </ion-infinite-scroll>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab title="网上讲座库">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list>
+                        <ion-refresher on-refresh="doRefresh(1)"
+                                       pulling-text="拖动刷新"
+                                       refreshing-text="加载中"
+                                       refreshing-icon="ion-loading-c">
+                        </ion-refresher>
+                        <div style="background:#F0F0F0;padding:5px;margin-bottom:45px;">
+                            <div ng-repeat="hotItem in dataOnlineSource" style="margin-bottom:5px">
+                                <div class="item item-thumbnail-right video-list ydjx1-list" ng-click="goNewsDetail(hotItem);" style="border:none">
+                                    <img src="../staticresource/{{hotItem.title_pic}}" class="md-whiteframe-z2" />
+                                    <img src="../img/Play.png" class="md-whiteframe-z2 ydjx1-list-img" style="{{marLeft}}" />
+                                    <p class="ydjx1-list-title">{{::hotItem.title | limitTo: 25}}{{::hotItem.title.length > 25 ? '...' : ''}}</p>
+                                    <div class="ydjx1-liebiao">
+                                        <span class="ydjx1-liebiao-right" style="display:inline-block;margin-top:0px;">
+                                            <span class="grey ydjx1-list-time" ng-show="{{hotItem.minutes ==0 ? 'false' : 'true'}}">
+                                                <i class="ion-clock" style="font-size:14px;"></i>
+                                                时长:&nbsp;{{::hotItem.minutes}}分钟
+                                            </span>
+                                            <span class="grey ydjx1-list-auth" ng-show="{{hotItem.author ==null ? 'false' : 'true'}}">
+                                                作者:&nbsp;{{::hotItem.author}}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="item text-center" layout="row" style="height:20px; padding:1px 0px 3px 0px;border:none;margin:0; background:#F7F7F7">
+                                    <div class="grey ydjx1-list-time" style="width:30%; float:left;cursor: pointer;">
+                                        <i class="ion-play" style="font-size:16px;color:#C6C3C6"></i>
+                                        <span style="font-size:12px;">播放数:&nbsp;{{hotItem.playcount}}</span>
+                                    </div>
+                                    <div class="grey ydjx1-list-time" style="width:30%; float:left;cursor: pointer;" ng-click="{{hotItem.isgood ==1?'':'Addgood(hotItem);'}}">
+                                        <i class="ion-thumbsup" style="font-size:16px;color:{{hotItem.isgood ==1?'#EF473A':'#C6C3C6'}}"></i>
+                                        <span style="font-size:12px">点赞数:&nbsp;{{hotItem.goodcount}}</span>
+                                    </div>
+                                    <div class="grey ydjx1-list-time" style="width:30%; float:left;cursor: pointer;" ng-click="{{hotItem.islike ==1?'Deletelike(hotItem);':'Addlike(hotItem);'}}">
+                                        <i class="ion-heart" style="font-size:16px;color:{{hotItem.islike ==1?'#EF473A':'#C6C3C6'}}"></i>
+                                        <span style="font-size:12px">收藏数:&nbsp;{{hotItem.docucount}}</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-list>
+                    <ion-infinite-scroll ng-if="moreDataCanBeLoaded1" on-infinite="loadMore(1);" distance="1%" icon="ion-loading-d">
+                    </ion-infinite-scroll>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>
+

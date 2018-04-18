@@ -1,0 +1,81 @@
+﻿<ion-view>
+    <go-back my-title="班部信息"></go-back>
+    <ion-content class="has-header">
+        <ion-list class="list item-nomargin-nopadding" ng-show="dataBZR.length>0">
+            <div class="item item-button-right agreement-title-red">
+                <span >
+                    班主任
+                </span>
+            </div>
+            <ion-item class="item-nomargin-nopadding">
+                <div ng-repeat="dataRepeat in dataBZR" >
+                    <a class="item item-avatar" ng-click="openModal(dataRepeat)">
+                        <img ng-src="{{userdefaultpng}}">
+                        <h2>
+                            <span ng-bind="dataRepeat.uname"></span>&nbsp;
+                            <span ng-bind="dataRepeat.xnzw" class="right-hui-16"></span>
+                        </h2>
+                        <p>
+                            <div class="pull-left" ng-show="dataRepeat.fjh!=null">房间号：<span ng-bind="dataRepeat.fjh"></span>&nbsp;&nbsp;</div>
+                            <div class="pull-left" ng-show="dataRepeat.fj!=null">办公分机：<span ng-bind="dataRepeat.fj"></span></div>
+                        </p>
+                    </a>
+                </div>
+                <div ng-show="dataBZR.length==0">
+                    暂无班主任
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-list class="list" ng-show="dataZDLS.length>0">
+            <div class="item item-button-right agreement-title-red" >
+                <span>
+                    指导老师
+                </span>
+            </div>
+            <ion-item class="item-nomargin-nopadding" >
+                <div ng-repeat="dataRepeat in dataZDLS" >
+                    <a class="item item-avatar " ng-click="openModal(dataRepeat)">
+                        <img ng-src="{{userdefaultpng}}">
+                        <h2>
+                            <span ng-bind="dataRepeat.uname"></span>&nbsp;
+                            <span class="right-hui-16" ng-bind="dataRepeat.xnzw" ></span>
+                        </h2>
+                        <p>
+                            <div class="pull-left" ng-show="dataRepeat.fjh!=null">房间号：<span ng-bind="dataRepeat.fjh"></span>&nbsp;&nbsp;</div>
+                            <div class="pull-left" ng-show="dataRepeat.fj!=null">办公分机：<span ng-bind="dataRepeat.fj"></span></div>
+                        </p>
+                    </a>
+                </div>
+                <div ng-show="dataZDLS.length==0">
+                    暂无指导老师
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-list class="list" ng-show="dataSBLD.length>0">
+            <div class="item item-button-right agreement-title-red" >
+                <span >
+                    随班领导
+                </span>
+            </div>
+            <ion-item class="item-nomargin-nopadding" >
+                <div ng-repeat="dataRepeat in dataSBLD" style="margin:1px ;">
+                    <a class="item item-avatar item-border-bottom " ng-click="openModal(dataRepeat)">
+                        <img ng-src="{{userdefaultpng}}">
+                        <h2>
+                            <span ng-bind="dataRepeat.uname"></span>&nbsp;
+                            <span ng-bind="dataRepeat.xnzw" class="right-hui-16"></span>
+                        </h2>
+                        <p>
+                            <div class="pull-left" ng-show="dataRepeat.fjh!=null">房间号：<span ng-bind="dataRepeat.fjh"></span>&nbsp;&nbsp;</div>
+                            <!--<div class="pull-left" ng-show="dataRepeat.fjdh!=null">房间分机：<span ng-bind="dataRepeat.fjdh"></span>&nbsp;&nbsp;</div>-->
+                            <div class="pull-left" ng-show="dataRepeat.fj!=null">办公分机：<span ng-bind="dataRepeat.fj"></span></div>
+                        </p>
+                    </a>
+                </div>
+                <div ng-show="dataSBLD.length==0">
+                    暂无随班领导
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

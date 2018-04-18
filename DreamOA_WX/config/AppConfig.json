@@ -1,0 +1,23 @@
+﻿{
+    "smsTemplate": "您的验证码为:[yzm]",
+    "postXmlPath": "/CollegeAPP/Controllers/",
+    "evaluateouttime": 10,
+    "evaluateouttimecolorred": 1440,
+    "rootURL": "/CollegeAPP/doPost",
+    "picUpload": "http://218.80.199.107:9901/CollegeAPP_test/backHTML/upUserPhoto.ashx",
+    "syncChat": "http://218.80.199.107:9901/CollegeAPP_test/api/chat/",
+    "syncChatSingle": "http://218.80.199.107:9901/CollegeAPP_test/api/chatSingle/",
+    "clxzPath": "http://218.80.199.107:9901/CollegeAPP_test/staticresource/attach/", 
+    "jxzlPath": "http://222.204.170.27/sharefile/",
+    "kcjxzlPath": "http://222.204.170.27/Attach",
+    "videoPlayPath": "http://7xokg7.com2.z0.glb.qiniucdn.com/",
+    "videoPlayLocalPath": "http://7xokg7.com2.z0.glb.qiniucdn.com/",
+   "openDcwj": "http://218.80.199.107:9901/",
+    "getFilepath": "http://10.16.224.110/CollegeAPPWX/api/getAttach/action/getAttach/",
+    "nbxyPath": "http://222.204.170.81/coremail/xphone/main.jsp?sid=",
+    "wbxyPath": "http://218.1.73.36/emailfrom/SingleLogin.aspx?act=",
+    "oaGetAttach": "http://10.16.224.110/CollegeAPPWX/",
+    "oaGetTomcat": "http://222.204.170.27:8080",
+   "hasZJlist":false ,
+   "needSendSMS":"false" 
+}

@@ -1,0 +1,69 @@
+﻿<ion-view title="现场提问">
+	<go-back my-title="现场提问"></go-back>
+	<ion-content class="has-header">
+		<ion-refresher on-refresh="LoadPageData()"
+					   pulling-text="拖动刷新"
+					   refreshing-text="加载中"
+					   refreshing-icon="ion-loading-c">
+		</ion-refresher>
+		<ion-list class="list" style="margin:0;padding:0;">
+			<div class="card text-center" ng-show="ShowNews" ng-click="LookNews();">
+				<div class="item item-text-wrap" style="background-color:#808080; color:#fff;">
+					{{newCount}} 条新动态
+				</div>
+			</div>
+			<div class="row" style="border:0px solid red;position:relative;text-align:center;">
+				<div style="display:inline-block; margin:0px; padding:0px;position:absolute;left:10px">
+					<span class="" style="display:inline-block;margin-top:7px;border:0px solid red;font-size:16px;line-height:20px;color:#f00;">
+					</span>
+				</div>
+				<!--综合排序-->
+				<div class="sort">
+					<button class="button-clear sort-time" ng-click="SortQuestion(0,sortDesc);">
+						<span style="{{sortCheckedStyle}};"> 时间&nbsp;<i ng-class="sortClass" ng-show="showArrow"></i></span>
+					</button>
+					<button class="button-clear sort-hot" ng-click="SortQuestion(1,sortHotDesc);" style="border-left:1px solid #efefef;">
+						<span style="{{sortHotCheckedStyle}};">热度&nbsp;<i ng-class="sortHotClass" ng-show="showHotArrow"></i></span>
+					</button>
+				</div>
+				<div style="display:inline; margin:0px; text-align:right;" class="col">
+				</div>
+			</div>
+
+			<a class="item item-text-wrap" ng-repeat="kc in TrainingKCList"
+			   ng-click="HrefTo(kc);" style="padding-top:10px;padding-left:12px;padding-right:12px;padding-bottom:5px;">
+				<div class="row">
+					<div class="col-20">
+						<span style="width:30px;writing-mode:tb-rl; border:0px solid red;">{{kc.kwsdate}}</span>
+					</div>
+					<div class="col-80">
+						<div class="timetable-title" style="margin:0px; padding:0px;">
+							{{kc.kwname}}
+						</div>
+						<div class="" style="color:#C0C3C5;margin:0;margin-top:15px;margin-bottom:5px;padding:0">
+							<span style="display:inline-block;float:left;">
+								<span style="display:inline-block;border:1px solid #C0C3C5;border-radius:50px;width:17px;height:17px;line-height:13px;text-align:center;">
+									<i class="icon ion-help" style="font-size:14px;"></i>
+								</span>
+								{{kc.questionnum}}
+							</span>
+							<span style="display:inline-block;float:left; padding-left:50px;">
+								<i class="icon"></i>
+								{{kc.zjr}}
+							</span>
+							<span style="display:inline-block; float:right;">
+								<i class="icon ion-fireball" style="color:#C0C3C5"></i>
+								{{kc.score}}
+							</span>
+							<div style="clear:both"></div>
+						</div>
+					</div>
+
+				</div>
+
+			</a>
+		</ion-list>
+		<ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMore()" distance="3%" icon="ion-loading-c">
+		</ion-infinite-scroll>
+	</ion-content>
+</ion-view>

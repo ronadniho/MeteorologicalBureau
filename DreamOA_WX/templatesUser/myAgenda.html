@@ -1,0 +1,63 @@
+﻿<style>h2.time {
+	color: #369;
+	float: right;
+	margin-right: 10px;
+}
+
+span.time {
+	color: #369;
+	float: right;
+	margin-right: 10px;
+}
+span.content{
+	float: left;
+	margin-top: .3rem;
+	display:inline-block;
+	max-width: 80%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.item-active:active{
+	background-color:#ddd;
+}
+</style>
+<link href="../css/asf.ios.css" rel="stylesheet" />
+<ion-view style="font-size:30px; background-color:#FFF; ">
+    <ion-header-bar align-title='center' class='bar-positive'>
+        <a class="button button-icon icon ion-ios-arrow-back" ng-click='goback()'></a>
+        <h3 class='title' ng-click="changePageView()">
+            我的日程
+        </h3>
+        <div class='buttons'>
+            <button class='button button-icon icon ' ng-click='createduty()'>新增</button>
+            <!--<button class='button button-icon icon ' ng-click='changeTodayView()'>今日</button>-->
+        </div>
+        <!--<a class="button button-icon icon" ng-click="changeTodayView()">今日</a>-->
+    </ion-header-bar>
+    <ion-content>
+<!--<button class="button" style="margin: 3px;" ng-click='createduty()'  >添加日程</button>-->
+<iframe id="mainFrame" ng-src="../newcalendar/calendar.html"
+	height="100px" style="width: 100%" frameborder="0" scrolling="auto"></iframe>
+
+<h3 class="text-center" style="margin-top: 10px;" id="selectDate"></h3>
+
+
+<br/>
+<input type="hidden"  id="userId">
+<div class="list" id="addList" style="margin-bottom: 50px;">
+
+	
+</div>
+
+<div id="cloneItem" style="display: none;">
+<div class="item item-active" onclick="openDuty(this)">
+	<h2>
+	<input type="hidden" id="indexItem">
+	<span class="content" id="content"></span>
+	<span class="time" id="time"></span>
+	</h2>
+	
+	</div></div>
+</ion-content>
+</ion-view>

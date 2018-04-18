@@ -1,0 +1,114 @@
+﻿
+<style>
+    .tabs-striped .tab-item.tab-item-active {
+        color: #e60000;
+        border-color: #e60000;
+    }
+     .tab-item.active, .tab-item.tab-item-active, .tab-item.activated {
+        margin-top: 0px !important;
+        border-top-width: 0px !important;
+        color: #ef473a;
+        border: 0 solid #ef473a !important;
+        margin-bottom: 2px !important; 
+    }
+    .tabs-top > .tabs, .tabs.tabs-top {
+        background:#f8f8f8 !important;
+    }
+    .tabs-striped .tabs {
+        border-bottom:none !important;
+    }
+    .tab-item {
+        color:rgba(239, 71, 58, 0.4) !important;          
+    }
+    .nowstyle {
+        font-weight:bold  !important;
+        /*font-size:1.3em !important;*/
+        font-size:18px !important ;
+    }
+    .tab-item.tab-item-active {
+        color:#e60000 !important;
+    }
+</style>
+<ion-view title="评价管理">
+	<go-back my-title="评价管理"></go-back>
+	<ion-tabs class="tabs-striped tabs-top" delegate-handle="myhandle" style="color:red;border-color:red;background:#f8f8f8;">
+        <ion-tab title="课程评价" class="nowstyle" ng-click="ReKCFleshTab(0);">
+            <ion-view style="{{marTop}}">
+                <ion-content>
+                    <ion-list class="list">
+                        <div class="item" ng-repeat="kc in PJKCList">
+                            <div class="timetable-title" style="margin:0px; padding:0px;">
+                                {{kc.kwname}}
+                            </div>
+                            <div class="row" ng-if="kc.canshow==1" style="border:0px solid red;">
+                                <div class="col" style="padding-top:12px;">
+                                    <span>
+                                        已评：
+                                        <a class="red" style="width:60px; border:0px; text-decoration:underline;" ng-click="HrefTo(14,kc.info_id);">{{kc.ypnum}}</a> 人
+                                    </span>
+                                </div>
+                                <div class="col" style="padding-top:12px;">
+                                    <span>未评：<a class="red" style="width:60px; border:0px; text-decoration:underline;" ng-click="HrefTo(13,kc.info_id);">{{kc.wpnum}}</a> 人</span>
+                                </div>
+                            </div>
+                            <div class="row" style="border:0px solid red; margin-top:5px;">
+                                <div class="col">
+                                    <span>平均分：{{kc.avgpj}}</span>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="kc.canshow==0">
+                                <div class="col">未开始评价</div>
+                            </div>
+                        </div>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab title="班主任评价" ng-click="ReFleshTab('班主任评价',1);" class="tabs-striped tabs-top nowstyle" style="color:red;border-color:red;background:#f8f8f8;">
+            <ion-view style="{{marTop}}">
+                <ion-content>
+                    <ion-list class="list">
+                        <div class="item" style="border:0px;">
+                            <div class="row" style="border:0px solid red;padding-top:5px;">
+                                <span>
+                                    已评：
+                                    <a class="red" style="width:60px; border:0px; text-decoration:underline;" ng-click="HrefTo(12,'');">{{OtherYPXYList.length}}</a> 人
+                                </span>
+                                <span style="margin-left:50px;">
+                                    未评：
+                                    <a class="red" style="width:60px; border:0px; text-decoration:underline;" ng-click="HrefTo(11,'');">{{OtherWPXYList.length}}</a> 人
+                                </span>
+                            </div>
+                            <div class="row" style="border:0px solid red; margin-top:5px;">
+                                平均分：{{OtherPJAvg}}
+                            </div>
+                        </div>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab title="总体评价" ng-click="ReFleshTab('总体评价',2);" class="tabs-striped tabs-top nowstyle" style="color:red;border-color:red;background:#f8f8f8;">
+            <ion-view style="{{marTop}}">
+                <ion-content>
+                    <ion-list class="list">
+                        <div class="item" style="border:0px;">
+                            <div class="row" style="border:0px solid red;padding-top:5px;">
+                                <span>
+                                    已评：
+                                    <a class="red" style="width:60px; border:0px; text-decoration:underline;" ng-click="HrefTo(10,'');">{{OtherYPXYList.length}}</a> 人
+                                </span>
+                                <span style="margin-left:50px;">
+                                    未评：
+                                    <a class="red" style="width:60px; border:0px; text-decoration:underline;" ng-click="HrefTo(9,'');">{{OtherWPXYList.length}}</a> 人
+                                </span>
+                            </div>
+                            <div class="row" style="border:0px solid red; margin-top:5px;">
+                                平均分：{{OtherPJAvg}}
+                            </div>
+                        </div>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+	</ion-tabs>
+</ion-view>

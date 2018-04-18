@@ -1,0 +1,951 @@
+﻿[
+    {
+        "key": "doLog",
+        "sql": "select sysdate from dual",
+        "tag": "APP登录",
+        "group": "登录"
+    },
+    {
+        "key": "doLogweixin",
+        "sql": "select sysdate from dual",
+        "tag": "微信登录",
+        "group": "登录"
+    },
+    {
+        "key": "doLogVideo",
+        "sql": "select sysdate from dual",
+        "tag": "播放视频:[content]",
+        "group": "内容访问"
+    },
+    {
+        "key": "doLogAny",
+        "sql": "select sysdate from dual",
+        "tag": "[content]",
+        "group": "内容访问"
+    },
+    {
+        "key": "doLogServer",
+        "sql": "select sysdate from dual",
+        "tag": "访问模块:[content]",
+        "group": "功能访问"
+    },
+    {
+        "key": "doLogUserInfo",
+        "sql": "select sysdate from dual",
+        "tag": "更改个人信息:[content]",
+        "group": "个人信息"
+    },
+    {
+        "key": "doLogVideoInfo",
+        "sql": "select sysdate from dual",
+        "tag": "内容管理:[content]",
+        "group": "内容管理"
+    },
+    {
+        "key": "getMydata",
+        "sql": "select bc.*,g.bt from [[jw_bcgl]] bc inner join g_infos g on bc.info_id=g.id where 1=1 {and bt like [bt]} {and pxsj>[pxsj]} ",
+        "tag": "获取个人数据"
+    },
+    {
+        "key": "getData",
+        "sql": "select kw.*,g.bt from jw_kcwh kw inner join g_infos g on kw.info_id=g.id where 1=1 {and g.bt like [name]}"
+    },
+    {
+        "key": "get_celap_group",
+        "sql": "select study.* from app_videostudy_relation re inner join app_videostudy study on re.finfo_id=study.info_id where re.info_id=[info_id]"
+    },
+    {
+        "key": "insertJWBCGL",
+        "sql": "insert into jw_bcgl (info_id,pxsj,pxsj_js,bzr) values([info_id],[pxsj],[pxsj_js],[bzr])"
+    },
+    {
+        "key": "insertmy",
+        "sql": "insert into TESTUPDATE (id,name) values([::guid],[name])"
+    },
+    {
+        "key": "updatemy",
+        "sql": "update TESTUPDATE set id=[myid] where id='123' "
+    },
+    {
+        "key": "get_celap_videostudy_byinfo_id",
+        "sql": "select * from app_videostudy where info_id=[info_id]"
+    },
+    {
+        "key": "insert_celap_videostudy",
+        "sql": "insert into app_videostudy (info_id,title,title_pic,source,createtime,content,author,menuid,category,minutes,releasetime,subtitle,webpath,keyword) values ([info_id],[title],[title_pic],[source],sysdate,[content],[author],[menuid],[category],[minutes],[releasetime],[subtitle],[webpath],[keyword])",
+        "defaultValue": {
+            "source": "",
+            "title_pic": "",
+            "author": "",
+            "content": "",
+            "subtitle": "",
+            "webpath": ""
+        }
+    },
+    {
+        "key": "update_celap_videostudy",
+        "sql": "update app_videostudy set title=[title],title_pic=[title_pic],source=[source],content=[content],author=[author],menuid=[menuid],category=[category],minutes=[minutes],releasetime=[releasetime]{{,subtitle=[subtitle]}} {{,webpath=[webpath]}}{{,keyword=[keyword]}} where info_id=[info_id] "
+
+    },
+    {
+        "key": "hasUsers",
+        "sql": "select count(*) hasUsers from sub_file_relation sub inner join g_infos g on sub.info_id=g.id and g.deleted>-1 inner join jw_xyxx xy on xy.info_id=g.id  where xy.sjhm=[phone] and g.deleted>-1"
+    },
+    {
+        "key": "hasTeacher",
+        "sql": "select count(*) hasUsers from g_users where mobile_email=[phone] and status>-1"
+    },
+    {
+        "key": "teacherLogin",
+        "sql": "select u.id as info_id, u.mobile_email as sjhm, u.uname as username,email as dzyj,userphoto,u.bjxxpsd,nvl(u.cpoint,0) as cpoint,u.workno  from g_users u where u.mobile_email =[phone] and u.status>-1"
+    },
+    {
+        "key": "getTeacherClass",
+        "sql": "select case when pxsj > sysdate then '2' when sysdate <= pxsj_js+1 and sysdate >= pxsj then '1'when pxsj_js < sysdate then '3' end ordernum, bc.bcpsd,bc.info_id as classid,g.bt,'['||to_char(bc.pxsj,'yyyy-mm')||']'||g.bt as bt2, bc.pxsj as kssj, bc.pxsj_js as jssj from jw_bcgl bc inner join g_infos g    on bc.info_id = g.id  and g.deleted>-1  inner join jw_bbxx bbxx    on bbxx.bcinfo_id=bc.info_id where bbxx.user_id=[userid]  order by ordernum,abs(sysdate-pxsj)"
+    },
+    {
+        "key": "getAllClass",
+        "sql": "select * from (select bc.info_id as classid,g.bt,'['||to_char(bc.pxsj,'yyyy-mm')||']'||g.bt as bt2, bc.pxsj as kssj, bc.pxsj_js as jssj,'teacher' as usertype from jw_bcgl bc inner join g_infos g    on bc.info_id = g.id and g.deleted>-1 inner join jw_bbxx bbxx    on bbxx.bcinfo_id=bc.info_id where bbxx.user_id=[userid] union all select  bc.info_id as classid, g.bt,'['||to_char(bc.pxsj,'yyyy-mm')||']'||g.bt as bt2 , bc.pxsj as kssj, bc.pxsj_js as jssj,'visitor' as usertype from jw_bcgl bc inner join g_infos g on g.id= bc.info_id and g.deleted<>-1 where ','||bc.sbld_uid||','  like '%,'||[userid]||',%' ) t order by t.kssj desc"
+    },
+    {
+        "key": "getTeacherClassByLeader",
+        "sql": "select  bc.info_id as classid, g.bt,'['||to_char(bc.pxsj,'yyyy-mm')||']'||g.bt as bt2 , bc.pxsj as kssj, bc.pxsj_js as jssj from jw_bcgl bc inner join g_infos g on g.id= bc.info_id and g.deleted<>-1 where ','||bc.sbld_uid||','  like '%,'||[userid]||',%' order by bc.pxsj desc"
+    },
+    {
+        "key": "getVisterLogin",
+        "sql": "select case when pxsj > sysdate then '2' when sysdate <= pxsj_js+1 and sysdate >= pxsj then '1'when pxsj_js < sysdate then '3' end ordernum,bc.info_id as classid, g.bt, bc.pxsj as kssj, bc.pxsj_js as jssj from jw_bcgl bc inner join g_infos g    on bc.info_id = g.id and g.deleted>-1 where   ','||bc.sbld_uid||',' like '%,'||[userid]||',%'   order by ordernum,abs(sysdate-pxsj)"
+    },
+    {
+        "key": "userLogin",
+        "sql": "select xy.*,sub.onecard,sub.xywifipwd,sub.bjxxpsd,g.bt as username,g2.bt as classname,g2.id as classid, bc.bcpsd,to_char(bc.pxsj,'yyyy-MM-dd') as kssj,to_char(bc.pxsj_js,'yyyy-MM-dd') as jssj　from jw_xyxx xy     inner join g_infos g    on xy.info_id=g.id and g.deleted>-1   inner join sub_file_relation sub    on sub.info_id=g.id    inner join g_infos g2    on g2.id=sub.finfo_id   inner join jw_bcgl bc    on bc.info_id=g2.id   where xy.sjhm=[phone] {and g2.id=[classid]} order by bc.pxsj desc"
+    },
+    {
+        "key": "updateUser",
+        "sql": "update jw_xyxx set sjhm=[sjhm],dzyj=[dzyj],szdw=[szdw],dwyb=[dwyb],dwdz=[dwdz] where info_id=[info_id]"
+    },
+    {
+        "key": "updateGUser",
+        "sql": "update g_users set mobile_email=[sjhm],email=[dzyj] where id=[info_id]"
+    },
+    {
+        "key": "Get_KCListInfoByDate",
+        "sql": "select kcwh.bz2 as remark,(select count(*) from g_nr nr where nr.info_id=kcwh.info_id) as jxzlnum,kcwh.info_id, g.bt as kcname,to_char(kcwh.kssj,'HH24:mi') as sktime,kcwh.kssj,kcwh.kcdd,kcwh.zjr,kcwh.questionnum,kcwh.questionrealnum from jw_kcwh kcwh inner join g_infos g on kcwh.info_id = g.id and g.deleted>-1 inner join jw_kcfb fb on fb.kwinfo_id=kcwh.info_id inner join jw_kcfbindex indx on indx.id=fb.fid inner join jw_bcgl bc on indx.info_id= bc.info_id inner join g_infos g2 on g2.id=bc.info_id and g2.deleted<>-1 where 1>0 {and to_char(kcwh.kssj,'yyyy-MM-dd')=to_char([todaydate],'yyyy-MM-dd')} and indx.info_id=[bcid] order by kcwh.kssj asc"
+    },
+    {
+        "key": "Get_KCListInfoByDateNew",
+        "sql": "select (select count(*) from g_nr nr where nr.info_id = kcwh.info_id) as jxzlnum,kcwh.bz2 as remark,kcwh.info_id,g1.bt as kcname,kcwh.kssj,CASE kcwh.jxxs WHEN '现场教学' THEN kcwh.xcjxd ELSE kcwh.kcdd END as kcdd,kcwh.zjr,kcwh.questionnum,kcwh.questionrealnum from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 where 1=1 and((exists(select 1 from jw_kcfb fb inner join jw_kcfbindex indx on indx.id = fb.fid where fb.kwinfo_id = kcwh.info_id and indx.info_id=[bcid] and (fb.kwtype is null or (fb.kwtype<>'选修课程' and fb.kwtype<>'经典著作导读')))) or exists(select 1 from jw_kcwh fwh inner join  g_infos gwh on gwh.id=fwh.info_id and gwh.deleted>-1 inner join jw_xyxk xk on xk.fkcinfo_id=fwh.info_id where (fwh.jxxs='选修课程' or fwh.jxxs='经典著作导读') and xk.bcinfo_id=[bcid] and xk.xyinfo_id=[xyid] and xk.kcinfo_id=kcwh.info_id and fwh.info_id= kcwh.fkw_id )) and to_char(kcwh.kssj,'yyyy-MM-dd')=to_char([todaydate],'yyyy-MM-dd') and ','||kcwh.bcid||',' like '%,'||[bcid]||',%' order by kcwh.kssj asc"
+    },
+    {
+        "key": "Get_KCWHInfoByInfoId",
+        "sql": "select (select count(*) from g_nr nr where nr.info_id = kcwh.info_id) as jxzlnum,kcwh.bz2 as remark,kcwh.info_id,g1.bt as kcname,to_char(kcwh.kssj, 'MM-DD HH24:mi') as sktime,kcwh.kcdd,kcwh.zjr,kcwh.questionnum,kcwh.questionrealnum from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 where kcwh.info_id=[info_id] and( exists(select * from jw_kcfb fb inner join jw_kcfbindex indx on indx.id = fb.fid where fb.kwinfo_id = kcwh.info_id) or exists(select * from jw_kcwh fwh inner join  g_infos gwh on gwh.id=fwh.info_id and gwh.deleted>-1 inner join sub_file_relation sub on sub.info_id=fwh.info_id where kcwh.fkw_id=fwh.info_id and (fwh.jxxs='选修课程' or fwh.jxxs='经典著作导读') and kcwh.fkw_id is not null and sub.finfo_id=[bcid]))order by kcwh.kssj asc"
+    },
+    {
+        "key": "Get_QuestionByKWID",
+        "sql": "select s.* from (select info_id,(sameQuestionNum*10+answerRealNum*30) as hot,(case when exists(select * from app_comment_[[bcid]] ct where ct.finfo_id=q.info_id and ct.userid=[userid] and ct.isgood=1) then 0 else 1 end) as enedit,(case when q.userid=[userid] then 1 else 0 end) as iask,(case when exists(select * from app_QuestionsAnswer_[[bcid]] an where q.info_id=an.finfo_id and q.userid=an.userid and deleted>-1) then 1 else 0 end) as ianswer,(case when exists(select * from app_QuestionsAnswer_[[bcid]] an where q.info_id=an.finfo_id and deleted>-1) then 1 else 0 end) as hasanswer,title,kwid,createdate,userid,username,sameQuestionNum,answerNum,answerRealNum from app_Questions_[[bcid]] q where q.deleted>-1 and q.kwid=[info_id] { and q.userid=[myuserid] or exists(select * from app_questionsanswer_[[bcid]] an where q.info_id=an.finfo_id and an.userid=[myuserid]) or exists(select * from app_comment_[[bcid]] cmt where q.info_id=cmt.finfo_id and cmt.userid=[myuserid])}) s order by [[orderbyfield]]"
+    },
+    {
+        "key": "Get_QuestionByBCID",
+        "sql": "select s.* from (select info_id,(sameQuestionNum*10+answerRealNum*30) as hot,(case when exists(select * from app_comment_[[bcid]] ct where ct.finfo_id=q.info_id and ct.userid=[userid] and ct.isgood=1) then 0 else 1 end) as enedit,(case when q.userid=[userid] then 1 else 0 end) as iask,(case when exists(select * from app_QuestionsAnswer_[[bcid]] an where q.userid=an.userid and deleted>-1) then 1 else 0 end) as ianswer,title,kwid,createdate,userid,username,sameQuestionNum,answerNum,answerRealNum from app_Questions_[[bcid]] q where q.deleted>-1 and q.bcid=[bcid] { and q.userid=[myuserid] or exists(select * from app_questionsanswer_[[bcid]] an where q.info_id=an.finfo_id and an.userid=[myuserid]) or exists(select * from app_comment_[[bcid]] cmt where q.info_id=cmt.finfo_id and cmt.userid=[myuserid])}) s order by [[orderbyfield]]"
+    },
+    {
+        "key": "Get_QuestionByNewTime",
+        "sql": "select s.* from (select info_id,(sameQuestionNum*10+answerRealNum*30) as hot,(case when exists(select * from app_comment_[[bcid]] ct where ct.finfo_id=q.info_id and ct.userid=[userid] and ct.isgood=1) then 0 else 1 end) as enedit,(case when q.userid=[userid] then 1 else 0 end) as iask,(case when exists(select * from app_QuestionsAnswer_[[bcid]] an where q.userid=an.userid and deleted>-1) then 1 else 0 end) as ianswer,title,kwid,createdate,userid,username,sameQuestionNum,answerNum,answerRealNum from app_Questions_[[bcid]] q where q.deleted>-1 and q.bcid=[bcid] and (exists(select * from app_comment_[[bcid]] ct where q.info_id=ct.finfo_id and exists(select * from app_questionVister_[[bcid]] qv where qv.qstinfo_id=ct.finfo_id and qv.userid=[userid] and ct.replaydate>qv.visterdate)) or exists(select * from app_questionsanswer_[[bcid]] qa where q.info_id=qa.finfo_id and exists(select * from app_questionVister_[[bcid]] qv where qa.finfo_id=qv.qstinfo_id and qv.userid=[userid] and qa.createdate>qv.visterdate)) or q.createdate>(select max(qv.visterdate) from app_questionVister_[[bcid]] qv where qv.userid=[userid]))) s order by [[orderbyfield]]"
+    },
+    {
+        "key": "Get_QuestionByXYInfoIdContainDeleted",
+        "sql": "select q.deleted,q.username, q.kwid,q.title,q.createdate,g.bt as kcname from app_questions_[[bcid]] q inner join jw_kcwh kcwh on q.kwid=kcwh.info_id inner join g_infos g on kcwh.info_id=g.id where q.userid=[userid] and q.bcid=[bcid] order by q.createdate desc"
+    },
+    {
+        "key": "Get_QuestionByAnswerXYInfoIdContainDeleted",
+        "sql": "select q.deleted, q.username, q.info_id, q.kwid,q.title,q.createdate,g.bt as kcname from app_questions_[[bcid]] q inner join jw_kcwh kcwh on q.kwid=kcwh.info_id inner join g_infos g on kcwh.info_id=g.id where q.bcid=[bcid] and exists(select * from app_questionsanswer_[[bcid]] an where an.finfo_id=q.info_id and an.userid=[userid]) order by q.createdate desc"
+    },
+    {
+        "key": "Get_QuestionByCommentXYInfoIdContainDeleted",
+        "sql": "select q.deleted,q.username, q.info_id, q.kwid,q.title,q.createdate,g.bt as kcname from app_questions_[[bcid]] q inner join jw_kcwh kcwh on q.kwid=kcwh.info_id inner join g_infos g on kcwh.info_id=g.id where q.bcid=[bcid] and exists(select * from app_comment_[[bcid]] ct where ct.finfo_id=q.info_id and ct.userid=[userid]) order by q.createdate desc"
+    },
+    {
+        "key": "Get_QuestionCountByBCID",
+        "sql": "select sum(kcwh.questionnum) as questionsum from jw_kcwh kcwh inner join jw_kcfb fb on kcwh.info_id=fb.kwinfo_id inner join jw_kcfbindex idx on idx.id=fb.fid and idx.info_id=[bcid]"
+    },
+    {
+        "key": "Get_NewCountByNewTime",
+        "sql": "select count(*) as newcount from (select 1 from app_comment_[[bcid]] ct where exists(select * from app_questionVister_[[bcid]] qv where ct.finfo_id=qv.qstinfo_id and qv.userid=[userid] and ct.replaydate>qv.visterdate) union all select 1 from app_questions_[[bcid]] qst where qst.deleted>-1 and qst.createdate>(select max(qv.visterdate) from app_questionVister_[[bcid]] qv where qv.userid=[userid]))"
+    },
+    {
+        "key": "Get_NewCountByNewTimeKWID",
+        "sql": "select count(*) as newcount from (select m.finfo_id from (select finfo_id as from app_comment_[[bcid]] ct where exists(select * from app_questionVister_[[bcid]] qv where ct.finfo_id=qv.qstinfo_id and qv.userid=[userid] and ct.replaydate>qv.visterdate) union all select finfo_id from app_questionsanswer_[[bcid]] qa where  exists(select * from app_questionVister_[[bcid]] qv where qa.finfo_id=qv.qstinfo_id and qv.userid=[userid] and qa.createdate>qv.visterdate)) m where exists(select * from app_questions_[[bcid]] qst where qst.info_id=m.finfo_id and qst.kwid=[info_id] and qst.deleted>-1))"
+    },
+    {
+        "key": "ClearNewsTime",
+        "sql": "update app_questionVister_[[bcid]] set visterdate=sysdate where userid=[userid]"
+    },
+    {
+        "key": "ClearNewsTimeByKWID",
+        "sql": "update app_questionVister_[[bcid]] set visterdate=sysdate where userid=[userid] and kwid=[kwid]"
+    },
+    {
+        "key": "Insert_Questions",
+        "sql": "insert into app_Questions_[[bcid]](info_id,bcid,title,kwid,createdate,userid,username,deleted)values([guid],[bcid],[title],[kwid],sysdate,[userid],[username],0)"
+    },
+    {
+        "key": "Update_XYXX_questionNumAdd",
+        "sql": "update jw_xyxx set questionNum=questionNum+1 where info_id=[userid]"
+    },
+    {
+        "key": "Update_JWBBXX_questionNumAdd",
+        "sql": "update jw_bbxx set questionNum=questionNum+1 where user_id=[userid] and bcinfo_id=[bcid]"
+    },
+    {
+        "key": "Update_JWKCWH_questionNumAdd",
+        "sql": "update jw_kcwh set questionNum=questionNum+1,questionRealNum=questionRealNum+1 where info_id=[kwid]"
+    },
+    {
+        "key": "Select_CacheQANumber",
+        "sql": "select * from app_QARelation  where userid=[userid] and bcid=[bcid] and usertype=[usertype]"
+    },
+    {
+        "key": "Insert_CacheQANumber",
+        "sql": "insert into app_QARelation(id,userid,bcid,usertype,questionNum,questionRealNum ,answerNum ,answerRealNum,sameQuestionNum,sameQuestionRealNum)values(sys_guid(),[userid],[bcid],[usertype],[questionnum],[questiorealnnum] ,[answernum] ,[answerrealnum],[samequestionnum],[samequestionrealnum])"
+    },
+    {
+        "key": "Update_CacheQANumber",
+        "sql": "update app_QARelation set questionNum=questionNum+[questionnum],questionRealNum=questionRealNum+[questiorealnnum] ,answerNum=answerNum+[answernum] ,answerRealNum=answerRealNum+[answerrealnum],sameQuestionNum=sameQuestionNum+[samequestionnum],sameQuestionRealNum=sameQuestionRealNum+[samequestionrealnum] where userid=[userid] and bcid=[bcid] and usertype=[usertype]"
+    },
+    {
+        "key": "Insert_Comment",
+        "sql": "insert into app_comment_[[bcid]](info_id,userid,username,finfo_id ,ncontent,isgood,replaydate,deleted,replayid)values([::guid],[userid],[username],[finfo_id],[ncontent],[isgood],sysdate,0,[replayid])"
+    },
+    {
+        "key": "Get_CommentByFinfoId",
+        "sql": "select appc.info_id,appc.userid,appc.username,appc.finfo_id,appc.isgood,appc.replaydate from app_comment_[[bcid]] appc where exists(select * from app_Questions_[[bcid]] q where appc.finfo_id=q.info_id and q.kwid=[info_id]) and appc.deleted>-1 order by replaydate desc "
+    },
+    {
+        "key": "Get_CommentByBCID",
+        "sql": "select appc.info_id,appc.userid,appc.username,appc.finfo_id,appc.isgood,appc.replaydate from app_comment_[[bcid]] appc where exists(select * from app_Questions_[[bcid]] q where appc.finfo_id=q.info_id and q.bcid=[bcid]) and appc.deleted>-1 order by replaydate desc "
+    },
+    {
+        "key": "Get_CommentByNewTime",
+        "sql": "select appc.info_id,appc.userid,appc.username,appc.finfo_id,appc.isgood,appc.replaydate from app_comment_[[bcid]] appc where exists(select * from app_questionVister_[[bcid]] qv where appc.finfo_id=qv.qstinfo_id and qv.userid=[userid] and appc.replaydate>qv.visterdate) and appc.deleted>-1 order by replaydate desc "
+    },
+    {
+        "key": "Get_AnswerByFinfoId",
+        "sql": "select appc.info_id,appc.userid,appc.username,appc.finfo_id,appc.createdate,appc.answer,(case when appc.userid=[userid] then 1 else 0 end) as ianswer from app_QuestionsAnswer_[[bcid]] appc where exists(select * from app_Questions_[[bcid]] q where appc.finfo_id=q.info_id and q.kwid=[info_id]) and appc.deleted>-1 order by createdate desc"
+    },
+    {
+        "key": "Get_AnswerByXYInfoIdContainDeleted",
+        "sql": "select appc.info_id,appc.userid,appc.username,appc.finfo_id,appc.createdate,appc.answer,(case when appc.userid=[userid] then 1 else 0 end) as ianswer from app_QuestionsAnswer_[[bcid]] appc where exists(select * from app_Questions_[[bcid]] q where appc.finfo_id=q.info_id) and appc.userid=[userid] order by createdate desc"
+    },
+    {
+        "key": "Get_AnswerByBCID",
+        "sql": "select appc.info_id,appc.userid,appc.username,appc.finfo_id,appc.createdate,appc.answer,(case when appc.userid=[userid] then 1 else 0 end) as ianswer from app_QuestionsAnswer_[[bcid]] appc where exists(select * from app_Questions_[[bcid]] q where appc.finfo_id=q.info_id and q.bcid=[bcid]) and appc.deleted>-1 order by createdate desc"
+    },
+    {
+        "key": "Get_AnswerByNewTime",
+        "sql": "select appc.info_id,appc.userid,appc.username,appc.finfo_id,appc.createdate,appc.answer,(case when appc.userid=[userid] then 1 else 0 end) as ianswer from app_QuestionsAnswer_[[bcid]] appc where exists(select * from app_questionVister_[[bcid]] qv where appc.finfo_id=qv.qstinfo_id and qv.userid=[userid] and appc.createdate>qv.visterdate) and appc.deleted>-1 order by createdate desc"
+    },
+    {
+        "key": "Get_GNRByKWID",
+        "sql": "select nr.nrbt,nr.mmtype,nr.mnr,nr.filesize,nr.user_id,nr.rq,nr.filepath from g_nr nr where nr.info_id=[info_id]"
+    },
+    {
+        "key": "Update_Question_SameQuestionNum",
+        "sql": "update app_Questions_[[bcid]] set sameQuestionNum=sameQuestionNum+1 where info_id=[finfo_id]"
+    },
+    {
+        "key": "Update_XYXX_SameQuestionNum",
+        "sql": "update jw_xyxx set SameQuestionNum=SameQuestionNum+1 where info_id=[userid]"
+    },
+    {
+        "key": "Update_JWBBXX_SameQuestionNum",
+        "sql": "update jw_bbxx set SameQuestionNum=SameQuestionNum+1 where user_id=[userid] and bcinfo_id=[bcid]"
+    },
+    {
+        "key": "Insert_Answer",
+        "sql": "insert into app_QuestionsAnswer_[[bcid]](info_id,Answer,finfo_id,createdate,userid ,username ,deleted)values([guid],[answer],[finfo_id],sysdate,[userid],[username],0)"
+    },
+    {
+        "key": "DeleteAppQuestionVister",
+        "sql": "delete from app_questionVister_[[bcid]] where userid=[userid] and qstinfo_id=[qstinfo_id] and kwid=[kwid]"
+    },
+    {
+        "key": "InsertAppQuestionVister",
+        "sql": "insert into app_questionVister_[[bcid]](info_id,userid,username,qstinfo_id,kwid,visterdate)values([::guid],[userid],[username],[qstinfo_id],[kwid],sysdate)"
+    },
+    {
+        "key": "update_video_status",
+        "sql": "update app_videostudy set status=[status] where info_id=[info_id]"
+    },
+    {
+        "key": "delete_video_attach",
+        "sql": "delete app_attach where id=[id]"
+    },
+    {
+        "key": "change_video_attach",
+        "sql": "update app_attach set orderindex=[ordernum] where id=[id]"
+    },
+    {
+        "key": "get_video_attachs",
+        "sql": "select * from app_attach where finfo_id=[info_id] order by orderindex asc"
+    },
+    {
+        "key": "Update_XYXX_AnswerNum",
+        "sql": "update jw_xyxx set answerNum=answerNum+1 where info_id=[userid]"
+    },
+    {
+        "key": "Update_JWBBXX_AnswerNum",
+        "sql": "update jw_bbxx set answerNum=answerNum+1 where user_id=[userid] and bcinfo_id=[bcid]"
+    },
+    {
+        "key": "Update_KCWH_AnswerNum",
+        "sql": "update jw_kcwh set answerNum=answerNum+1,answerRealNum=answerRealNum+1 where info_id=[userid]"
+    },
+    {
+        "key": "Update_Questions_AnswerNum",
+        "sql": "update app_Questions_[[bcid]] set answerNum=answerNum+1,answerRealNum=answerRealNum+1 where info_id=[finfo_id]"
+    },
+    {
+        "key": "Delete_Questions",
+        "sql": "update app_Questions_[[bcid]] set deleted=-1 where info_id=[qstinfo_id]"
+    },
+    {
+        "key": "Delete_Questions_Answer",
+        "sql": "update app_QuestionsAnswer_[[bcid]] set deleted=-1 where info_id=[ansinfo_id]"
+    },
+    {
+        "key": "Delete_Questions_AnswerByQuestInfoId",
+        "sql": "update app_QuestionsAnswer_[[bcid]] set deleted=-1 where finfo_id=[qstinfo_id]"
+    },
+    {
+        "key": "Update_JWKCWH_questionNumReduce",
+        "sql": "update jw_kcwh set questionNum=questionNum-1 where info_id=[kwid]"
+    },
+    {
+        "key": "Update_Question_AnswerNumReduce",
+        "sql": "update app_Questions_[[bcid]] set answerNum=answerNum-1 where info_id=[qstinfo_id]"
+    },
+    {
+        "key": "getXyList",
+        "sql": "select g.bt,g.id,(nvl(qar.questionnum,0)*20+nvl(qar.answernum,0)*30) as hot,nvl(qar.questionnum,0) as questionnum,nvl(qar.answernum,0) as answernum,nvl(qar.sameQuestionNum,0) as sameQuestionNum,(nvl(qar.sameQuestionNum,0)*10+nvl(qar.questionnum,0)*20+nvl(qar.answernum*30,0)) as score from sub_file_relation sub inner join g_infos g on sub.info_id = g.id  inner join jw_xyxx xy    on xy.info_id = sub.info_id left join app_QARelation qar on xy.info_id=qar.userid and qar.bcid=[classid] and qar.usertype=0 where sub.finfo_id = [classid]   and g.deleted > -1 order by [[orderbyfield]] desc"
+    },
+    {
+        "key": "getXyActivityList",
+        "sql": "select * from (select sub.sernumber,g.bt,xy.info_id,(nvl(qar.questionnum,0)*20+nvl(qar.answernum,0)*30) as hot,nvl(qar.questionrealnum,0) as questionnum,nvl(qar.answerrealnum,0) as answernum,nvl(qar.sameQuestionrealNum,0) as sameQuestionNum,(nvl(qar.sameQuestionrealNum,0)*10+nvl(qar.questionrealnum,0)*20+nvl(qar.answerrealnum,0)*30) as score from sub_file_relation sub inner join g_infos g on sub.info_id = g.id inner join jw_xyxx xy  on xy.info_id = sub.info_id left join app_QARelation qar on xy.info_id=qar.userid and qar.bcid= [classid] and qar.usertype=0 where sub.finfo_id = [classid]   and g.deleted > -1) s  order by [[orderbyfield]] ,s.sernumber"
+    },
+    {
+        "key": "getSingleXyActivityList",
+        "sql": "select * from (select sub.sernumber,g.bt,xy.info_id,(nvl(qar.questionnum,0)*20+nvl(qar.answernum,0)*30) as hot,nvl(qar.questionrealnum,0) as questionnum,nvl(qar.answerrealnum,0) as answernum,nvl(qar.sameQuestionrealNum,0) as sameQuestionNum,(nvl(qar.sameQuestionrealNum,0)*10+nvl(qar.questionrealnum,0)*20+nvl(qar.answerrealnum,0)*30) as score,(select count(*) from app_faorite where userid=[xyinfo_id] and comtype=1) as mymark,(select count(*) from app_faorite where userid=[xyinfo_id] and comtype=3) as mylike from sub_file_relation sub inner join g_infos g on sub.info_id = g.id inner join jw_xyxx xy    on xy.info_id = sub.info_id left join app_QARelation qar on xy.info_id=qar.userid and qar.bcid=[classid] and qar.usertype=0 where sub.finfo_id = [classid] and sub.info_id=[xyinfo_id] and g.deleted > -1)"
+    },
+    {
+        "key": "getSingleTeachActivity",
+        "sql": "select * from (select bb.bcinfo_id,bb.user_id,nvl(qar.questionrealnum,0) as questionnum,nvl(qar.answerrealnum,0) as answernum,nvl(qar.samequestionrealnum,0) as samequestionnum,(nvl(qar.questionnum,0)*20+nvl(qar.answernum,0)*30) as hot,(nvl(qar.sameQuestionrealNum,0)*10+nvl(qar.questionrealnum,0)*20+nvl(qar.answerrealnum,0)*30) as score ,(select count(*) from app_faorite where userid=[techinfo_id] and comtype=1) as mymark,(select count(*) from app_faorite where userid=[techinfo_id] and comtype=3) as mylike	from jw_bbxx bb left join app_QARelation qar on bb.user_id=qar.userid and qar.bcid=[classid] and qar.usertype=[usertype] where bb.bcinfo_id=[classid] and bb.user_id=[techinfo_id])"
+    },
+    {
+        "key": "getSingleVisitorActivity",
+        "sql": "select * from (select bc.info_id,nvl(qar.questionrealnum,0) as questionnum,nvl(qar.answerrealnum,0) as answernum,nvl(qar.samequestionrealnum,0) as samequestionnum,(nvl(qar.questionnum,0)*20+nvl(qar.answernum,0)*30) as hot,(nvl(qar.sameQuestionNum,0)*10+nvl(qar.questionnum,0)*20+nvl(qar.answernum,0)*30) as score,(select count(*) from app_faorite where userid=[techinfo_id] and comtype=1) as mymark,(select count(*) from app_faorite where userid=[techinfo_id] and comtype=3) as mylike from jw_bcgl bc inner join g_infos g on g.id= bc.info_id and g.deleted<>-1left join app_QARelation qar on qar.userid=[techinfo_id] and qar.bcid=[classid] and qar.usertype=2 where  ','||bc.sbld_uid||','  like '%,'||[techinfo_id]||',%' and  bc.info_id=[classid])"
+    },
+    {
+        "key": "GetXYPJKCList",
+        "sql": "select * from (select kcwh.jxxs,kcwh.zjr, kcwh.info_id,kcwh.kc_id,g1.bt as kwname,kcwh.kcdd,to_char(kcwh.kssj, 'MM-dd HH24:mi') as kwsdate,kcwh.isshare,(case when exists(select *from jw_pjpost pj where pj.xyinfo_id =[xyinfoid] and pj.bcinfo_id = [bcid] and pj.kcinfo_id = kcwh.info_id) then 1 else 0 end) as yp from jw_kcwh kcwh inner join jw_kcfb fb on kcwh.info_id=fb.kwinfo_id inner join jw_kcfbindex indx on indx.id = fb.fid inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 where 1>0 and indx.info_id=[bcid] and ascii(kcwh.jxxs) <> 64497 and kcwh.jssj < sysdate and (kcwh.jxxs <> '选修课程' and kcwh.jxxs <> '经典著作导读') and kcwh.fkw_id is null union all select kcwh.jxxs,kcwh.zjr,kcwh.info_id,kcwh.kc_id,g1.bt as kwname,kcwh.kcdd,to_char(kcwh.kssj, 'MM-dd HH24:mi') as kwsdate,kcwh.isshare,(case when exists(select * from jw_pjpost pj where pj.xyinfo_id =[xyinfoid] and pj.bcinfo_id = [bcid] and pj.kcinfo_id = kcwh.info_id) then 1 else 0 end) as yp from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 where exists(select * from jw_kcwh fwh inner join g_infos gwh on gwh.id = fwh.info_id and gwh.deleted > -1 inner join sub_file_relation sub on sub.info_id = fwh.info_id inner join jw_xyxk xk on xk.bcinfo_id = sub.finfo_id and xk.xyinfo_id =[xyinfoid] where 1 > 0 and (fwh.jxxs = '选修课程' or fwh.jxxs = '经典著作导读') and sub.finfo_id =[bcid] and fwh.info_id = kcwh.fkw_id and xk.kcinfo_id = kcwh.info_id) and kcwh.jssj < sysdate) t order by t.kwsdate asc"
+    },
+    {
+        "key": "GetXYTrainingKCList",
+        "sql": "select * from ( select rownum rn,p.* from (select * from (select (kcwh.questionnum+kcwh.answernum) as hot,kcwh.questionnum,kcwh.answernum,kcwh.sameQuestionNum,(kcwh.sameQuestionNum*10+kcwh.questionnum*20+kcwh.answernum*30) as score,kcwh.jxxs, kcwh.zjr,kcwh.info_id,kcwh.kc_id,g1.bt as kwname,kcwh.kcdd,to_char(kcwh.kssj, 'MM-dd HH24:mi') as kwsdate,(case when exists (select * from jw_pjpost pj where pj.xyinfo_id =[xyinfoid] and pj.bcinfo_id = [bcid] and pj.kcinfo_id = kcwh.info_id) then 1 else 0 end) as yp from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 where kcwh.bcid like '%'||[bcid]||'%' and ascii(kcwh.jxxs)<>64497 and((exists(select * from jw_kcfb fb inner join jw_kcfbindex indx on indx.id = fb.fid where fb.kwinfo_id = kcwh.info_id and indx.info_id=[bcid]) and (kcwh.jxxs<>'选修课程' and kcwh.jxxs<>'经典著作导读') and kcwh.fkw_id is null) or exists(select * from jw_kcwh fwh inner join  g_infos gwh on gwh.id=fwh.info_id and gwh.deleted>-1 inner join sub_file_relation sub on sub.info_id=fwh.info_id inner join jw_xyxk xk on xk.bcinfo_id=sub.finfo_id and xk.xyinfo_id=[xyinfoid] where 1>0 and (fwh.jxxs='选修课程' or fwh.jxxs='经典著作导读') and sub.finfo_id=[bcid] and fwh.info_id= kcwh.fkw_id and xk.kcinfo_id=kcwh.info_id))) s order by [[orderbyfield]] ) p where rownum<[pageindex]*8 ) c where c.rn>([pageindex]-1)*8"
+    },
+    {
+        "key": "GetTeachTrainingKCList",
+        "sql": "select * from (select (kcwh.questionnum+kcwh.answernum) as hot,kcwh.questionnum,kcwh.answernum,kcwh.sameQuestionNum,(kcwh.sameQuestionNum*10+kcwh.questionnum*20+kcwh.answernum*30) as score,kcwh.jxxs, kcwh.zjr,kcwh.info_id,kcwh.kc_id,g1.bt as kwname,kcwh.kcdd,to_char(kcwh.kssj, 'MM-dd HH24:mi') as kwsdate,(case when exists (select * from jw_pjpost pj where pj.xyinfo_id =[xyinfoid] and pj.bcinfo_id = [bcid] and pj.kcinfo_id = kcwh.info_id) then 1 else 0 end) as yp from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 where kcwh.bcid like '%'||[bcid]||'%' and ascii(kcwh.jxxs)<>64497 and((exists(select * from jw_kcfb fb inner join jw_kcfbindex indx on indx.id = fb.fid where fb.kwinfo_id = kcwh.info_id and indx.info_id=[bcid]) and (kcwh.jxxs<>'选修课程' and kcwh.jxxs<>'经典著作导读') and kcwh.fkw_id is null) or exists(select * from jw_kcwh fwh inner join  g_infos gwh on gwh.id=fwh.info_id and gwh.deleted>-1 inner join sub_file_relation sub on sub.info_id=fwh.info_id  where 1>0 and (fwh.jxxs='选修课程' or fwh.jxxs='经典著作导读') and sub.finfo_id=[bcid] and fwh.info_id= kcwh.fkw_id)) ) s order by [[orderbyfield]]"
+    },
+    {
+        "key": "GetBCPJKCList",
+        "sql": "select (case when kcwh.kssj<sysdate then 1 else 0 end) as canshow,(select count(*) from jw_xyxx xy inner join g_infos g on g.id = xy.info_id and g.deleted <> -1 inner join sub_file_relation sub on sub.info_id = xy.info_id inner join jw_bcgl bc on bc.info_id = sub.finfo_id inner join g_infos g2  on g2.id = bc.info_id and g2.deleted <> -1 where bc.info_id = [bcid] and not exists (select * from jw_pjpost pjp where xy.info_id = pjp.xyinfo_id and bc.info_id = pjp.bcinfo_id and pjp.kcinfo_id = kcwh.info_id)) as wpnum,(SELECT round(nvl(AVG(pj.pjcontent),0),2) as avgpj from jw_pjpost pj WHERE pj.kcinfo_id=kcwh.info_id and pj.pjcontent IN('0','1','2','3','4','5','6','7','8','9','10') AND EXISTS(SELECT item.name FROM jw_pjform form INNER JOIN jw_pjitem item ON form.id=item.formid WHERE item.type='DJ'  AND form.pjtype='课程评价' AND pj.formid=form.id AND pj.bcinfo_id=[bcid])  AND pj.bcinfo_id=[bcid]) as avgpj,(select count(*) from jw_xyxx xy inner join g_infos g on g.id = xy.info_id and g.deleted <> -1 inner join sub_file_relation sub on sub.info_id = xy.info_id inner join jw_bcgl bc on bc.info_id = sub.finfo_id inner join g_infos g2 on g2.id = bc.info_id and g2.deleted <> -1 where bc.info_id =[bcid] and exists (select * from jw_pjpost pjp  where xy.info_id = pjp.xyinfo_id  and bc.info_id = pjp.bcinfo_id and pjp.kcinfo_id = kcwh.info_id)) as ypnum,kcwh.jxxs, kcwh.zjr,kcwh.info_id,kcwh.kc_id,g1.bt as kwname,kcwh.kcdd,to_char(kcwh.kssj, 'MM-dd HH24:mi') as kwsdate from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 where kcwh.bcid like '%'||[bcid]||'%' and ascii(kcwh.jxxs)<>64497 and((exists(select * from jw_kcfb fb inner join jw_kcfbindex indx on indx.id = fb.fid where fb.kwinfo_id = kcwh.info_id and indx.info_id=[bcid]) and (kcwh.jxxs<>'选修课程' and kcwh.jxxs<>'经典著作导读') and kcwh.fkw_id is null) or exists(select * from jw_kcwh fwh inner join  g_infos gwh on gwh.id=fwh.info_id and gwh.deleted>-1 inner join sub_file_relation sub on sub.info_id=fwh.info_id  where 1>0 and (fwh.jxxs='选修课程' or fwh.jxxs='经典著作导读') and sub.finfo_id=[bcid] and fwh.info_id= kcwh.fkw_id)) and kcwh.jssj<sysdate order by kcwh.kssj asc"
+    },
+    {
+        "key": "GetXYKCPJCode",
+        "sql": "select (case when exists(select * from jw_pjpost pjp where pjp.bcinfo_id=[bcid]) then (select distinct pjp.code from jw_pjpost pjp where pjp.bcinfo_id=[bcid]) else (select max(form.code) from jw_pjform form where form.pjtype='课程评价' and form.jxxs='专题讲座') end) pjcode from dual"
+    },
+    {
+        "key": "GetOtherPJ",
+        "sql": " select * from (select '班主任工作评价单' as title, '班主任评价' as pjtype,[[bcid]] as bcid,(case when exists(select form.jxxs,form.pjtype,form.code,pjp.pjcontent,pjp.itemname from jw_pjform form  inner join jw_pjpost pjp on pjp.formid=form.id and pjp.bcinfo_id=[bcid] and pjp.xyinfo_id=[xyinfoid] where form.code=[pjcode] and form.DELETED<>1 and form.SELECTED=1 and form.jxxs='班主任评价') then 1 else 0 end) as yp from dual union all   select '班次的教学总体评价','总体评价' as pjtype,[[bcid]] as bcid,(case when exists(select form.jxxs,form.pjtype,form.code,pjp.pjcontent,pjp.itemname from jw_pjform form  inner join jw_pjpost pjp on pjp.formid=form.id and pjp.bcinfo_id=[bcid]  and pjp.xyinfo_id=[xyinfoid] where form.code=[pjcode] and form.DELETED<>1 and form.SELECTED=1 and form.jxxs='总体评价') then 1 else 0 end) as yp from dual) s where exists(select * from jw_bcgl bc where s.bcid=bc.info_id and bc.pxsj+((bc.pxsj_js-bc.pxsj)/2)<=sysdate)"
+    },
+    {
+        "key": "GetOtherPJAvg",
+        "sql": "SELECT round(nvl(avg(pj.pjcontent),0),2) as avgpj from jw_pjpost pj WHERE pj.pjcontent IN('0','1','2','3','4','5','6','7','8','9','10') AND EXISTS(SELECT item.name FROM jw_pjform form INNER JOIN jw_pjitem item ON form.id=item.formid WHERE item.type='DJ'  AND form.pjtype=[pjtype] AND pj.formid=form.id ) AND pj.bcinfo_id=[bcid]"
+    },
+    {
+        "key": "Get_OtherXYPJData",
+        "sql": "select form.jxxs,form.pjtype,form.code,pjp.pjcontent,pjp.itemname from jw_pjform form inner join jw_pjpost pjp on pjp.formid=form.id and pjp.bcinfo_id=[bcid] and pjp.xyinfo_id= [xyinfoid] where form.code=[pjcode] and form.DELETED<>1 and form.SELECTED=1 and form.jxxs='班主任评价'"
+    },
+    {
+        "key": "GetKCPJItemList",
+        "sql": "select item.type, item.name,item.id,item.ordno,item.status, item.formid,form.jxxs,form.pjtype,form.code,(case when item.type='DJ' then pjp.pjcontent end) as defaultvalue,(case when item.type='YJ' or item.type='YJ2' then pjp.pjcontent end) as defaulttext from jw_pjform form inner join jw_pjitem item on form.id=item.formid left join jw_pjpost pjp on pjp.formid=form.id and item.id=pjp.itemid and pjp.bcinfo_id=[bcid]  and pjp.xyinfo_id=[xyinfoid] and pjp.kcinfo_id=[kwid] where  form.code=[pjcode] and form.pjtype=[pjtype] and form.jxxs=[jxxs] and item.status=1 order by type,id,ordno"
+    },
+    {
+        "key": "GetWPXYRSByPJType",
+        "sql": "select g.id,g.bt,xy.szdw,sub.fjh,sub.fjdh,xy.sjhm from jw_xyxx xy inner join g_infos g on g.id = xy.info_id and g.deleted <> -1 inner join sub_file_relation sub on sub.info_id = xy.info_id inner join jw_bcgl bc on bc.info_id = sub.finfo_id inner join g_infos g2 on g2.id = bc.info_id and g2.deleted <> -1 where bc.info_id =[bcid] and not exists(select *  from jw_pjform form inner join jw_pjitem item on form.id=item.formid inner join jw_pjpost pjp on pjp.formid=form.id and pjp.itemid=item.id where xy.info_id=pjp.xyinfo_id and bc.info_id=pjp.bcinfo_id and form.pjtype=[pjtype] and form.code=[pjcode])"
+    },
+    {
+        "key": "GetWPXYRSByPJTypeAndKCID",
+        "sql": "select g.id,g.bt,xy.szdw,sub.fjh,sub.fjdh,xy.sjhm from jw_xyxx xy inner join g_infos g on g.id = xy.info_id and g.deleted <> -1 inner join sub_file_relation sub on sub.info_id = xy.info_id inner join jw_bcgl bc on bc.info_id = sub.finfo_id inner join g_infos g2 on g2.id = bc.info_id and g2.deleted <> -1 where bc.info_id =[bcid] and not exists(select *  from jw_pjform form inner join jw_pjitem item on form.id=item.formid inner join jw_pjpost pjp on pjp.formid=form.id and pjp.itemid=item.id where xy.info_id=pjp.xyinfo_id and bc.info_id=pjp.bcinfo_id and form.pjtype=[pjtype] and form.code=[pjcode] and pjp.kcinfo_id=[kwid])"
+    },
+    {
+        "key": "GetYPXYRSByPJTypeAndKCID",
+        "sql": "select g.id,g.bt,xy.szdw,sub.fjh,sub.fjdh,xy.sjhm from jw_xyxx xy inner join g_infos g on g.id = xy.info_id and g.deleted <> -1 inner join sub_file_relation sub on sub.info_id = xy.info_id inner join jw_bcgl bc on bc.info_id = sub.finfo_id inner join g_infos g2 on g2.id = bc.info_id and g2.deleted <> -1 where bc.info_id =[bcid] and exists(select *  from jw_pjform form inner join jw_pjitem item on form.id=item.formid inner join jw_pjpost pjp on pjp.formid=form.id and pjp.itemid=item.id where xy.info_id=pjp.xyinfo_id and bc.info_id=pjp.bcinfo_id and form.pjtype=[pjtype] and form.code=[pjcode] and pjp.kcinfo_id=[kwid])"
+    },
+    {
+        "key": "GetYPXYRSByPJType",
+        "sql": "select g.id,g.bt,xy.szdw,sub.fjh,sub.fjdh,xy.sjhm from jw_xyxx xy inner join g_infos g on g.id = xy.info_id and g.deleted <> -1 inner join sub_file_relation sub on sub.info_id = xy.info_id inner join jw_bcgl bc on bc.info_id = sub.finfo_id inner join g_infos g2 on g2.id = bc.info_id and g2.deleted <> -1 where bc.info_id =[bcid] and exists(select *  from jw_pjform form inner join jw_pjitem item on form.id=item.formid inner join jw_pjpost pjp on pjp.formid=form.id and pjp.itemid=item.id where xy.info_id=pjp.xyinfo_id and bc.info_id=pjp.bcinfo_id and form.pjtype=[pjtype] and form.code=[pjcode])"
+    },
+    {
+        "key": "GetOtherPJItemList",
+        "sql": "select * from (select item.type, item.name,item.id,item.ordno,item.status, item.formid,form.jxxs,form.pjtype,form.code,(case when item.type='DJ' then 1 else case when item.type='YJ2' then 2 else 3 end end) as sort, (case when item.type='DJ' or item.type='YJ2' then pjp.pjcontent end) as defaultvalue,(case when item.type='YJ' then pjp.pjcontent end) as defaulttext from jw_pjform form inner join jw_pjitem item on form.id=item.formid left join jw_pjpost pjp on pjp.formid=form.id and item.id=pjp.itemid and pjp.bcinfo_id=[bcid]  and pjp.xyinfo_id=[xyinfoid] where  form.code=[pjcode] and form.pjtype=[pjtype] and item.status=1 order by type,id,ordno) s order by s.sort,s.id,s.ordno"
+    },
+    {
+        "key": "GetPJLevelData",
+        "sql": "select * from jw_pjlevel"
+    },
+    {
+        "key": "getKb",
+        "sql": "SELECT  FB.KWINFO_ID AS LESSONID,FB.KWNAME AS LESSONNAME,TO_CHAR(FB.KWSDATE,'yyyy-MM-dd hh24:mi:ss')  AS LESSONBEGIN,TO_CHAR(FB.KWEDATE,'yyyy-MM-dd hh24:mi:ss')  AS LESSONEND,TO_CHAR(FB.KWSDATE,'yyyy-MM-dd')  AS LESSONBEGIN1,TO_CHAR(FB.KWEDATE,'yyyy-MM-dd')  AS LESSONEND1,   TO_CHAR(FB.KWSDATE,'HH24:MI')  AS LESSONTIME,FB.KWTYPE AS LESSONTYPE,CASE FB.KWTYPE WHEN '现场教学' THEN FB.KWXCJXD ELSE FB.KWADDRESS END AS LESSONADDRESS,       KC.ISXXK AS ISOPTIONAL,FB.KWJSID AS  LESSONTEACHERIDS,     FB.KWJS AS LESSONTEACHERS,FB.KWKCID AS COURSEID,     KC.BZ2 AS LESSONMEMOFROM JW_KCFBINDEX TINNER JOIN JW_KCFB FB ON FB.FID=T.ID INNER JOIN JW_KCWH KC ON KC.INFO_ID=FB.KWINFO_ID WHERE T.INFO_ID=[CLASSID]      ORDER BY FB.KWSDATE"
+    },
+    {
+        "key": "getKbNew",
+        "sql": "select kcwh.info_id AS LESSONID,g1.bt AS LESSONNAME,TO_CHAR(kcwh.kssj, 'yyyy-MM-dd hh24:mi:ss') AS LESSONBEGIN,TO_CHAR(kcwh.jssj, 'yyyy-MM-dd hh24:mi:ss') AS LESSONEND,   TO_CHAR(kcwh.kssj, 'yyyy-MM-dd') AS LESSONBEGIN1,       TO_CHAR(kcwh.jssj, 'yyyy-MM-dd') AS LESSONEND1,       TO_CHAR(kcwh.kssj, 'HH24:MI') AS LESSONTIME,       kcwh.jxxs AS LESSONTYPE, CASE kcwh.jxxs WHEN '现场教学' THEN kcwh.xcjxd         ELSE    kcwh.kcdd END AS LESSONADDRESS,       kcwh.isxxk AS ISOPTIONAL,kcwh.zjsid AS LESSONTEACHERIDS,kcwh.zjr AS LESSONTEACHERS,kcwh.kc_id AS COURSEID,       kcwh.BZ2 AS LESSONMEMO from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 where 1=1 and((exists(select 1 from jw_kcfb fb inner join jw_kcfbindex indx on indx.id = fb.fid where fb.kwinfo_id = kcwh.info_id and indx.info_id=[CLASSID] and (fb.kwtype is null or (fb.kwtype<>'选修课程' and fb.kwtype<>'经典著作导读')))) or exists(select 1 from jw_kcwh fwh inner join  g_infos gwh on gwh.id=fwh.info_id and gwh.deleted>-1 inner join jw_xyxk xk on xk.fkcinfo_id=fwh.info_id where (fwh.jxxs='选修课程' or fwh.jxxs='经典著作导读') and xk.bcinfo_id=[CLASSID] and xk.xyinfo_id=[USERID] and xk.kcinfo_id=kcwh.info_id and fwh.info_id= kcwh.fkw_id )) and ','||kcwh.bcid||',' like '%,'||[CLASSID]||',%' order by kcwh.kssj asc"
+    },
+    {
+        "key": "updatebz",
+        "sql": "update jw_kcwh set bz2=[content] where info_id=[kcid]"
+    },
+    {
+        "key": "getkbuser",
+        "sql": "select u.id as userid,u.uname as uname,u.logname,u.mobile_email as mobile,u.birthday,''as sex,bc.info_id as classid,gbc.bt as classname,bc.pxsj as classbegin,bc.pxsj_js as classend,TO_CHAR(SYSDATE,'YYYY-MM-DD') AS SYSTIME,TO_CHAR(SYSDATE,'YYYY-MM-DD hh24:mi:ss') AS SYS_DATE from g_users u left join jw_bbxx bx on bx.user_id=u.id inner join jw_bcgl bc on bx.bcinfo_id=bc.info_id inner join g_infos gbc on gbc.id=bc.info_id and gbc.deleted<>-1 and gbc.id=[CLASSID] where u.id=[USERID]  or bc.sbld_uid like '%'||[USERID]||'%' and rownum=1 union all select G.ID AS USERID,G.BT AS UNAME ,'' AS LOGNAME,XY.SJHM AS MOBILE,XY.CSNY AS BIRTHDAY, CASE XY.XB WHEN '1' THEN '女' ELSE '男' END  AS SEX,bc.info_id as classid,g.bt as classname,bc.pxsj as classbegin,bc.pxsj_js as classend,    TO_CHAR(SYSDATE,'YYYY-MM-DD') AS SYSTIME,   TO_CHAR(SYSDATE,'YYYY-MM-DD hh24:mi:ss') AS SYS_DATE from jw_xyxx xy inner join sub_file_relation sub on sub.info_id=xy.info_id inner join jw_bcgl bc on bc.info_id=sub.finfo_id inner join g_infos g on g.id=sub.info_id and g.deleted<>-1 where xy.info_id=[USERID] and sub.finfo_id=[CLASSID]"
+    },
+    {
+        "key": "getPj",
+        "sql": " SELECT * FROM (SELECT G.ID AS USERID,G.BT AS UNAME ,T.ONECARD AS LOGNAME,XY.SJHM AS MOBILE,XY.CSNY AS BIRTHDAY,CASE XY.XB WHEN '1' THEN '女' ELSE '男' END  AS SEX,BC.INFO_ID AS CLASSID,G2.BT AS CLASSNAME, TO_CHAR(BC.PXSJ,'YYYY-MM-DD') AS CLASSBEGIN,TO_CHAR(BC.PXSJ_JS,'YYYY-MM-DD') AS CLASSEND,TO_CHAR(SYSDATE,'YYYY-MM-DD') AS SYSTIME,TO_CHAR(SYSDATE,'YYYY-MM-DD hh24:mi:ss') AS SYS_DATEFROM JW_XYXX XYINNER JOIN G_INFOS G ON G.DELETED<>-1 AND G.ID=XY.INFO_ID INNER JOIN SUB_FILE_RELATION T ON T.INFO_ID=XY.INFO_ID INNER JOIN JW_BCGL BC ON BC.INFO_ID=T.FINFO_ID INNER JOIN G_INFOS G2 ON G2.ID=BC.INFO_ID AND G2.DELETED<>-1 WHERE G.ID=[USERID] ORDER BY BC.PXSJ DESC) WHERE ROWNUM=1"
+    },
+    {
+        "key": "getAddressUser",
+        "sql": "select u.id,u.uname,u.userphoto,u.zppath,u.mobile_email as phone,u.fj,bx.fjdh,'1' as utype from g_users u left join jw_bbxx bx on bx.user_id=u.id and bx.bcinfo_id=[classid] where u.id=[userid] union all select g.id,g.bt,xy.userphoto,'' as zppath,xy.sjhm,sub.fjh,sub.fjdh,'0' as utype from jw_xyxx xy inner join sub_file_relation sub on sub.info_id=xy.info_id inner join g_infos g on g.id=sub.info_id and g.deleted<>-1 where xy.info_id=[userid] and sub.finfo_id=[classid]"
+    },
+    {
+        "key": "getBZR",
+        "sql": "select u.id,u.uname,u.xnzw,u.fj,bx.fjh,bx.fjdh from jw_bbxx bx inner join g_users u on u.id=bx.user_id where bx.jstype=1 and bx.bcinfo_id=[classid] order by bx.id"
+    },
+    {
+        "key": "getZDLS",
+        "sql": "select u.id,u.uname,u.xnzw,u.fj,bx.fjh,bx.fjdh from jw_bbxx bx inner join g_users u on u.id=bx.user_id where bx.jstype=2 and bx.bcinfo_id=[classid] order by bx.id"
+    },
+    {
+        "key": "update_remote_video",
+        "sql": "update app_videostudy set videostatus=1,status=0,videoid=[videoid] where info_id=[info_id] "
+    },
+    {
+        "key": "getSBLD",
+        "sql": "select distinct u.id,u.uname,u.xnzw,u.fj,u.userorderby,dept.shorder from sub_file_relation sub inner join g_infos g on g.id=sub.finfo_id and g.deleted<>-1 inner join jw_bcgl bc on bc.info_id=g.id inner join g_users u on ','||bc.sbld_uid||','  like '%,'||u.id||',%' inner join g_dept dept on dept.user_id=u.id  where  g.id=[classid] order by dept.shorder asc,u.userorderby asc "
+    },
+    {
+        "key": "getNewList",
+        "sql": " select info_id,title,title_pic,source,createtime,rnum,subtitle,videopath,RELEASETIME,category,webpath,MINUTES,author,goodCount,docuCount from ( select info_id,title,title_pic,source,createtime,rownum,subtitle,videopath,RELEASETIME,category,webpath,MINUTES,author,goodCount,docuCount, rownum as rnum from (select ap.info_id,ap.RELEASETIME,ap.title,ap.title_pic,ap.source,ap.createtime,am.title as ftitle,ap.videopath,ap.subtitle,ap.category,webpath,MINUTES,author,(select count(*) from app_comment where app_comment.finfo_id=ap.info_id) as goodCount,(select count(*) from app_attach where app_attach.finfo_id=ap.info_id) as docuCount from app_videostudy ap inner join app_mobilemenu am on ap.menuid =am.info_id where status =1 {and am.title = [category]} order by releasetime desc)) {where rnum > ([pagecount]-1) * [rowcount] and rnum <= [pagecount] * [rowcount]} ",
+        "tag": "获取新闻分类[category]",
+        "group": "新闻"
+    },
+    {
+        "key": "getNewxyDetail",
+        "sql": "select info_id,title,title_pic,source,createtime,content,rownum,subtitle,videopath,RELEASETIME,category,MINUTES,author,goodCount,docuCount from (select ap.info_id,ap.RELEASETIME,ap.title,ap.title_pic,ap.source,ap.createtime,ap.content,am.title as ftitle,ap.videopath,ap.subtitle,ap.category,MINUTES,author,(select count(*) from app_comment where app_comment.finfo_id=ap.info_id) as goodCount,(select count(*) from app_attach where app_attach.finfo_id=ap.info_id) as docuCount from app_videostudy ap inner join app_mobilemenu am on ap.menuid =am.info_id where status =1 {and am.title = [category]} order by releasetime desc)"
+    },
+    {
+        "key": "getImageList",
+        "sql": "select info_id,title,title_pic,createtime,rownum,category from (select ap.info_id,ap.title,ap.title_pic,ap.createtime,am.title as ftitle,ap.category from app_videostudy ap inner join app_mobilemenu am on ap.menuid=am.info_id where status=1 {and am.title = [category]} order by releasetime desc) where rownum<5"
+    },
+    {
+        "key": "getNewDetail",
+        "sql": "select ap.category,ap.info_id,ap.title,ap.title_pic,ap.source,ap.createtime,ap.content,ap.videopath,am.title as ftitle,ap.RELEASETIME,ap.subtitle from app_videostudy ap inner join app_mobilemenu am on ap.menuid=am.info_id where 1=1 {and ap.info_id = [id]}"
+    },
+    {
+        "key": "getAllStu",
+        "sql": "select g.id,g.bt,xyxz.name as xz,xy.szdw,bnzw.name as bnzw,sub.fjh,sub.fjdh,xy.sjhm  from jw_xyxx xy inner join g_infos g on g.id=xy.info_id and g.deleted<>-1 inner join sub_file_relation sub on sub.info_id=xy.info_id  inner join jw_bcgl bc on bc.info_id=sub.finfo_id inner join g_infos g2 on g2.id=bc.info_id and g2.deleted<>-1 left join ( select name,cl.id,rel.rel_id from jw_classrole_rel rel inner join Jw_Classrole cl on rel.fid=cl.id and rel.bcinfo_id=cl.bcinfo_id where rel.bcinfo_id=[classid]) bnzw on bnzw.rel_id=xy.info_id left join (select wo.name,rel1.fid,rel1.ord_no,rel1.rel_id,wo.ord_no as ord_no1 from jw_classframework_rel rel1 inner join jw_classframework_rel rel2 on rel1.fid=rel2.id and rel1.bcinfo_id=rel2.bcinfo_id inner join jw_classframework wo on rel2.rel_id=wo.id and rel2.bcinfo_id=wo.bcinfo_id where rel1.bcinfo_id=[classid] order by wo.ord_no asc ,rel1.ord_no asc) xyxz on xyxz.rel_id=xy.info_id where bc.info_id=[classid] order by xyxz.ord_no1,xyxz.ord_no,xyxz.fid,sub.sernumber"
+    },
+    {
+        "key": "getChoose",
+        "sql": "select g.id,g.bt,xyxz.name as xz,xy.szdw,bnzw.name as bnzw,sub.fjh,sub.fjdh,xy.sjhm  from jw_xyxx xy inner join g_infos g on g.id=xy.info_id and g.deleted<>-1 inner join sub_file_relation sub on sub.info_id=xy.info_id  inner join jw_bcgl bc on bc.info_id=sub.finfo_id inner join g_infos g2 on g2.id=bc.info_id and g2.deleted<>-1 left join ( select name,cl.id,rel.rel_id from jw_classrole_rel rel inner join Jw_Classrole cl on rel.fid=cl.id and rel.bcinfo_id=cl.bcinfo_id where rel.bcinfo_id=[classid]) bnzw on bnzw.rel_id=xy.info_id left join (select wo.name,rel1.fid,rel1.ord_no,rel1.rel_id,wo.ord_no as ord_no1 from jw_classframework_rel rel1 inner join jw_classframework_rel rel2 on rel1.fid=rel2.id and rel1.bcinfo_id=rel2.bcinfo_id inner join jw_classframework wo on rel2.rel_id=wo.id and rel2.bcinfo_id=wo.bcinfo_id where rel1.bcinfo_id=[classid] order by wo.ord_no asc ,rel1.ord_no asc) xyxz on xyxz.rel_id=xy.info_id where bc.info_id=[classid]  and exists(select 1 from jw_xyxk where fkcinfo_id=[kcid]  and bcinfo_id= [classid]  and xyinfo_id=xy.info_id) order by xyxz.ord_no1,xyxz.ord_no,xyxz.fid"
+    },
+    {
+        "key": "getNoChoose",
+        "sql": "select g.id,g.bt,xyxz.name as xz,xy.szdw,bnzw.name as bnzw,sub.fjh,sub.fjdh,xy.sjhm  from jw_xyxx xy inner join g_infos g on g.id=xy.info_id and g.deleted<>-1 inner join sub_file_relation sub on sub.info_id=xy.info_id  inner join jw_bcgl bc on bc.info_id=sub.finfo_id inner join g_infos g2 on g2.id=bc.info_id and g2.deleted<>-1 left join ( select name,cl.id,rel.rel_id from jw_classrole_rel rel inner join Jw_Classrole cl on rel.fid=cl.id and rel.bcinfo_id=cl.bcinfo_id where rel.bcinfo_id=[classid]) bnzw on bnzw.rel_id=xy.info_id left join (select wo.name,rel1.fid,rel1.ord_no,rel1.rel_id,wo.ord_no as ord_no1 from jw_classframework_rel rel1 inner join jw_classframework_rel rel2 on rel1.fid=rel2.id and rel1.bcinfo_id=rel2.bcinfo_id inner join jw_classframework wo on rel2.rel_id=wo.id and rel2.bcinfo_id=wo.bcinfo_id where rel1.bcinfo_id=[classid] order by wo.ord_no asc ,rel1.ord_no asc) xyxz on xyxz.rel_id=xy.info_id where bc.info_id=[classid]  and not exists(select 1 from jw_xyxk where fkcinfo_id=[kcid]  and bcinfo_id= [classid]  and xyinfo_id=xy.info_id) order by xyxz.ord_no1,xyxz.ord_no,xyxz.fid"
+    },
+    {
+        "key": "Get_XYXXByInfoId",
+        "sql": "select g.bt as xm,nvl(qar.questionnum,0) as questionnum,nvl(qar.answernum,0) as answernum,nvl(qar.sameQuestionNum,0) as sameQuestionNum,(nvl(qar.sameQuestionRealNum,0)*10+nvl(qar.questionRealnum,0)*20+nvl(qar.answerRealnum,0)*30) as score from jw_xyxx xy inner join g_infos g on xy.info_id=g.id left join app_QARelation qar on xy.info_id=qar.userid and qar.bcid=[classid] and qar.usertype=0 where xy.info_id=[info_id]"
+    },
+    {
+        "key": "getXZ",
+        "sql": "select * from vw_classframework t where usertype='G' and bcinfo_id=[classid] order by ord_No"
+    },
+    {
+        "key": "getZW",
+        "sql": "select ID,name from jw_classrole t where bcinfo_id=[classid] order by t.ord_No"
+    },
+    {
+        "key": "getMainGG",
+        "sql": "select * from (select gg.id,gg.ggbt,gg.ggsj,(select count(*) from jw_bcggreader reader where reader.ggid=gg.id and reader.xyinfo_id=[xyid]) as hasreader from jw_bcgg_relations re  inner join   jw_bcgg gg      on re.ggid=gg.id         where re.bcinfo_id=[bcid]  ORDER BY GG.GGSJ DESC)where ggsj is not null and rownum=1"
+    },
+    {
+        "key": "getMainReader",
+        "sql": " select * from (select gg.id,gg.ggbt,gg.ggsj,(select count(*) from jw_bcggreader reader where reader.ggid=gg.id and reader.xyinfo_id=[xyid]) as hasreader from jw_bcgg_relations re  inner join   jw_bcgg gg      on re.ggid=gg.id         where re.bcinfo_id=[bcid] ) where ggsj is not null and hasreader=0"
+
+    },
+    {
+        "key": "getXXK",
+        "sql": "Select distinct wh2.kssj,g.bt,kc.zjr,kc.rsxz,kc.info_id,kc.fkw_id,(select count(*) from jw_xyxk where fkcinfo_id=kc.fkw_id and kcinfo_id=kc.info_id and bcinfo_id=[bcid]) rs,(select count(1) from jw_xyxx xy inner join g_infos g on g.id=xy.info_id and g.deleted<>-1 inner join sub_file_relation sub on sub.info_id=xy.info_id  inner join jw_bcgl bc on bc.info_id=sub.finfo_id inner join g_infos g2 on g2.id=bc.info_id and g2.deleted<>-1 where sub.finfo_id=t.info_id )allrs From jw_kcfbindex t  Inner Join jw_kcfb fb On fb.fid=t.Id And t.info_id=[bcid] Inner Join jw_kcwh kc On kc.fkw_id=fb.kwinfo_id   inner join g_infos g on g.id=kc.info_id and g.deleted<>-1  inner join jw_kcwh wh2 on kc.fkw_id=wh2.info_id  Where fb.kwtype='选修课程' or fb.kwtype='经典著作导读'  order by kc.info_id "
+    },
+    {
+        "key": "getXXKChoose",
+        "sql": "select * from (Select distinct wh2.kssj,g.bt,kc.zjr,kc.rsxz,kc.info_id,kc.fkw_id,(select count(1) from jw_xyxk where fkcinfo_id=kc.fkw_id and kcinfo_id=kc.info_id) rs,(select count(1) from jw_xyxx xy inner join g_infos g on g.id=xy.info_id and g.deleted<>-1 inner join sub_file_relation sub on sub.info_id=xy.info_id  inner join jw_bcgl bc on bc.info_id=sub.finfo_id inner join g_infos g2 on g2.id=bc.info_id and g2.deleted<>-1 where sub.finfo_id=t.info_id)allrs From jw_kcfbindex t  Inner Join jw_kcfb fb On fb.fid=t.Id And t.info_id=[bcid] Inner Join jw_kcwh kc On kc.fkw_id=fb.kwinfo_id   inner join g_infos g on g.id=kc.info_id and g.deleted<>-1  inner join jw_kcwh wh2 on kc.fkw_id=wh2.info_id  Where fb.kwtype='选修课程' or fb.kwtype='经典著作导读' order by kc.info_id )where  (kssj>=sysdate) or exists(select 1 from jw_xyxk where fkcinfo_id=fkw_id  and bcinfo_id=[bcid]  and xyinfo_id=[xyid])"
+    },
+    {
+        "key": "insertXXK",
+        "sql": "insert into jw_xyxk values([fkid],[info_id],[xyid],[classid],1)"
+    },
+    {
+        "key": "getXXKStu",
+        "sql": "select * from jw_xyxk  where bcinfo_id=[classid] and xyinfo_id=[xyid]"
+    },
+    {
+        "key": "queryComment",
+        "sql": "select * from app_comment where userid=[userid] and finfo_id=[finfoId]"
+    },
+    {
+        "key": "Insert_GoodComment",
+        "sql": "insert into app_comment(info_id,userid,username,finfo_id ,ncontent,isgood,replaydate,deleted,replayid)values([::guid],[userid],[username],[finfo_id],[ncontent],[isgood],sysdate,0,[replayid])"
+    },
+    {
+        "key": "queryJxzlSql",
+        "sql": "select kc.info_id,nr.nrbt,nr.filepath,'1'as nrtype from  jw_kcwh kc inner join g_nr nr on nr.info_id=kc.info_id where kc.bcid ='[bcid]' union all select id, to_char(filename),'','0' as nrtype from JW_MATERIAL where classid=[bcid] and state<>-1"
+    },
+    {
+        "key": "queryClxzSql",
+        "sql": "select aa.id,filename,path,title,orginname,ap.videopath from app_attach aa inner join app_videostudy ap on ap.info_id=aa.finfo_id where aa.finfo_id=[fid] order by orderindex asc"
+    },
+    {
+        "key": "getNotice",
+        "sql": "SELECT GG.ID AS NOTICEID, GG.GGBT AS NOTICETITLE, GG.GGSJ AS RELEASETIME,decode(GG.GGSJ,null,'未发布','已发布')as status , G.UNAME AS RELEASEPERSON, READER.GGID AS ISREAD, GG.GGNR FROM JW_BCGG GG LEFT JOIN G_USERS G ON G.ID = GG.CREATEUSER INNER JOIN JW_BCGG_RELATIONS GR ON GR.GGID = GG.ID AND GR.BCINFO_ID =[bcid] LEFT JOIN JW_BCGGREADER READER  ON READER.GGID = GG.ID AND READER.XYINFO_ID =[xyid] where gg.ggsj is not null { and  GG.ID=[ggid] } ORDER BY GG.GGSJ DESC"
+    },
+    {
+        "key": "getNoticeStudent",
+        "sql": "SELECT GG.ID AS NOTICEID, GG.GGBT AS NOTICETITLE, GG.GGSJ AS RELEASETIME,decode(GG.GGSJ,null,'未发布','已发布')as status , G.UNAME AS RELEASEPERSON, READER.GGID AS ISREAD, GG.GGNR FROM JW_BCGG GG LEFT JOIN G_USERS G ON G.ID = GG.CREATEUSER INNER JOIN JW_BCGG_RELATIONS GR ON GR.GGID = GG.ID AND GR.BCINFO_ID =[bcid] LEFT JOIN JW_BCGGREADER READER  ON READER.GGID = GG.ID AND READER.XYINFO_ID =[xyid] where gg.ggsj is not null { and  GG.ID=[ggid] } ORDER BY GG.GGSJ DESC"
+    },
+    {
+        "key": "getNoticeRead",
+        "sql": "select count(*) as total from jw_bcggreader where ggid=[ggid] and xyinfo_id=[xyid]"
+    },
+    {
+        "key": "addNoticeRead",
+        "sql": "insert into jw_bcggreader values([ggid],[xyid])"
+    },
+    {
+        "key": "delNotice",
+        "sql": "delete from JW_BCGG where id=[ggid]"
+    },
+    {
+        "key": "addNotice",
+        "sql": "insert into jw_bcgg(GGBT,ID,GGSJ,CREATEUSER,GGNR) values([title],[ggid],sysdate,[userid],[content])"
+    },
+    {
+        "key": "addNotice2",
+        "sql": "insert into jw_bcgg_relations values([ggid],[bcid])"
+    },
+    {
+        "key": "getNoticeNum",
+        "sql": "select BCGG_IDX.NEXTVal from dual"
+    },
+    {
+        "key": "getXYXZ",
+        "sql": "select info_id as id,title,title_pic,source,createtime,rownum,videopath,category,MINUTES,author,goodCount,docuCount from (select ap.info_id,ap.title,ap.title_pic,ap.source,ap.createtime,ap.content,am.title as ftitle,ap.videopath,ap.category,MINUTES,author,(select count(*) from app_comment where app_comment.finfo_id=ap.info_id) as goodCount,(select count(*) from app_attach where app_attach.finfo_id=ap.info_id) as docuCount from app_videostudy ap inner join app_mobilemenu am on ap.menuid=am.info_id left join app_comment ac on ap.info_id=ac.finfo_id left join app_attach aa on ap.info_id=aa.finfo_id where 1=1 and am.title = '学员须知' order by createtime desc) where 1>0 { and info_id=[id]} "
+    },
+    {
+        "key": "addQuestion",
+        "sql": "insert into dsfa_question (id,name,type,ispublic,dataflag,qtype) values([id],[name],[type],[ispublic],[dataflag],0)"
+    },
+    {
+        "key": "getQuestion",
+        "sql": "select id,name,type,ispublic,dataflag,qtype,status from dsfa_question where id=[id]"
+    },
+    {
+        "key": "getClassInfo",
+        "sql": "  select bt,info_id,case isChecked when 1 then 'true' when 0 then 'false' end as isChecked,pxsj_js,pxsj from (     select g.bt,bc.info_id,bc.pxsj,bc.pxsj_js,(select count(*) from app_questionClass where  classid=bc.info_id {and qid =[qid]}) as isChecked from jw_bcgl bc inner join g_infos g on bc.info_id=g.id and g.deleted>-1 where bc.pxsj_js>=sysdate  order by bc.pxsj_js   ) "
+    },
+    {
+        "key": "updateQuestion",
+        "sql": "update dsfa_question set name=[name],type=[type],ispublic=[ispublic] where id=[id]"
+    },
+    {
+        "key": "deleteQuestionClass",
+        "sql": "delete app_questionClass where qid=[qid]"
+    },
+    {
+        "key": "addQuestionClass",
+        "sql": "insert into app_questionClass values([::guid],[qid],[classid])"
+    },
+    {
+        "key": "queryNoQuestionList",
+        "sql": " select * from( select dq.name,dq.id,dq.dataflag,dq.type,dq.ispublic,dq.publishtime from app_questionClass ap inner join dsfa_question dq on ap.qid=dq.id where not exists (select qid from dsfa_question_publish_user qa where  qa.qid = dq.id and qa.userid = [uid_z] and cid=[classid_z]) and ap.classid= [classid_z]  and dq.status=2 union all select dq.name,dq.id,dq.dataflag,dq.type,dq.ispublic,dq.publishtime  from dsfa_question dq where  not exists (select qid from dsfa_question_publish_user qa where  qa.qid = dq.id and qa.userid = [uid_z] and cid=[classid_z])  and dq.status=2 and dq.ispublic=1 ) order by publishtime desc"
+    },
+
+    {
+        "key": "queryHasQuestionList",
+        "sql": " select * from( select dq.name,dq.id,dq.dataflag,dq.type,dq.publishtime  from dsfa_question dq left join dsfa_question_publish_user qa on dq.id=qa.qid where  dq.status=2 and  qa.userid = [uid_z] and cid=[classid_z]  ) order by publishtime desc "
+    },
+    {
+        "key": "queryQuestionCountList",
+        "sql": " select * from ( select id,name,publishtime,xycount,qacount,decode(sign(xycount-qacount),-1,0,1,(xycount-qacount),0,0) as wjcount from (  select dq.name,dq.id, dq.publishtime,(select count(1) from vw_xyfrombc xy where xy.bcinfo_id =[classid]) as xyCount,  (select count(1) from dsfa_question_publish_user qa where qa.qid=dq.id and cid=[classid]) as qaCount  from dsfa_question dq left join app_questionClass ap on dq.id=ap.qid  where ap.classid=[classid]  and dq.status=2 and ispublic=0) union all  select id,name,publishtime,xycount,qacount,decode(sign(xycount-qacount),-1,0,1,(xycount-qacount),0,0) as wjcount from (  select dq.name,dq.id,dq.publishtime ,  (select count(1) from vw_xyfrombc xy where xy.bcinfo_id =[classid]) as xyCount,  (select count(1) from dsfa_question_publish_user qa where qa.qid=dq.id and cid=[classid]) as qaCount  from dsfa_question dq   where dq.status=2 and ispublic=1)) order by publishtime desc"
+    },
+    {
+        "key": "getQuestionCount",
+        "sql": "  select dq.name,dq.id,dq.dataflag,dq.type,dq.publishtime,dq.ispublic  from app_questionClass ap inner join dsfa_question dq on ap.qid=dq.id where not exists (select qid from dsfa_question_publish_user qa where  qa.qid = dq.id and qa.userid = [userid] and cid=[classid_q]) and  ap.classid= [classid_q] and dq.status=2 union all select dq.name,dq.id,dq.dataflag,dq.type,dq.publishtime,dq.ispublic  from dsfa_question dq where not exists (select qid from dsfa_question_publish_user qa where  qa.qid = dq.id and qa.userid = [userid] and cid=[classid_q])  and dq.status=2 and dq.ispublic=1 "
+    },
+    {
+        "key": "get_main_xxkCount",
+        "sql": "SELECT  count(1) as xxk FROM JW_KCFBINDEX T INNER JOIN JW_KCFB FB ON FB.FID=T.ID INNER JOIN JW_KCWH KC ON KC.INFO_ID=FB.KWINFO_ID WHERE T.INFO_ID=[bcid] and ( kc.jxxs='选修课程' or  kc.jxxs='经典著作导读') and kc.kssj>=sysdate and not exists(select 1 from jw_xyxk where fkcinfo_id=kc.info_id and bcinfo_id=[bcid] and xyinfo_id=[xyid]) "
+    },
+    {
+        "key": "getAnswerQuestion",
+        "sql": "select g.id,xy.XM as bt,sub.fjh,sub.fjdh,szdw,xy.sjhm from jw_xyxx xy     inner join sub_file_relation sub    on xy.info_id=sub.info_id inner join g_infos g on g.id=xy.info_id and g.deleted<>-1  where not exists(select userid from dsfa_question_publish_user dq where dq.userid=xy.info_id and  qid=[qid]) and sub.finfo_id=[cid]"
+    },
+    {
+        "key": "getHasAnswerQuestion",
+        "sql": "select g.id,xy.XM as bt,sub.fjh,sub.fjdh,szdw,xy.sjhm from jw_xyxx xy     inner join sub_file_relation sub    on xy.info_id=sub.info_id  inner join g_infos g on g.id=xy.info_id and g.deleted<>-1  left join dsfa_question_publish_user qa on xy.info_id=qa.userid   where  qa.cid=[cid] and sub.finfo_id=[cid] and qid=[qid]"
+    },
+    {
+        "key": "getMyQuestionCount",
+        "sql": "select count(*) as countnum from app_Questions_[[bcid]] q where q.createdate>(select decode(readtime,null,sysdate,readtime) from g_users where id=[info_id])"
+    },
+    {
+        "key": "getFwrxList",
+        "sql": " select info_id,title,rnum,content from ( select info_id,title,rownum,content, rownum as rnum from (select ap.info_id,ap.title,ap.content,am.title as ftitle,ap.videopath from app_videostudy ap inner join app_mobilemenu am on ap.menuid =am.info_id where status =1 {and am.title = [category]}  order by releasetime desc)) {where rnum > ([pagecount]-1) * [rowcount] and rnum <= [pagecount] * [rowcount]} "
+    },
+    {
+        "key": "videoLog",
+        "sql": "insert into app_log (ip,time) values ([ip],[time])"
+    },
+    {
+        "key": "getZJlistByTime",
+        "sql": "select b.*,(select title_pic from app_videostudy where menuid=b.info_id and rownum=1) as title_pic,(select ismark from app_faorite where userid = [userid] and comtype=1 and finfo_id= b.info_id) as ismark,(select count(*) from app_videostudy where menuid = b.info_id) as videocount,(select wm_concat(bcid) from app_videostudy_class where info_id in ( select info_id from app_videostudy where menuid=b.info_id)) as bcid from app_mobilemenu a inner join app_mobilemenu b on a.info_id=b.finfo_id where a.title=[title] order by b.lastupdatetime desc"
+    },
+    {
+        "key": "getZJlistByCount",
+        "sql": "select b.*,(select title_pic from app_videostudy where menuid=b.info_id and rownum=1) as title_pic,(select ismark from app_faorite where userid = [userid] and comtype=1 and finfo_id= b.info_id) as ismark,(select count(*) from app_videostudy where menuid = b.info_id) as videocount,(select wm_concat(bcid) from app_videostudy_class where info_id in ( select info_id from app_videostudy where menuid=b.info_id)) as bcid from app_mobilemenu a inner join app_mobilemenu b on a.info_id=b.finfo_id where a.title=[title] order by b.playcount desc"
+    },
+    {
+        "key": "getZJNewList",
+        "sql": " select info_id,title,title_pic,source,createtime,rnum,subtitle,videopath,RELEASETIME,category,webpath,MINUTES,author,playcount,goodCount,docuCount,isgood,islike,bcid from ( select info_id,title,title_pic,source,createtime,rownum,subtitle,videopath,RELEASETIME,category,webpath,MINUTES,author,playcount,goodCount,docuCount,isgood,islike,bcid, rownum as rnum from (select ap.info_id,ap.RELEASETIME,ap.title,ap.title_pic,ap.source,ap.createtime,am.title as ftitle,ap.videopath,ap.subtitle,ap.category,webpath,MINUTES,author,ap.playcount,(select count(*) from app_faorite where app_faorite.finfo_id = ap.info_id and comtype=2) as goodCount,(select count(*) from app_faorite where app_faorite.finfo_id = ap.info_id and comtype=3) as docuCount,(select isgood from app_faorite where app_faorite.finfo_id = ap.info_id and app_faorite.userid=[userid]  and comtype=2) as isgood,(select islike from app_faorite where app_faorite.finfo_id = ap.info_id and app_faorite.userid=[userid]  and comtype=3) as islike,(select wm_concat(bcid) from app_videostudy_class where info_id=ap.info_id) as bcid from app_videostudy ap inner join app_mobilemenu am on ap.menuid =am.info_id where status =1 {and ap.menuid = [menuid]} order by releasetime desc)) {where rnum > ([pagecount]-1) * [rowcount] and rnum <= [pagecount] * [rowcount]} "
+    },
+    {
+        "key": "getZJDetail",
+        "sql": " select title,content from app_mobilemenu where info_id=[menuid] "
+    },
+    {
+        "key": "getAuthorList",
+        "sql": " select author,keyword from app_videostudy where author is not null and status=1 and menuid=[menuid] "
+    },
+    {
+        "key": "Insert_myComment",
+        "sql": "insert into app_faorite(userid,username,finfo_id ,ismark,isgood,islike,comtype)values([userid],[username],[finfo_id],[ismark],[isgood],[islike],[comtype])"
+    },
+    {
+        "key": "queryMyComment",
+        "sql": "select * from app_faorite where userid=[userid] and finfo_id=[finfo_id] and comtype=[comtype]"
+    },
+    {
+        "key": "updateLastTime",
+        "sql": "update  app_mobilemenu set LASTUPDATETIME=sysdate where info_id = (select menuid from app_videostudy where info_id =[info_id])"
+    },
+    {
+        "key": "cancelDingyue",
+        "sql": " delete from app_faorite where userid=[userid] and finfo_id=[finfo_id] and comtype=[comtype] "
+    },
+    {
+        "key": "updatePlayCount",
+        "sql": " update app_mobilemenu set playcount=(decode(playcount,null,0,playcount)+1) where info_id=( select menuid from app_videostudy where info_id=[info_id]) "
+    },
+    {
+        "key": "updateVideoPlayCount",
+        "sql": " update app_videostudy set playcount=(decode(playcount,null,0,playcount)+1) where info_id=[info_id] "
+    },
+    {
+        "key": "getMyMark",
+        "sql": " select b.*,(select title_pic  from app_videostudy where menuid = b.info_id and rownum = 1) as title_pic, d.ismark,(select count(*) from app_videostudy where menuid = b.info_id) as videocount from app_mobilemenu a inner join app_mobilemenu b on a.info_id = b.finfo_id inner join app_faorite d on b.info_id=d.finfo_id where d.userid=[userid] and  d.comtype=1 order by b.lastupdatetime desc "
+    },
+    {
+        "key": "getMyLikeList",
+        "sql": " select info_id,title,title_pic,source,createtime,rnum,subtitle,videopath,RELEASETIME,category,webpath,MINUTES,author,playcount,goodCount,docuCount,isgood,islike from ( select info_id,title,title_pic,source,createtime,rownum,subtitle,videopath,RELEASETIME,category,webpath,MINUTES,author,playcount,goodCount,docuCount,isgood,islike, rownum as rnum from (select ap.info_id,ap.RELEASETIME,ap.title,ap.title_pic,ap.source,ap.createtime,am.title as ftitle,ap.videopath,ap.subtitle,ap.category,webpath,MINUTES,author,ap.playcount,(select count(*) from app_faorite where app_faorite.finfo_id = ap.info_id and comtype=2) as goodCount,(select count(*) from app_faorite where app_faorite.finfo_id = ap.info_id and comtype=3) as docuCount,(select isgood from app_faorite where app_faorite.finfo_id = ap.info_id and app_faorite.userid=[userid]  and comtype=2) as isgood,(select islike from app_faorite where app_faorite.finfo_id = ap.info_id and app_faorite.userid=[userid]  and comtype=3) as islike from app_videostudy ap inner join app_mobilemenu am on ap.menuid =am.info_id  inner join app_faorite af on ap.info_id=af.finfo_id where status =1 {and af.userid= [userid]} and af.comtype=3 order by releasetime desc)) {where rnum > ([pagecount]-1) * [rowcount] and rnum <= [pagecount] * [rowcount]} "
+    },
+    {
+        "key": "updateTeachinfo",
+        "sql": " update g_users set bjxxpsd=[bcpsd] where id=[info_id] "
+    },
+    {
+        "key": "updateXYinfo",
+        "sql": " update sub_file_relation set bjxxpsd=[bcpsd] where info_id=[info_id] "
+    },
+    {
+        "key": "GetPJChartData",
+        "sql": "select temp.itemname,sum(temp.totaldata) as totaldata from app_charttotal temp where temp.category='PJ' group by temp.itemname"
+    },
+    {
+        "key": "GetFWChartData",
+        "sql": "select temp.itemname,sum(temp.totaldata) as totaldata from app_charttotal temp where temp.category='FW' group by temp.itemname"
+    },
+    {
+        "key": "GetLMChartData",
+        "sql": "select * from (select a.finfo_id, a.title as itemname, nvl((select sum(b.playcount) from app_mobilemenu b where a.info_id=b.finfo_id),0) as totaldata from app_mobilemenu a where finfo_id in (8,10) union all select a.finfo_id, a.title, a.playcount from app_mobilemenu a where finfo_id in (9,11)) t order by t.finfo_id desc"
+    },
+    {
+        "key": "GetXXKChartData",
+        "sql": "select temp.itemname,sum(temp.totaldata) as totaldata from app_charttotal temp where temp.category='XXK' group by temp.itemname"
+    },
+    {
+        "key": "GetcardComsumList",
+        "sql": " select * from ( select rownum as rnum, inputdt,money,remainpoint from (  select inputdt,(remainpoint-beforepoint) as money,remainpoint from coff_cardconsume where fcardno=[cardno] {and to_char(inputdt,'yyyy-MM-dd')>= [sdate]} {and to_char(inputdt,'yyyy-MM-dd')<= [edate]} order by inputdt desc)) where rnum > ([pagecount] - 1) * [rowcount] and rnum <= [pagecount] * [rowcount] "
+    },
+    {
+        "key": "GetJsGG",
+        "sql": " select * from ( select rownum as rnum,ggbt,id,ggsj from (  select ggbt,id,ggsj from jw_jsgg order by ggsj desc )) where rnum > ([pagecount] - 1) * [rowcount] and rnum <= [pagecount] * [rowcount] "
+    },
+    {
+        "key": "addNoticeByJS",
+        "sql": "insert into jw_jsgg(GGBT,ID,GGSJ,CREATEUSER,GGNR) values([title],[ggid],sysdate,[userid],[content])"
+    },
+    {
+        "key": "GetJsGGDetial",
+        "sql": " select ggbt,id,ggsj,ggnr from jw_jsgg where id=[ggid]"
+    },
+    {
+        "key": "getJSNoticeRead",
+        "sql": "select count(*) as total from jw_jsggreader where ggid=[ggid] and jsinfo_id=[jsid]"
+    },
+    {
+        "key": "addJSNoticeRead",
+        "sql": "insert into jw_jsggreader values([ggid],[jsid])"
+    },
+    {
+        "key": "getTopGGxx",
+        "sql": "select * from ( select rownum as rnum, ggbt,id,ggsj from ( select ggbt,id,ggsj from jw_jsgg order by ggsj desc)) where rnum<4"
+    },
+    {
+        "key": "getTeacherPaiming",
+        "sql": "select rownum as rnum, id,uname, hyd  from (select  id,uname,sum(hyd) as hyd from ( select gu.id,gu.uname,count(*) as hyd from app_faorite af  inner join g_users gu on af.userid=gu.id group by gu.id,gu.uname  union  select userid as id,username,count(*) as hyd from [[table]] applog where usertype='teacher' group by userid,username) group by id,uname order by hyd desc)"
+    },
+    {
+        "key": "getUserlist",
+        "sql": "select u.id,u.FJ, u.uname as bt,u2.uname deptname from g_users u  inner join g_dept d on u.id=d.user_id  inner join g_dept d2 on d.fid=d2.id  inner join g_users u2 on u2.id=d2.user_id and u2.status>-1  where u.utype in (0,2,9) and u.status>-1   order by d2.shorder,d.shorder"
+    },
+    {
+        "key": "getAddressUserInfo",
+        "sql": "select u.id,u.uname,u.userphoto,u.zppath,u.mobile_email as phone,u.fj,bx.fjdh,'1' as utype from g_users u left join jw_bbxx bx on bx.user_id=u.id where u.id=[userid] union all select g.id,g.bt,xy.userphoto,'' as zppath,xy.sjhm,sub.fjh,sub.fjdh,'0' as utype from jw_xyxx xy inner join sub_file_relation sub on sub.info_id=xy.info_id inner join g_infos g on g.id=sub.info_id and g.deleted<>-1 where xy.info_id=[userid] "
+    },
+    {
+        "key": "userInfoLogin",
+        "sql": "select u.id as info_id,u.logname,u.wifipassword, u.mobile_email as sjhm, u.uname as username,u.email as dzyj,u.userphoto,u.bjxxpsd,u.handpsd,u.ishandpsd,nvl(u.cpoint,0) as cpoint,u.workno,u2.uname deptname  from g_users u inner join g_dept d on u.id=d.user_id  inner join g_dept d2 on d.fid=d2.id inner join g_users u2 on u2.id=d2.user_id and u2.status>-1 where u.mobile_email =[phone] and u.status>-1"
+    },
+    {
+        "key": "getMyMarkCount",
+        "sql": " select count(*)  as mymark  from app_faorite    where userid = [userid]  and comtype = 3"
+    },
+    {
+        "key": "getzpyKbNew",
+        "sql": "select kcwh.info_id AS LESSONID,g1.bt AS LESSONNAME,TO_CHAR(kcwh.kssj, 'yyyy-MM-dd hh24:mi:ss') AS LESSONBEGIN,TO_CHAR(kcwh.jssj, 'yyyy-MM-dd hh24:mi:ss') AS LESSONEND,   TO_CHAR(kcwh.kssj, 'yyyy-MM-dd') AS LESSONBEGIN1,       TO_CHAR(kcwh.jssj, 'yyyy-MM-dd') AS LESSONEND1,       TO_CHAR(kcwh.kssj, 'HH24:MI') AS LESSONTIME,       kcwh.jxxs AS LESSONTYPE, CASE kcwh.jxxs WHEN '现场教学' THEN kcwh.xcjxd         ELSE    kcwh.kcdd END AS LESSONADDRESS,       kcwh.isxxk AS ISOPTIONAL,kcwh.zjsid AS LESSONTEACHERIDS,kcwh.zjr AS LESSONTEACHERS,kcwh.kc_id AS COURSEID,       kcwh.BZ2 AS LESSONMEMO, kcwh.bcid from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 where 1=1 and((exists(select 1 from jw_kcfb fb inner join jw_kcfbindex indx on indx.id = fb.fid where fb.kwinfo_id = kcwh.info_id {and indx.info_id =[chkclassid]} and (fb.kwtype is null or (fb.kwtype<>'选修课程' and fb.kwtype<>'经典著作导读')))) or exists(select 1 from jw_kcwh fwh inner join  g_infos gwh on gwh.id=fwh.info_id and gwh.deleted>-1 inner join jw_xyxk xk on xk.fkcinfo_id=fwh.info_id where (fwh.jxxs='选修课程' or fwh.jxxs='经典著作导读') {and xk.bcinfo_id =[chkclassid]} and xk.kcinfo_id=kcwh.info_id and fwh.info_id= kcwh.fkw_id )) and (TO_NUMBER(TO_CHAR((kcwh.kssj), 'YY')) =  TO_NUMBER(TO_CHAR((sysdate), 'YY')))  and (TO_NUMBER(TO_CHAR((kcwh.kssj), 'MM')) =  TO_NUMBER(TO_CHAR((sysdate), 'MM')))  and (TO_NUMBER(TO_CHAR((kcwh.kssj), 'DD')) BETWEEN   TO_NUMBER(TO_CHAR((sysdate), 'DD'))-30 AND TO_NUMBER(TO_CHAR((sysdate), 'DD')) + 30) order by kcwh.kssj asc"
+    },
+    {
+        "key": "getAllbc",
+        "sql": "select distinct * from (select bc.info_id as classid,g.bt, '[' || to_char(bc.pxsj, 'yyyy-mm') || ']' || g.bt as bt2, bc.pxsj as kssj, bc.pxsj_js as jssj from jw_bcgl bc inner join g_infos g on bc.info_id = g.id and g.deleted > -1 inner join jw_bbxx bbxx on bbxx.bcinfo_id = bc.info_id  union all select bc.info_id as classid, g.bt, '[' || to_char(bc.pxsj, 'yyyy-mm') || ']' || g.bt as bt2, bc.pxsj as kssj, bc.pxsj_js as jssj  from jw_bcgl bc inner join g_infos g on g.id = bc.info_id and g.deleted <> -1 ) t  where to_char(t.kssj,'yyyy-MM-dd') <= to_char(sysdate,'yyyy-MM-dd') and to_char(t.jssj,'yyyy-MM-dd') >= to_char(sysdate,'yyyy-MM-dd') order by t.kssj desc"
+    }    ,
+    {
+        "key": "getNoticeByid",
+        "sql": "select gg.id,ggbt,ggsj,createuser,g.uname,ggnr from JW_JSGG gg left join g_users g on gg.createuser=g.id where gg.id=[id]"
+    },
+    {
+        "key": "addNoticeByAdmin",
+        "sql": "insert into jw_jsgg(GGBT,ID,GGSJ,CREATEUSER,GGNR) values([ggbt],[id],sysdate,[createuser],[ggnr])"
+    },
+    {
+        "key": "updateNoticeByAdmin",
+        "sql": "update jw_jsgg set GGBT=[ggbt],GGNR=[ggnr] where id=[id]"
+    },
+    {
+        "key": "addNewAgenda",
+        "sql": "insert into jw_Agenda (id,rcbt,rcsj,rcsj_js,userid,rcdd,rcnr) values([id],[rcbt],[rcsj],[rcsj_js],[userid],[rcdd],[rcnr])"
+    },
+    {
+        "key": "getMyAgenda",
+        "sql": "select id,rcbt,userid,rcdd,rcnr,rcsj,rcsj_js,to_char(rcsj,'yyyy-mm-dd') as ksrq,to_char(rcsj_js,'yyyy-mm-dd') as ksrq_js from jw_Agenda where userid=[USERID] AND (TO_NUMBER(TO_CHAR((rcsj), 'YY')) = TO_NUMBER(TO_CHAR((sysdate), 'YY'))) and (TO_NUMBER(TO_CHAR((rcsj), 'MM')) = TO_NUMBER(TO_CHAR((sysdate), 'MM')))"
+    },
+    {
+        "key": "getMyAgendaByid",
+        "sql": "select * from jw_Agenda where id =[id]"
+    },
+    {
+        "key": "updateMyAgendaByid",
+        "sql": "update jw_Agenda set rcbt=[rcbt],rcsj=[rcsj],rcdd=[rcdd],rcnr=[rcnr],rcsj_js=[rcsj_js] where id=[id]"
+    },
+    {
+        "key": "deleteMyAgendaByid",
+        "sql": "delete from jw_Agenda where id=[id]"
+    },
+    {
+        "key": "getZYTXbc",
+        "sql": "select * from ( select rownum as rowindex, t.*  from (select bc.info_id as classid,bc.xn,bc.xq,bc.sfjh,bc.bjxz, (select count(1)  from vw_xyfrombc xy  where xy.bcinfo_id = bc.info_id) as xyCount,  g.bt,  bc.pxsj as kssj, bc.pxsj_js as jssj   from jw_bcgl bc  inner join g_infos g  on g.id = bc.info_id and g.deleted <> -1) t  where sfjh=[sfjh] and xn=[xn] and xq =[xq] {and bjxz =[bjxz]}) where rowindex > ([pagecount]-1) * [rowcount] and rowindex <= [pagecount] * [rowcount]"
+    },
+    {
+        "key": "getBcinfoByid",
+        "sql": "select bc.xn,bc.xq,decode(bc.sfjh,1,'市场委托班','中央调训班') as bctype,g.bt, bc.pxsj as kssj,  bc.pxsj_js as jssj from jw_bcgl bc inner join g_infos g on g.id = bc.info_id where bc.info_id=[classid]"
+    },
+    {
+        "key": "getZCLView",
+        "sql": "select * from (select rownum as rowindex, g.bt, bc.bch, bc.xq, bc.pxsj, bc.pxsj_js, bc.bzr, nvl(qd.zcrs, 0) as zcrs, nvl(stu.rs, 0) as rs, decode(stu.rs, null, 0, 0, 0, round(nvl(qd.zcrs, 0) / stu.rs, 4)) * 100 || '%' as zcl, bc.info_id as bcid, bc.sfjh as 是否计划, decode(sfjh, 0, '市场委托班', 1, '中央调训班', 2, '网络学院培训') as bclx from jw_bcgl bc inner join g_infos g on g.id = bc.info_id and g.deleted > -1 left join (select classid, count(*) as rs from vw_selectstubybc group by classid) stu  on stu.classid = g.id left join (select classid, count(outid) as zcrs  from (select distinct ws.outid, stu.classid   from ws_ab ws  inner join vw_selectstubybc stu    on stu.cardnumber = ws.outid  inner join jw_bcgl bc1  on bc1.info_id = stu.classid  where ws.opertime between bc1.pxsj - 3 and   bc1.pxsj_js + 1) t  group by classid) qd on qd.classid = bc.info_id where bc.bzr_uid is not null and sysdate between bc.pxsj - 3 and bc.pxsj_js + 1) where rowindex > ([pagecount]-1) * 10 and rowindex <= [pagecount] * 10"
+    },
+    {
+        "key": "getZCLViewWhere",
+        "sql": "select * from (select rownum as rowindex, g.bt, bc.bch, bc.xq, bc.pxsj, bc.pxsj_js, bc.bzr, nvl(qd.zcrs, 0) as zcrs, nvl(stu.rs, 0) as rs, decode(stu.rs, null, 0, 0, 0, round(nvl(qd.zcrs, 0) / stu.rs, 4)) * 100 || '%' as zcl, bc.info_id as bcid, bc.sfjh as 是否计划, decode(sfjh, 0, '市场委托班', 1, '中央调训班', 2, '网络学院培训') as bclx from jw_bcgl bc inner join g_infos g on g.id = bc.info_id and g.deleted > -1 left join (select classid, count(*) as rs from vw_selectstubybc group by classid) stu  on stu.classid = g.id left join (select classid, count(outid) as zcrs  from (select distinct ws.outid, stu.classid   from ws_ab ws  inner join vw_selectstubybc stu    on stu.cardnumber = ws.outid  inner join jw_bcgl bc1  on bc1.info_id = stu.classid  where ws.opertime between bc1.pxsj - 3 and   bc1.pxsj_js + 1) t  group by classid) qd on qd.classid = bc.info_id where bc.bzr_uid is not null and xn=[xn] and xq=[xq] and sfjh=[sfjh]) where rowindex > ([pagecount]-1) * 10 and rowindex <= [pagecount] * 10"
+    },
+    {
+        "key": "getBjxxByid",
+        "sql": " select bjxxpsd from sub_file_relation where info_id=[xyid]"
+    },
+    {
+        "key": "updateHandpsd",
+        "sql": " update g_users set ishandpsd=[ishandpsd], handpsd=[handpsd] where id= [id]"
+    },
+    {
+        "key": "getDywjList",
+        "sql": " SELECT * FROM ( select ROWNUM AS ROWINDEX,ID,F.BT,F.UNAME,F.DEPTNAME,F.RDATE from (select t.INFO_ID id,t.BT,B.UNAME,C.UNAME AS DEPTNAME,to_char(t.RDATE,'yyyy-mm-dd') RDATE from G_FENGYUE_FILE t,G_FENGYUE_USER s,G_USERS B,G_INFOS A LEFT JOIN G_USERS C ON A.DEPTLV1=C.ID WHERE t.INFO_ID = s.INFO_ID AND t.INFO_ID=A.ID AND A.USER_ID=B.ID AND s.USER_ID=6133 AND T.OBJCLASS NOT IN('OBJCLASS') AND s.READED=[READED] AND t.STATUS>=0 order by RDATE desc) F) where rowindex > ([pagecount]-1) * 10 and rowindex <= [pagecount] * 10"
+    },
+    {
+        "key": "updateReaded",
+        "sql": " update G_FENGYUE_USER set READED = 1,READTIME=sysdate where USER_ID=[userid] and INFO_ID=[ID] "
+    },
+    {
+        "key": "getFilePath",
+        "sql": " SELECT B.NRBT,B.FILEPATH FROM G_NR B left join MMDATA A on B.MNR=A.ID WHERE INFO_ID=[id] AND NRTYPE IN(3,0) "
+    },
+    {
+        "key": "getGzzdList",
+        "sql": " select * from ( select rownum rowindex,t2.* from (select g.bt,doc.info_id,doc.syfw,doc.doclevel,doc.sffb  from OFFICIALDOCUMENT doc  inner join g_infos g on g.id=doc.info_id and g.deleted>-1  where doctype=[fileType] {and doc.syfw=[syfw]} {and doc.doclevel=[doclevel]} order by showorder desc) t2 where sffb=1 ) where rowindex > ([pagecount]-1) * 10 and rowindex <= [pagecount] * 10"
+    },
+    {
+        "key": "getFileList",
+        "sql": " SELECT B.NRBT,B.FILEPATH FROM G_NR B left join MMDATA A on B.MNR=A.ID WHERE INFO_ID=[id] "
+    },
+    {
+        "key": "getSelectList",
+        "sql": " select showvalue,datavalue from r_code where class=[rCodeClass] order by showorder "
+    },
+    {
+        "key": "getKCListMain",
+        "sql": " select *  from (select rownum as rowindex,LESSONID,BT,qdcount,(xyCount - qdcount) as wcount,LESSONBEGIN,LESSONEND,LESSONADDRESS from (select * from (select kcwh.info_id AS LESSONID,g1.bt,(select count(*) from jw_qdinfo qd  where qd.lessonid = kcwh.info_id) as qdcount,(select count(1)  from vw_xyfrombc xy  where xy.bcinfo_id = [classid] and xxzt = 0) as xyCount,TO_CHAR(kcwh.kssj, 'yyyy-MM-dd hh24:mi') AS LESSONBEGIN, TO_CHAR(kcwh.jssj, 'yyyy-MM-dd hh24:mi') AS LESSONEND, CASE kcwh.jxxs WHEN '现场教学' THEN kcwh.xcjxd  ELSE  kcwh.kcdd END AS LESSONADDRESS, kcwh.bcid from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 inner join jw_kcfb fb on fb.kwinfo_id = kcwh.info_id inner join jw_kcfbindex indx on indx.id = fb.fid  where  indx.info_id = [classid] and (fb.kwtype is null or (fb.kwtype <> '选修课程' and  fb.kwtype <> '经典著作导读')) and TO_NUMBER(TO_CHAR((kcwh.kssj), 'YY')) = TO_NUMBER(TO_CHAR((sysdate), 'YY'))  union   select distinct kcwh.info_id AS LESSONID, g1.bt,(select count(*) from jw_qdinfo qd  where qd.lessonid = kcwh.info_id) as qdcount, (select count(1) from vw_xyfrombc xy  where xy.bcinfo_id = [classid] and xxzt = 0) as xyCount, TO_CHAR(kcwh.kssj, 'yyyy-MM-dd hh24:mi') AS LESSONBEGIN, TO_CHAR(kcwh.jssj, 'yyyy-MM-dd hh24:mi') AS LESSONEND, CASE kcwh.jxxs  WHEN '现场教学' THEN kcwh.xcjxd  ELSE kcwh.kcdd END AS LESSONADDRESS, kcwh.bcid from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 left join jw_xyxk xk on xk.kcinfo_id = kcwh.info_id inner join jw_kcwh fwh on xk.fkcinfo_id = fwh.info_id inner join g_infos gwh on gwh.id = fwh.info_id and gwh.deleted > -1 where (fwh.jxxs = '选修课程' or fwh.jxxs = '经典著作导读') and xk.bcinfo_id = [classid] and fwh.info_id = kcwh.fkw_id and TO_NUMBER(TO_CHAR((kcwh.kssj), 'YY')) = TO_NUMBER(TO_CHAR((sysdate), 'YY'))) aa order by aa.LESSONBEGIN asc)) {where rowindex > ([ pagecount ] - 1) * 10 and rowindex <= [ pagecount ] * 10} "
+    },
+    {
+        "key": "getKCListById",
+        "sql": " select *  from (select rownum as rowindex,LESSONID,BT,qdcount,(xyCount - qdcount) as wcount,LESSONBEGIN,LESSONEND,LESSONADDRESS from (select * from (select kcwh.info_id AS LESSONID,g1.bt ||'  '||  TO_CHAR(kcwh.kssj, 'yy-MM-dd hh24:mi') as bt,(select count(*) from jw_qdinfo qd  where qd.lessonid = kcwh.info_id) as qdcount,(select count(1)  from vw_xyfrombc xy  where xy.bcinfo_id = [classid] and xxzt = 0) as xyCount,TO_CHAR(kcwh.kssj, 'yyyy-MM-dd hh24:mi') AS LESSONBEGIN, TO_CHAR(kcwh.jssj, 'yyyy-MM-dd hh24:mi') AS LESSONEND, CASE kcwh.jxxs WHEN '现场教学' THEN kcwh.xcjxd  ELSE  kcwh.kcdd END AS LESSONADDRESS, kcwh.bcid from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 inner join jw_kcfb fb on fb.kwinfo_id = kcwh.info_id inner join jw_kcfbindex indx on indx.id = fb.fid  where  indx.info_id = [classid] and (fb.kwtype is null or (fb.kwtype <> '选修课程' and  fb.kwtype <> '经典著作导读')) and TO_NUMBER(TO_CHAR((kcwh.kssj), 'YY')) = TO_NUMBER(TO_CHAR((sysdate), 'YY'))  union   select distinct kcwh.info_id AS LESSONID, g1.bt ||'  '||  TO_CHAR(kcwh.kssj, 'yy-MM-dd hh24:mi') as bt,(select count(*) from jw_qdinfo qd  where qd.lessonid = kcwh.info_id) as qdcount, (select count(1) from vw_xyfrombc xy  where xy.bcinfo_id = [classid] and xxzt = 0) as xyCount, TO_CHAR(kcwh.kssj, 'yyyy-MM-dd hh24:mi') AS LESSONBEGIN, TO_CHAR(kcwh.jssj, 'yyyy-MM-dd hh24:mi') AS LESSONEND, CASE kcwh.jxxs  WHEN '现场教学' THEN kcwh.xcjxd  ELSE kcwh.kcdd END AS LESSONADDRESS, kcwh.bcid from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 left join jw_xyxk xk on xk.kcinfo_id = kcwh.info_id inner join jw_kcwh fwh on xk.fkcinfo_id = fwh.info_id inner join g_infos gwh on gwh.id = fwh.info_id and gwh.deleted > -1 where (fwh.jxxs = '选修课程' or fwh.jxxs = '经典著作导读') and xk.bcinfo_id = [classid] and fwh.info_id = kcwh.fkw_id and TO_NUMBER(TO_CHAR((kcwh.kssj), 'YY')) = TO_NUMBER(TO_CHAR((sysdate), 'YY'))) aa order by aa.LESSONBEGIN asc)) {where rowindex > ([ pagecount ] - 1) * 10 and rowindex <= [ pagecount ] * 10} "
+    },
+    {
+        "key": "getKQListById",
+        "sql": " select *  from (select rownum as rowindex,LESSONID,BT,qdcount,(xyCount - qdcount) as wcount,LESSONBEGIN,LESSONEND,LESSONADDRESS,signbegin,iskq from (select * from (select kcwh.info_id AS LESSONID,g1.bt ||'  '||  TO_CHAR(kcwh.kssj, 'yy-MM-dd hh24:mi') as bt,(select count(*) from jw_qdinfo qd  where qd.lessonid = kcwh.info_id) as qdcount,(select count(1)  from vw_xyfrombc xy  where xy.bcinfo_id = [classid] and xxzt = 0) as xyCount,TO_CHAR(kcwh.kssj, 'yyyy-MM-dd hh24:mi') AS LESSONBEGIN, TO_CHAR(kcwh.jssj, 'yyyy-MM-dd hh24:mi') AS LESSONEND, CASE kcwh.jxxs WHEN '现场教学' THEN kcwh.xcjxd  ELSE  kcwh.kcdd END AS LESSONADDRESS, kcwh.bcid,kq.signbegin,kq.iskq from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 inner join jw_kcfb fb on fb.kwinfo_id = kcwh.info_id inner join jw_kcfbindex indx on indx.id = fb.fid inner join jw_kqgl kq on kcwh.info_id=kq.lessonid  where kq.iskq=1 and  indx.info_id = [classid] and (fb.kwtype is null or (fb.kwtype <> '选修课程' and  fb.kwtype <> '经典著作导读')) union   select distinct kcwh.info_id AS LESSONID, g1.bt ||'  '||  TO_CHAR(kcwh.kssj, 'yy-MM-dd hh24:mi') as bt,(select count(*) from jw_qdinfo qd  where qd.lessonid = kcwh.info_id) as qdcount, (select count(1) from vw_xyfrombc xy  where xy.bcinfo_id = [classid] and xxzt = 0) as xyCount, TO_CHAR(kcwh.kssj, 'yyyy-MM-dd hh24:mi') AS LESSONBEGIN, TO_CHAR(kcwh.jssj, 'yyyy-MM-dd hh24:mi') AS LESSONEND, CASE kcwh.jxxs  WHEN '现场教学' THEN kcwh.xcjxd  ELSE kcwh.kcdd END AS LESSONADDRESS, kcwh.bcid,kq.signbegin,kq.iskq from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id and g1.deleted <> -1 left join jw_xyxk xk on xk.kcinfo_id = kcwh.info_id inner join jw_kcwh fwh on xk.fkcinfo_id = fwh.info_id inner join g_infos gwh on gwh.id = fwh.info_id and gwh.deleted > -1 inner join jw_kqgl kq on kcwh.info_id=kq.lessonid where kq.iskq=1 and (fwh.jxxs = '选修课程' or fwh.jxxs = '经典著作导读') and xk.bcinfo_id = [classid] and fwh.info_id = kcwh.fkw_id ) aa order by iskq,signbegin desc)) {where rowindex > ([ pagecount ] - 1) * 10 and rowindex <= [ pagecount ] * 10} "
+    },{
+        "key": "getHistoryKQListById",
+        "sql": " select * from (select rownum as rowindex,kq.*,kq.lessonname as bt,(select count(1)  from vw_xyfrombc xy  where xy.bcinfo_id = kq.classid  and xxzt = 0) as xyCount,(select count(1) from jw_qdinfo qd where qd.info_id=kq.info_id) as yqCount from  jw_kqgl kq where iskq=1 AND CLASSID=[classid] order by signbegin desc) {where rowindex > ([ pagecount ] - 1) * 10 and rowindex <= [ pagecount ] * 10} "
+    },
+    {
+        "key": "getTodayKCListById",
+        "sql": " select LESSONID,BT, LESSONBEGIN,LESSONEND,LESSONADDRESS from (select * from (select kcwh.info_id AS LESSONID, g1.bt || '  ' || TO_CHAR(kcwh.kssj, 'yy-MM-dd hh24:mi') as bt, TO_CHAR(kcwh.kssj, 'yyyy-MM-dd hh24:mi') AS LESSONBEGIN,TO_CHAR(kcwh.jssj, 'yyyy-MM-dd hh24:mi') AS LESSONEND, CASE kcwh.jxxs WHEN '现场教学' THEN kcwh.xcjxd ELSE kcwh.kcdd END AS LESSONADDRESS,kcwh.bcid from jw_kcwh kcwh inner join g_infos g1 on g1.id = kcwh.info_id        and g1.deleted <> -1  inner join jw_kcfb fb            on fb.kwinfo_id = kcwh.info_id  inner join jw_kcfbindex indx    on indx.id = fb.fid   where indx.info_id = [classid]   and (fb.kwtype is null or  (fb.kwtype <> '选修课程' and fb.kwtype <> '经典著作导读')) and TO_CHAR((kcwh.kssj), 'yyyy-MM-dd') = TO_CHAR((sysdate), 'yyyy-MM-dd') union select distinct kcwh.info_id AS LESSONID,  g1.bt || '  ' ||  TO_CHAR(kcwh.kssj, 'yy-MM-dd hh24:mi') as bt,  TO_CHAR(kcwh.kssj,  'yyyy-MM-dd hh24:mi') AS LESSONBEGIN,  TO_CHAR(kcwh.jssj,  'yyyy-MM-dd hh24:mi') AS LESSONEND,  CASE kcwh.jxxs  WHEN '现场教学' THEN  kcwh.xcjxd   ELSE  kcwh.kcdd  END AS LESSONADDRESS,  kcwh.bcid   from jw_kcwh kcwh   inner join g_infos g1 on g1.id = kcwh.info_id  and g1.deleted <> -1  left join jw_xyxk xk on xk.kcinfo_id = kcwh.info_id inner join jw_kcwh fwh  on xk.fkcinfo_id = fwh.info_id  inner join g_infos gwh  on gwh.id = fwh.info_id and gwh.deleted > -1 where (fwh.jxxs = '选修课程' or fwh.jxxs = '经典著作导读')  and xk.bcinfo_id = [classid]  and fwh.info_id = kcwh.fkw_id  and TO_CHAR((kcwh.kssj), 'yyyy-MM-dd') =  TO_CHAR((sysdate), 'yyyy-MM-dd')) aa  order by aa.LESSONBEGIN asc) "
+    },
+    {
+        "key": "getCQInfo",
+        "sql": "  select count(*) stateCount, state,xyCount from (select classid,state,xm, (select count(1) from vw_xyfrombc xy where xy.bcinfo_id =classid and xxzt=0) as xyCount from jw_querykaoqing where kcid=[kcid] and classid=[classid]) group by state,xyCount "
+    },
+    {
+        "key": "getNowQd",
+        "sql": "  select kq.*,(select count(1)  from vw_xyfrombc xy  where xy.bcinfo_id = kq.classid  and xxzt = 0) as xyCount,(select count(1) from jw_qdinfo qd where qd.info_id=kq.info_id) as yqCount from  jw_kqgl kq where iskq=0 AND CLASSID=[classid] "
+    },
+    {
+        "key": "getQdInfo",
+        "sql": "  select kq.xm,kq.state,sub.info_id from jw_querykaoqing kq inner join sub_file_relation sub on kq.stuid=sub.onecard where kcid = [kcid]  and classid = [classid] and state!='未签' "
+    },
+    {
+        "key": "getWQdInfo",
+        "sql": "  select kq.xm,kq.state,sub.info_id from jw_querykaoqing kq inner join sub_file_relation sub on kq.stuid=sub.onecard where kcid = [kcid]  and classid = [classid] and state='未签' "
+    },
+    {
+        "key": "insertKqinfo",
+        "sql": "  insert into jw_kqgl (info_id,classid,lessonid,lessonname,signbegin,signend,iskq,fqr,fqrname) values ((select decode(max(info_id), '', 1, max(to_number(info_id)) + 1) from jw_kqgl),[classid],[lessonid],[lessonname],SYSDATE,[signend],0,[fqr],[fqrname]) "
+    },
+    {
+        "key": "getKqinfo",
+        "sql": " select count(*) as kqNum from jw_kqgl where classid=[classid] and lessonid=[lessonid]"
+    },
+    {
+        "key": "getKCInfoById",
+        "sql": "  select kq.*,g1.bt from  jw_kqgl kq left join g_infos g1 on g1.id = kq.lessonid where classid=[classid] and lessonid=[lessonid]"
+    },
+    {
+        "key": "updateKqinfo",
+        "sql": " update jw_kqgl set signend=sysdate,iskq=[iskq] where info_id=[info_id]"
+    },{
+        "key": "getTodayQdCount",
+        "sql": " select count(*) as todayQd from jw_kqgl where to_char(signbegin,'yyyy-MM-dd')=to_char(sysdate,'yyyy-MM-dd') and classid=[classid]"
+    },
+    {
+        "key": "getQdList",
+        "sql": "  select *  from (select rownum as rowindex, kq.*, kq.lessonname as bt, (select count(1) from vw_xyfrombc xy where xy.bcinfo_id = kq.classid and xxzt = 0) as xyCount, (select count(1) from jw_qdinfo qd where qd.info_id = kq.info_id) as yqCount,(select signtime from jw_qdinfo q where studentid = [stuid] and q.info_id = kq.info_id) as signtime, (select count(1) from jw_qdinfo q  where studentid = [stuid]  and q.info_id = kq.info_id) as signstatus from jw_kqgl kq where (iskq = 1 or kq.info_id in (select info_id from jw_qdinfo where studentid=[stuid] and classid=[classid]))  AND CLASSID = [classid] order by signbegin desc) {where rowindex > ([pagecount] - 1) * 10 and rowindex <= [pagecount] * 10}"
+    },{
+        "key": "getNowQdStudent",
+        "sql": "  select * from jw_kqgl where iskq=0 and classid=[classid] and info_id not in (select info_id from jw_qdinfo where classid=[classid] and studentid=[stuid])"
+    },
+    {
+        "key": "insertQdData",
+        "sql": " insert into jw_qdinfo (studentid,lessonid,signtime,classid,info_id) values([studentid],[lessonid],sysdate,[classid],[info_id]) "
+    },
+    {
+        "key": "getKqNum",
+        "sql": " select count(1) as topNum from jw_kqgl k where k.iskq=0 and k.classid=[bcid] and k.info_id not in(select info_id from jw_qdinfo where studentid=[xyid] and classid=[classid]) "
+    },
+    {
+        "key": "getOutOrIn",
+        "sql": " select * from ( select rownum as rowindex, opertime,oplocation,bt from (select kq.opertime,kq.oplocation,g.bt from ws_ab kq INNER JOIN SUB_FILE_RELATION T ON T.Onecard=kq.outid INNER JOIN G_INFOS G ON G.DELETED<>-1 AND G.ID=t.INFO_ID where kq.placeid in (select placeid from jw_relationkq where placetype=2) and t.finfo_id=[classid] and (to_char(kq.opertime,'HH24:mi') > '22:00' or to_char(kq.opertime,'HH24:mi') < '07:00')  order by opertime desc)) {where rowindex > ([pagecount]-1) * 10 and rowindex <= [pagecount] * 10} "
+    },
+    {
+        "key": "getQiandaoList",
+        "sql": " select kc.studentid as id,bc.bt,bc.xyname,kc.signtime from vw_xyfrombc bc inner join jw_qdinfo kc on bc.info_id=kc.studentid where bc.bcinfo_id=[bcid] and kc.info_id=[id] "
+    },
+    {
+        "key": "getweiQiandaoList",
+        "sql": " select info_id as id,bt,xyname,sjhm,0 as phonestatus from vw_xyfrombc where bcinfo_id=[bcid] and info_id not in( select studentid from jw_qdinfo where info_id=[id]) "
+    },
+    {
+        "key": "getTodoCount",
+        "sql": " SELECT count(*) as num  FROM G_INBOX A inner join G_INFOS B  on A.INFO_ID = B.ID left join g_userinfo u on a.FUSER_ID = u.ID   left join g_favorite f on f.info_id = a.info_id and f.tablename = 'g_inbox' and f.userid = a.user_id inner join g_module g on b.module_id = g.id LEFT JOIN G_PNODES P ON A.INFO_ID = P.INFO_ID  AND A.PID = P.PID AND A.PNID = P.ID LEFT JOIN G_OPINION_HANDWRITING H ON H.PID = P.PID AND H.PNID = P.ID WHERE g.rowstate > -1  and (A.USER_ID = [info_id]  or   A.USER_ID in (select USER_ID from G_DBRESET where AUSER_ID=[info_id] AND to_char(PERIOD,'yyyy-MM-dd')<=to_char(sysdate,'yyyy-MM-dd') AND to_char(ENDDATE,'yyyy-MM-dd')>=to_char(sysdate,'yyyy-MM-dd') AND rowstate>-1)  OR (A.USER_ID IN (select grp_id from g_grps where user_id=[info_id]) AND A.DEPT_ID IN (select organizeid from g_orguser where userinfoid=[info_id])))  AND (A.STATUS = 1 or A.STATUS = 2)  AND (B.ROWSTATE > -1 or B.ROWSTATE is null) order by a.RDATE desc "
+    },
+    {
+        "key": "getTodoList",
+        "sql": " SELECT P.BACKREASON, a.ACTNAME,  B.jc_id, a.id,a.pid,a.pnid,a.wfnode_id wfNodeId,u.Photo userIcon,u.id sendId,u.Name NAME,B.URGENT isUrgent, a.RDATE TIME,a.STATUS,a.info_id,g.name moduleName,b.BT itemsContent, case when f.info_id is null then  'false' else 'true'  end isAttention, B.XFORM_ID formId, b.wf_id, g.id as module_id, H.ID AS HANDWRITING_ID  FROM G_INBOX A inner join G_INFOS B  on A.INFO_ID = B.ID left join g_userinfo u on a.FUSER_ID = u.ID   left join g_favorite f on f.info_id = a.info_id and f.tablename = 'g_inbox' and f.userid = a.user_id inner join g_module g on b.module_id = g.id LEFT JOIN G_PNODES P ON A.INFO_ID = P.INFO_ID  AND A.PID = P.PID AND A.PNID = P.ID LEFT JOIN G_OPINION_HANDWRITING H ON H.PID = P.PID AND H.PNID = P.ID WHERE g.rowstate > -1  and (A.USER_ID = [userid]  or   A.USER_ID in (select USER_ID from G_DBRESET where AUSER_ID=[userid] AND to_char(PERIOD,'yyyy-MM-dd')<=to_char(sysdate,'yyyy-MM-dd') AND to_char(ENDDATE,'yyyy-MM-dd')>=to_char(sysdate,'yyyy-MM-dd') AND rowstate>-1)  OR (A.USER_ID IN (select grp_id from g_grps where user_id=[userid]) AND A.DEPT_ID IN (select organizeid from g_orguser where userinfoid=[userid])))  AND (A.STATUS = 1 or A.STATUS = 2)  AND (B.ROWSTATE > -1 or B.ROWSTATE is null) order by a.RDATE desc "
+    },
+    {
+        "key": "getHasdoList",
+        "sql": " SELECT a.wfnode_id wfNodeId,B.jc_id ,a.id,a.pid,a.pnid,u.Photo userIcon,u.id sendId,u.Name NAME,B.URGENT  isUrgent,a.RDATE TIME,a.STATUS,a.info_id,g.name moduleName,b.BT itemsContent,case when f.info_id is null then 'false' else 'true' end  isAttention,b.xform_id formId, b.wf_id,b.module_id  FROM G_INBOX A inner join G_INFOS B on A.INFO_ID = B.ID left join g_userinfo u on a.USER_ID = u.ID left join g_favorite f on f.info_id=B.ID and f.userid=[userid] inner join g_module g on b.module_id = g.id WHERE  A.FUSER_ID =[userid] AND (B.ROWSTATE > -1 or B.ROWSTATE is null) AND A.STATUS IN (1,2) AND A.PNID > 1 order by a.RDATE desc  "
+    },
+    {
+        "key": "updateXYxx",
+        "sql": " update jw_xyxx set sjhm=[phone] where info_id=[info_id]  "
+    },
+    {
+        "key": "getXyhy",
+        "sql": "  select hycontent,cjry,zrbm,TO_CHAR(starttime,'YYYY-MM-DD') as stime, starttime,hydd from t_hy where TO_CHAR(starttime,'YYYY-MM-DD') between TO_CHAR( SYSDATE - TO_NUMBER( TO_CHAR(SYSDATE,'D') ) -5,'YYYY-MM-DD' ) and TO_CHAR( SYSDATE - TO_NUMBER( TO_CHAR(SYSDATE,'D') ) + 15,'YYYY-MM-DD' ) order by starttime desc    "
+    },
+    {
+        "key": "getLdrc",
+        "sql": " select re.userid,g.uname,re.content,TO_CHAR(re.sendtime,'YYYY-MM-DD') as stime,re.sendtime,re.cjry,re.address from rc_calendar re  inner join g_users g on re.userid=g.id Inner Join g_dept g2 On g.Id=g2.user_id And (g.utype=0 Or g.utype=9) And g.status>=0 Inner Join g_dept g3 On g2.fid=g3.Id  Inner Join g_users g4 On g4.Id=g3.user_id  Where g4.uname='院领导' and (TO_CHAR(starttime, 'YYYY-MM-DD') >= TO_CHAR(SYSDATE - TO_NUMBER(TO_CHAR(SYSDATE, 'D')) - 5, 'YYYY-MM-DD') and TO_CHAR(starttime, 'YYYY-MM-DD') < TO_CHAR(SYSDATE - TO_NUMBER(TO_CHAR(SYSDATE, 'D')) + 15, 'YYYY-MM-DD')) and ispublic in (1) and fbstatus in (1, 2) and re.status in (2, 3, 4, 5, 6, 7) and isbzry = 0  order by sendtime  "
+    },
+    {
+        "key": "getXiaoli",
+        "sql": " select title,content from app_videostudy where menuid in (select info_id from app_mobilemenu where title='校历') "
+    }
+]

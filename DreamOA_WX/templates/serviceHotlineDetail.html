@@ -1,0 +1,13 @@
+<ion-view>
+    <go-back></go-back>
+    <div style=" background-color:white;" class="scroll-content has-header">
+        <div class="textRange" style="font-size:22px;margin:8px 8px 0px; height:48px;line-height:24px;text-align:center">
+            {{detail.title}}
+        </div>
+    </div>
+    <ion-content class="padding-top bg-gray has-header " style="margin-top: 64px;">
+        <div style="position:absolute;">
+        <div class="padding" ng-bind-html="detail.content"></div>
+        </div>
+    </ion-content>
+</ion-view>

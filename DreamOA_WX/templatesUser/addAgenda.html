@@ -1,0 +1,35 @@
+﻿<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+<ion-view>
+    <!--<go-back class='bar-positive' my-title="添加日程"></go-back>-->
+    <ion-header-bar align-title='center' class='bar-positive'>
+        <a class="button button-icon icon ion-ios-arrow-back" ng-click='goback();'></a>
+        <h3 class='title'>
+            {{viewTitle}}
+        </h3>
+    </ion-header-bar>
+    <ion-content class="has-header addAgenfaContent_box">
+        <div class="list">
+ <form ng-submit="savedata()" novalidate>
+  	<label class="item item-input item-stacked-label">
+    	<span class="input-label">从</span>
+    	<input type="text"
+			name="startTime" id="startTime" ng-model="startTime" />
+  		</label>
+  	<label class="item item-input item-stacked-label"  >
+    	<span class="input-label">到</span>
+    	<input type="text" 
+			name="endTime" id="endTime" ng-model="endTime" />
+  	</label>
+    <label class="item item-input">
+    	<textarea placeholder="请输入日程信息"  ng-model="content" id="contentAgenda" style="height: 100px;max-height: 20%;" required></textarea>
+      </label>
+
+    <div class="col bar-positive" >
+        <button class="button" ng-type="submit" style="width:100%;">
+            提 交
+        </button>
+    </div>
+</form>
+</div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,83 @@
+﻿<style>
+    .item-note input {
+        text-align: right;
+    }
+</style>
+<ion-view title="">
+    <ion-header-bar align-title='center' class='bar-positive'>
+        <a class="button button-icon icon ion-ios-arrow-back" ng-click='goback()'></a>
+        <h3 class='title'>
+            个人信息
+        </h3>
+    </ion-header-bar>
+    <ion-content class="has-header">
+        <ul class="list">
+            <li class="item">
+                <div class="text-center">
+                    <div>
+                        <img style="width:100px;height:100px;border-radius:100px" id="photoImg" />
+                    </div>
+                    <!--div class="text-center">
+                        <button class="button button-small button-assertive" style="width:100%" ng-click="showUserAction()">
+                            上传头像
+                        </button>
+                    </div-->
+                </div>
+            </li>
+            <li class="item">
+                姓名
+                <span class="item-note">
+                    {{user.name}}
+                </span>
+            </li>
+            <li class="item">
+                部门
+                <span class="item-note">
+                    {{user.department}}
+                    <!--<input type="text" placeholder="" ng-model="user.dzyj" />-->
+                </span>
+            </li>
+            <li class="item">
+                手机号码
+                <span class="item-note">
+                    {{user.phone}}
+                </span>
+            </li>
+            <li class="item">
+                公司固话
+                <span class="item-note">
+                    {{user.company_address}}
+                </span>
+            </li>
+
+            
+            <!--li class="item">
+                电子邮箱
+                <span class="item-note">
+                    {{user.dzyj}}
+                </span>
+            </li>
+            <li class="item" ng-if="$rootScope.user.type=='student'">
+                单位及职务
+                <span class="item-note">
+                    <input type="text" placeholder="" ng-model="user.szdw" />
+                </span>
+            </li>
+            <li class="item" ng-if="user.type=='student'">
+                单位邮编
+                <span class="item-note">
+                    <input type="text" placeholder="" ng-model="user.dwyb" />
+                </span>
+            </li>
+            <li class="item" ng-if="user.type=='student'">
+                单位地址
+                <span class="item-note">
+                    <input type="text" placeholder="" ng-model="user.dwdz" />
+                </span>
+            </li-->
+        </ul>
+    </ion-content>
+    <!--ion-footer-bar align-title="center" class="bar-assertive button-my">
+        <h1 class="title" ng-click="save()">保存</h1>
+    </ion-footer-bar-->
+</ion-view>

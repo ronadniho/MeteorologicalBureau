@@ -1,0 +1,71 @@
+﻿<ion-view title="{{title}}">
+	<gomain></gomain>
+	<!--<div style="height:100px;"></div>-->
+
+	<div class="tabs-striped tabs-top tabs-background-light tabs-icon-only">
+		<div class="tabs">
+			<a ng-if="tab.id==1" class="tab-item active" ng-click="doRefresh(tab)" href="#/app/appraise_list/%E8%AF%BE%E7%A8%8B%E8%AF%84%E4%BB%B7/kcpj" ng-repeat="tab in tabs">
+				{{tab.name}}
+			</a>
+			<a ng-if="tab.id!=1" class="tab-item" ng-click="doRefresh(tab)" href="#/app/appraise_list/%E8%AF%BE%E7%A8%8B%E8%AF%84%E4%BB%B7/kcpj" ng-repeat="tab in tabs">
+				{{tab.name}}
+			</a>
+		</div>
+	</div>
+	<ion-content class=" has-footer" style="background-color:#ddd">
+		<!--<ion-refresher on-refresh="doRefresh(tab)"
+					   pulling-text="拖动刷新"
+					   refreshing-text="加载中"
+					   refreshing-icon="ion-loading-c">
+		</ion-refresher>-->
+		<div style="height:50px;"></div>
+		<ion-list>
+			<ion-item ng-repeat="item in list" ng-click="openPopover(item)" style="margin:3px 3px" class="item item-icon-right">
+				<h2 ng-if="column.istitle&&column.columntype!='hidden'" ng-repeat="column in item.rowListColumnData">{{column|columnDisplayFilter}}</h2>
+				<p style="display:inline; padding-right:40px;" class="col"
+				   ng-if="!column.istitle&&!column.needPlay&&column.columntype!='column'&&column.columntype!='hidden'"
+				   ng-repeat="column in item.rowListColumnData">{{column|columnDisplayFilter}}</p>
+				<i class="icon ion-chevron-right balanced" ng-repeat="column in item.rowListColumnData" ng-if="column.columntype=='column'&&item.isfinshed"></i>
+				<i class="icon ion-ios7-arrow-right " ng-repeat="column in item.rowListColumnData" ng-if="column.columntype=='column'&&!item.isfinshed"></i>
+			</ion-item>
+		</ion-list>
+		<!--<ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMore(tab)" distance="3%" icon="ion-loading-c">
+		</ion-infinite-scroll>-->
+	</ion-content>
+
+	<!--<ion-tabs class="tabs-striped tabs-top tabs-background-light tabs-icon-only">
+		<ion-tab title="{{tab.name}}" ng-repeat="tab in tabs" on-select="onTabSelected(tab)">
+			<ion-content class=" has-footer" style="background-color:#ddd">
+				<ion-refresher on-refresh="doRefresh(tab)"
+							   pulling-text="拖动刷新"
+							   refreshing-text="加载中"
+							   refreshing-icon="ion-loading-c">
+				</ion-refresher>
+				<div style="height:100px;"></div>
+				{{list.length}}
+				<ion-list>
+					<ion-item ng-repeat="item in list" ng-click="openPopover(item)" style="margin:3px 3px" class="item item-icon-right">
+						<h2 ng-if="column.istitle&&column.columntype!='hidden'" ng-repeat="column in item.rowListColumnData">{{column|columnDisplayFilter}}</h2>
+						<p style="display:inline; padding-right:40px;" class="col"
+						   ng-if="!column.istitle&&!column.needPlay&&column.columntype!='column'&&column.columntype!='hidden'"
+						   ng-repeat="column in item.rowListColumnData">{{column|columnDisplayFilter}}</p>
+						<i class="icon ion-chevron-right balanced" ng-repeat="column in item.rowListColumnData" ng-if="column.columntype=='column'&&item.isfinshed"></i>
+						<i class="icon ion-ios7-arrow-right " ng-repeat="column in item.rowListColumnData" ng-if="column.columntype=='column'&&!item.isfinshed"></i>
+					</ion-item>
+				</ion-list>
+				<ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMore(tab)" distance="3%" icon="ion-loading-c">
+				</ion-infinite-scroll>
+			</ion-content>
+	</ion-tabs>-->
+
+	<div class="bar bar-footer bar-positive" style="height:30px; padding-left:10px">
+		未评&nbsp;&nbsp;&nbsp;&nbsp;
+		<label class="toggle toggle-balanced">
+			<input type="checkbox" ng-model="query" ng-change="CheckToggle()">
+			<div class="track">
+				<div class="handle"></div>
+			</div>
+		</label>
+		&nbsp;&nbsp;&nbsp;&nbsp;已评
+	</div>
+</ion-view>

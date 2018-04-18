@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link href="css/theme.full.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../Script/jquery/jquery-1.11.0.min.js"></script>
+<!--script type="text/javascript" src="../Script/jquery.touchSwipe.js"></script-->
+<script type="text/javascript" src="../Script/js/public.js"></script>
+<!--script type="text/javascript" src="../Script/APPScript/config.js"></script-->
+</head>
+<body>
+	<div id="divCalendar">		
+			<div  class="module calendar">
+				<div class="btitle">
+					<div class="selectDate">
+              <ul class="clearfix">
+                <li class="btn-gray prev" onclick="pushBtm('MU')"><i></i></li>
+                <li class="date"><b class="year" id="current-data"><script>document.write(new Date().getFullYear())</script>年</b><b class="month" id="current-data-month"><script>document.write(new Date().getMonth()+1)</script>月</b></li>
+                <li class="btn-gray next" onclick="pushBtm('MD')"><i></i></li>
+              </ul>
+            </div>
+					<div class="backToday btn-gray btn-today" onclick="pushBtm('JT')">今日</div>
+				</div>
+				<div class="calGrid">
+					<table>
+						<colgroup>
+							<col width="14.25%">
+							<col width="14.3%">
+							<col width="14.3%">
+							<col width="14.3%">
+							<col width="14.3%">
+							<col width="14.3%">
+							<col width="14.25%">
+						</colgroup>
+						<thead class="thead">
+							<th class="weekend">周日</th>
+							<th>周一</th>
+							<th>周二</th>
+							<th>周三</th>
+							<th>周四</th>
+							<th>周五</th>
+							<th class="weekend">周六</th>
+						</thead>
+						<tbody class="tbody">
+							<script type="text/javascript">
+								var myDate = new Date();
+								var numList = new Array();
+								var year = myDate.getFullYear();
+								var month = myDate.getMonth();
+								var day = myDate.getDate();
+								var firstDay = new Date(year, month, 1);
+								var lastDay = new Date(year, month + 1, 0);
+								var start = firstDay.getDay();
+								var end = lastDay.getDay();
+								var dayNum = lastDay.getDate();
+								for (var i = start; i > 0; i--) {
+									numList.push(new Date(year, month, 1 - i)
+											.getDate());
+								};
+
+								for (var i = 0; i < dayNum; i++) {
+									numList.push(i + 1);
+								};
+
+								for (var i = 0; i < 6 - end; i++) {
+									numList.push(new Date(year, month + 1,
+											i + 1).getDate());
+								};
+								var gNum;
+								for (i = 0; i < 6; i++) {
+									document.write('<tr>');
+									for (j = 0; j < 7; j++) {
+										gNum = i * 7 + j;
+										if (j == 0 || j == 6) {
+											document
+													.write('<td class="weekend" id="GD'
+															+ gNum
+															+ '" onclick="mOvr('
+															+ gNum + ')"><div>');
+										} else {
+											document.write('<td id="GD' + gNum
+													+ '" onclick="mOvr(' + gNum
+													+ ')"><div>');
+										}
+										document
+												.write('<strong id="SD' + gNum +'" class="solar">'
+														+ numList[gNum]
+														+ '</strong>')
+										document
+												.write('<span id="LD' + gNum +'" class="lunar"></span>');
+										document.write('</div></td>');
+										if (i == 5) {
+											document
+													.getElementById('GD' + gNum).style.display = 'none';
+										}
+									}
+									document.write('</tr>');
+								}
+							</script>
+						</tbody>
+					</table>
+				</div>		
+			</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/calendar.js"></script>
+<script type="text/javascript" src="js/init.js"></script>
+</html>

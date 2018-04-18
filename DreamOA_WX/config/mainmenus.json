@@ -1,0 +1,347 @@
+﻿[
+    {
+        "image": "../staticresource/xqxq.png",
+        "title": "我的需求",
+        "url": "dcwjStudent",
+        "showicon": true,
+        "keyname": "studentcount",
+        "icontype": "student"
+    },
+    {
+        "image": "../staticresource/xqxq.png",
+        "title": "班级需求",
+        "url": "dcwjTeacher",
+        "showicon": true,
+        "keyname": "teachertcount",
+        "icontype": "teacher"
+    },
+    {
+        "image": "../staticresource/xqxq.png",
+        "title": "班级需求",
+        "url": "dcwjTeacher",
+        "showicon": true,
+        "keyname": "teachertcount",
+        "icontype": "visitor"
+    },
+    {
+        "image": "../staticresource/xztw.png",
+        "title": "现场提问",
+        "url": "ntraining",
+        "showicon": true,
+        "keyname": "myQuestionCount",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/bwfz.png",
+        "title": "学员活跃度",
+        "url": "teachactivity",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "visitor"
+    },
+    {
+        "image": "../staticresource/jxzl.png",
+        "title": "教学资料",
+        "url": "jxzl",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "visitor"
+    },
+    {
+        "image": "../staticresource/bwfz.png",
+        "title": "学员活跃度",
+        "url": "teachactivity",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "teacher"
+    },
+    {
+        "image": "../staticresource/jxzl.png",
+        "title": "教学资料",
+        "url": "jxzl",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "student"
+    },
+    {
+        "image": "../staticresource/kbcx.png",
+        "title": "课表查询",
+        "url": "app.kbcx",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/jxpj.png",
+        "title": "教学评价",
+        "url": "stuappraise",
+        "showicon": true,
+        "keyname": "wpnum",
+        "icontype": "student"
+    },
+    {
+        "image": "../staticresource/jxpj.png",
+        "title": "评价管理",
+        "url": "teachappraise",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "teacher"
+    },
+    {
+        "image": "../staticresource/jxpj.png",
+        "title": "评价管理",
+        "url": "teachappraise",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "visitor"
+    },
+    {
+        "image": "../staticresource/xxbm.png",
+        "title": "选修管理",
+        "url": "choosemanage",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "visitor"
+    },
+    {
+        "image": "../staticresource/xxbm.png",
+        "title": "选修管理",
+        "url": "choosemanage",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "teacher"
+    },
+    {
+        "image": "../staticresource/xxbm.png",
+        "title": "选修报名",
+        "url": "chooseclass",
+        "showicon": true,
+        "keyname": "xxkNumber",
+        "icontype": "student"
+    },
+    {
+        "image": "../staticresource/bjxx.png",
+        "title": "班级信息",
+        "url": "studentgroup",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "all"
+    },   
+    {
+        "image": "../staticresource/jxzl.png",
+        "title": "教学资料",
+        "url": "jxzl",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "teacher"
+    },
+    {
+        "image": "../staticresource/bdxz.png",
+        "title": "学员须知",
+        "url": "guidelineCollege",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "student"
+    },
+    {
+        "image": "../staticresource/fh.png",
+        "title": "教工版",
+        "url": "user.mainuser",
+        "showicon": false,
+        "withpara": true,
+        "keyname": "",
+        "icontype": "lt"
+    },
+    {
+        "image": "../staticresource/kqgl.png",
+        "title": "考勤管理",
+        "url": "kqgl",
+        "showicon": false,
+        "withpara": true,
+        "keyname": "",
+        "icontype": "teacher1"
+    }
+    ,
+    {
+        "image": "../staticresource/yktkq.png",
+        "title": "一卡通考勤",
+        "url": "yktkq",
+        "showicon": false,
+        "withpara": true,
+        "keyname": "",
+        "icontype": "teacher"
+    },
+    {
+        "image": "../staticresource/cryc.png",
+        "title": "出入异常",
+        "url": "cryc",
+        "showicon": false,
+        "withpara": true,
+        "keyname": "",
+        "icontype": "teacher"
+    },
+    {
+        "image": "../staticresource/yddm.png",
+        "title": "移动点名",
+        "url": "kqaddinfo",
+        "showicon": false,
+        "withpara": true,
+        "keyname": "",
+        "icontype": "teacher"
+    },
+    {
+        "image": "../staticresource/yddm.png",
+        "title": "移动点名",
+        "url": "kqaddinfo",
+        "showicon": false,
+        "withpara": true,
+        "keyname": "",
+        "icontype": "visitor"
+    },
+    {
+        "image": "../staticresource/qd.png",
+        "title": "签到",
+        "url": "kqStudent",
+        "showicon": true,
+        "keyname": "kqNum",
+        "icontype": "student"
+    }
+    ,
+    {
+        "image": "../content/hotline.png",
+        "title": "服务热线",
+        "url": "serviceHotline",
+        "showicon": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/wjz.png",
+        "title": "微讲座",
+        "url": "ydjxzjlist",
+        "menuid":19, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/wsp.png",
+        "title": "微视频",
+        "url": "ydjxzjlist",
+        "menuid":29, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/wal.png",
+        "title": "微案例",
+        "url": "ydjxzjlist",
+        "menuid":30, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/wxc.png",
+        "title": "微现场",
+        "url": "ydjxzjlist",
+        "menuid":32, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/wlt.png",
+        "title": "微论坛",
+        "url": "ydjxzjlist",
+        "menuid":31, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/xxsk.png",
+        "title": "学“习”思考",
+        "url": "ydjxzjlist",
+        "menuid":22, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/dxjygs.png",
+        "title": "党性教育故事",
+        "url": "ydjxzjlist",
+        "menuid":21, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/kgkfs.png",
+        "title": "改革开放史",
+        "url": "ydjxzjlist",
+        "menuid":33, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/lzdd.png",
+        "title": "论著导读",
+        "url": "ydjxzjlist",
+        "menuid":23, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/xxts.png",
+        "title": "信息推送",
+        "url": "ydjxzjlist",
+        "menuid":24, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/gkk.png",
+        "title": "公开课",
+        "url": "ydjxzjlist",
+        "menuid":20, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/zbjt.png",
+        "title": "直播课堂",
+        "url": "ydjxzjlist",
+        "menuid":28, 
+        "showicon": false,
+        "withpara": false,
+        "keyname": "",
+        "icontype": "all"
+    },
+    {
+        "image": "../staticresource/zpyw.png",
+        "title": "中浦要闻",
+        "url": "zpNewsList",
+        "showicon": false,
+        "withpara": true,
+        "keyname": "",
+        "icontype": "all"
+    }
+]

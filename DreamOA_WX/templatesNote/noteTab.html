@@ -1,0 +1,28 @@
+<style>
+	.tabs ,.tab-item ,.tab-nav, .tabs-positive > .tabs, .tabs.tabs-positive  {
+		border-color: #18acef;
+		background-color: #18acef;
+		background-image: linear-gradient(0deg, #18acef, #18acef 50%, transparent 50%);
+		color: #fff;
+	}
+</style>
+<ion-view >
+	<ion-tabs title="表单" class="tabs-positive tabs-icon-top" class="has-header">
+		
+		<ion-tab  title="待办便笺" icon="ion-chatbox-working" href="#/noteTab/noteToList">
+			<!--<div ui-view="noteToList" ></div>-->
+			<ion-nav-view name="noteToList"></ion-nav-view>
+		</ion-tab>
+		
+		<ion-tab  title="已收便笺" icon="ion-chatboxes" href="#/noteTab/noteToAllList">
+			<!--<div ui-view="noteToAllList" ></div>-->
+			<ion-nav-view name="noteToAllList"></ion-nav-view>
+		</ion-tab>
+		
+		<ion-tab title="已发便笺" icon="ion-chatbubbles" href="#/noteTab/noteFromList">
+			<!--<div ui-view="noteFromList" ></div> -->
+			<ion-nav-view name="noteFromList"></ion-nav-view>
+		</ion-tab>
+		
+	</ion-tabs>
+</ion-view>

@@ -1,0 +1,287 @@
+﻿[
+    {
+        "title": "测试页面",
+        "state": "app.testpage",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "teacher",
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "通知通告",
+        "state": "app.default_list",
+        "category": "tztg",
+        "badge": 10,
+        "groupId": 1,
+        "display": true,
+        "edit": false,
+        "usertype": "teacher",
+        "badgeUrl": "",
+        "keyname": "com.ue.oa.oa.activity.NoticeActivity",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "校务公开",
+        "state": "app.default_list",
+        "category": "xwgk",
+        "badge": 22,
+        "groupId": 2,
+        "display": true,
+        "usertype": "teacher",
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "视频信息",
+        "state": "app.default_list",
+        "category": "spxx",
+        "badge": 0,
+        "groupId": 152,
+        "display": true,
+        "usertype": "teacher",
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "新闻动态",
+        "state": "app.default_list",
+        "category": "xyjj",
+        "badge": 0,
+        "groupId": 3,
+        "display": true,
+        "usertype": "teacher",
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+            { "title": "校院聚焦", "state": "app.default_list", "category": "xyjj", "badge": 22, "groupId": 3.1, "display": true, "edit": false, "badgeUrl": "", "subMenus": [ ] },
+            { "title": "工作动态", "state": "app.default_list", "category": "gzdt", "badge": 22, "groupId": 3.2, "display": true, "edit": false, "badgeUrl": "", "subMenus": [ ] },
+            { "title": "教研动态", "state": "app.default_list", "category": "jydt", "badge": 22, "groupId": 3.3, "display": true, "edit": false, "badgeUrl": "", "subMenus": [ ] },
+            { "title": "学员天地", "state": "app.default_list", "category": "xytd", "badge": 22, "groupId": 3.4, "display": true, "edit": false, "badgeUrl": "", "subMenus": [ ] }
+
+        ]
+    },
+    {
+        "title": "四川党校报",
+        "state": "app.default_list",
+        "category": "jydt",
+        "badge": 22,
+        "groupId": 4,
+        "usertype": "teacher",
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "通讯录",
+        "state": "app.addresslist",
+        "category": "",
+        "badge": 0,
+        "usertype": "teacher",
+        "groupId": 2333,
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "请假单",
+        "state": "app.qingjiaList",
+        "category": "",
+        "badge": 0,
+        "usertype": "student",
+        "groupId": 2333123,
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "一周课表",
+        "state": "app.weekClass",
+        "category": "",
+        "badge": 0,
+        "usertype": "teacher",
+        "groupId": 4623,
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "一周课表",
+        "state": "app.weekClass",
+        "category": "",
+        "badge": 0,
+        "usertype": "student",
+        "groupId": 4623,
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "个人日程",
+        "state": "app.calendar",
+        "category": "",
+        "badge": 0,
+        "usertype": "teacher",
+        "groupId": 46223,
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "视频新闻",
+        "state": "app.default_list",
+        "category": "spxw",
+        "badge": 0,
+        "groupId": 6,
+        "usertype": "teacher",
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "学员通讯录",
+        "state": "app.studentList",
+        "category": "",
+        "badge": 0,
+        "groupId": 3212,
+        "usertype": "student",
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "移动课堂",
+        "state": "app.default_list",
+        "category": "ydkt",
+        "badge": 0,
+        "groupId": 7,
+        "usertype": "student",
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "课程评价",
+        "state": "app.appraise_list",
+        "category": "kcpj",
+        "badge": 0,
+        "groupId": 8,
+        "usertype": "student",
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "xinlang",
+        "state": "app.xinlang",
+        "category": "",
+        "badge": 0,
+        "groupId": 8212,
+        "usertype": "teacher",
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "学员通讯录",
+        "state": "app.studentList",
+        "category": "",
+        "badge": 0,
+        "groupId": 32112,
+        "usertype": "vister",
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "xinlang",
+        "state": "app.xinlang",
+        "category": "",
+        "badge": 0,
+        "groupId": 82122,
+        "usertype": "vister",
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "微信测试",
+        "state": "app.testwx",
+        "category": "wx",
+        "badge": 0,
+        "groupId": 189,
+        "usertype": "teacher",
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    },
+    {
+        "title": "信息传送",
+        "state": "app.default_list",
+        "category": "xxcs",
+        "badge": 0,
+        "groupId": 4567,
+        "usertype": "teacher",
+        "display": true,
+        "edit": false,
+        "badgeUrl": "",
+        "subMenus": [
+
+        ]
+    }
+]

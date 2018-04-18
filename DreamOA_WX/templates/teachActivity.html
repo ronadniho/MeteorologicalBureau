@@ -1,0 +1,70 @@
+﻿<ion-view title="学员活跃度" style="font-size:30px; ">
+	<go-back my-title="学员活跃度"></go-back>
+	<ion-content class="has-header">
+		<ion-refresher on-refresh="LoadPageData()"
+					   pulling-text="拖动刷新"
+					   refreshing-text="加载中"
+					   refreshing-icon="ion-loading-c">
+		</ion-refresher>
+		<div>
+			<div class="row border-none" style="position:relative;">
+				<div class="padding-0 margin-0" style="position:relative;left:10px;height:38px;line-height:38px;">
+					<!--<span class="border-none size-16 line-h-20 red" style="display:inline-block;margin-top:7px;">
+						问题
+						&nbsp;{{WenTiNum}}
+					</span>-->
+				</div>
+				<!--综合排序-->
+				<div class="sort" style="position:absolute;right:10px">
+					<!--<button class="button-clear sort-time" ng-click="SortQuestion(0,sortDesc);">
+						<span style="{{sortCheckedStyle}};"> 时间&nbsp;<i ng-class="sortClass" ng-show="showArrow"></i></span>
+					</button>-->
+					<button class="button-clear sort-hot" ng-click="SortQuestion(1,sortHotDesc);">
+						<span style="{{sortHotCheckedStyle}};">热度&nbsp;<i ng-class="sortHotClass" ng-show="showHotArrow"></i></span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<ion-item style="padding:5px;" ng-repeat="xy in XYList">
+			<div class="item" style="border:0px solid #eee;margin-bottom:2px;">
+				<!--<img ng-src="{{userdefaultpng}}">-->
+				<h2>
+					<label style="font-size:14px;">
+						{{xy.bt}}
+					</label>
+					<span ng-repeat="star in xy.starArr">
+						<i ng-class="star.starClass"></i>
+					</span>
+				</h2>
+				<p>
+                    <div class="row">
+                        <div class="col-33 pull-left">
+                            <button class="button button-small" style="border:0px;" ng-click="HrefTo('myquestion',xy.info_id);">
+                                <i class="icon ion-ios-help-outline" style="color:#4e7fa1;"></i>
+                                <label style="font-size:12px;color:#4e7fa1;">提问({{xy.questionnum}})</label>
+                            </button>
+                        </div>
+                        <div class="col-33 pull-center">
+                            <button class="button button-small" style="border:0px;" ng-click="HrefTo('answerqst',xy.info_id);">
+                                <i class="icon ion-social-twitch-outline" style="color:#4e7fa1;"></i>
+                                <label style="font-size:12px;color:#4e7fa1;">观点({{xy.answernum}})</label>
+                            </button>
+                        </div>
+                        <div class="col-33 pull-right">
+                            <button class="button button-small" style="border:0px;" ng-click="HrefTo('samequestion',xy.info_id);">
+                                <i class="icon ion-thumbsup" style="color:#4e7fa1;"></i>
+                                <label style="font-size:12px;color:#4e7fa1;">同问({{xy.samequestionnum}})</label>
+                            </button>
+                        </div>
+                    </div>
+				</p>
+			</div>
+		</ion-item>
+		<div class="item text-center" ng-show="ShowNoRecord" style="color:#ccc; font-size:30px;border-bottom:0px;">
+			<i class="ion-clipboard" style="font-size:90px"></i>
+			<br />
+			<br />
+			暂无学员
+		</div>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,123 @@
+﻿<style>
+    .tabs-striped .tab-item.tab-item-active {
+        border-color: #c00000;
+    }
+
+    .controls-container {
+        background-color: white;
+    }
+
+    .item-thumbnail-left > img:first-child, .item-thumbnail-left .item-image, .item-thumbnail-left .item-content > img:first-child, .item-thumbnail-left .item-content .item-image {
+        top: 5px;
+    }
+
+    .item-thumbnail-left, .item-thumbnail-left .item-content {
+        min-height: 90px;
+    }
+</style>
+<ion-view style="font-size:30px;">
+    <go-back my-title="{{loadTitle}}"></go-back>
+    <div class="bar bar-subheader  has-header">
+        <ion-scroll style="height:120%;" delegate-handle="small" direction="x" scrollbar-x="false">
+            <div class="button-bar ydjx1-but-bar" style="width:160%;">
+                <a id="ydh1" ng-click="changeIndex(1)" class="button ydjx1-bar-but ydjx1-bar-but-active ">学“习”思考</a>
+                <a id="ydh2" ng-click="changeIndex(2)" class="button ydjx1-bar-but">党性教育故事</a>
+                <a id="ydh3" ng-click="changeIndex(3)" class="button ydjx1-bar-but">改革开放史</a>
+                <a id="ydh4" ng-click="changeIndex(4)" class="button ydjx1-bar-but">论著导读</a>
+                <a id="ydh5" ng-click="changeIndex(5)" class="button ydjx1-bar-but">信息推送</a>
+
+                <!--<ion-view style="height:35px;">
+                <ion-slide-box on-slide-changed="changeIndex($index)" show-pager="false" does-continue="true" auto-play="false">
+                    <ion-slide>
+                        <div class="center-block text-center"><a class="button ydjx1-bar-but ydjx1-bar-but-active ">学“习”思考</a></div>
+                    </ion-slide>
+                    <ion-slide>
+                        <div class="center-block text-center"><a class="button ydjx1-bar-but ydjx1-bar-but-active ">党性教育故事</a></div>
+                    </ion-slide>
+                    <ion-slide>
+                        <div class="center-block text-center"><a class="button ydjx1-bar-but ydjx1-bar-but-active ">改革开放史</a></div>
+                    </ion-slide>
+                    <ion-slide>
+                        <div class="center-block text-center"><a class="button ydjx1-bar-but ydjx1-bar-but-active ">论著导读</a></div>
+                    </ion-slide>
+                    <ion-slide>
+                        <div class="center-block text-center"><a class="button ydjx1-bar-but ydjx1-bar-but-active ">信息推送</a></div>
+                    </ion-slide>
+                </ion-slide-box>
+            </ion-view>-->
+            </div>
+        </ion-scroll>
+    </div>
+    <ion-content style="margin-top:90px;margin-bottom:45px;">
+        <ion-list>
+            <div style="padding:0px 20px 10px 20px ;">
+                <div class="button-bar ">
+                    <a id="btn1" ng-click="changeBtnIndex(1)" class="button button-c00">热门</a>
+                    <a id="btn2" ng-click="changeBtnIndex(2)" class="button button-fff">最新</a>
+                </div>
+            </div>
+
+            <ion-refresher on-refresh="doRefresh()"
+                           pulling-text="拖动刷新"
+                           refreshing-text="加载中"
+                           refreshing-icon="ion-loading-c">
+            </ion-refresher>
+            <div style="">
+                <!--background:#E4E4E4;padding:5px;-->
+                <div ng-repeat="hotItem in dataZpywSource" style="border-top:1px solid #e4e4e4">
+                    <ion-item class="item item-thumbnail-left " style="border-top:1px solid #e4e4e4; height:90px;position:relative;padding-top:0px;padding-bottom:0px;">
+                        <img src="../staticresource/{{hotItem.title_pic}}" ng-click="goZJList(hotItem.info_id);" class="md-whiteframe-z2 border_radius" />
+                        <div class="ydjx1-video-lis-title" ng-click="goZJList(hotItem.info_id);">
+                            <p>{{hotItem.title | limitTo: 25}}{{hotItem.title.length > 25 ? '...' : ''}}</p>
+                            <div class="ydjx1-video-lis-time" style="margin-top:5px;">
+                                <!--<i class="ion-play" style="font-size:14px;color:#C6C3C6"></i>-->
+                                <span style="font-size:12px;">点播数:&nbsp;&nbsp;{{hotItem.playcount}}</span>&nbsp;&nbsp;&nbsp;
+                                <!--<i class="ion-ios-book" style="font-size:14px;color:#C6C3C6"></i>-->
+                                <span style="font-size:12px;">课程数:&nbsp;&nbsp;{{hotItem.videocount}}</span><br />
+                                <span style="font-size:12px">最近更新:&nbsp;{{hotItem.lastupdatetime|date:'yyyy-MM-dd'}}</span>
+
+                            </div>
+                        </div>
+
+                        <div class="ydjx1-video-lis-DY" style="color:{{hotItem.ismark ==1 ?  '#C6C3C6':'#FF0000'}}" ng-click="dingYue(hotItem);">
+                            <img src="../img/{{hotItem.ismark ==1 ? 'sc2.svg' : 'sc1.svg'}}" /></br>
+                            <span style="font-size:14px"><i>{{hotItem.ismark ==1 ? '取消' : '订阅'}}</i></span>
+                        </div>
+                    </ion-item>
+                    <!--<div class="item text-center" layout="row" style="padding:5px;border:none;margin: 0px 0px;">
+                        <div style="width:20%; float:left;color:#999999">
+                            <i class="ion-play" style="font-size:18px;color:#C6C3C6"></i>
+                            <span style="font-size:14px;">&nbsp;3000</span>
+                        </div>
+                        <div style="width:58%; float:left;color:#999999" ng-click="addGood(item);">
+                            <span style="font-size:14px">&nbsp;最后更新:&nbsp;2015-12-01</span>
+                        </div>
+                        <div style="width:20%; float:left;color:#FF0000" ng-click="goDeital(item);">
+                            <span style="font-size:14px">&nbsp;<i ng-click="goCailiao()">订阅</i></span>
+                        </div>
+                        已订阅:color:#999;订阅:#f00
+                    </div>-->
+                </div>
+            </div>
+
+        </ion-list>
+        <div style="display:none">
+            <videogular style="background-color:white" vg-player-ready="onPlayerReady($API)" vg-update-time="onUpdateTime($currentTime, $duration)" vg-theme="controller.config.theme">
+                <vg-media vg-src="controller.config.sources"
+                          vg-tracks="controller.config.tracks">
+                </vg-media>
+                <vg-controls>
+
+                </vg-controls>
+
+
+                <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+                <vg-analytics vg-track-info="config.plugins.analytics.events"></vg-analytics>
+            </videogular>
+        </div>
+        <div ng-show="isShow" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-monitor" style="font-size:90px"></i><br /><br />
+            暂无信息
+        </div>
+    </ion-content>
+</ion-view>

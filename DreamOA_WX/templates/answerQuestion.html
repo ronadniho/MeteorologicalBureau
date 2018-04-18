@@ -1,0 +1,23 @@
+﻿<ion-view>
+    <go-back my-title="未提交问卷学员"></go-back>
+    <ion-content class="has-header">
+        <ion-list class="list">
+            <div class="item text-center" ng-show="dataDcwjSource.length==0" style="color:#ccc; font-size:30px;border-bottom:0px;">
+                <i class="ion-clipboard" style="font-size:90px"></i>
+                <br />
+                <br />
+                暂无学员
+            </div>
+            <div collection-repeat="hotItem in dataDcwjSource">
+                <a class="item" style="border-left:none;border-right:none;border-top:none;margin-bottom:2px;" ng-click="openModal(hotItem)">
+                    <!--<img ng-src="{{userdefaultpng}}">-->
+                    <h2><span ng-bind="hotItem.xm"></span>&nbsp;<span ng-bind="hotItem.szdw" style="color:#a99e9e"></span></h2>
+                    <p>
+                        <div class="pull-left" ng-show="hotItem.fjh!=null">房间号：<span ng-bind="hotItem.fjh"></span>&nbsp;&nbsp;</div>
+                        <div class="pull-left" ng-show="hotItem.fjdh!=null">分机号：<span ng-bind="hotItem.fjdh"></span></div>
+                    </p>
+                </a>
+            </div>
+        </ion-list>
+    </ion-content>    
+</ion-view>

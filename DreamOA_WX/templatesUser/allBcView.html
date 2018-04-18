@@ -1,0 +1,130 @@
+﻿
+<ion-view>
+    <go-back my-title="班次一览表"></go-back>
+    <ion-tabs class="tabs-striped tabs-top" style="color:red;border-color:red;">
+        <ion-tab title="中央调训班">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list>
+                            <div class="left">
+                                <div class="item-text-wrap grey size-12">
+                                    <ul class="sa_select_box">
+                                        <li>
+                                            <label>学年：</label><div class="select haveMargin"><select name="data" id="data_select" class="">
+                                                <option value="2016">2016</option>
+                                                <option value="2015">2015</option>
+                                                <option value="2014">2014</option>
+                                            </select><i></i></div><!--
+                                            --><label>学期：</label><div class="select haveMargin"><select name="data" id="data_select1" class="">
+                                                <option value="春季">春季</option>
+                                                <option value="秋季">秋季</option>
+                                            </select><i></i></div><!--
+                                            --><label>类型：</label><div class="select"><select name="data" id="data_type">
+                                                <option value="全部">全部</option>
+                                                <option value="独立设置班">独立设置班</option>
+                                                <option value="合作班次">合作班次</option>
+                                                <option value="部委班次">部委班次</option>
+                                                <option value="境外培训班次">境外培训班次</option>
+                                                <option value="涉外班次">涉外班次</option>
+                                            </select><i></i></div>
+                                        </li>
+                                        <li>
+                                            <label class="item item-input searchText_box">
+                                                <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+                                                <input type="text" placeholder="查询" ng-model="keyword" maxlength="10">
+                                            </label><!--
+                                            --><button class="submit" ng-click="search(0)">搜索</button>
+                                        </li>
+                                        <div class="clear"></div>
+                                    </ul>
+                                </div>
+                            </div>
+                    </ion-list>
+                    <div ng-show="false" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                        <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+                    </div>
+                    <table class="classList">
+                        <tr>
+                            <th class="longLine">班次名称</th>
+                            <th>开班时间</th>
+                            <th>学员人数</th>
+                        </tr>
+                        <tr ng-repeat="item in loadAllbc|queryStuList:keyword" ng-click="gotoBcinfo(item)">
+                            <td>{{item.bt}}</td>
+                            <td>{{item.kssj|date:'MM-dd'}}<br />{{item.jssj|date:'MM-dd'}}</td>
+                            <td>{{item.xycount}}</td>
+                        </tr>
+                        <tr ng-show="loadAllbc.length==0">
+                            <td colspan="3" style="text-align:center;">无班级信息</td>
+                        </tr>
+                    </table>
+                    <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMore(0);" distance="1%" icon="ion-loading-d">
+                    </ion-infinite-scroll>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab title="市场委托班">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list>
+                            <div class="left">
+                                <div class="item-text-wrap grey size-12">
+                                    <ul class="sa_select_box">
+                                        <li>
+                                            <label>学年：</label><div class="select haveMargin"><select name="data" id="data_scwt" class="">
+                                                <option value="2016">2016</option>
+                                                <option value="2015">2015</option>
+                                                <option value="2014">2014</option>
+                                            </select><i></i></div><!--
+                                            --><label>学期：</label><div class="select haveMargin"><select name="data" id="time_scwt" class="">
+                                                <option value="春季">春季</option>
+                                                <option value="秋季">秋季</option>
+                                            </select><i></i></div><!--
+                                            --><label>类型：</label><div class="select"><select name="data" id="bc_type">
+                                                <option value="全部">全部</option>
+                                                <option value="独立设置班">独立设置班</option>
+                                                <option value="合作班次">合作班次</option>
+                                                <option value="部委班次">部委班次</option>
+                                                <option value="境外培训班次">境外培训班次</option>
+                                                <option value="涉外班次">涉外班次</option>
+                                            </select><i></i></div>
+                                        </li>
+                                        <li>
+                                            <label class="item item-input searchText_box">
+                                                <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+                                                <input type="text" placeholder="查询" ng-model="keysword" maxlength="10">
+                                            </label><!--
+                                            --><button class="submit" ng-click="search(1)">搜索</button>
+                                        </li>
+                                        <div class="clear"></div>
+                                    </ul>
+                                </div>
+                            </div>
+                    </ion-list>
+                    <div ng-show="false" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                        <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+
+                    </div>
+                    <table class="classList">
+                        <tr>
+                            <th class="longLine">班次名称</th>
+                            <th>开班时间</th>
+                            <th>学员人数</th>
+                        </tr>
+                        <tr ng-repeat="item in loadSCWTbc|queryStuList:keysword" ng-click="gotoBcinfo(item)">
+                            <td>{{item.bt}}</td>
+                            <td>{{item.kssj|date:'MM-dd'}}<br />{{item.jssj|date:'MM-dd'}}</td>
+                            <td>{{item.xycount}}</td>
+                        </tr>
+                        <tr ng-show="loadSCWTbc.length==0">
+                            <td colspan="3" style="text-align:center;">无班级信息</td>
+                        </tr>
+                    </table>
+                    <ion-infinite-scroll ng-if="moreDataCanBeLoaded1" on-infinite="loadMore(1);" distance="1%" icon="ion-loading-d">
+                    </ion-infinite-scroll>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>
+

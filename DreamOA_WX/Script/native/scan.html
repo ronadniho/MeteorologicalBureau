@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+        <script type="text/javascript" charset="utf-8" src="native.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            alert('onDeviceReady');
+                xsfBarcode.scan(
+                           function (result) {
+                           alert("We got a barcode\n" +
+                                 "Result: " + result.text + "\n" +
+                                 "Format: " + result.format + "\n" +
+                                 "Cancelled: " + result.cancelled);
+                           },
+                           function (error) {
+                           alert("Scanning failed: " + error);
+                           }
+		   );
+        }
+    </script>
+  </head>
+  <body>
+    <p>...</p>
+  </body>
+</html>

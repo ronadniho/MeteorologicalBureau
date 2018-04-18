@@ -1,0 +1,33 @@
+﻿<style>
+    .tabs-color-assertive .tab-item {
+        color:#000 !important;
+    }
+        .tabs-color-assertive .tab-item.tab-item-active, .tabs-color-assertive .tab-item.active, .tabs-color-assertive .tab-item.activated {
+        color: #ef473a !important;
+        /*border: 0 solid #ef473a !important;*/
+        }
+</style>
+
+
+<ion-view >
+    <ion-nav-view name="tab-content" animation="slide-left-right"></ion-nav-view>
+        <ion-tabs animation="slide-left-right" class="tabs-icon-top  tabs-color-assertive tabs-tabs" style="border-top:1px solid #ccc;">
+            <ion-tab nav-direction="forward" title="我的班级" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" href="#/app/main" style="">
+
+            </ion-tab>
+            <ion-tab nav-direction="forward" style="font-size:10px" title="移动教学" icon-on="ion-ios-book" icon-off="ion-ios-book-outline" href="#/app/ydjxnew">
+
+            </ion-tab>
+            <ion-tab nav-direction="forward" title="走进中浦" icon-on="ion-ios-people" icon-off="ion-ios-people-outline" href="#/app/zjzp">
+                
+            </ion-tab>
+            <ion-tab nav-direction="forward" title="个人中心" ng-if="user.type=='student'" icon="ion-ios-person" icon-off="ion-ios-person-outline" href="#/app/myinfo">
+
+            </ion-tab>
+            <ion-tab nav-direction="forward" ng-if="user.type=='teacher'||user.type=='visitor'" title="个人中心" icon="ion-ios-person" icon-off="ion-ios-person-outline" href="#/app/teacherinfo">
+
+            </ion-tab>
+        </ion-tabs>   
+
+</ion-view>
+

@@ -1,0 +1,133 @@
+﻿
+<ion-view>
+    <go-back my-title="规章制度"></go-back>
+    <ion-tabs class="tabs-striped tabs-top" style="color:red;border-color:red;">
+        <ion-tab title="政策法规">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list>
+                        <div class="left">
+                            <div class="item-text-wrap grey size-12">
+                                <ul class="sa_select_box">
+                                    <li class="long">
+                                        <label class="long">适用范围：</label><div class="select haveMargin"><select name="data" id="data_select" class="">
+                                            <option value="全部">全部</option>
+                                            <option ng-repeat="item in zcfgList" value="{{item.datavalue}}">{{item.showvalue}}</option>
+                                        </select><i></i></div><!--
+                                        --><label class="long">法规级别：</label><div class="select"><select name="data" id="data_fgjb">
+                                            <option value="全部">全部</option>
+                                            <option ng-repeat="item in zcfgjbList" value="{{item.datavalue}}">{{item.showvalue}}</option>
+                                        </select><i></i></div>
+                                    </li>
+                                    <li>
+                                        <label class="item item-input searchText_box">
+                                            <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+                                            <input type="text" placeholder="查询" ng-model="keyword" maxlength="10">
+                                        </label>
+                                        <button class="submit" ng-click="search()">搜索</button>
+                                    </li>
+                                    <div class="clear"></div>
+                                </ul>
+                            </div>
+                        </div>
+                        <ion-item ng-repeat="item in zcfg|queryStuList:keyword" style="padding:10px 10px;padding-bottom:5px" ng-click="gotoLoadHtml(item)">
+                            <div class="line-h-30">
+                                <div class="item-text-wrap black size-18">{{item.bt}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.deptname"></span>
+                                </div>
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.uname"></span>
+                                </div>
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.rdate|date:'yyyy-MM-dd'"></span>
+                                </div>
+                            </div>
+                        </ion-item>
+                    </ion-list>
+                    <div ng-show="zcfg.length==0" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                        <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+                        暂无文件
+                    </div>
+                    <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMoreZcfg();" distance="1%" icon="ion-loading-d">
+                    </ion-infinite-scroll>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab title="办事流程">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list>
+                        <div class="left">
+                            <label class="item item-input shang" style="padding:1px">
+                                <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+                                <input type="text" placeholder="查询" ng-model="keyyyword" maxlength="10">
+                            </label>
+                        </div>
+                        <ion-item ng-repeat="item in bslc|queryStuList:keyyyword" style="padding:10px 10px;padding-bottom:5px" ng-click="gotoLoadHtml(item)">
+                            <div class="line-h-30">
+                                <div class="item-text-wrap black size-18">{{item.bt}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.deptname"></span>
+                                </div>
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.uname"></span>
+                                </div>
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.rdate|date:'yyyy-MM-dd'"></span>
+                                </div>
+                            </div>
+                        </ion-item>
+                    </ion-list>
+                    <div ng-show="bslc.length==0" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                        <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+                        暂无文件
+                    </div>
+                    <ion-infinite-scroll ng-if="moreDataCanBeLoaded1" on-infinite="loadMoreBslc();" distance="1%" icon="ion-loading-d">
+                    </ion-infinite-scroll>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab title="专题公示">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list>
+                        <div class="left">
+                            <label class="item item-input shang" style="padding:1px">
+                                <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+                                <input type="text" placeholder="查询" ng-model="keyztword" maxlength="10">
+                            </label>
+                        </div>
+                        <ion-item ng-repeat="item in ztgs|queryStuList:keyztword" style="padding:10px 10px;padding-bottom:5px" ng-click="gotoLoadHtml(item)">
+                            <div class="line-h-30">
+                                <div class="item-text-wrap black size-18">{{item.bt}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.deptname"></span>
+                                </div>
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.uname"></span>
+                                </div>
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.rdate|date:'yyyy-MM-dd'"></span>
+                                </div>
+                            </div>
+                        </ion-item>
+                    </ion-list>
+                    <div ng-show="ztgs.length==0" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                        <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+                        暂无文件
+                    </div>
+                    <ion-infinite-scroll ng-if="moreDataCanBeLoaded2" on-infinite="loadMoreZtgs();" distance="1%" icon="ion-loading-d">
+                    </ion-infinite-scroll>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>
+

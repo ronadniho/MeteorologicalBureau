@@ -1,0 +1,21 @@
+﻿<ion-view>
+    <go-back my-title="附件"></go-back>
+    <ion-content class="has-header">
+        <ion-list>
+            <div ng-repeat="hotItem in fileList" style="padding:1px 10px 1px 10px;">
+                <ion-item class="item item-thumbnail-left" style="border-top:0px; border-left:0px; border-right:0px; padding-left:80px;" ng-click="gotoLoadFile(hotItem)">
+                    <img style="width:60px;height:60px;margin-top:10px;" src="{{loadDataType(hotItem.nrbt)}}" />
+                    <div style="margin-top:30px;">
+                        <h2 style="width:95%; float:left;">{{hotItem.nrbt}}</h2>
+                        <i class="icon ion-ios-arrow-right" style="float:right;"></i>
+                    </div>
+                </ion-item>
+            </div>
+        </ion-list>
+        <div ng-show="fileList.length==0" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+            暂无文件
+        </div>
+    </ion-content>
+</ion-view>
+

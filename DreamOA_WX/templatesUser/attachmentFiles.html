@@ -1,0 +1,29 @@
+<style>
+	.app_icon{
+		height:1.7rem;
+		width: 1.5rem;
+	}
+    .ion-document-text:before{
+        color:#717f8f;
+    }
+</style>
+<ion-view>
+<ion-content>
+	<ion-list>
+             <div ng-repeat="file in files">
+             	 <div class="item item-divider todoAttachTitle" ng-if="file.hasFile">{{file.name}}</div>
+                 <div class="item item-icon-left" ng-if="!file.hasFile" ng-click='openfile(file)'>
+                     <h3 class="todoAttachName">{{file.name}}</h3>
+                     <i class="icon icon-left ion-document-text">
+                         <!--<img src="{{file.img}}" class="app_icon" />-->
+                     </i>
+                 </div>
+             </div>
+      </ion-list> 
+       
+      <div ng-show="!isExistAttachments" >
+     	 <img style="width:50%;height:50%;margin-top:30%;margin-left:30%;" src="../img/blank_page.png"></img>
+     	<span style="width:50%;height:50%;margin-top:30px;margin-left:40%;font-weight:bold">暂无内容...</span>
+      </div>    
+      </ion-content>
+</ion-view>

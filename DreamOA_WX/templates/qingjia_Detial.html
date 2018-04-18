@@ -1,0 +1,39 @@
+﻿<ion-view title="请假单">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios7-arrow-left" style="font-size:12px" ng-click="goBack()">返回</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">请假事由</span>
+                <input type="text" ng-model="qingjia.CONTENT" placeholder="事由" />
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">请假开始时间</span>
+                <input type="datetime-local" ng-model="qingjia.SDATE" placeholder="{{nowDate|date:'yyyy-MM-dd'}}">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">请假结束时间</span>
+                <input type="datetime-local" ng-model="qingjia.EDATE" placeholder="{{nowDate|date:'yyyy-MM-dd'}}">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">请假类型</span>
+                <br />
+                <br />
+                <select ng-model="qingjia.QJLX">
+                    <option value="公假">公假</option>
+                    <option value="事假">事假</option>
+                    <option value="病假">病假</option>
+                </select>
+            </label>
+        </div>
+
+    </ion-content>
+    <div align-title="left" class="bar bar-footer bar-positive">
+        <h1 class="title">
+            <a class="button button-clear" ng-click="save()">
+                保存
+            </a>
+        </h1>
+    </div>
+</ion-view>

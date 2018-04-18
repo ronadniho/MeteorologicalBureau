@@ -1,0 +1,84 @@
+﻿
+<ion-view>
+    <go-back my-title=""></go-back>
+    <ion-tabs class="tabs-striped tabs-top" style="color:red;border-color:red;">
+        <ion-tab title="待阅">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list>
+                        <ion-refresher on-refresh="doRefresh()"
+                                       pulling-text="拖动刷新"
+                                       refreshing-text="加载中"
+                                       refreshing-icon="ion-loading-c">
+                        </ion-refresher>
+                        <div class="left">
+                            <label class="item item-input" style="padding:1px">
+                                <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+                                <input type="text" placeholder="查询" ng-model="keyword" maxlength="10">
+                            </label>
+                        </div>
+                        <ion-item ng-repeat="item in dywj|queryStuList:keyword" style="padding:10px 10px;padding-bottom:5px" ng-click="gotoLoadFile(item,0)">
+                            <div class="line-h-30">
+                                <div class="item-text-wrap black size-18">{{item.bt}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.deptname"></span>
+                                </div>
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.uname"></span>
+                                </div>
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.rdate|date:'yyyy-MM-dd'"></span>
+                                </div>
+                            </div>
+                        </ion-item>
+                    </ion-list>
+                    <div ng-show="dywj.length==0" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                        <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+                        暂无待阅文件
+                    </div>
+                    <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMoreDywj();" distance="1%" icon="ion-loading-d">
+                    </ion-infinite-scroll>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab title="已阅">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list>
+                        <div class="left">
+                            <label class="item item-input" style="padding:1px">
+                                <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+                                <input type="text" placeholder="查询" ng-model="keyyyword" maxlength="10">
+                            </label>
+                        </div>
+                        <ion-item ng-repeat="item in yywj|queryStuList:keyyyword" style="padding:10px 10px;padding-bottom:5px" ng-click="gotoLoadFile(item,1)">
+                            <div class="line-h-30">
+                                <div class="item-text-wrap black size-18">{{item.bt}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.deptname"></span>
+                                </div>
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.uname"></span>
+                                </div>
+                                <div class="col-33 pull-right" style="color:#C6C3C6;margin-top:10px;">
+                                    <span ng-bind="item.rdate|date:'yyyy-MM-dd'"></span>
+                                </div>
+                            </div>
+                        </ion-item>
+                    </ion-list>
+                    <div ng-show="yywj.length==0" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                        <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+                        暂无已阅文件
+                    </div>
+                    <ion-infinite-scroll ng-if="moreDataCanBeLoaded1" on-infinite="loadMoreYywj();" distance="1%" icon="ion-loading-d">
+                    </ion-infinite-scroll>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>
+

@@ -1,0 +1,44 @@
+﻿<style>
+    .tabs-color-assertive .tab-item {
+        color:#000 !important;
+    }
+    .tabs-color-assertive .tab-item.tab-item-active, .tabs-color-assertive .tab-item.active, .tabs-color-assertive .tab-item.activated {
+        color: #387ef5 !important;
+        /*border-top: 2px solid #387ef5 !important;*/
+    }
+    .tabs-tabs .tab-item{
+        max-width: none;
+        width: 100%;
+    }
+    .tabs-color-assertive .tab-item .badge {
+         opacity: 1 !important; 
+    }
+</style>
+
+
+<ion-side-menus>
+    <ion-side-menu-content class="bar-positive">
+        <ion-nav-view id="eventPlaceholder" ></ion-nav-view>
+            <ion-tabs animation="slide-left-right" class="tabs-icon-top  tabs-color-assertive tabs-tabs" style="border-top:1px solid #ccc;">
+                <ion-tab nav-direction="forward" title="工作台" icon-on="index_menu home_on" icon-off="index_menu home" href="#/user/mainNewUser">
+                </ion-tab>
+                <ion-tab nav-direction="forward" title="通讯录" icon="index_menu tel_on" icon-off="index_menu tel" href="#/user/addresslistNew">
+                </ion-tab>
+                <ion-tab nav-direction="forward" title="日程" icon="index_menu time_on" icon-off="index_menu time" href="#/user/myAgenda" 
+                       badge="unreaderNum" badge-style="badge-assertive">
+                       
+                </ion-tab>
+                <ion-tab nav-direction="forward" title="个人中心" icon="index_menu center_on" icon-off="index_menu center" href="#/user/userInfo">
+                </ion-tab>
+                <!--
+                <ion-tab nav-direction="forward" style="font-size:10px" title="移动教学" icon-on="ion-ios-videocam" icon-off="ion-ios-videocam-outline" href="#/user/ydjxnew">
+
+                </ion-tab>
+                <ion-tab nav-direction="forward" title="带班管理" icon-on="ion-ios-people" icon-off="ion-ios-people-outline" href="#/user/mainBzr">
+
+                </ion-tab>
+                -->
+            </ion-tabs>
+    </ion-side-menu-content>
+</ion-side-menus>
+

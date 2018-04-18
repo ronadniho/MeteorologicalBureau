@@ -1,0 +1,122 @@
+﻿[
+    {
+        "title": "训中提问",
+        "state": "app.main",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "student",
+        "badgeUrl": "",
+        "img": "训中提问.png"
+    },
+        {
+        "title": "调查问卷",
+        "state": "app.main",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "student",
+        "badgeUrl": "",
+        "img": "调查问卷.png"
+    },
+    {
+        "title": "教学评价",
+        "state": "testChat",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "student",
+        "badgeUrl": "",
+        "img": "教学评价.png"
+    },
+    {
+        "title": "通知公告",
+        "state": "app.testpage",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "student",
+        "badgeUrl": "",
+        "img": "通知公告.png"
+    },
+        {
+        "title": "教学资料",
+        "state": "app.testpage",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "student",
+        "badgeUrl": "",
+        "img": "教学资料.png"
+    },
+    {
+        "title": "课表查询",
+        "state": "app.testpage",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "student",
+        "badgeUrl": "",
+        "img": "课表查询.png"
+    },
+    {
+        "title": "选修报名",
+        "state": "app.testpage",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "student",
+        "badgeUrl": "",
+        "img": "选修报名.png"
+    },
+    {
+        "title": "班级交流",
+        "state": "app.testpage",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "student",
+        "badgeUrl": "",
+        "img": "班级交流.png"
+    },
+    {
+        "title": "班部信息",
+        "state": "app.testpage",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "student",
+        "badgeUrl": "",
+        "img": "班级信息.png"
+    },
+                    {
+        "title": "班委分组",
+        "state": "app.testpage",
+        "category": "",
+        "badge": 10,
+        "groupId": 0,
+        "display": true,
+        "edit": false,
+        "usertype": "student",
+        "badgeUrl": "",
+        "img": "班委分组.png"
+    }
+]

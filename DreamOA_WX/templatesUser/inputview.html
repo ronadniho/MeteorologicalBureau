@@ -1,0 +1,26 @@
+			<div class="inputview todoCommentSubmit">
+				<div class="inputview-bar clearfix" >
+					<div class="inputview-bar-op">  
+                        <div class="inputview-morebtn inputview-morebtn-plus" ng-click="inputviewToggleMoreBlock()"></div>                      
+                        <div>
+                            <button class="button submit inputview-send-button" ng-click="inputviewSend()">提交</button>
+                        </div>
+                        </div>
+                    <div class="inputview-input"><textarea id="inputview-textarea" data-role="none" placeholder="请输入意见..." ng-model="inputviewContent" /></textarea></div>
+				</div>		
+			
+				<div ng-show="true"   class="inputview-more" >
+					<div class="inputview-more-templates" >
+			                <ion-slide-box class="inputview-slidebox"   delegate-handle="inputview-handle"   on-slide-changed="slideHasChanged($index)"  show-pager="true" auto-play="false" >
+			                    <ion-slide  class="inputview-slide" ng-repeat="ivPageData in inputViewPageData" >
+		                            <div class="row  inputview-tmpl-row" >
+			                            <div class="col-33  col-item"   ng-repeat="ivData in ivPageData.data"  ng-click="onInputViewItemClick(ivData)" on-hold="onInputViewItemHold(ivData)">
+			                                	<div class="inputview-tmpl-item"  ng-if="!ivData.isAddButton" >{{ivData.content}}</div>
+			                                	<div class="inputview-tmpl-add"   ng-if="ivData.isAddButton" >{{ivData.content}}</div>
+			                            </div>
+		                            </div>
+			                    </ion-slide>
+			                </ion-slide-box>
+					</div>
+			</div>
+		</div>

@@ -1,0 +1,133 @@
+﻿<style>
+    /*.icon ion-record {
+        color:#C00000;
+         font-size:8px;
+    }*/
+    /*.slider-pager {
+        color:#C00000;
+         font-size:8px;
+         bottom:8px;
+    }*/
+</style>
+<ion-view title="走进中浦院" style="font-size:30px; background-color:#E4E4E4; ">
+    <ion-content lazy-scroll>
+        <ion-slide-box does-continue="true" show-pager="false" auto-play="true" style="height:160px;">
+            <ion-slide ng-repeat="img in dataImageSource" show-pager="false" ng-click="goNewsDetail(img)"  style="background: url(../staticresource/{{img.title_pic}}) no-repeat;background-size: cover;">
+                <h3 style="font-family:微软雅黑;white-space:nowrap; font-size:18px; width:100%; text-align:center; color:white; margin-top:118px;padding:8px 0px;background:rgba(0,0,0,0.2)">
+                    {{img.title | limitTo: 15}}{{img.title.length > 15 ? '...' : ''}}
+                </h3>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+    <div style=" background-color:white;{{marTop}}" class="scroll-content has-header">
+        <table style="width:100%;height:35px;">
+            <tr>
+                <td align="center" style="vertical-align:middle;">
+                    <span id="1" style="font-family:微软雅黑;font-size:20px;font-style:normal;text-decoration:none;color:#e60000;" ng-click="changeIndex('1','中浦要闻');">中浦要闻</span>
+                </td>
+                <td align="center" style="vertical-align:middle;">
+                    <span id="2" style="font-family:微软雅黑;font-size:20px;font-style:normal;text-decoration:none;" ng-click="changeIndex('2','学院介绍');">学院介绍</span>
+                </td>
+                <td align="center" style="vertical-align:middle;">
+                    <span id="3" style="font-family:微软雅黑;font-size:20px;font-style:normal;text-decoration:none;" ng-click="changeIndex('3','创建成果');">创建成果</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <ion-content style="margin-top:190px;" class="has-footer" lazy-scroll>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="拖动刷新"
+                       refreshing-text="加载中"
+                       refreshing-icon="ion-loading-c">
+        </ion-refresher>
+        <ion-list>
+            <div ng-repeat="Item in dataZpywSource">
+                <ion-item class="item item-thumbnail-left" ng-click="goNewsDetail(Item)">
+                    <img image-lazy-src="../staticresource/{{Item.title_pic}}" image-lazy-distance-from-bottom-to-load="100"  class="md-whiteframe-z2" />
+                    <h2 style="white-space:pre-wrap;margin-top:15px; font-size:16px;">{{Item.title | limitTo: 35}}{{Item.title.length > 35 ? '...' : ''}}</h2>
+                </ion-item>
+            </div>
+            <!--<span style="font-family:Arial;font-size:16px;font-style:normal;text-decoration:none;color:#e60000;">&nbsp;&nbsp;&nbsp;&nbsp;创建成果</span>
+            <ion-slide-box>
+                <ion-slide>
+                    <table style=" width:100%; height:100%;">
+                        <tr>
+                            <td align="center" valign="bottom" style="width:33%;border:0px solid #fff; vertical-align : middle;">
+                                <a ng-click="goQianyan()">
+                                    <img style="width:80px; height:80px;" src="../img/qy.png" />
+                                </a><br />
+                                <p style="font-size:16px;">前言</p>
+                            </td>
+                            <td align="center" valign="middle" style="width:33%;border:1px solid #fff; vertical-align : middle;">
+                                <a ng-click="goWeike();">
+                                    <img style="width:80px; height:80px;" ng-src="../img/hx.png" />
+                                </a><br />
+                                <p style="font-size:16px;">贺信</p>
+                            </td>
+                            <td align="center" valign="middle" style="width:33%;border:1px solid #fff; vertical-align : middle;">
+                                <a ng-click="goVedioList()">
+                                    <img style="width:80px; height:80px;" ng-src="../img/ldgh.png" />
+                                </a><br />
+                                <p style="font-size:16px;">领导关怀</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="width:33%;border:1px solid #fff; vertical-align : middle;">
+                                <br />
+                                <img style="width:80px; height:80px;" ng-src="../img/jxts.png" /><br />
+                                <p style="font-size:16px;">教学特色</p>
+                            </td>
+                            <td align="center" style="width:33%;border:1px solid #fff; vertical-align : middle;">
+                                <br />
+                                <img style="width:80px; height:80px;" ng-src="../img/gjxjs.png" /><br />
+                                <p style="font-size:16px;">国际性建设</p>
+                            </td>
+                            <td align="center" style="width:33%;border:1px solid #fff; vertical-align : middle;">
+                                <br />
+                                <img style="width:80px; height:80px;" ng-src="../img/gjjlhz.png" /><br />
+                                <p style="font-size:16px;">国内交流合作</p>
+                            </td>
+                        </tr>
+                    </table>
+                </ion-slide>
+                <ion-slide>
+                    <table style=" width:100%; height:84%;">
+                        <tr>
+                            <td align="center" valign="bottom" style="width:33%;border:0px solid #fff; vertical-align : middle;">
+                                <a ng-click="goWish()">
+                                    <img style="width:80px; height:80px;" src="../img/kysl.png" />
+                                </a><br />
+                                <p style="font-size:16px;">科研实力</p>
+                            </td>
+                            <td align="center" valign="middle" style="width:33%;border:1px solid #fff; vertical-align : middle;">
+                                <a target="_blank" ng-click="goDouble();">
+                                    <img style="width:80px; height:80px;" ng-src="../img/tyxf.png" />
+                                </a><br />
+                                <p style="font-size:16px;">特有校风</p>
+                            </td>
+                            <td align="center" valign="middle" style="width:33%;border:1px solid #fff; vertical-align : middle;">
+                                <img style="width:80px; height:80px;" ng-src="../img/djjs.png" /><br />
+                                <p style="font-size:16px;">党建与队伍建设</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="width:33%;border:1px solid #fff; vertical-align : middle;">
+                                <br />
+                                <img style="width:80px; height:80px;" ng-src="../img/zw.png" /><br />
+                                <p style="font-size:16px;">展望</p>
+                            </td>
+                            <td align="center" style="width:33%;border:1px solid #fff; vertical-align : middle;">
+                                <br />
+                            </td>
+                            <td align="center" style="width:33%;border:1px solid #fff; vertical-align : middle;">
+                                <br />
+                            </td>
+                        </tr>
+                    </table>
+                </ion-slide>
+            </ion-slide-box>-->
+        </ion-list>
+        <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMore();" distance="1%" icon="ion-loading-d">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

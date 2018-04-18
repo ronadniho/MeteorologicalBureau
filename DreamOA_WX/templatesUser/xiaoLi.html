@@ -1,0 +1,11 @@
+﻿<ion-view>
+    <go-back my-title="校历"></go-back>
+    <ion-content class="padding-top  xlStyle">        
+        <div ng-repeat="item in xiaoli" class="xlBg">
+            <div class="textRange xlText">
+                {{item.title}}
+            </div>
+            <div class="padding" ng-bind-html="item.content"></div>
+        </div>
+    </ion-content>
+</ion-view>

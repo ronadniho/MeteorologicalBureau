@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>File Transfer Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="native.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            /*xsfCamera.getPicture(
+                uploadPhoto,
+                function(message) { alert('get picture failed'); },
+                {
+                    quality         : 50,
+                    destinationType : navigator.camera.DestinationType.FILE_URI,
+                    sourceType      : navigator.camera.PictureSourceType.PHOTOLIBRARY
+                }
+            );*/
+        }
+
+        function uploadPhoto(imageURI) {
+            var options = new FileUploadOptions();
+            options.fileKey="file";
+            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+            options.mimeType="image/jpeg";
+
+            var params = {};
+            params.value1 = "test";
+            params.value2 = "param";
+
+            options.params = params;
+
+            var ft = new FileTransfer();
+            ft.upload(imageURI, encodeURI("http://some.server.com/upload.php"), win, fail, options);
+            
+        }
+
+        function win(r) {
+            console.log("Code = " + r.responseCode);
+            console.log("Response = " + r.response);
+            console.log("Sent = " + r.bytesSent);
+        }
+
+        function fail(error) {
+            alert("An error has occurred: Code = " + error.code);
+            console.log("upload error source " + error.source);
+            console.log("upload error target " + error.target);
+        }
+        
+		function download1(){
+			alert("download");
+			var fileTransfer = new xsf.FileTransfer();
+			//var uri = encodeURI("http://some.server.com/download.php");
+			var uri = "http://117.184.89.78:7080/ezweb/upload/1.doc";
+			var filePath = "/storage/emulated/0/2.doc";
+			alert(fileTransfer);
+			alert(fileTransfer.download);
+			fileTransfer.download(
+			    uri,
+			    filePath,
+			    function(entry) {
+			        alert("download complete: " + entry.fullPath);
+			    },
+			    function(error) {
+			        alert("download error source " + error.source);
+			        alert("download error target " + error.target);
+			        alert("upload error code" + error.code);
+			    },
+			    false,
+			    {
+			        //headers: {
+			        //    "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+			        //}
+			    }
+			);
+		
+		}
+        </script>
+</head>
+<body>
+    <h1>Example</h1>
+    <p>Upload File</p>
+    <a href="#" onclick="download1()">download</a>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿[{
+    "image": "../staticresource/tzgg.png",
+    "title": "通知公告",
+    "url": "noticeNew",
+    "showicon": true,
+    "keyname": "com.ue.oa.oa.activity.NoticeActivity",
+    "icontype": "all"
+},{
+    "image": "../staticresource/dbwj.png",
+    "title": "一般阅件",
+    "url": "toRead",
+    "showicon": true,
+    "keyname": "com.ue.oa.oa.activity.ReviewActivity",
+    "icontype": "all"
+}, {
+    "image": "../staticresource/ybwj.png",
+    "title": "已办文件",
+    "url": "hasdolist",
+    "showicon": false,
+    "keyname": "",
+    "icontype": "all"
+}, {
+    "image": "../staticresource/bq.png",
+    "title": "便笺",
+    "url": "noteTab",
+    "showicon": true,
+    "keyname": "com.ue.oa.oa.activity.NoteActivity",
+    "icontype": "all"
+}, {
+    "image": "../staticresource/nbgh.png",
+    "title": "内部公函",
+    "url": "internalLetters",
+    "showicon": false,
+    "keyname": "",
+    "icontype": "all"
+}, {
+    "image": "../staticresource/qjsq.png",
+    "title": "请假申请",
+    "url": "leaveList",
+    "showicon": true,
+    "keyname": "",
+    "icontype": "all"
+}]

@@ -1,0 +1,27 @@
+﻿<ion-view>
+    <go-back my-title="{{dataSource.ftitle}}"><div style="width:60px;" ng-show="false" ng-click="fontSizeFun()"><p style="margin-top:8px;">-&nbsp;字体+</p></div></go-back>
+
+    <ion-content class="scroll-content bg-gray has-header">
+        <div class="row" style="font-size:22px;margin:8px 8px 0px;text-align:left;line-height:1.5em">
+            {{dataSource.title}}
+        </div>
+        <div class="row" ng-show="{{dataSource.subtitle==''?'false':'true'}}" style="color:gray; font-size:18px;margin:8px 8px 0px;text-align:left;line-height:1.5em">
+            {{dataSource.subtitle}}
+        </div>
+        <div class="row" style="font-size: 16px; color: #999; border-bottom: 1px solid #ddd;">
+            <div class="col" style="text-align:left">
+                <i class="ion-clock">&nbsp;时间:&nbsp;&nbsp;{{dataSource.releasetime|date:'yyyy-MM-dd'}}</i>
+            </div>
+        </div>
+        <div style="position:absolute;">
+            <div>
+                <div class="padding">
+                    <!--<img src="../staticresource/{{dataSource.title_pic}}" style="width:100%;" class="md-whiteframe-z2 border_radius" />-->
+                    <span id="wishContent" style="font-size:{{fontSize}};" ng-bind-html="dataSource.content">
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

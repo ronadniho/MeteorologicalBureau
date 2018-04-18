@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact Example</title>
+        <script type="text/javascript" charset="utf-8" src="native.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    document.addEventListener("deviceready", onDeviceReady, false);
+   
+	function onError(contactError) {
+        alert('onError:' + contactError);
+    }
+    function onDeviceReady() {
+        alert("onDeviceReady");
+        xsfContacts.find(["displayName"], onSuccess, onError, {filter:'',multiple:true});
+    }
+    function onSuccess(contacts) {
+    	alert(contacts.length);
+        for (var i=0; i<5; i++) {
+            debugger;
+            alert(contacts[i].displayName);
+        }
+    };
+    </script>
+  </head>
+  <body>
+    <h1>test</h1>
+    <p><a href="index.html">index</a></p>
+  </body>
+</html>

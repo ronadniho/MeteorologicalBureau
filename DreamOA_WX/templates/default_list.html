@@ -1,0 +1,30 @@
+﻿<ion-view title="{{title}}">
+
+    <ion-header-bar align-title="center" class="bar bar-subheader">
+        <label class="item item-input" style="padding:2px">
+            <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+            <input type="text" placeholder="搜索" ng-model="query">
+        </label>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="拖动刷新"
+                       refreshing-text="加载中"
+                       refreshing-icon="ion-loading-c">
+        </ion-refresher>
+        <ion-list>
+            <ion-item style="padding:8px" ng-repeat="item in list|queryItem:query" ng-click="showDetial(item)" ng-class="{true: 'item item-icon-right', false: 'item'}[listneedPlay]">
+                <h2 ng-if="column.istitle" ng-repeat="column in item.rowListColumnData">
+                    <i class="icon balanced icon-left  ion-ios7-cloudy-night ion-play"></i>&nbsp;&nbsp;{{column|columnDisplayFilter}}
+                </h2>
+
+                <i class="icon balanced icon-right  ion-ios7-cloudy-night ion-play" ng-click="palyVideo(column)" ng-repeat="column in item.rowListColumnData" ng-init="checkNeedPlay(column)" ng-if="column.needPlay"></i>
+                <div class="row" style="margin-left:0px; margin-right:0px; padding:0px">
+                    <p style="display:inline; margin:0px" class="col" ng-if="!column.istitle&&!column.needPlay" ng-repeat="column in item.rowListColumnData">{{column|columnDisplayFilter}}</p>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMore()" distance="3%" icon="ion-loading-c">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

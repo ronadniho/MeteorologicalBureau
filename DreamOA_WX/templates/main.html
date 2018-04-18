@@ -1,0 +1,158 @@
+﻿<style>
+    .add {
+        background-image: url('../Content/red.png');
+        background-repeat: no-repeat;
+        background-size: 10px 40px;
+        background-position: left bottom;
+    }
+
+    .mainpage .slider-pager {
+        font-size: 8px;
+        bottom: 0px;
+        display:block;
+    }
+
+    .ion-record:before {
+        color: #C00000;
+    }
+</style>
+<ion-view title="" style="background:url(../content/bg.jpg)  no-repeat;background-size:100% 240px;">
+    <!--此行报错，原因未知-->
+    <!--<go-main-page></go-main-page>-->
+    <!--<ion-header-bar style="background:rgba(0,0,0,0);border:none;" >
+        <button class="button button-icon icon ion-navicon"></button>
+        <h1 class="title" style="color:#fff;text-align:center;">学在中浦院</h1>
+        <button class="button button-icon icon ion-person"></button>
+    </ion-header-bar>-->
+    <main-new-header-bar my-title="{{user.classname}}"></main-new-header-bar>
+    <div class="has-header list">
+        <div ng-if="user.type=='teacher'" style="border:none;text-align:center;background:rgba(0,0,0,0);background-size:100% 100%;">
+            <div style="color:#fff;">
+                <div ng-bind="user.username" style="display:inline-block;" class="size-18"></div>
+            </div>
+        </div>
+        <div ng-if="user.type!='teacher'" style="border:none;text-align:center;background:rgba(0,0,0,0);background-size:100% 100%;">
+            <div style="color:#fff;">
+                <div ng-bind="user.username" style="display:inline-block;" class="size-18"></div>
+                <div style="display:inline-block"><span ng-repeat="star in userInfo.starArr"><i ng-class="star.starClass" style="color:#FFE38C"></i></span></div>
+            </div>
+        </div> 
+    </div>
+    <ion-content class="has-tabs" ng-style="myStyle">
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="拖动刷新"
+                       refreshing-text="加载中"
+                       refreshing-icon="ion-android-refresh">
+        </ion-refresher>
+        <ion-list style="border:none;padding:0px;background:#f3f3f3;">
+            <ion-item class="item mainpage" style="border:none;padding:0;overflow:hidden;height:300px">
+                <ion-slide-box show-pager="false" auto-play="false">
+                    <ion-slide ng-repeat="dataPage in datameSource" style="padding:10px;">
+                        <div class="row" style="padding:0;height:95px;" ng-repeat="dataRows in dataPage.data">
+                            <div class="row-div" style="width:33%;text-align:center;border-right:1px solid #f6f6f6;padding:10px 0px; border-bottom:1px solid #f6f6f6;" ng-if="dataRow.icontype=='all'||dataRow.icontype==user.type||dataRow.icontype=='lt'" ng-repeat="dataRow in dataRows.data" ng-click="gosub(dataRow)">
+                                <div style="position:relative;display:inline-block;">
+                                    <img class="img-50" ng-src="{{dataRow.image}}">
+                                    <div class="elective-number danru" id="{{iconitem.key}}" ng-if="dataRow.showicon&&iconitem.key==dataRow.keyname&&iconitem.val>0" ng-repeat="iconitem in iconvalArray">{{iconitem.val}}</div>
+                                </div>
+                                <p class="size-18">{{dataRow.title}}</p>
+                            </div>
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
+            </ion-item>
+        </ion-list>
+        <!--通知公告-->
+        <ion-list>
+            <div class="item item-button-right agreement-title-top item-padding-10 " ng-click="goGGList()">
+                <span style="position:relative">
+                    <i class="icon ion-speakerphone size-20" style="color:#f00;"></i>&nbsp;&nbsp;<span class="size-18">通知公告</span>
+                    <div class="announ-elective-number danru" style="font-weight:900;" ng-if="iconitem.key=='numUnReader'&&iconitem.val>0" ng-repeat="iconitem in iconvalArray">{{iconitem.val}}</div>
+                </span>
+                <span class="more"><i class="icon ion-ios-arrow-forward"></i></span>
+            </div>
+            <ion-item style="padding:13px 10px;color:#999" ng-if="ggList.length<=0">
+                暂无公告
+            </ion-item>
+            <div class="item item-padding-10 " ng-repeat="gg in ggList " ng-click="gogg(gg)">
+                <div class="row">
+                    <div class="col-20">
+                        <span class="size-18">{{gg.ggsj|date:'MM-dd'}}</span>
+                    </div>
+                    <div class="col-80 size-18" ng-if="gg.hasreader==0" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
+                        <span class="size-18">{{gg.ggbt}}</span>
+                    </div>
+                    <div class="col-80 size-18 grey" ng-if="gg.hasreader>0" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
+                        <span class="size-18">{{gg.ggbt}}</span>
+                    </div>                    
+                </div>
+            </div>
+        </ion-list>
+        <!--今日课程-->
+        <ion-list style="border:none">
+            <div class="item item-button-right agreement-title item-padding-10 " ng-click="gokb()">
+                <i class="icon ion-calendar size-20" style="color:#f00;">&nbsp;&nbsp;</i><span class="size-18">今日课程</span><span class="more"><i class="icon ion-ios-arrow-forward"></i></span>
+            </div>
+            <ion-item style="padding:13px 10px;color:#999" ng-if="KCList.length<=0">
+                暂无课程
+            </ion-item>
+            <div class="item " style="padding:0px;border-bottom:none;" ng-repeat="kc in KCList" ng-click="OpenKCDetail(kc)">
+                <div style="margin-left:0px; margin-right:0px; padding:0px;">
+                    <div class="course-info">
+                        <div class="course-info-description size-18"><div class="course-info-time size-22">{{kc.kssj|date:'HH:mm'}}&nbsp;</div>{{kc.kcname}}</div>
+                        <div class="col-20-name course-info-name size-16"><i class="ion-ios-person-outline size-22"  ng-show="kc.zjr">&nbsp;</i>{{kc.zjr}}</div>
+                        <div class=" course-info-address" style="width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:16px;"><i ng-show="kc.kcdd" class="ion-ios-location-outline size-20">&nbsp;</i>{{kc.kcdd}}</div>
+                    </div>
+                </div>
+                <div style="margin:0px 0px;" ng-if="!kc.remark==''">
+                    <span class="beizhu"><i class="icon ion-flag " style="color:#f00;display:inline-block;margin-right:3px;"></i>{{kc.remark}}</span>
+                    <!--<span><i class="icon-study" style="height:30px;line-height:30px;" ng-if="kc.jxzlnum>0">教学资料</i></span>
+                    <span><i class="icon-problem" style="height:30px;line-height:30px;" ng-if="kc.questionnum>0">问题区</i></span>-->
+                </div>
+
+            </div>
+        </ion-list>
+
+        <!--<div class="item item-button-right" style="background:#f3f3f3;border-top:none;">
+            服务信息<span class="more"></span>
+        </div>-->
+        <!--服务信息-->
+        <!--<div style="background:#f3f3f3;padding-top:20px">
+            <div style="background:#fff;padding:10px 0px">
+                <div style="text-align:center;display:inline-block;width:32%;" ng-click="openUserList(1)">
+                    <div>
+                        <img src="../content/headmaster.png" style="width:50px; height:50px" />
+                    </div>
+                    <div class="text-align:center" style="font-size:18px;">
+                        班部信息
+                    </div>
+                </div>
+
+                <div class="" style="text-align:center;display:inline-block;width:32%" ng-click="openUserList(2)">
+                    <div>
+                        <img src="../content/classleader.png" style="width:50px; height:50px" />
+                    </div>
+                    <div class="text-align:center" style="font-size:18px;">
+                        随班领导
+                    </div>
+                </div>
+                <div class="" style="text-align:center;display:inline-block;width:32%;" ng-click="goff()">
+
+                    <div>
+                        <img src="../content/hotline.png" style="width:50px; height:50px" />
+                    </div>
+                    <div class="text-align:center" style="font-size:18px;">
+                        服务热线
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <!--<div class="row" ng-repeat="gg in ggList">
+            <div class="col-20">
+                <span ng-init="mystyle={color:red}" ng-style="mystyle">{{gg.ggsj|date:'MM-dd'}}</span>
+            </div>
+            <div class="col-80">
+                <span ng-init="mystyle={color:red}" ng-style="mystyle">{{gg.ggbt}}</span>
+            </div>
+        </div>-->
+    </ion-content>
+</ion-view>

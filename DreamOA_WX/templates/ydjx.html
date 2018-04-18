@@ -1,0 +1,247 @@
+﻿<style>
+    .tabs-striped .tab-item.tab-item-active {
+        color: #e60000;
+        border-color: #e60000;
+    }
+</style>
+<ion-view title="移动教学" style="background:url(../content/bg.jpg)  no-repeat;background-size:100% 240px;">
+    <main-new-header-bar my-title="移动教学"></main-new-header-bar>
+    <!--<ion-tabs class="tabs-striped tabs-top">
+        <ion-tab title="微课程">
+            <ion-view>-->
+    <ion-content class="has-header has-footer">
+        <div style="background:#fff;">
+            <div class="item item-button-right ydjx-wkc-title">
+                微课程
+            </div>
+            <div class="row padding-0">
+                <div class="col-50 ydjx-wkc" ng-click="goydjxList('微讲座')">
+                    <span class="ydjx-text">微讲座 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/微讲座.svg" />
+                    </div>
+                </div>
+                <div class="col-50 ydjx-wkc" ng-click="goydjxList('微视频')">
+                    <span class="ydjx-text">微视频 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/微视频.svg" />
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding:0px;margin-top:1px;">
+                <div class="col-33 ydjx-wkc" ng-click="goYDList('微案例')">
+                    <span class="ydjx-text">微案例 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/微案例.svg" />
+                    </div>
+                </div>
+                <div class="col-33 ydjx-wkc" ng-click="goYDList('微现场')">
+                    <span class="ydjx-text">微现场 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/微现场.svg" />
+                    </div>
+                </div>
+                <div class="col-33 ydjx-wkc" ng-click="goYDList('微论坛')">
+                    <span class="ydjx-text">微论坛 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/微论坛.svg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background:#fff;">
+            <div class="item item-button-right ydjx-ydh-title">
+                悦读汇
+            </div>
+            <div class="row" style="padding:0px;">
+                <div class="col-50 ydjx-ydh" ng-click="goydjxList('学“习”思考')">
+                    <span class="ydjx-text">学“习”思考 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/学“习”思考.svg" />
+                    </div>
+                </div>
+                <div class="col-50 ydjx-ydh" ng-click="goydjxList('党性教育故事')">
+                    <span class="ydjx-text">党性教育故事 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/党性教育故事.svg" />
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding:0px;margin-top:1px;">
+                <div class="col-33 ydjx-ydh" ng-click="goYDList('改革开放史')">
+                    <span class="ydjx-text">改革开放史 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/改革开放史.svg" />
+                    </div>
+                </div>
+                <div class="col-33 ydjx-ydh" ng-click="goYDList('论著导读')">
+                    <span class="ydjx-text">论著导读 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/论著导读.svg" />
+                    </div>
+                </div>
+                <div class="col-33 ydjx-ydh" ng-click="goYDList('信息推送')">
+                    <span class="ydjx-text">信息推送 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/信息推送.svg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background:#fff;">
+            <div class="ydjx-fgx"></div>
+            <div class="row" style="padding:0px;">
+                <div class="col-33 ydjx-gkk" ng-click="goydjxList('公开课')">
+                    <span class="ydjx-text size-16" style="color:#ff6666;font-weight:inherit">公开课 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/公开课.svg" />
+                    </div>
+                </div>
+                <div class="col-33 ydjx-wlxy" ng-click="goYDList('网络学院')">
+                    <span class="ydjx-text  size-16" style="color:#ff6666;font-weight:inherit">网络学院 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/网络学院.svg" />
+                    </div>
+                </div>
+                <div class="col-33 ysjx-zbkt" ng-click="goydjxList('直播课堂')">
+                    <span class="ydjx-text  size-16" style="color:#ff6666;font-weight:inherit">直播课堂 </span>
+                    <div class="ydjx-img">
+                        <img src="../img/直播课堂.svg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <!--</ion-view>
+    </ion-tab>-->
+    <!--<ion-tab title="悦读会">
+        <ion-view>
+            <ion-content>
+                <div class="row">
+                    <div class="col-50" ng-click="goydjxList('党性教育故事')"><img style="width:100%;padding:0px 1px 1px 0px;" src="../img/dxjygs.png"></div>
+                    <div class="col-50" ng-click="goydjxList('学“习”思考')"><img style="width:100%; padding:0px 1px 1px 0px;" src="../img/ggkf.png"></div>
+                </div>
+                <div class="row">
+                    <div class="col-50" ng-click="goYDList('论著导读')"><img style="width:100%;padding:0px 1px 1px 0px;" src="../img/lzdd.png"></div>
+                    <div class="col-50" ng-click="goYDList('信息推送')"><img style="width:100%; padding:0px 1px 1px 0px;" src="../img/xxts.png"></div>
+                </div>
+            </ion-content>
+        </ion-view>
+    </ion-tab>
+    <ion-tab title="公开课">
+        <ion-view>
+            <ion-content style="background-color:#E4E4E4;">
+                <ion-list>
+                    <div ng-repeat="hotItem in dataZpywSource" style="padding:3px 10px 0px 10px;">
+                        <ion-item ng-click="goDetail(hotItem);" class="item item-thumbnail-left">
+                            <img src="../staticresource/{{hotItem.title_pic}}" ng-click="goDetail($index,hotItem);" class="md-whiteframe-z2 border_radius" />
+                            <h2 style="white-space:pre-wrap;margin-top:3px; height:35px; font-size:16px;">{{hotItem.title | limitTo: 25}}{{hotItem.title.length > 25 ? '...' : ''}}</h2>
+                            <p style="font-size:14px;margin-top:1px;"><span ng-show="{{hotItem.minutes ==null ? 'false' : 'true'}}"><i class="ion-clock" style="font-size:14px;color:pink"></i>&nbsp;时长:&nbsp;&nbsp;&nbsp;{{hotItem.MINUTES}} 分钟</span><span style="float:right;" ng-show="{{hotItem.author ==null ? 'false' : 'true'}}"><i class="ion-person" style="font-size:16px;color:pink"></i>&nbsp;作者:&nbsp;{{hotItem.author}} </span></p>
+                            <p style="font-size:14px;margin-top:3px;"><span ng-click="goDocuments(hotItem)"><i class="ion-folder" style="font-size:16px;color:pink;"></i>&nbsp;相关材料:&nbsp;{{hotItem.docucount}}</span><span style="float:right;" ng-click="addGood(hotItem)"><i class="ion-thumbsup" style="font-size:16px;color:pink"></i>&nbsp;点赞:&nbsp;{{hotItem.goodcount}} </span></p>
+                        </ion-item>
+                        <div class="item text-center" layout="row" style="padding:8px">
+                            <div style="width:30%; float:left;">
+                                <i class="ion-clock" style="font-size:18px;color:pink"></i>
+                                <span style="font-size:14px;">&nbsp;时长:&nbsp;&nbsp;&nbsp;3</span>
+                            </div>
+                            <div style="width:30%; float:left;" ng-click="addGood(item);">
+                                <i class="ion-heart" style="font-size:18px;color:pink"></i>
+                                <span style="font-size:14px">&nbsp;点赞:&nbsp;1</span>
+                            </div>
+                            <div style="width:30%; float:left;" ng-click="goDeital(item);">
+                                <i class="ion-paperclip" style="font-size:18px;color:pink"></i>
+                                <span style="font-size:14px">&nbsp;<i ng-click="goCailiao()">相关材料:&nbsp;1</i></span>
+                            </div>
+                        </div>
+                    </div>
+                </ion-list>
+            </ion-content>
+        </ion-view>
+    </ion-tab>-->
+    <!--<ion-tab title="网络学院">
+            <ion-view>
+                <ion-content style="background-color:#E4E4E4;">
+                    <ion-list>
+                        <div ng-repeat="Item in dataWlxySource">
+                            <ion-item class="item item-thumbnail-left" ng-click="goNewsDetail(Item)">
+                                <img src="../staticresource/{{Item.title_pic}}" class="md-whiteframe-z2" />
+                                <h2 style="white-space:pre-wrap;margin-top:25px; font-size:16px;">{{Item.title}}</h2>
+                            </ion-item>
+                        </div>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab title="直播课堂">
+            <ion-view>
+                <ion-content>
+                    <div ng-show="!timetable.length" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                        <i class="ion-monitor" style="font-size:90px"></i><br /><br />
+                        暂无直播
+                    </div>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+    </ion-tabs>-->
+    <!--<ion-content >
+        <ion-list>
+            <div style="padding:10px 10px 0px 10px;">
+                <div style="width:100%;border:1px solid #000;background-color:#E4E4E4;"><span style="font-family:Arial;font-size:16px;font-style:normal;text-decoration:none;color:#000;">&nbsp;&nbsp;微课程</span></div>
+                <div class="row" style="width:100%;border:1px solid #000; height:100px; border-top:0px;">
+                    <div class="col"><img src="img/g-1.jpg"><br /><p style="font-size:14px;">微讲座</p></div>
+                    <div class="col" ng-click="goydjxList()"><img src="img/g-2.jpg"><br /><p style="font-size:14px;">微视频</p></div>
+                    <div class="col"><img src="img/g-3.jpg"><br /><p style="font-size:14px;">微案例</p></div>
+                    <div class="col"><img src="img/g-4.jpg"><br /><p style="font-size:14px;">微现场</p></div>
+                    <div class="col"><img src="img/g-4.jpg"><br /><p style="font-size:14px;">微论坛</p></div>
+                </div>
+            </div>
+            <div style="padding:10px 10px 0px 10px;">
+                <div style="width:100%;border:1px solid #000;background-color:#E4E4E4;">
+                    <span style="font-family:Arial;font-size:16px;font-style:normal;text-decoration:none;color:#000;">
+                        &nbsp;&nbsp;悦读会
+                    </span>
+                </div>
+                <div class="row" style="width:100%;border:1px solid #000; height:100px; border-top:0px;">
+                    <div class="col"><img src="img/g-1.jpg"><br /><p style="font-size:14px;">党性教育故事</p></div>
+                    <div class="col"><img src="img/g-2.jpg"><br /><p style="font-size:14px;">改革开放口述史</p></div>
+                    <div class="col"><img src="img/g-3.jpg"><br /><p style="font-size:14px;">论著导读</p></div>
+                    <div class="col"><img src="img/g-4.jpg"><br /><p style="font-size:14px;">信息推送</p></div>
+                </div>
+            </div>
+            <div style="padding:10px 10px 0px 10px;">
+                <div style="width:100%;border:1px solid #000;background-color:#E4E4E4;">
+                    <span style="font-family:Arial;font-size:16px;font-style:normal;text-decoration:none;color:#000;">
+                        &nbsp;&nbsp;公开课
+                    </span>
+                </div>
+                <div class="row" style="width:100%;border:1px solid #000; height:100px; border-top:0px;">
+                </div>
+            </div>
+            <div style="padding:10px 10px 0px 10px;">
+                <table style="border:0px;width:100%;">
+                    <tr>
+                        <td width="49%">
+                            <div style="width:100%;border:1px solid #000;background-color:#E4E4E4;">
+                                <span style="font-family:Arial;font-size:16px;font-style:normal;text-decoration:none;color:#000;">
+                                    &nbsp;&nbsp;网络学院
+                                </span>
+                            </div>
+                            <div class="row" style="width:100%;border:1px solid #000;height:100px; border-top:0px;">
+                            </div>
+                        </td>
+                        <td width="4%"></td>
+                        <td width="49%">
+                            <div style="width:100%;border:1px solid #000;background-color:#E4E4E4;">
+                                <span style="font-family:Arial;font-size:16px;font-style:normal;text-decoration:none;color:#000;">
+                                    &nbsp;&nbsp;直播课堂
+                                </span>
+                            </div>
+                            <div class="row" style="width:100%;border:1px solid #000;height:100px; border-top:0px;">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </ion-list>
+    </ion-content>-->
+</ion-view>

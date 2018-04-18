@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>gps</title>
+
+    <script type="text/javascript" charset="utf-8" src="native.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+        	alert("onDeviceReady");
+        	//alert(navigator);
+        	//alert(navigator.geolocation);
+        	//alert(navigator.geolocation.getCurrentPosition);
+            xsfGeolocation.getCurrentPosition(onSuccess, onError);
+        }
+        function onSuccess(position) {
+        	alert("position:" + position);
+            var element = document.getElementById('geolocation');
+            element.innerHTML = '纬度: '           + position.coords.latitude              + '<br />' +
+                    '经线: '          + position.coords.longitude             + '<br />' +
+                    '高度: '           + position.coords.altitude              + '<br />' +
+                    '精确度: '           + position.coords.accuracy              + '<br />' +
+                    '高度 精确度: '  + position.coords.altitudeAccuracy      + '<br />' +
+                    '罗盘航向: '            + position.coords.heading               + '<br />' +
+                    '加速度: '              + position.coords.speed                 + '<br />' +
+                    '地址: '              + position.coords.address                 + '<br />' +
+                    '时间戳1: '          + position.timestamp                    + '<br />';
+        }
+        function onError(error) {
+        	alert("error:" + error);
+            alert('code: '    + error.code    + '\n' +
+                    'message: ' + error.message + '\n');
+        }
+
+    </script>
+</head>
+<body>
+<p id="geolocation">gps</p>
+</body>
+</html>

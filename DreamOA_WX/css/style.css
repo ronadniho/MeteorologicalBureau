@@ -1,0 +1,219 @@
+/*浅灰色背景，示例加到content上了*/
+/*顶部搜索条兼容修改*/
+.bar-header .item-input-wrapper input[type="search"] {
+  background: transparent;
+}
+.red {
+  color: red;
+  font-weight: 600;
+}
+.background_gray {
+  background-color: #ddd;
+}
+.background_white {
+  background-color: #fff;
+}
+.lt {
+  float: left;
+}
+.rt {
+  float: right;
+}
+.clr {
+  display: table;
+  content: '';
+  clear: both;
+}
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+  padding: 0;
+}
+@media screen and (min-width: 320px) {
+  html {
+    font-size: 50px;
+  }
+}
+@media screen and (min-width: 360px) {
+  html {
+    font-size: 56.25px;
+  }
+}
+@media screen and (min-width: 375px) {
+  html {
+    font-size: 58.59px;
+  }
+}
+@media screen and (min-width: 400px) {
+  html {
+    font-size: 62.5px;
+  }
+}
+@media screen and (min-width: 414px) {
+  html {
+    font-size: 64.68px;
+  }
+}
+@media screen and (min-width: 440px) {
+  html {
+    font-size: 68.75px;
+  }
+}
+@media screen and (min-width: 480px) {
+  html {
+    font-size: 75px;
+  }
+}
+@media screen and (min-width: 520px) {
+  html {
+    font-size: 81.25px;
+  }
+}
+@media screen and (min-width: 560px) {
+  html {
+    font-size: 87.5px;
+  }
+}
+@media screen and (min-width: 600px) {
+  html {
+    font-size: 93.75px;
+  }
+}
+@media screen and (min-width: 640px) {
+  html {
+    font-size: 100px;
+  }
+}
+@media screen and (min-width: 680px) {
+  html {
+    font-size: 106.25px;
+  }
+}
+@media screen and (min-width: 720px) {
+  html {
+    font-size: 112.5px;
+  }
+}
+@media screen and (min-width: 760px) {
+  html {
+    font-size: 118.75px;
+  }
+}
+@media screen and (min-width: 800px) {
+  html {
+    font-size: 125px;
+  }
+}
+@media screen and (min-width: 960px) {
+  html {
+    font-size: 150px;
+  }
+}
+/*登录页*/
+ion-content.bg-gray {
+  background: #f8f8f8;
+}
+ion-content.bg-gray .list {
+  margin-bottom: .41rem;
+}
+ion-content.bg-gray .list .logo {
+  text-align: center;
+}
+ion-content.bg-gray .list .logo img {
+  margin-top: 1.17rem;
+  margin-bottom: .69rem;
+  width: 1.55rem;
+  height: 1.55rem;
+}
+ion-content.bg-gray .list .input-item {
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 .35rem;
+  background-color: #ffffff;
+}
+ion-content.bg-gray .list .input-item .items {
+  width: 100%;
+  position: relative;
+}
+ion-content.bg-gray .list .input-item .items span {
+  position: absolute;
+  display: block;
+  width: .68rem;
+  height: .81rem;
+  background: url("../img/component/loginMobile/user.png") no-repeat 50% 50%;
+  background-size: .32rem;
+}
+ion-content.bg-gray .list .input-item .items input {
+  width: 100%;
+  padding-left: .68rem;
+  height: .81rem;
+  font-size: .25rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+ion-content.bg-gray .list .input-item .items:last-child input {
+  border-bottom: 0;
+}
+ion-content.bg-gray .list .input-item .items:last-child span {
+  background-image: url("../img/component/loginMobile/pwd.png");
+}
+ion-content.bg-gray .submit {
+  margin-bottom: .39rem;
+}
+ion-content.bg-gray .submit button {
+  border: 0;
+  border-radius: 5px;
+  background-color: #38adff;
+  color: #ffffff;
+  font-size: .26rem;
+  width: 5.98rem;
+  height: .67rem;
+}
+ion-content.bg-gray .submit button:disabled {
+  background-color: #afdeff;
+}
+ion-content.bg-gray .help {
+  width: 100%;
+  padding: 0 .27rem 0 .23rem;
+}
+ion-content.bg-gray .help div.rt {
+  text-align: right;
+}
+ion-content.bg-gray .help span {
+  font-size: .25rem;
+  color: #999;
+}
+ion-content.bg-gray .help #myCheck + label {
+  background-color: white;
+  border: 1px solid #d3d3d3;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 20px;
+}
+ion-content.bg-gray .help #myCheck:checked + label {
+  background-color: #38adff;
+  color: #ffffff;
+  border: 0;
+  border-radius: 3px;
+}
+ion-content.bg-gray .help #myCheck:checked + label:after {
+  content: "\2714";
+}
+ion-content.bg-gray .help input[type="checkbox"] {
+  display: none;
+}
+/*首页*/

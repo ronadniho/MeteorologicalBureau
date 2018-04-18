@@ -1,0 +1,187 @@
+html { overflow-y: scroll; }
+
+body { margin: 0 auto; color: #333333; background-color: #f0f0f0; font: 22px/1.5 Microsoft Yahei, sans-serif; text-align: center; }
+
+p, dl, dt, dd, table, td, th, input, img, form, div, span, ul, ol, li, h1, h2, h3, h4, h5, h6, select, input { margin: 0; padding: 0; font-weight: normal; }
+
+img, iframe { border: none; }
+
+ul, li, ol { list-style: none; }
+
+img { vertical-align: middle; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+input { outline: none; }
+
+em, b, i, strong, cite, sub, sup, font { font-weight: normal; font-style: normal; font-size: 100%; }
+
+a { color: #333333; text-decoration: none; outline: none; }
+a:hover { color: #333333; }
+
+.clearfix, .calendar .btitle, .calGrid ol { zoom: 1; }
+.clearfix:before, .calendar .btitle:before, .calGrid ol:before { content: ""; display: table; }
+.clearfix:after, .calendar .btitle:after, .calGrid ol:after { content: ""; display: table; clear: both; }
+
+.clear { clear: both; }
+
+.c-f00000 { color: #f00000; }
+
+input, button { background: none; border: none; font-family: Microsoft Yahei; }
+
+.btn-gray { *zoom: 1; background-image: -webkit-gradient(linear, left top, left bottom, from(whitesmoke), to(#e5e5e5)); background-image: -webkit-linear-gradient(top, whitesmoke, #e5e5e5); background-image: -moz-linear-gradient(top, whitesmoke, #e5e5e5); background-image: -ms-linear-gradient(top, whitesmoke, #e5e5e5); background-image: -o-linear-gradient(top, whitesmoke, #e5e5e5); background-image: linear-gradient(top, whitesmoke, #e5e5e5); filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#FFF5F5F5", EndColorStr="#FFE5E5E5"); color: #666; border: 1px solid #c1c1c1; }
+
+@media only screen { .header .i_prev, .header .i_home { width: 41px; height: 44px; background-size: 124px 44px; }
+  .header .logoTit { width: 126px; height: 44px; background-size: 126px 44px; } }
+@media only screen and (min-width: 480px) { .header .i_prev, .header .i_home { width: 62px; height: 66px; background-size: 186px 66px; }
+  .header .logoTit { width: 190px; height: 66px; background-size: 190px 66px; } }
+@media only screen and (max-width: 319px) { .header .i_prev, .header .i_home { width: 31px; height: 33px; background-size: 93px 33px; }
+  .header .logoTit { width: 95px; height: 33px; background-size: 95px 33px; } }
+
+.module { border: 1px solid #cbcbcb; }
+
+.calendar .btitle { background-color: #ececec; text-align: center; }
+.calendar .selectDate { float: left; }
+.calendar .selectDate li { float: left; color: #666; }
+.calendar .selectDate .prev i, .calendar .selectDate .next i { display: inline-block; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAVAQMAAABIYp33AAAAA3NCSVQICAjb4U/gAAAABlBMVEX///+np6cgAYT+AAAAAnRSTlMA/1uRIrUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAAF3RFWHRDcmVhdGlvbiBUaW1lADIwMTQuMS4xN8UgzUoAAAA4SURBVAiZY2AoYGD4wMD4gYH5AQP7AQb+BgZ5BgY7BoYaBoYfIBkQWQMWAYoDZYFqgCqB6kFyBQCsLg2nWbfQPwAAAABJRU5ErkJggg==) no-repeat; }
+.calendar .selectDate .next i { *zoom: 1; -ms-filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=-1, M12=-0.0, M21=0.0, M22=-1); filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=-1, M12=-0.0, M21=0.0, M22=-1); -moz-transform: rotate(180deg); -o-transform: rotate(180deg); -webkit-transform: rotate(180deg); -ms-transform: rotate(180deg); transform: rotate(180deg); }
+.calendar .backToday { float: right; }
+
+.calGrid table { width: 100%; }
+.calGrid th, .calGrid td { border: solid #dedede; border-width: 1px 0 0 1px; }
+.calGrid th:first-child, .calGrid td:first-child { border-left: 0; }
+.calGrid .thead th { color: #666; background-color: #f5f5f5; }
+.calGrid .thead th.weekend { color: #F00000; }
+.calGrid .tbody td { background-color: #FFF; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+.calGrid .tbody td div { position: relative; overflow: hidden; }
+.calGrid .tbody td strong, .calGrid .tbody td span, .calGrid .tbody td i { display: block; }
+.calGrid .tbody td strong { color: #000; font-weight: bold; }
+.calGrid .tbody td span { color: #999; }
+.calGrid .tbody td i { position: absolute; left: 0px; top: 0px; color: #fff; overflow: hidden; }
+.calGrid .tbody td.weekend strong { color: #F00000; }
+.calGrid .tbody td.tradition { background-color: #F5F5F5; }
+.calGrid .tbody td.tradition strong, .calGrid .tbody td.tradition span { color: #c3c3c3; }
+.calGrid .tbody td.tradition i { background-color: #E45D51; }
+.calGrid .tbody td.holidays i { background-color: #E45D51; }
+.calGrid .tbody td.works i { background-color: #679B54; }
+.calGrid .tbody td.selected { z-index: 1; }
+.calGrid .tbody td.selected div { border: 2px solid #409CEA; left: 0px; top: 0px; z-index: 1; }
+.calGrid .tbody td.today { z-index: 1; }
+.calGrid .tbody td.today div { background-color: #409CEA; z-index: 1; }
+.calGrid .tbody td.today strong, .calGrid .tbody td.today span { color: #fff; }
+.calGrid .tbody td.today i { background-color: #2885CE; }
+.calGrid .tbody td:last-child.selected { padding: 0 1px; }
+.calGrid .tbody td:last-child.selected div { left: -2px; }
+
+.info { color: #666; background-color: #FFF; }
+.info .col-1 { float: left; border-right: 1px dashed #cbcbcb; }
+.info .tday { color: #2B97EC; }
+.info .col-2 { overflow: hidden; zoom: 1; }
+.info .ganzhi { text-align: left; }
+.info .ganzhi .jiri { color: #F00000; }
+.info .ganzhi .jiri a { color: #F00000; }
+.info .almanac { text-align: left; border-top: 1px dashed #cbcbcb; overflow: hidden; }
+.info .almanac li { position: relative; overflow: hidden; zoom: 1; }
+.info .almanac a { display: inline-block; }
+.info .almanac .icon { position: absolute; left: 0; top: 1px; background-repeat: no-repeat; }
+
+.quickLnk { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+.quickLnk .ulLinksB { text-align: center; }
+.quickLnk .ulLinksB li { width: 33%; text-align: left; display: -moz-inline-stack; display: inline-block; vertical-align: middle; overflow: hidden; }
+.quickLnk .ulLinksB li a { display: -moz-inline-stack; display: inline-block; vertical-align: middle; }
+.quickLnk .ulLinksB li a:hover { background-color: #d6d5d5; }
+@media only screen { .quickLnk .ulLinksB { padding: 8px 0 0; }
+  .quickLnk .ulLinksB li { margin: 8px 0 0; }
+  .quickLnk .ulLinksB li a { font-size: 14px; height: 32px; padding: 0 4px; line-height: 32px; } }
+@media only screen and (min-width: 480px) { .quickLnk .ulLinksB { padding: 12px 0 0; }
+  .quickLnk .ulLinksB li { margin: 12px 0 0; }
+  .quickLnk .ulLinksB li a { font-size: 22px; height: 48px; padding: 0 6px; line-height: 48px; } }
+@media only screen and (max-width: 319px) { .quickLnk .ulLinksB { padding: 6px 0 0; }
+  .quickLnk .ulLinksB li { margin: 6px 0 0; }
+  .quickLnk .ulLinksB li a { font-size: 11px; height: 24px; padding: 0 3px; line-height: 24px; } }
+.quickLnk a { color: #666; }
+.quickLnk a:visited, .quickLnk a:hover { color: #666; }
+
+@media only screen { body { font-size: 14px; }
+  .btn-gray { height: 29px; line-height: 29px; -webkit-radius: 3px; -moz-radius: 3px; border-radius: 3px; }
+  .module { margin: 6px 6px 0; }
+  .calendar .btitle { padding: 3px; }
+  .calendar .selectDate .prev, .calendar .selectDate .next { width: 26px; }
+  .calendar .selectDate .prev i, .calendar .selectDate .next i { width: 8px; height: 14px; background-size: 8px 14px; margin-top: 8px; }
+  .calendar .selectDate .date { width: 103px; height: 29px; line-height: 29px; font-size: 16px; }
+  .calendar .backToday { width: 81px; font-size: 14px; }
+  .calGrid .thead th { font-size: 12px; height: 24px; line-height: 24px; }
+  .calGrid .tbody td div { padding: 6px 0; height: 34px; }
+  .calGrid .tbody td strong { font-size: 17px; line-height: 22px; margin-bottom: 1px; }
+  .calGrid .tbody td span { font-size: 10px; line-height: 14px; }
+  .calGrid .tbody td i { font-size: 9px; width: 10px; height: 10px; line-height: 10px; }
+  .calGrid .tbody td.selected div { padding: 4px 0; }
+  .info { padding: 2px 0; line-height: 16px; font-size: 10px; }
+  .info .col-1, .info .col-2 { padding-left: 5px; padding-right: 5px; }
+  .info .col-2 { padding-top: 2px; }
+  .info .tday { font-size: 36px; height: 44px; line-height: 44px; }
+  .info .week { font-size: 12px; }
+  .info .ganzhi { height: 26px; line-height: 13px; padding-left: 2px; text-indent: -5px; }
+  .info .ganzhi span:nth-child(3) { margin: 0 6px; }
+  .info .almanac { padding: 8px 0 6px; margin-top: 3px; height: 52px; }
+  .info .almanac ul { margin: 0 3px; }
+  .info .almanac li { height: 12px; line-height: 12px; padding-left: 22px; margin-bottom: 8px; }
+  .info .almanac .icon { width: 10px; height: 10px; background-size: 10px 10px; }
+  .info .almanac a { margin: 0 4px; }
+  .quickLnk { margin: 0 4px; } }
+@media only screen and (min-width: 480px) { body { font-size: 22px; }
+  .btn-gray { height: 44px; line-height: 44px; -webkit-radius: 5px; -moz-radius: 5px; border-radius: 5px; }
+  .module { margin: 10px 10px 0; }
+  .calendar .btitle { padding: 5px; }
+  .calendar .selectDate .prev, .calendar .selectDate .next { width: 39px; }
+  .calendar .selectDate .prev i, .calendar .selectDate .next i { width: 12px; height: 21px; background-size: 12px 21px; margin-top: 12px; }
+  .calendar .selectDate .date { width: 155px; height: 44px; line-height: 44px; font-size: 24px; }
+  .calendar .backToday { width: 122px; font-size: 22px; }
+  .calGrid .thead th { font-size: 18px; height: 37px; line-height: 37px; }
+  .calGrid .tbody td div { padding: 10px 0; height: 52px; }
+  .calGrid .tbody td strong { font-size: 26px; line-height: 32px; margin-bottom: 2px; }
+  .calGrid .tbody td span { font-size: 16px; line-height: 20px; }
+  .calGrid .tbody td i { font-size: 14px; width: 16px; height: 16px; line-height: 16px; }
+  .calGrid .tbody td.selected div { padding: 8px 0; }
+  .info { padding: 4px 0; line-height: 24px; font-size: 16px; }
+  .info .col-1, .info .col-2 { padding-left: 8px; padding-right: 8px; }
+  .info .col-2 { padding-top: 3px; }
+  .info .tday { font-size: 55px; height: 66px; line-height: 66px; }
+  .info .week { font-size: 18px; }
+  .info .ganzhi { height: 40px; line-height: 20px; padding-left: 4px; text-indent: -8px; }
+  .info .ganzhi span:nth-child(3) { margin: 0 10px; }
+  .info .almanac { padding: 12px 0 10px; margin-top: 5px; height: 78px; }
+  .info .almanac ul { margin: 0 5px; }
+  .info .almanac li { height: 18px; line-height: 18px; padding-left: 34px; margin-bottom: 12px; }
+  .info .almanac .icon { width: 16px; height: 16px; background-size: 16px 16px; }
+  .info .almanac a { margin: 0 6px; }
+  .quickLnk { margin: 0 6px; } }
+@media only screen and (max-width: 319px) { body { font-size: 11px; }
+  .btn-gray { height: 22px; line-height: 22px; -webkit-radius: 2px; -moz-radius: 2px; border-radius: 2px; }
+  .module { margin: 5px 5px 0; }
+  .calendar .btitle { padding: 2px; }
+  .calendar .selectDate .prev, .calendar .selectDate .next { width: 19px; }
+  .calendar .selectDate .prev i, .calendar .selectDate .next i { width: 6px; height: 10px; background-size: 6px 10px; margin-top: 6px; }
+  .calendar .selectDate .date { width: 77px; height: 22px; line-height: 22px; font-size: 12px; }
+  .calendar .backToday { width: 61px; font-size: 11px; }
+  .calGrid .thead th { font-size: 9px; height: 18px; line-height: 18px; }
+  .calGrid .tbody td div { padding: 5px 0; height: 26px; }
+  .calGrid .tbody td strong { font-size: 13px; line-height: 17px; margin-bottom: 1px; }
+  .calGrid .tbody td span { font-size: 8px; line-height: 11px; }
+  .calGrid .tbody td i { font-size: 7px; width: 8px; height: 8px; line-height: 8px; }
+  .calGrid .tbody td.selected div { padding: 3px 0; }
+  .info { padding: 2px 0; line-height: 12px; font-size: 8px; }
+  .info .col-1, .info .col-2 { padding-left: 4px; padding-right: 4px; }
+  .info .col-2 { padding-top: 1px; }
+  .info .tday { font-size: 27px; height: 33px; line-height: 33px; }
+  .info .week { font-size: 9px; }
+  .info .ganzhi { height: 20px; line-height: 10px; padding-left: 2px; text-indent: -4px; }
+  .info .ganzhi span:nth-child(3) { margin: 0 5px; }
+  .info .almanac { padding: 6px 0 5px; margin-top: 2px; height: 39px; }
+  .info .almanac ul { margin: 0 2px; }
+  .info .almanac li { height: 9px; line-height: 9px; padding-left: 17px; margin-bottom: 6px; }
+  .info .almanac .icon { width: 8px; height: 8px; background-size: 8px 8px; }
+  .info .almanac a { margin: 0 3px; }
+  .quickLnk { margin: 0 3px; } }
+  
+  .green{color: #009900;}

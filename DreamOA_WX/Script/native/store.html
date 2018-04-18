@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+        <script type="text/javascript" charset="utf-8" src="native.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            alert('onDeviceReady');
+            
+        }
+    function test() {
+        alert('test_get');
+        debugger
+        xsfStore.set("test","test_value",
+                    function (result) {
+                    },
+                    function (error) {
+                    alert(error);
+                    }
+                    );
+        /*xsfStore.set("test",1,
+                    function (result) {
+                    },
+                    function (error) {
+                    alert(error);
+                    }
+                    );*/
+        /*xsfStore.set("test",false,
+                    function (result) {
+                    },
+                    function (error) {
+                    alert("open failed: " + error);
+                    }
+                    );*//*
+        xsfStore.set("test",1.1,
+                    function (result) {
+                    alert(result);
+                    },
+                    function (error) {
+                    alert("open failed: " + error);
+                    }
+                    );*/
+        xsfStore.get("test",
+                    function (result) {
+                    alert(result);
+                    },
+                    function (error) {
+                    alert("open failed: " + error);
+                    }
+                    );
+        xsfStore.remove("test",
+                    function (result) {
+                    },
+                    function (error) {
+                    alert("open failed: " + error);
+                    }
+                    );
+        xsfStore.get("test",
+                    function (result) {
+                    alert("已经删除：" + result);
+                    },
+                    function (error) {
+                    alert("open failed: " + error);
+                    }
+                    );
+                                 
+    }
+    </script>
+  </head>
+  <body>
+    <p><a href="#" onclick="test()">test</a></p>
+  </body>
+</html>

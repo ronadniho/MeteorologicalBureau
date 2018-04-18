@@ -1,0 +1,17 @@
+﻿<ion-view title="同学录">
+    <ion-header-bar align-title="center" class="bar bar-subheader">
+        <label class="item item-input" style="padding:2px">
+            <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+            <input type="text" placeholder="搜索" ng-model="query">
+        </label>
+    </ion-header-bar>
+    <ion-content delegate-handle="myScroll">
+        <ion-list>
+            <ion-item class="item-icon-left item-icon-right" ng-repeat="user in users|filter:query" ng-click="show(user.phone)">
+                <i class="icon ion-ios7-person icon-left"></i>
+                <h2>{{user.uname}}</h2>
+                <a class="icon ion-ios7-telephone icon-right" style="color:#498f24" href="tel:{{user.phone}}" ng-if="user.phone!=null"></a>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

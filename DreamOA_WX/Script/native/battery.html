@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>电池</title>
+
+<script type="text/javascript" charset="utf-8" src="native.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+	//debugger;
+    document.addEventListener("deviceready", onDeviceReady, false);
+    ///
+    function onDeviceReady() {
+        alert('onDeviceReady');
+    }
+window.addEventListener("batterystatus", onBatteryStatus, false);
+
+function onBatteryStatus(info) {
+    // Handle the online event
+    console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
+}
+
+    window.addEventListener("batterycritical", onBatteryCritical, false);
+    function onBatteryCritical(info) {
+        alert("Battery Level Critical " + info.level + "%\nRecharge Soon!");
+    }
+    window.addEventListener("batterylow", onBatteryLow, false);
+    function onBatteryLow(info) {
+        alert("Battery Level Low " + info.level + "%");
+    }
+    </script>
+
+  </head>
+  <body>
+
+    <p>battery</p>
+<p><a href="index.html">index</a></p>
+  </body>
+</html>

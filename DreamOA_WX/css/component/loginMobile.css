@@ -1,0 +1,94 @@
+ion-content.bg-gray {
+  background: #f8f8f8;
+}
+ion-content.bg-gray .list {
+  margin-bottom: .41rem;
+}
+ion-content.bg-gray .list .logo {
+  text-align: center;
+}
+ion-content.bg-gray .list .logo img {
+  margin-top: 1.17rem;
+  margin-bottom: .69rem;
+  width: 1.55rem;
+  height: 1.55rem;
+}
+ion-content.bg-gray .list .input-item {
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 .35rem;
+  background-color: #ffffff;
+}
+ion-content.bg-gray .list .input-item .items {
+  width: 100%;
+  position: relative;
+}
+ion-content.bg-gray .list .input-item .items span {
+  position: absolute;
+  display: block;
+  width: .68rem;
+  height: .81rem;
+  background: url("../img/component/loginMobile/user.png") no-repeat 50% 50%;
+  background-size: .32rem;
+}
+ion-content.bg-gray .list .input-item .items input {
+  width: 100%;
+  padding-left: .68rem;
+  height: .81rem;
+  font-size: .25rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+ion-content.bg-gray .list .input-item .items:last-child input {
+  border-bottom: 0;
+}
+ion-content.bg-gray .list .input-item .items:last-child span {
+  background-image: url("../img/component/loginMobile/pwd.png");
+}
+ion-content.bg-gray .submit {
+  margin-bottom: .39rem;
+}
+ion-content.bg-gray .submit button {
+  border: 0;
+  border-radius: 5px;
+  background-color: #38adff;
+  color: #ffffff;
+  font-size: .26rem;
+  width: 5.98rem;
+  height: .67rem;
+}
+ion-content.bg-gray .submit button:disabled {
+  background-color: #afdeff;
+}
+ion-content.bg-gray .help {
+  width: 100%;
+  padding: 0 .27rem 0 .23rem;
+}
+ion-content.bg-gray .help div.rt {
+  text-align: right;
+}
+ion-content.bg-gray .help span {
+  font-size: .25rem;
+  color: #999;
+}
+ion-content.bg-gray .help #myCheck + label {
+  background-color: white;
+  border: 1px solid #d3d3d3;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 20px;
+}
+ion-content.bg-gray .help #myCheck:checked + label {
+  background-color: #38adff;
+  color: #ffffff;
+  border: 0;
+  border-radius: 3px;
+}
+ion-content.bg-gray .help #myCheck:checked + label:after {
+  content: "\2714";
+}
+ion-content.bg-gray .help input[type="checkbox"] {
+  display: none;
+}

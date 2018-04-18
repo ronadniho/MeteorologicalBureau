@@ -1,0 +1,25 @@
+﻿<ion-view>
+    <go-back my-title="课程列表"></go-back>
+    <ion-content class="has-header">
+        <div class="card" ng-repeat="datadate in dataSource">
+            <div class="bar bar-assertive title item item-divider">
+                {{datadate.time | date:'yyyy-MM-dd'}}
+            </div>
+            <div class="item item-text-wrap" ng-repeat="dataRow in datadate.data" ng-click="goAnswer(dataRow)">
+                <div style="color:black;font-weight:bold;">{{dataRow.kcname}}</div>
+                <div class="pull-left">
+                    <span class="ion-ios-person-outline" style="font-size:25px;"></span>
+                </div>
+                <div class="pull-left">
+                    <span style="height:25px;display:inline-table;line-height:25px;margin-left:10px;">{{dataRow.zjr}}</span>
+                </div>
+                <div style="clear:both;">
+                </div>
+            </div>
+        </div>
+        <div ng-show="dataSource.length==0" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+            暂无课程
+        </div>
+    </ion-content>
+</ion-view>

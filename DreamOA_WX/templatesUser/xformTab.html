@@ -1,0 +1,333 @@
+<link href="../css/asf.ios.css" rel="stylesheet" />
+<style>
+	.inputview {
+		border-top: 1px solid #BBB;
+		width: 100%;
+		height: 45px;
+		/* position: fixed; */
+		top: 100%;
+		/* margin-top: -45px; */
+		background: #F1F1F1;
+		text-shadow: none;
+		z-index: 10;
+	}
+	
+	.inputview-bar {
+		padding: 0 0 5px 0;
+	}
+	
+	.inputview-bar-op {
+		float: right;
+		width: 90px;
+		/* width: 50px; */
+		-webkit-user-select: none;
+	}
+	
+	.inputview-morebtn-plus {
+		background: url("../img/inputview/inputview_add.png") no-repeat center center;
+		background-size: 75% 75%;
+	}
+	
+	.platform-ios.platform-cordova:not(.fullscreen) .tabs-top> .tabs,
+	.platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
+		top: 35px;
+	}
+	
+	.tabs-striped.tabs-background-positive .tabs {
+		margin-left: -10px;
+	}
+	
+	.popup-container .popup {
+		width: 100%;
+	}
+	
+	.breadcrumb> li+ li:before {
+		padding: 0 5px;
+		color: #ccc;
+		content: "/\00a0";
+	}
+	
+	.breadcrumb-header-item:active {
+		background-color: #ddd;
+	}
+	
+	.breadcrumb> li {
+		display: inline-block;
+	}
+	
+	.breadcrumb {
+		padding: 8px 15px;
+		margin-bottom: 20px;
+		list-style: none;
+		background-color: #f5f5f5;
+		border-radius: 4px;
+	}
+	
+	#selectUsersDom .icon-photo {
+		height: 2.5rem;
+		width: 2.3rem;
+	}
+	
+	img {
+		vertical-align: middle;
+	}
+	
+	.popup-container .popup {
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+		max-height: 90%;
+		border-radius: 0px;
+		background-color: rgba(255, 255, 255, 0.9);
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -moz-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-direction: normal;
+		-webkit-box-orient: vertical;
+		-webkit-flex-direction: column;
+		-moz-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+	
+	.popup-body {
+		padding: 10px;
+		overflow: scroll;
+		height: 80%;
+	}
+	
+	.checkbox input,
+	.checkbox-icon {
+		width: 8px;
+		height: 12px;
+	}
+	
+	.checkbox input:before,
+	.checkbox-icon:before {
+		width: 17px;
+		height: 17px;
+		margin-top: 4px;
+		background: #eee;
+	}
+	
+	.ion-android-person:before {
+		font-size: 20px;
+		color: #717f8f;
+	}
+	
+	.selectedStudent {
+		display: inline-block;
+		padding: 16px 50px;
+	}
+	
+	.button.button-positive {
+		border-color: #0c60ee !important;
+		background-color: #387ef5 !important;
+	}
+	
+	.tabs-striped .tab-item.tab-item-active {
+		border-color: #18acef;
+		color: #18acef;
+	}
+	
+	.tabs-striped .activated {
+		color: #18acef;
+	}
+	
+	.tabs-striped .tab-item.activated {
+		border-color: #18acef;
+	}
+
+</style>
+<ion-view>
+	<ion-header-bar align-title="center" class="bar-positive">
+		<div class="buttons">
+			<button class="button button-icon icon ion-ios-arrow-back" ng-click="goback();"></button>
+			<span style="margin-left:40px;margin-top:10px;font-size: 17px;"></span>
+		</div>
+		<h1 class="title">文件</h1>
+		<div class="buttons">
+			<button ng-show="{{issue}}" class="button" ng-click="readItem();">阅毕</button>
+			<!--
+            <button ng-show="{{sendFolwState}}"  class="button" ng-click="send();">发送</button>
+            <button ng-show="{{issue}}"  class="button" ng-click="diviedReview();">分阅</button>
+             <button ng-show="{{xformButtonSate}}"  class="button" ng-click="toggleXFormMenu();">菜单</button>
+            <button ng-show="{{xformButtonSate}}"  class="button" ng-click="saveForm();">保存</button>
+            -->
+			<!--<button ng-show="{{attentionState}}" class="button" ng-click="clkAttention();"><img height=32 ng-src="{{isAttentionPng}}"></img></button>-->
+			<!--<button ng-show="{{showBackFolwState}}" class="button" ng-click="showBackReason();"><img height=32 ng-src="../img/texticon_tuihuiyuanyin.png"></img></button>
+            <button ng-show="{{sendFolwState}}" class="button" ng-click="send();"><img height=32 src="../img/texticon_send.png"></img></button>
+            <button ng-show="{{backFolwState}}" class="button" ng-click="flowBack();"><img height=32 src="../img/texticon_fall_back.png"></img></button>-->
+			<!-- <button ng-show="{{xformButtonSate}}"  class="button" ng-click="toggleXFormMenu();">菜单</button> -->
+			<!--<button ng-if="xformButtonSate" class="button" ng-click="saveForm();"><img height=32 src="../img/save_texticon.png"></img></button>
+            <button ng-show="{{todoPartReviewState}}" id="xformFenY1" class="button" ng-click="diviedTodoReview();"><img height=32 src="../img/texticon_feny.png"></img></button>
+            <button ng-show="{{issue}}" id="xformFenY2" class="button" ng-click="diviedReview();"><img height=32 src="../img/texticon_feny.png"></img></button>-->
+			<!-- <button ng-show="{{issue}}"  class="button" ng-click="readItem();"><img  height=32 src="../img/texticon_yueb.png"></img></button> -->
+			<!--<button ng-show="{{reviewdState}}" class="button" ng-click="{{reviewdAction}}"><img height=32 src="../img/texticon_yueb.png"></img></button>-->
+			<!-- 阅毕 -->
+		</div>
+	</ion-header-bar>
+	<ion-tabs title="表单" class="tabs-striped tabs-top tabs-icon-only" class="has-header">
+
+		<ion-tab title="表单" on-select="hideSave(true,0)">
+			<ion-view class="xform-view">
+				<ion-content scroll="true" overflow-scroll="true">
+					<div class="xform_container">
+						<iframe id="xformFrame" width="100%" height="100%" ng-src="{{xformURL}}"></iframe>
+					</div>
+				</ion-content>
+			</ion-view>
+		</ion-tab>
+
+		<ion-tab title="表单附件" ng-if="isShowAttach" on-select="hideSave(false,0)">
+			<ion-view>
+				<!--<ion-content style="background: #ebebeb;">-->
+				<ion-content>
+					<ion-list>
+						<div ng-repeat="file in files">
+							<div class="item item-divider todoAttachTitle" ng-if="file.hasFile">{{file.name}}</div>
+							<div class="item item-icon-left" ng-if="!file.hasFile" ng-click='openfile(file)'>
+								<h3 class="todoAttachName">{{file.name}}</h3>
+								<i class="icon icon-left ion-document-text">
+                                    <!--<img src="{{file.img}}" class="app_icon" />-->
+                                </i>
+							</div>
+						</div>
+					</ion-list>
+
+					<!--<div ng-show="!isExistAttachments">
+                        <img style="width:50%;height:50%;margin-top:30%;margin-left:30%;" src="../img/blank_page.png"></img>
+                        <span style="width:50%;height:50%;margin-top:30px;margin-left:40%;font-weight:bold">暂无内容...</span>
+                    </div>-->
+
+					<div ng-if="!isExistAttachments" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+						<i class="ion-clipboard" style="font-size:90px"></i><br /><br /> 暂无表单附件
+					</div>
+				</ion-content>
+			</ion-view>
+		</ion-tab>
+		
+		<ion-tab title="审批意见" ng-if="isShowComment" on-select="hideSave(false,1)">
+			<ion-view>
+				<ion-content ng-class="{true: 'asf-has-inputview' }[inputviewContainerState]">
+					<ion-list>
+						<div ng-repeat="comment in comments">
+							<div class="item spyj_list">
+								<div class="clearfix">
+									<div class="todoCommentsLeft">
+										<!--<i class="icon icon-left"><img class='attach_icon' src='../img/drawable-hdpi/user_default_icon.png' err-src="{{defaultUserIcon }}"></i>-->
+										<i class="icon ion-android-person"></i>
+										<!--<span class="comment"> <h3>{{comment.itemsContent}}</h3> </span>-->
+									</div>
+									<h2 ng-if="comment.name" class="todoCommentsRight">
+                                        <span>{{comment.name}}</span>
+                                        <p class="time" ng-if="comment.time">
+                                            <img class='attach_icon' ng-if='comment.hasFile' ng-click='openAttachmentsList(comment.documents)' src='../img/drawable-hdpi/file_status_attachment.png'> {{comment.time}}
+                                        </p>
+                                    </h2>
+								</div>
+								<div class="comment todoCommentsContent" style="padding-top: 6px;">
+									<h3>{{comment.itemsContent}}</h3>
+								</div>
+							</div>
+						</div>
+					</ion-list>
+					<div ng-if="!isExistComments" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+						<i class="ion-clipboard" style="font-size:90px"></i><br /><br /> 暂无审批意见
+					</div>
+					<!--<div ng-if="!isExistComments">
+                        <div>
+                            <img style="width:50%;height:50%;margin-top:30%;margin-left:30%;" src="../img/blank_page.png"></img>
+                            <span style="width:50%;height:50%;margin-top:30%;margin-left:40%;font-weight:bold">暂无内容...</span>
+                        </div>
+                    </div>-->
+					<ion-content>
+			</ion-view>
+			<ion-footer-bar class="spyj_inputview" ng-if="inputviewContainerState" id="inputview-container" ng-class="{true: 'asf-inputview-container-expand', false: 'asf-inputview-container'}[inputViewMoreBlockActive]">
+				<inputview></inputview>
+			</ion-footer-bar>
+		</ion-tab>
+		<!-- 流程节点 -->
+
+		<ion-tab title="流程列表" ng-if="isShowComment" on-select="hideSave(false,1)">
+			<ion-view>				
+				<ion-content class="con_flow">
+					<ion-list>
+					<div class="workflow">	
+						<div class="line-d"><i></i></div>
+						<div class="workflow-box">	
+							
+							<div class="item section" ng-repeat="comment in flows">
+								<div class="date"> 
+									{{comment.date}}
+								</div>
+								<div class="dot" ng-class="{'dot-c01':$last}" ></div>
+								<div class="text">
+									<p class="text-tit"><i ng-click="btn(comment)" style="position: relative;z-index: 2;width: 28px;" ><img src="../img/arrow_right.png" alt="展开" ng-hide="comment.hide"><img src="../img/arrow_down.png" alt="展开" ng-show="comment.show"></i><span class="note">{{comment.actName}}</span>共{{comment.opinions.length}}人处理</p>
+									<span class="tips1" ng-class="{true:'tips1',false:'tips2'}[comment.classTip]">
+										<i class="tip_i" ></i>
+										<span class="tip_top" ></span>
+										<span  class="tip_content" ng-repeat="comment2 in comment.opinions">
+										    <div class="tip_content_sapn" ng-class="{true:'tip_content_sapn',false:'tip_content_sapn2'}[comment.className]" >{{comment2.name}}:{{comment2.content}}</div><br />
+										</span>										
+									</p>					
+								</div>
+							</div>
+						</div>
+					</div>
+					</ion-list>
+					<ion-content>
+			</ion-view>
+		</ion-tab>
+
+		<ion-tab title="关联文件" ng-if="isShowRelationFile" on-select="hideSave(false,1)">
+			<ion-view>
+				<ion-content ng-class="">
+					<ion-list>
+						<ion-item ng-repeat="item in relationFiles" class="todoContainer" ng-click="openRelationFile(item)">
+							<div class="todo_title size-16"><span ng-if="item.muser_id && item.muser_id != userId">【委】</span>{{item.itemsContent}}</div>
+							<div class="clearfix">
+								<p class="pull-left size-14 todo_inform">【{{item.moduleName}}】</p>
+								<p class="pull-right size-14 todo_person">
+									<span ng-bind="item.name"></span>
+									<i>|</i>
+									<span ng-bind="item.time"></span>
+								</p>
+							</div>
+						</ion-item>
+
+						<!--<ion-item ng-repeat="item in relationFiles" class="todoContainer" ng-click="openRelationFile(item)">
+                            <div class="todoNameTime">
+                                <div class="pull-left">
+                                    <i class="ion-android-person"></i>
+                                    <span ng-bind="item.name" class="size-14"></span>
+                                </div>
+                                <div class="pull-right">
+                                    <i class="ion-clock"></i>
+                                    <span ng-bind="item.time|date:'yyyy-MM-dd HH:mm'" class="size-14" style="color:#999;"></span>
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div class="todoTitle"> 
+                                <div class="item-text-wrap size-14"><span ng-if="item.muser_id && item.muser_id != userId">【委】</span>{{item.itemsContent}}</div>
+                            </div>
+                        </ion-item>-->
+					</ion-list>
+					<ion-content>
+			</ion-view>
+		</ion-tab>
+
+	</ion-tabs>
+	
+	<ion-footer-bar class="xFormTab_footer" ng-show="{{sendFolwState}}">
+		<div class="buttons" ng-click="send()">
+			<button class="button send"><i class="icon"></i>发送</button>
+		</div>
+		<div class="buttons" ng-click="saveForm()">
+			<button class="button save"><i class="icon"></i>保存</button>
+		</div>
+	</ion-footer-bar>
+</ion-view>

@@ -1,0 +1,44 @@
+﻿<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+<ion-view >
+    <go-back my-title="一卡通积点明细"></go-back>
+    <ion-content class="has-header consumeInfo">
+        <ion-list>
+            <ion-refresher on-refresh="doRefresh()"
+                           pulling-text="拖动刷新"
+                           refreshing-text="加载中"
+                           refreshing-icon="ion-loading-c">
+            </ion-refresher>
+            <div class="form-group selectTime_box">
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+                    <input placeholder="开始时间" class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input1" value="" />
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input placeholder="结束时间" class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input2" value="" />
+                <button class="btn btn-block" type="button" ng-click="search()">查询</button>
+            </div>            
+            <ion-item ng-repeat="item in comsumData">
+                    <div class="right">
+                        <div class="item-text-wrap grey size-12">{{item.inputdt|date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                        <div class="item-text-wrap size-18">{{item.money}}</div>
+                    </div>
+                <div class="line-h-30">
+                    <div class="item-text-wrap black size-18">在线支付</div>
+                    <div class="item-text-wrap size-12">余额：{{item.remainpoint}}</div>
+                </div>
+            </ion-item>
+        </ion-list>
+        <div ng-show="undisplay" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+            暂无消费明细
+        </div>
+        <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMore();" distance="1%" icon="ion-loading-d">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

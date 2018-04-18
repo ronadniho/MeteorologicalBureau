@@ -1,0 +1,36 @@
+<ion-view >
+	<ion-header-bar align-title="center" class="bar-positive">
+	  <div class="buttons">
+	    <button class="button button-icon icon ion-ios-arrow-back" ng-click="closeWin();">返回</button>
+	  </div>
+	  <h1 class="title" >{{viewTitle}}</h1>
+	  <div class="buttons">
+	  	<button  class="button" ng-click="replyNote();">发送</button>
+	  </div>
+	</ion-header-bar> 
+	
+	  	<ion-content >
+	  		<div class="list">
+				  <label class=" item item-input">
+				    <span class="input-label">收件人：</span>
+				     <span class="input-label">{{reply.item.createUserName}}</span>
+				  </label>
+				<div class="reply" >
+						<i class="reply-hock"></i>
+				 <div class="list-pro">
+				 	<label class="item item-input">
+				 	<textarea rows="4" cols="20" ng-model="reply.content"></textarea>
+					</label>
+					<label class="item">
+					-----原始内容------
+					</label>
+					<label style="border-color: #ddd;background-color: #fff;color: #444;position: relative;z-index: 2;display: block;margin: -1px;padding: 16px;border-width: 1px;border-style: solid;font-size: 16px;" style="color: #666;">
+					<div>{{reply.item.content}}</div>
+					<!--  <textarea  cols="20" ng-model="reply.item.content" disabled="disabled"></textarea>-->
+					</label>
+					
+				</div>
+				</div>
+			</div>
+	  	</ion-content>
+</ion-view>

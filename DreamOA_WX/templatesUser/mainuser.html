@@ -1,0 +1,103 @@
+﻿<style>
+    .add {
+        background-image: url('../Content/red.png');
+        background-repeat: no-repeat;
+        background-size: 10px 40px;
+        background-position: left bottom;
+    }
+
+    .mainpage .slider-pager {
+        font-size: 8px;
+        bottom: 0px;
+        display: block;
+    }
+
+    .ion-record:before {
+        color: #C00000;
+    }
+
+    #preview-textfield {
+        position: absolute;
+        top: 35px;
+        left: 54px;
+        width: 38px;
+        right: 0;
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+        font-family: 'Amaranth', sans-serif;
+    }
+</style>
+<ion-view title="" style="background:url(../content/bg.jpg)  no-repeat;background-size:100% 240px;">
+
+    <main-new-header-bar my-title="{{user.deptname}}"></main-new-header-bar>
+    <div class="has-header list">
+        <div style="border:none;text-align:center;background:rgba(0,0,0,0);background-size:100% 100%;">
+            <div style="color:#fff;">
+                <div ng-bind="user.username" style="display:inline-block;" class="size-12"></div>
+            </div>
+        </div>
+    </div>
+    <ion-content class="has-tabs" ng-style="myStyle">
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="拖动刷新"
+                       refreshing-text="加载中"
+                       refreshing-icon="ion-android-refresh">
+        </ion-refresher>
+        <ion-list class="index-top">
+            <ion-item>
+                <div class="canvas">
+                    <canvas width=100 height=80 id="foo"></canvas>
+                    <div id="preview-textfield"></div>
+                </div>
+                <div class="row-div">
+                    <span class="num">{{content[0].oddfare}}</span>
+                    <span>一卡通余额</span>
+                    <a ng-click="gotoOneCardList(user.workno)">消费明细</a>
+                </div>
+                <div class="row-div">
+                    <span class="num">{{user.cpoint}}</span>
+                    <span>一卡通积点</span>
+                    <a ng-click="gotoOneCard(user.workno)">积点明细</a>
+                </div>
+            </ion-item>
+        </ion-list>
+        <!--通知公告-->
+        <ion-list>
+            <div class="item item-padding-10 ">
+                <div class="row">
+                    <div class="col-20">
+                        <span class="size-18" ng-click="gotoJSGG()"><span class="notice_btn">公告</span> </span>
+                    </div>
+                    <div class="col-80 size-18" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis" ng-click="godetail()">
+
+                        <marquee direction="down" behavior="scroll" scrollamount="5" scrolldelay="300" loop="-1"
+                                 height="20" hspace="0" vspace="0">
+                            <font color=red class="size-18">
+                                {{ggxx}}
+                            </font>
+                        </marquee>
+
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+        <ion-list class="index-middle">
+            <ion-item class="item mainpage" style="border:none;padding:0;overflow:hidden;height:300px">
+                <ion-slide-box show-pager="false" auto-play="false">
+                    <ion-slide ng-repeat="dataPage in datameSource" style="padding:10px;">
+                        <div class="row" style="padding:0;height:95px;" ng-repeat="dataRows in dataPage.data">
+                            <div class="row-div" ng-if="dataRow.icontype=='all'||dataRow.icontype==user.type" ng-repeat="dataRow in dataRows.data" ng-click="gosub(dataRow)">
+                                <div style="position:relative;display:inline-block;">
+                                    <img class="img-50" ng-src="{{dataRow.image}}">
+                                    <div class="elective-number danru" id="{{iconitem.key}}" ng-if="dataRow.showicon&&iconitem.key==dataRow.keyname&&iconitem.val>0" ng-repeat="iconitem in iconvalArray">{{iconitem.val}}</div>
+                                </div>
+                                <p class="size-14">{{dataRow.title}}</p>
+                            </div>
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

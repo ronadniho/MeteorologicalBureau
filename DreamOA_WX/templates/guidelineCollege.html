@@ -1,0 +1,60 @@
+﻿<style type="text/css">
+    .tab-item.active, .tab-item.tab-item-active, .tab-item.activated {
+        margin-top: 0px !important;
+        border-top-width: 0px !important;
+        color: #ef473a;
+        border: 0 solid #ef473a !important;
+        border-bottom-width: 2px !important;
+        margin-bottom: 2px !important;
+    }
+
+    .anchorBL {
+        display: none;
+    }
+
+    #l-map {
+        height: 300px;
+        width: 100%;
+    }
+
+    #r-result, #r-result table {
+        width: 100%;
+    }
+</style>
+<ion-view title="学员须知">
+    <go-back my-title="学员须知"></go-back>
+    <ion-content overflow-scroll="false" class="has-header">
+        <div data-ng-init="load()">
+            <div class="tabs has-tabs tabs-striped tabs-color-assertive" style="position:inherit;border-top:none;">
+                <a class="tab-item" ng-class="{true: 'active', false: ''}[tab.active]" ng-repeat="tab in tabs" ng-click="go(tab)">
+                    <span style="font-weight:bold;font-size:1.3em"> {{tab.name}}</span>
+                </a>
+            </div>
+        </div>
+        <div ng-show="nowtab=='学员须知'" direction="y" style="width:100%;">
+            <div style="text-align:center;">
+                <ion-list>
+                    <div class="item text-left" style="position:relative;padding:0" ng-repeat="item in dataGuidelineCollegeSource" ng-click="onGuidelineClick(item)">
+                        <div style="display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;margin:15px 10px;margin-right:30px;">
+                            {{item.title}}
+                        </div>
+                        <div style="position:absolute;right:10px;top:15px;" class="more"><i class="icon ion-ios-arrow-forward"></i></div>
+                        <!--<span class="size-18;" >{{item.title}}</span>
+                        <span class="more" ><i class="icon ion-ios-arrow-forward"></i></span>-->
+                    </div>
+
+                </ion-list>
+            </div>
+        </div>
+        <div ng-show="nowtab=='地图导航'" direction="y" style="width:100%;">
+            <div id="l-map"></div>
+            <div style="text-align:center;" class="padding-top padding-bottom">
+                <button class="button button-assertive" ng-click="switchMapType('transit')">公交模式</button>
+                <button class="button button-assertive" ng-click="switchMapType('walking')">步行模式</button>
+                <button class="button button-assertive" ng-click="switchMapType('driving')">驾车模式</button>
+            </div>
+            <div id="r-result"></div>
+        </div>
+
+    </ion-content>
+</ion-view>

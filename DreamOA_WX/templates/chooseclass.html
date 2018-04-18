@@ -1,0 +1,94 @@
+﻿<style>
+    .tabs-striped .tab-item.tab-item-active {
+        color: #e60000;
+        border-color: #e60000;
+    }
+     .tab-item.active, .tab-item.tab-item-active, .tab-item.activated {
+        margin-top: 0px !important;
+        border-top-width: 0px !important;
+        color: #ef473a;
+        border: 0 solid #ef473a !important;
+        margin-bottom: 2px !important; 
+    }
+     .tabs-top > .tabs, .tabs.tabs-top {
+        background:#f8f8f8 !important;
+    }
+    .tabs-striped .tabs {
+        border-bottom:none !important;
+    }
+    .tab-item {
+        color:rgba(239, 71, 58, 0.4) !important;          
+    }
+    .nowstyle {
+        font-weight:bold  !important;
+        font-size:18px !important ;
+    }
+    .tab-item.tab-item-active {
+        color:#e60000 !important;
+    }
+
+</style>
+<ion-view title="选修报名" style="font-size:30px; ">
+    <go-back my-title="选修报名"></go-back>
+    <ion-tabs class="tabs-striped tabs-top" style="color:red;border-color:red;">
+        <ion-tab class="nowstyle" title="待选{{unchoosed}}">
+            <ion-view>
+                <ion-content class="has-header" delegate-handle="mainScroll">
+                    <div class="card" ng-repeat="dataxxk in dataSource" ng-show="dataxxk.show">
+                        <div class="bar  title item item-divider">
+                            {{dataxxk.time}}
+                        </div>
+
+                        <div class="item item-text-wrap" ng-repeat="dataRow in dataxxk.data" style="padding:0; ">
+                            <ion-checkbox ng-model="dataRow.checked" ng-change="changeCheck(dataxxk,dataRow)" ng-disabled="dataRow.disabled">
+                                <div class="timetable-title">{{dataRow.name}}</div>
+                                <div class="pull-left">
+                                    <span style="height:35px;display:inline-table;line-height:35px;margin-right:10px;color: #e60000" ng-bind="dataRow.mark"></span>
+                                </div>
+                                <div class="pull-left">
+                                    <span class="ion-ios-person-outline" style="font-size:24px;color:#C0C3C5;"></span>
+                                </div>
+                                <div class="pull-left">
+                                    <span class="course-info-name" style="height:35px;display:inline-table;line-height:35px;margin-left:10px;">{{dataRow.teacher}}</span>
+                                </div>
+                                <div style="clear:both;">
+                                </div>
+                            </ion-checkbox>
+                        </div>
+                    </div>
+                    <div ng-show="undisplay" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                        <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+                        暂无选修课
+                    </div>
+                </ion-content>
+                <ion-footer-bar align-title="center" class="bar-assertive button-my" ng-show="dataCount!=dataSource.length">
+                    <h1 class="title" ng-click="subchoose()">提交报名</h1>
+                </ion-footer-bar>
+            </ion-view>
+        </ion-tab>
+        <ion-tab class="nowstyle" title="已选{{choosed}}">
+            <ion-view>
+                <ion-content class="has-header">
+                    <div class="card" ng-repeat="dataxxk in dataSource" ng-show="!dataxxk.show">
+                        <div class="bar title item item-divider">
+                            {{dataxxk.time}}
+                        </div>
+                        <div class="item item-text-wrap" ng-repeat="dataRow in dataxxk.data" style="padding:0; ">
+                            <ion-checkbox ng-model="dataRow.checked" ng-change="changeCheck(dataxxk,dataRow)" ng-disabled="true">
+                                <div class="timetable-title">{{dataRow.name}}</div>
+                                <div class="pull-left">
+                                    <span class="ion-ios-person-outline" style="font-size:24px;color:#C0C3C5;"></span>
+                                </div>
+                                <div class="pull-left">
+                                    <span class="course-info-name" style="height:35px;display:inline-table;line-height:35px;margin-left:10px;">{{dataRow.teacher}}</span>
+                                </div>
+                                <div style="clear:both;">
+                                </div>
+                            </ion-checkbox>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

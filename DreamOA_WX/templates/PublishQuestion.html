@@ -1,0 +1,26 @@
+﻿<ion-modal-view>
+	<!--<ion-header-bar>
+		<h1 class="title">My Modal title</h1>
+	</ion-header-bar>-->
+	<ion-content>
+		<div class="list" style="background-color:#fff;">
+			
+			<!--<label class="item item-input" style="border-bottom:1px solid #d1cece;border-top:0px solid #d1cece;">
+				<textarea rows="11" ng-model="question.questionText" placeholder="请输入内容" style="font-size:25px;line-height:28px;padding-top:10px;"></textarea>
+			</label>-->
+			<limit-text-area text-value="question.questionText" size="20" style="padding:10px" max-length="100" rows="5"></limit-text-area>
+			<div class="row">
+				<div class="col">
+					<button class="button button-assertive button-my" ng-click="Publish();" style="width:100%;">
+						发表问题
+					</button>
+				</div>
+				<div class="col">
+					<button class="button button-stable" ng-click="closeModal();" style="width:100%;">
+						取消
+					</button>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-modal-view>

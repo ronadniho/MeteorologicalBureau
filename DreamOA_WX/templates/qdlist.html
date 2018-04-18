@@ -1,0 +1,50 @@
+﻿<ion-view>
+    <ion-header-bar align-title="center" class="bar-assertive">
+        <div class="buttons">
+            <button class='button button-icon icon ion-ios-arrow-back' style='font-size:12px' ng-click='goBack()'></button>
+        </div>
+        <h3 class='title'>一卡通考勤信息</h3>
+    </ion-header-bar>
+    <ion-tabs class="tabs-striped tabs-top" style="color:red;border-color:red;">
+        <ion-tab title="未到学员({{dataWStu.length}})">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list class="list">
+                        <div class="item text-center" ng-show="dataWStu.length==0" style="color:#ccc; font-size:30px;border-bottom:0px;">
+                            <i class="ion-clipboard" style="font-size:90px"></i>
+                            <br />
+                            <br />
+                            暂无学员
+                        </div>
+                        <div ng-repeat="dataRepeat in dataWStu">
+                            <a class="item" style="border-left:none;border-right:none;border-top:none;margin-bottom:2px;" ng-click="openModal(dataRepeat)">
+                                <!--<img ng-src="{{userdefaultpng}}">-->
+                                <h2><span ng-bind="dataRepeat.xm"></span></h2>
+                            </a>
+                        </div>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab title="实到学员({{dataStu.length}})">
+            <ion-view>
+                <ion-content class="has-header consumeInfo">
+                    <ion-list class="list">
+                        <div class="item text-center" ng-show="dataStu.length==0" style="color:#ccc; font-size:30px;border-bottom:0px;">
+                            <i class="ion-clipboard" style="font-size:90px"></i>
+                            <br />
+                            <br />
+                            暂无学员
+                        </div>
+                        <div ng-repeat="dataRepeat in dataStu">
+                            <a class="item" style="border-left:none;border-right:none;border-top:none;margin-bottom:2px;" ng-click="openModal(dataRepeat)">
+                                <!--<img ng-src="{{userdefaultpng}}">-->
+                                <h2><span ng-bind="dataRepeat.xm"></span></h2>
+                            </a>
+                        </div>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

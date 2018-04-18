@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+
+ <script type="text/javascript" charset="utf-8" src="native.js"></script>
+        <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+    //
+    function onDeviceReady() {
+        alert('onDeviceReady');
+    }
+
+    function start(){
+      alert("start");
+      xsfRecognition.start(function(result){
+        //alert(result.ls);
+        div1.innerHTML += "<br />" + result.results;
+      },function(err){
+        //
+      });
+      //
+    }
+    </script>
+  </head>
+  <body>
+      
+      <a href="#" onclick="start()">start</a><br />
+      <div id="div1"></div>
+  </body>
+</html>

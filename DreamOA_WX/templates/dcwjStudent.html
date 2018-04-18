@@ -1,0 +1,90 @@
+﻿<style>
+    .tab-item.active, .tab-item.tab-item-active, .tab-item.activated {
+        margin-top: 0px !important;
+        border-top-width: 0px !important;
+        color: #ef473a;
+        border: 0 solid #ef473a !important;
+        margin-bottom: 2px !important;
+    }
+
+    .tabs-top > .tabs, .tabs.tabs-top {
+        background: #f8f8f8 !important;
+    }
+
+    .tabs-striped .tabs {
+        border-bottom: none !important;
+    }
+    .tab-item {
+        color: rgba(239, 71, 58, 0.4) !important;        
+    }
+    .nowstyle {
+    font-weight: bold !important;
+        font-size: 1.3em !important;
+    }
+
+        .tab-item.tab-item-active {
+            color: #e60000 !important;
+        }
+</style>
+<ion-view>
+    <ion-header-bar align-title='center' class='bar-assertive'>
+        <div class='buttons'>
+            <button class='button button-icon icon ion-ios-arrow-back' style='font-size:12px' ng-click='goMain()'></button>
+        </div>
+        <h3 class='title'>我的需求</h3>
+    </ion-header-bar>
+    <ion-tabs class="tabs-striped tabs-top ">
+        <ion-tab class="nowstyle" title="未答({{wpnum}})">
+            <ion-view>
+                <ion-content ng-style="myStyle">
+                    <ion-refresher on-refresh="doRefresh()"
+                                   pulling-text="拖动刷新"  
+                                   refreshing-text="加载中"
+                                   refreshing-icon="ion-loading-c">
+                    </ion-refresher>
+                    <ion-list class="list">
+                        <a class="item item-text-wrap my-padding" ng-repeat="hotItem in dataDcwjSource" ng-click="gotoDetail(hotItem);">
+                            <div class="timetable-title" style="margin:0px; padding:10px;">
+                                {{hotItem.name}}
+                                <i class="icon ion-ios-arrow-right" style="float:right;"></i>
+                            </div>
+                            <!--<div>
+                            <span class="span-block-right">
+                                <i class="icon  ion-clock"></i>
+                                {{hotItem.publishtime|date:'MM-dd hh:mm'}}
+                            </span>
+                            <div style="clear:both"></div>
+                        </div>-->
+                        </a>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab class="nowstyle" title="已答({{ypnum}})">
+            <ion-view>
+                <ion-content ng-style="myStyle">
+                    <ion-refresher on-refresh="doRefresh()"
+                                   pulling-text="拖动刷新"
+                                   refreshing-text="加载中"
+                                   refreshing-icon="ion-loading-c">
+                    </ion-refresher>
+                    <ion-list>
+                        <a class="item item-text-wrap my-padding" ng-repeat="hotItem in dataHasDcwjSource" ng-click="gotoDetail(hotItem);">
+                            <div class="timetable-title" style="margin:0px; padding:10px;">
+                                {{hotItem.name}}
+                                <i class="icon ion-ios-arrow-right" style="float:right;"></i>
+                            </div>
+                            <!--<div>
+                            <span class="span-block-right">
+                                <i class="icon  ion-clock"></i>
+                                {{hotItem.publishtime|date:'MM-dd hh:mm'}}
+                            </span>
+                            <div style="clear:both"></div>
+                        </div>-->
+                        </a>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+    </ion-tabs>        
+</ion-view>

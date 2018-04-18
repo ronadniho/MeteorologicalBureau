@@ -1,0 +1,45 @@
+﻿<ion-view>
+    <go-back my-title="通讯录"></go-back>
+    <ion-header-bar align-title="center" class="bar bar-subheader">
+        <label class="item item-input" style="padding:1px">
+            <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+            <input type="text" placeholder="查询" ng-model="keyword" maxlength="10">
+        </label>
+    </ion-header-bar>
+    <ion-content delegate-handle="myScroll">
+        <ion-list class="list" style="margin:0;padding:0;" ng-repeat="rowXZ in dataDEPT">
+            <div class="item item-button-right agreement-title-red" style="text-align:left;margin-bottom:1px;" ng-click="openDept(rowXZ.id)">
+                <span>
+                    {{rowXZ.bt}}<i style="float:right;" id="i{{rowXZ.id}}" class="{{rowXZ.bt!=user.deptname?'ion-arrow-down-b':'ion-arrow-up-b'}} "></i>
+                </span>
+            </div>
+            <ion-item class="item-nomargin-nopadding addressList_one" style="{{rowXZ.bt!=user.deptname?'display:none;':'display:online;'}}" id="item{{rowXZ.id}}">
+                <div ng-repeat="dataRepeat in dataUser|queryStuList:keyword" ng-if="rowXZ.bt==dataRepeat.deptname" ng-show="showgroup(rowXZ,keyword)">
+                    <ion-item class="item-icon-left item-icon-right">
+                        <h2 ng-click="openModal(dataRepeat)">
+                            <!--<img style="width:30px;height:30px;border-radius:30px" src="../staticresource/userphoto/userdefault.svg">-->
+                            <i class="icon ion-ios-person-outline icon-left"></i>
+                            <span ng-bind="dataRepeat.bt"></span>&nbsp;
+                            <span class="item-note" ng-if="dataRepeat.fj!=null">
+                                办公分机：{{dataRepeat.fj}}
+                            </span>
+                        </h2>
+                    </ion-item>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-list ng-show="dataDEPT.length==0">
+            <ion-item class="item-nomargin-nopadding">
+                <div ng-repeat="dataRepeat in dataUser|queryStuList:keyword">
+                    <ion-item class="item-icon-left item-icon-right">
+                        <h2>
+                            <i class="icon ion-ios7-person icon-left"></i>
+                            <span ng-bind="dataRepeat.bt" ng-click="gotoDetial(dataRepeat.id)"></span>&nbsp;
+                            <a style="color:#498f24" href="tel:{{dataRepeat.fj}}" ng-if="dataRepeat.fj!=null"></a>
+                        </h2>
+                    </ion-item>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

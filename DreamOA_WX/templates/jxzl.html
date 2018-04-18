@@ -1,0 +1,25 @@
+﻿<ion-view>
+    <ion-header-bar align-title='center' class='bar-assertive'>
+        <div class='buttons'>
+            <button class='button button-icon icon ion-ios-arrow-back' style='font-size:12px' ng-click='goMain()'></button>
+        </div>
+        <h3 class='title'>教学资料</h3>
+    </ion-header-bar>
+    <ion-content class="has-header">
+        <ion-list>
+            <div ng-repeat="hotItem in dataZpywSource" style="padding:1px 10px 1px 10px;">
+                <ion-item class="item item-thumbnail-left" style="border-top:0px; border-left:0px; border-right:0px; padding-left:80px;" ng-click="loadData(hotItem)">
+                    <img style="width:60px;height:60px;margin-top:10px;" src="{{loadDataType(hotItem.nrbt)}}" />
+                    <div style="margin-top:30px;">
+                        <h2 style="width:95%; float:left;">{{hotItem.nrbt}}</h2>
+                        <i class="icon ion-ios-arrow-right" style="float:right;"></i>
+                    </div>
+                </ion-item>
+            </div>
+            <div ng-show="dataZpywSource.length==0" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+                暂无教学资料
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

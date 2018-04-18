@@ -1,0 +1,50 @@
+﻿<ion-view title="问题列表" style="font-size:30px; ">
+	<go-back my-title="问题列表"></go-back>
+	<ion-content class="has-header">
+		<ion-list>
+			<div class="item text-center" ng-show="ShowNoRecord" style="color:#ccc; font-size:30px;border-bottom:0px;">
+				<i class="ion-clipboard" style="font-size:90px"></i>
+				<br />
+				<br />
+				暂无问题
+			</div>
+			<a class="item item-text-wrap" ng-repeat="q in QuestionList" ng-click="HrefTo('KCDetail',q.kwid)"style="padding:10px 10px;">
+				<div class="" style="color:#C0C3C5;margin:0;margin-top:5px;margin-bottom:5px;padding:0;margin-left:25px;">
+					<div class="row">
+						<span style="position:absolute;top:20px;left:10px;display:inline-block;border:1px solid #f00;color:#f00;border-radius:50px;width:17px;height:17px;line-height:13px;text-align:center;">
+							<i class="icon ion-help" style="font-size:14px;"></i>
+						</span>
+						<div class="text-left publish-name">{{q.username}}:</div>
+						<div class="text-left publish-time">{{q.createdatestr}}</div>
+						<div class="text-left publish-time" ng-show="q.deleted==-1">[已删除]</div>
+					</div>
+
+					<!--<span style="display:inline-block;border:1px solid #f00;color:#f00;border-radius:50px;width:17px;height:17px;line-height:13px;text-align:center;">
+						<i class="icon ion-help" style="font-size:14px;"></i>
+					</span>
+					<span class="text-left publish-name" style="margin-left:5px;display:inline-block;">
+						{{q.username}}
+					</span>
+					<span class="text-left publish-time" style="display:inline-block;float:right">
+						{{q.createdatestr}}
+					</span>
+					<div style="clear:both"></div>-->
+				</div>
+				<div class="row" style="color:#C0C3C5;margin:0;margin-top:5px;margin-bottom:5px;padding:0">
+					<!--<div class="col" style="flex:0 0 8%;">						
+					</div>-->
+					<div class="col">
+						<div class="timetable-title" style="margin:0px; padding:0px 15px;">
+							{{q.title}}
+						</div>
+					</div>
+				</div>
+				<div  style="color:#C0C3C5;margin:0;margin-top:5px;margin-left:20px;margin-bottom:5px;padding:0;white-space:normal;line-height:24px;">
+					<span style="display:inline-block;float:left;">
+					</span>
+					【相关课程】：{{q.kcname}}
+				</div>
+			</a>
+		</ion-list>
+	</ion-content>
+</ion-view>

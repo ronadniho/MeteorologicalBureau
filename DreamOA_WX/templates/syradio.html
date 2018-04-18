@@ -1,0 +1,28 @@
+﻿
+
+<div style="border:1px solid #f7f7f7;border-bottom:none;margin-bottom:10px;">
+    <div class="list" style="margin:0px;padding:10px;background:#fefefe;">
+        {{assignobj.name}}
+    </div>
+    <div class="row" style="">
+        <div class="col" ng-repeat="lvl in assignobj.PJLevelList">
+			<button class="md-raised sy-md-btn md-button btn_disabled"
+					ng-show="assignobj.yp"
+					ng-class="{true:'btn_active',false:''}[assignobj.defaultvalue==lvl.point]"
+					ng-click="tipshow(lvl.tip)">
+				<span style="font-size:16px;">{{lvl.discription}}</span>
+			</button>
+
+			<button class="md-raised sy-md-btn md-button"
+					ng-show="!assignobj.yp"
+					ng-class="{true:'btn_active',false:''}[assignobj.defaultvalue==lvl.point]"
+					showtext="{{lvl.discription}}"
+					ng-click="optionChecked(assignobj.elementid,lvl.discription,lvl.point,lvl.discription)"
+					value="{{lvl.point}}">
+				<span style="font-size:16px;">{{lvl.discription}}</span>
+			</button>
+        </div>
+    </div>
+</div>
+<input type="text" class="hide-ngmode-val" ng-model="assignobj.defaultvalue" />
+<input type="text" class="hide-ngmode-text" ng-model="assignobj.defaulttext" />

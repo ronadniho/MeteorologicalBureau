@@ -1,0 +1,78 @@
+﻿<ion-view view-title="">
+    <ion-header-bar class="bar bar-header index_logo"></ion-header-bar>
+    <!--Sub Header-->
+    <ion-header-bar class="bar bar-subheader index_secret">
+        <h3 class="size-14">此系统为非涉密系统，禁止处理涉密信息</h3>
+    </ion-header-bar>
+    <ion-content class="has-tabs has-subheader index_container">
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="拖动刷新"
+                       refreshing-text="加载中"
+                       refreshing-icon="ion-android-refresh"> 
+        </ion-refresher>
+
+        <!--待办-->
+        <div style="height: 250px;">
+            <ion-list >
+                <div class="noticeBtn size-16" ng-click="gotoToDo()">待办事项</div>
+                <!--loading-->
+                <div style="text-align:center" ng-if="todo.flag == 0">
+                    <ion-spinner icon="spiral"></ion-spinner>
+                </div>
+                <!-- 空白页 -->
+                <ion-item class="todo_none" ng-if="todo.flag == -1" style="height: 210px;">
+                   <div style="font-size:30px;color:#ccc;text-align:center;">
+                        <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+                        暂无待办
+                    </div>
+                </ion-item>
+                <!--列表-->
+                <ion-item ng-repeat="item in topToDoList" class="item mainpage-list-item" ng-click="gotoToDoItem(item)" >
+                    <div class="todo_title size-14"><a><span ng-if="item.muser_id && item.muser_id != userId">【委】</span>{{item.itemsContent}}</a></div>
+                    <div class="clearfix">
+                        <p class="pull-left size-14 todo_inform">【{{item.moduleName}}】</p>
+                        <p class="pull-right size-14 todo_person">
+                            <span ng-bind="item.name"></span>
+                            <i>|</i>
+                            <span ng-bind="item.time"></span>
+                        </p>
+                    </div>
+                    <!--<div class="todoNameTime">
+                        <div class="pull-left">
+                            <i class="ion-android-person" ng-bind="item.name"></i>
+                            <span ng-bind="item.name" class="size-14"></span>
+                        </div>
+                        <div class="pull-right">
+                            <i class="ion-clock"></i>
+                            <span ng-bind="item.time|date:'yyyy-MM-dd HH:mm'" class="size-14" style="color:#999;"></span>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <div class="item-text-wrap size-14"><span ng-if="item.muser_id && item.muser_id != userId">【委】</span>{{item.itemsContent}}</div>-->
+                </ion-item>
+            </ion-list>
+        </div>
+
+<div class="div_space"></div>
+
+        <!--功能图标-->
+        <ion-list class="index-middle">
+            <ion-item class="item mainpage">
+                <ion-slide-box show-pager="false" auto-play="false">
+                    <ion-slide ng-repeat="dataPage in datameSource">
+                        <div class="row" ng-repeat="dataRows in dataPage.data">
+                            <div class="row-div rowDiv" ng-if="dataRow.icontype=='all'||dataRow.icontype==user.type" ng-repeat="dataRow in dataRows.data" ng-click="gosub(dataRow)">
+                                <div style="position: relative;display: inline-block;">
+                                    <img class="img-50" ng-src="{{dataRow.image}}">
+                                    <div class="elective-number danru" id="{{iconitem.key}}" ng-if="dataRow.showicon&&iconitem.key==dataRow.keyname&&iconitem.val>0" ng-repeat="iconitem in iconvalArray">{{iconitem.val > 99 ? "99+" : "" + iconitem.val}}</div>
+                                </div>
+                                <p class="size-14">{{dataRow.title}}</p>
+                            </div>
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

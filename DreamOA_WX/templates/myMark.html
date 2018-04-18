@@ -1,0 +1,57 @@
+﻿<style>
+    .tabs-striped .tab-item.tab-item-active {
+        border-color: #c00000;
+    }
+
+    .controls-container {
+        background-color: white;
+    }
+
+    .item-thumbnail-left > img:first-child, .item-thumbnail-left .item-image, .item-thumbnail-left .item-content > img:first-child, .item-thumbnail-left .item-content .item-image {
+        top: 5px;
+    }
+
+    .item-thumbnail-left, .item-thumbnail-left .item-content {
+        min-height: 90px;
+    }
+</style>
+<ion-view style="font-size:30px;">
+    <go-back my-title="我的订阅"></go-back>
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-refresher on-refresh="doRefresh()"
+                           pulling-text="拖动刷新"
+                           refreshing-text="加载中"
+                           refreshing-icon="ion-loading-c">
+            </ion-refresher>
+            <div style="">
+                <!--background:#E4E4E4;padding:5px;-->
+                <div ng-repeat="hotItem in dataZpywSource" style="border-top:1px solid #e4e4e4">
+                    <ion-item class="item item-thumbnail-left " style="border-top:1px solid #e4e4e4; height:90px;position:relative;padding-top:0px;padding-bottom:0px;">
+                        <img src="../staticresource/{{hotItem.title_pic}}" ng-click="goZJList(hotItem.info_id);" class="md-whiteframe-z2 border_radius" />
+                        <div class="ydjx1-video-lis-title" ng-click="goZJList(hotItem.info_id);">
+                            <p>{{hotItem.title | limitTo: 25}}{{hotItem.title.length > 25 ? '...' : ''}}</p>
+                            <div class="ydjx1-video-lis-time" style="margin-top:5px;">
+                                <span style="font-size:12px;">点播数:&nbsp;&nbsp;{{hotItem.playcount}}</span>&nbsp;&nbsp;&nbsp;
+                                <!--<i class="ion-ios-book" style="font-size:14px;color:#C6C3C6"></i>-->
+                                <span style="font-size:12px;">课程数:&nbsp;&nbsp;{{hotItem.videocount}}</span><br />
+                                <span style="font-size:12px">最近更新:&nbsp;{{hotItem.lastupdatetime|date:'yyyy-MM-dd'}}</span>
+                            </div>
+                        </div>
+                        <div class="ydjx1-video-lis-DY" style="color:{{hotItem.ismark ==1 ?  '#C6C3C6':'#FF0000'}}" ng-click="dingYue(hotItem);">
+                            <img src="../img/{{hotItem.ismark ==1 ? 'sc2.svg' : 'sc1.svg'}}" /></br>
+                            <span style="font-size:14px"><i>{{hotItem.ismark ==1 ? '取消订阅' : '订阅'}}</i></span>
+                        </div>
+                    </ion-item>
+                </div>
+            </div>
+
+        </ion-list>
+        <div ng-show="isShow" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-monitor" style="font-size:90px"></i><br /><br />
+            暂无订阅
+        </div>
+        <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMore();" distance="1%" icon="ion-loading-d">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

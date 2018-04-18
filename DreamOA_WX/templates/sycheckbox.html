@@ -1,0 +1,19 @@
+﻿<div class="list agreement-title" ng-show="assignobj.type=='YJ2'&&assignobj.status==2" style="padding:10px;margin-bottom:10px;">
+	{{assignobj.name}}<span>您认为该班需要进一步加强和改进的是（限选2-4项）</span>
+</div>
+<div class="row" style="margin:0;" ng-show="assignobj.type=='YJ2'&&assignobj.status!=2">
+	<div class="col">
+		<div ng-show="assignobj.yp" style="font-size:18px;color:#888;">
+			<ion-checkbox ng-disabled="assignobj.yp" ng-model="assignobj.checkedbox">{{assignobj.name}}</ion-checkbox>
+		</div>
+		<div ng-show="!assignobj.yp&&assignobj.type=='YJ2'&&assignobj.status!=2">
+			<ion-checkbox ng-model="assignobj.checkedbox">{{assignobj.name}}</ion-checkbox>
+			<!--<div class="item item-checkbox item-text-wrap" style="font-size:14px;">
+				<label class="checkbox small" style="border:0px solid red;">
+					<input ng-model="assignobj.defaultvalue" type="checkbox" value="{{assignobj.id}}" />
+				</label>
+				{{assignobj.name}}
+			</div>-->
+		</div>
+	</div>
+</div>

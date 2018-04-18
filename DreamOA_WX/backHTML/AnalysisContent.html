@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <title>学在中浦院后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap/css/site.css" rel="stylesheet">
+    <script src="../Script/ztree/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript">
+        var datalength = "";
+        function loadData(pageindex) {
+            var title = $("#hidtitle").val();
+            var orderby = $("#hidorder").val();
+            var html = "";
+            $.ajax({
+                type: "post",
+                url: "backHtmlHelp.ashx",
+                data: { title: title, orderby: orderby, uindex: pageindex, func: "getVideoInfo" },
+                success: function (data) {
+                    if (data != "" && data != null) {
+                        var content = eval("(" + data + ")");
+                        if (content.length > 0) {
+                            for (var i = 0; i < content.length; i++) {
+                                html += "<tr>";
+                                html += "<td>" + content[i].title + "</td>";
+                                html += "<td>" + content[i].menuname + "</td>";
+                                html += "<td>" + content[i].playcount + "</td>";
+                                html += "<td>" + content[i].mark + "</td>";
+                                html += "<td>" + content[i].good + "</td>";
+                                html += "</tr>";
+                            }
+                        } else {
+                            html += "<tr>";
+                            html += "<td colspan='5' style='text-align:center;'>暂无数据</td>";
+                            html += "</tr>";
+                        }
+                    }
+                    $("#tbody").html(html);
+                }
+            });
+        }
+
+        function firstLoad(pageindex) {
+            // 存储查询条件
+            $("#hidtitle").val($("#txtTitle").val());
+            $("#hidorder").val($("#orderText option:selected").text());
+
+            var title = $("#hidtitle").val();
+            var orderby = $("#hidorder").val();
+            var html = "";
+            $.ajax({
+                type: "post",
+                url: "backHtmlHelp.ashx",
+                data: { title: title, orderby: orderby, uindex: pageindex, func: "getVideoInfo" },
+                success: function (data) {
+                    if (data != "" && data != null) {
+                        var content = eval("(" + data + ")");
+                        if (content.length > 0) {
+                            datalength = content[0].datacount;
+                            for (var i = 0; i < content.length; i++) {
+                                html += "<tr>";
+                                html += "<td>" + content[i].title + "</td>";
+                                html += "<td>" + content[i].menuname + "</td>";
+                                html += "<td>" + content[i].playcount + "</td>";
+                                html += "<td>" + content[i].mark + "</td>";
+                                html += "<td>" + content[i].good + "</td>";
+                                html += "</tr>";
+                            }
+                        } else {
+                            datalength = 0;
+                            html += "<tr>";
+                            html += "<td colspan='5' style='text-align:center;'>暂无数据</td>";
+                            html += "</tr>";
+                        }
+                    }
+                    $("#tbody").html(html);
+                    var totalCount = Number(datalength) || 0, showCount = 10,
+                     limit = Number(10) || 10;
+                    $('#callBackPager').extendPagination({
+                        totalCount: totalCount,
+                        showCount: showCount,
+                        limit: limit,
+                        callback: function (curr, limit, totalCount) {
+                            //createTable(curr, limit, totalCount);
+                            loadData(curr);
+                        }
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $("#hidtitle").val($("#txtTitle").val());
+            $("#hidorder").val($("#orderText option:selected").text());
+
+            firstLoad(1);
+
+        })
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="span2">
+                <div class="well" style="padding: 8px 0;">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">
+                            统计分析
+                        </li>
+                        <li>
+                            <a href="Analysis.html"><i class="icon-home"></i> 总体状态</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisCompare.html"><i class="icon-refresh"></i> 对比统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisLogin.html"><i class="icon-folder-open"></i> 登录统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisFunction.html"><i class="icon-check"></i> 访问统计</a>
+                        </li>
+                        <li>
+                            <a href="DemandInfo.html"><i class="icon-envelope"></i> 需求统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisQuestion.html"><i class="icon-file"></i> 问答统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisMenu.html"><i class="icon-list-alt"></i> 栏目统计</a>
+                        </li>
+                        <li class="active">
+                            <a href="#"><i class="icon-user"></i> 内容统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisGrades.html"><i class="icon-cog"></i> 积分统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisGroup.html"><i class="icon-info-sign"></i> 群组统计</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span11">
+                <legend>内容统计</legend>
+                <input type="hidden" id="hidtitle" value="" />
+                <input type="hidden" id="hidorder" value="" />
+                <div class="nav-collapse">
+                    <a>标题</a>
+                    <input type="text" style="margin-top:5px;" id="txtTitle" value="" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a>排序</a>
+                    <select class="btn btn-default dropdown-toggle" style="width:115px;" id="orderText">
+                        <option value="全部" selected="selected">全部</option>
+                        <option value="访问正序">访问正序</option>
+                        <option value="访问倒序">访问倒序</option>
+                        <option value="收藏正序">收藏正序</option>
+                        <option value="收藏倒序">收藏倒序</option>
+                        <option value="点赞正序">点赞正序</option>
+                        <option value="点赞倒序">点赞倒序</option>
+                    </select>
+                    <input type="button" class="btn btn-small" style="float:right;" onclick="firstLoad(1)" value="查询" />
+                    
+                </div>
+                <div class="row">
+                    <div class="span12">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        标题
+                                    </th>
+                                    <th>
+                                        所属栏目
+                                    </th>
+                                    <th>
+                                        访问次数
+                                    </th>
+                                    <th>
+                                        收藏数
+                                    </th>
+                                    <th>
+                                        点赞数
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody"></tbody>
+                        </table>
+                        <div id="callBackPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/site.js"></script>
+    <script src="bootstrap/js/extendPagination.js"></script>
+</body>
+</html>

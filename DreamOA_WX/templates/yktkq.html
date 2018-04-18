@@ -1,0 +1,35 @@
+﻿
+<ion-view>
+    <go-back my-title="一卡通考勤"></go-back>
+    <ion-content class="has-header consumeInfo">
+        <ion-list>
+            <div class="left">
+                <label class="item item-input" style="padding:1px">
+                    <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+                    <input type="text" placeholder="查询" ng-model="keyword" maxlength="10">
+                </label>
+            </div>
+        </ion-list>
+        <div ng-show="false" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+        </div>
+        <table class="classList">
+            <tr>
+                <th>序号</th>
+                <th class="longLine">课程名称</th>
+                <th>上课时间</th>
+            </tr>
+            <tr ng-repeat="item in kclist|queryStuList:keyword" ng-click="gotoKq(item)">
+                <td>{{item.rowindex}}</td>
+                <td>{{item.bt}}</td>
+                <td>{{item.lessonbegin}}</td>
+            </tr>
+            <tr ng-show="kclist.length==0">
+                <td colspan="3" style="text-align:center;">无课程信息</td>
+            </tr>
+        </table>
+        <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMoreKcList();" distance="1%" icon="ion-loading-d">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>
+

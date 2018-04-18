@@ -1,0 +1,156 @@
+﻿<ion-view style="font-size:30px; background-color:#FFF; ">
+    <ion-header-bar align-title='center' class='bar-assertive'>
+        <a class="button button-icon icon ion-ios-arrow-back" ng-click='goback()'></a>
+        <h3 class='title' ng-click="changePageView()">
+            {{titleYearMonth}}
+            <div class="tabsbox">
+                <span class="left" ng-class="{true:'s_active',false:''}[weekpage]"></span>
+                <span class="right" ng-class="{true:'',false:'s_active'}[weekpage]"></span>
+            </div>
+        </h3>
+        <a class="button button-icon icon" ng-click="changeTodayView()">今日</a>
+    </ion-header-bar>
+    <div ng-show="isshowloading" style="position:absolute;width:100%;height:50%;background-color:#fff;left:0px;top:{{styleTopString}}px;z-index:9999;text-align:center;padding-top:25px;font-size:20px;">
+        <div id="caseMarron">
+            <div id="boule"></div>
+            <div id="load">
+                <p>加载中 ...</p>
+            </div>
+        </div>
+    </div>    
+    <div style=" background-color:white;" class="scroll-content has-header week-content">
+        <div class="transparent-bg">
+            <div class="item item-text-wrap zpykbcx_className" ng-click="selectbc();">
+                <p>{{user.classname}}</p><span class="right" ng-show="ShowSelectBtn"><i class="icon ion-arrow-down-b"></i></span>
+            </div>
+        </div>
+        <div class="week-title">
+            <div class="row">
+                <div class="col" style="font-size:12px;">
+                    周日
+                </div>
+                <div class="col" style="font-size:12px;">
+                    周一
+                </div>
+                <div class="col" style="font-size:12px;">
+                    周二
+                </div>
+                <div class="col" style="font-size:12px;">
+                    周三
+                </div>
+                <div class="col" style="font-size:12px;">
+                    周四
+                </div>
+                <div class="col" style="font-size:12px;">
+                    周五
+                </div>
+                <div class="col" style="font-size:12px;">
+                    周六
+                </div>
+            </div>
+        </div>
+        <div class="week-date" ng-show="weekpage">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="false">
+                <ion-slide ng-repeat="clitem in calendarList">
+                    <div class="date-solar-calendar">
+                        <div class="row">
+                            <div ng-repeat="sditem in clitem.solarData" class="col" ng-click="changeTimeTableView(clitem,sditem,true)" ng-class="{true:'active',false:''}[sditem.date==activeDate]">
+                                <div>
+                                    {{sditem.day}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="date-lunar-calendar">
+                        <div class="row">
+                            <div class="col" ng-repeat="lditem in clitem.lunarData" ng-click="changeTimeTableView(clitem,lditem,true)">
+                                {{lditem.day}}<em ng-show="lditem.data.length"></em>
+                            </div>
+                        </div>
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+
+        </div>
+    </div>
+    <ion-content style="margin-top: 166px;" class="has-footer week-timetable-content" delegate-handle="mainScroll">
+        <div ng-show="weekpage">
+            <ion-list ng-repeat="rowClass in bclist" ng-show="userInfo.classname==rowClass.bt||userInfo.classname=='全部班次'">
+                <div class="item item-button-right agreement-title-red" style="text-align:left;margin-bottom:1px;" ng-if="rowClass.bt!='全部班次'">
+                    <span>
+                        <i class="ion-ios-people"></i>&nbsp;{{rowClass.bt}}
+                    </span>
+                </div>
+                <ion-item ng-repeat="ttItem in timetable" class="item" ng-if="rowClass.classid==ttItem.bcid">
+                    <div class="timetable-title" ng-click="gokcdetail(ttItem)">{{ttItem.lessonname}}</div>
+                    <h2 ng-show="ttItem.lessontime" class="timetable-info" ng-click="gokcdetail(ttItem)">
+                        <i class="ion-ios-alarm-outline"></i> {{ttItem.lessontime}}
+                    </h2>
+                    <h2 ng-show="ttItem.lessonaddress" class="timetable-info" style="white-space:normal;" ng-click="gokcdetail(ttItem)">
+                        <i class="ion-ios-location-outline"></i> {{ttItem.lessonaddress}}
+                    </h2>
+                    <h2 ng-show="ttItem.lessonteachers" class="timetable-info" style="white-space:normal;" ng-click="gokcdetail(ttItem)">
+                        <i class="ion-ios-person-outline"></i> {{ttItem.lessonteachers}}
+                    </h2>
+                    <h2 ng-show="user.type =='teacher'||(user.type!='teacher'&&ttItem.lessonmemo!=null)" class="timetable-info bz-font" style="white-space:normal;color:#f00;" ng-click="openModal(ttItem)">
+                        <i class="ion-flag"></i>{{ttItem.lessonmemo}}
+                    </h2>
+                </ion-item>
+            </ion-list>
+            <div ng-show="!timetable.length" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+                <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+                无课程安排
+            </div>
+        </div>
+        <div ng-show="!weekpage">
+            <div ng-repeat="ml in monthlist">
+                <div style="height:22px;background-color:#efefef;color:#333;text-align:left;font-size:16px;padding-left:10px;">
+                    {{ml.month}}月
+                </div>
+                <div ng-if="ml.date==clitem.ym1||ml.date==clitem.ym2" ng-repeat="clitem in calendarList">
+                    <div class="date-solar-calendar">
+                        <div class="row" style="padding-bottom:0px;">
+                            <div ng-repeat="sditem in clitem.solarData" style="padding-bottom:0px;" class="col" ng-class="{true:'active',false:''}[sditem.date==activeDate]">
+                                <span ng-if="ml.date==sditem.ym" ng-click="changeTimeTableView(clitem,sditem,false)" style="display:block">
+                                    <div>
+                                        {{sditem.day}}
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="date-lunar-calendar">
+                        <div class="row" style="padding-top:0px;">
+                            <div class="col" style="padding-top:0px;font-size:13px" ng-repeat="lditem in clitem.lunarData">
+                                <span ng-if="ml.date==lditem.ym" ng-click="changeTimeTableView(clitem,lditem,false)" style="display:block">
+                                    {{lditem.day}}<em ng-show="lditem.data.length"></em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script id="memo" type="text/ng-template">
+            <ion-modal-view>
+                <ion-content>
+                    <div class="list" style="background-color:#fff;margin-bottom:0px;">
+                        <limit-text-area text-value="newlessonmemo.lessonmemo" size="20" style="padding:10px" max-length="100" rows="3"></limit-text-area>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="button button-assertive" ng-click="updatememo();" style="width:100%;">
+                                提 交
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="button button-stable" ng-click="closeModal();" style="width:100%;">
+                                取消
+                            </button>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

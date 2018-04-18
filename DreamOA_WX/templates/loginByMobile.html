@@ -1,0 +1,68 @@
+﻿<style>
+    /*.bar.bar-assertive {background-color: #387ef5;     background-image: linear-gradient(0deg, #387ef5, #387ef5 50%, transparent 50%);}
+    .button.button-assertive { border-color: #387ef5; background-color: #387ef5; color: #fff; }
+    .bar.bar-assertive { border-color: #387ef5;}
+    .button.button-assertive.active,
+    .button.button-assertive.activated{border-color: #387ef5; background-color: #387ef5;}
+    */
+</style>
+
+
+<ion-view title="" style="font-size:30px">
+    <!--<ion-header-bar id="headBar" align-title="center" class="bar-positive">
+    <div><img ng-init="$scope.showLogo=true;" ng-if="showLogo" style=" vertical-align:top;" width="33" height="33" ng-src="../img/{{LogoPath}}" /></div>
+    <h1 class="title">登录</h1>
+    <button class="button button-clear button-white ion-android-social" ng-if="showVister==true" ng-click="visterLogin()">访客登录</button>
+    </ion-header-bar>-->
+
+    <ion-content overflow-scroll="true" class="bg-gray">
+       <!-- <ion-slide-box does-continue="true" auto-play="true" show-pager="false" ng-if="needShowImage"
+                       ng-show="loginImg.length>0">
+            <ion-slide ng-repeat="img in loginImg">
+                <div class="center-block text-center">
+                    <img style="border-radius:5%" ng-src="../img/loginImg/{{img.imgSrc}}">
+                </div>
+            </ion-slide>
+        </ion-slide-box>-->
+
+        <div class="list">
+            <div class="logo">
+                <img ng-src="../img/component/loginMobile/logo.png">
+            </div>
+
+            <div class="input-item">
+                <div class="items">
+                    <span class=""></span>
+                    <input type="text" placeholder="手机号" ng-model="loginData.logname" required/>
+                </div>
+                <div class="items">
+                    <span class=""></span>
+                    <input type="password" placeholder="密码" ng-model="loginData.password" required/>
+                </div>
+            </div>
+           <!-- <label class="item item-input">
+                <span class="input-label icon ion-person">&nbsp;&nbsp;用户名</span>
+                <input type="text" placeholder="用户名" ng-model="loginData.logname" required>
+            </label>
+            <div class="item item-input">
+                <span class="input-label icon ion-locked">&nbsp;&nbsp;密码</span>
+                <input type="password" placeholder="密码" ng-model="loginData.password" required/>
+            </div>-->
+        </div>
+        <div class="submit" style="text-align:center;">
+            <button class="button" ng-click="login()">登录</button>
+        </div>
+        <div class="help clr">
+            <div class="lt">
+                <input type="checkbox" id="myCheck">
+                <label for="myCheck"></label>
+                <span>记住密码</span>
+            </div>
+            <div class="rt">
+                <span>忘记密码?</span>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
+

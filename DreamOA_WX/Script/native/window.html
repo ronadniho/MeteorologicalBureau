@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+        <script type="text/javascript" charset="utf-8" src="native.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            alert('onDeviceReady');
+        }
+        function openw(url,title){
+            alert("open window");
+            xsfWindow.open(url,"title",
+                function (result) {
+                    alert("open seccess");
+                },
+                function (error) {
+                    alert("open failed: " + error);
+                }
+            );
+        }
+        function closew(){
+            alert("close window");
+            xsfWindow.close();
+        }
+    </script>
+  </head>
+  <body>
+    <p><a href="#" onclick="openw('http://www.baidu.com')">open baidu</a></p>
+    <p><a href="#" onclick="openw('window.html')">open window</a></p>
+    <p><a href="#" onclick="closew()">close window</a></p>
+    
+    <p><a href="#" onclick="xsfWindow.rotation()">rotation</a></p>
+    <p><a href="#" onclick="xsfWindow.resetRotation()">resetRotation</a></p>
+    <p><a href="#" onclick="xsfWindow.zoom(true)">zoom:true</a></p>
+    <p><a href="#" onclick="xsfWindow.zoom(false)">zoom :false</a></p>
+    <input type="text" value="11" />
+    1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+
+ <script type="text/javascript" charset="utf-8" src="native.js"></script>
+        <script type="text/javascript" charset="utf-8">
+
+    //
+    var ref;
+    document.addEventListener("deviceready", onDeviceReady, false);
+    //
+    function onDeviceReady() {
+        alert('onDeviceReady');
+    }
+    function start(){
+    	alert('start');
+    	xsfNFC.start(function(data){
+        	alert(data);
+        },function(e){
+        	alert(e.message);
+        });
+    }
+    function close(){
+    	xsfNFC.close();
+    }
+    </script>
+  </head>
+  <body>
+      <a href="#" onclick="start()">start</a><br />
+      <a href="#" onclick="close()">close</a><br />
+  </body>
+</html>

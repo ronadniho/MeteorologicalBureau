@@ -1,0 +1,58 @@
+﻿<link href="../css/asf.ios.css" rel="stylesheet" />
+<ion-view title="" class="dbwj_container">
+    <ion-header-bar align-title='center' class='bar-positive'>
+        <a class="button button-icon icon ion-ios-arrow-back" ng-click='goback()'></a>
+        <h3 class='title'>待办事项</h3>
+    </ion-header-bar>
+    <ion-content class="has-header">
+        <ion-refresher on-refresh="doRefresh()" pulling-text="拖动刷新" refreshing-text="加载中" refreshing-icon="ion-loading-c" pulling-icon="ion-ios-arrow-down"
+            pulling-icon="ion-ios-arrow-down"> 
+        </ion-refresher>
+
+        <div class="item item-input-inset todoSearch">
+            <label class="item-input-wrapper searchStyle">
+                <i class ="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="在此输入关键字" ng-model="model.query" maxlength="10">
+            </label>
+        </div>
+
+        <ion-list>
+            <ion-item ng-repeat="item in items" class="todoContainer" ng-click="godetail(item)">
+                <div class="todo_title size-14"><span ng-if="item.muser_id && item.muser_id != userId">【委】</span>{{item.itemsContent || "(无标题)"}}</div>
+                <div class="clearfix">
+                    <p class="pull-left size-14 todo_inform">【{{item.moduleName}}】</p>
+                    <p class="pull-right size-14 todo_person">
+                        <span ng-bind="item.name"></span>
+                        <i>|</i>
+                        <span ng-bind="item.time"></span>
+                    </p>
+                </div>
+               <!-- <div class="todoNameTime">
+                    <div class="pull-left">
+                        <i class="ion-android-person"></i>
+                        <span ng-bind="item.name" class="size-14"></span>
+                    </div>
+                    <div class="pull-right">
+                        <i class="ion-clock"></i>
+                        <span ng-bind="item.time|date:'yyyy-MM-dd HH:mm'" class="size-14" style="color:#999;"></span>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="todoTitle" ng-if="item.backReason">
+                    退回原因：<div class="item-text-wrap size-14" style="color:red">{{item.backReason}}</div>
+                </div>
+                <div class="todoTitle"> 
+                    <div class="item-text-wrap size-14"><span ng-if="item.muser_id && item.muser_id != userId">【委】</span>{{item.itemsContent}}</div>
+                </div>-->
+            </ion-item>
+        </ion-list>
+
+        <div ng-show="items.length==0" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+            暂无待办事项
+        </div>
+
+        <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMoreItems()" distance="3%" icon="ion-loading-c">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

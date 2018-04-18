@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <title>学在中浦院后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap/css/site.css" rel="stylesheet">
+    <script src="../Script/ztree/js/jquery-1.4.4.min.js"></script>
+    <script src="bootstrap/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript">
+        function firstLoad() {
+            // 存储查询条件
+            var start = $("#start").val();
+            var end = $("#end").val();
+
+            var html = "";
+            $.ajax({
+                type: "post",
+                url: "backHtmlHelp.ashx",
+                data: { start: start, end: end, func: "getQuestionData" },
+                success: function (data) {
+                    if (data != "" && data != null) {
+                        var content = eval("(" + data + ")");
+                        if (content.length > 0) {
+                            datalength = content[0].datacount;
+                            for (var i = 0; i < content.length; i++) {
+                                html += "<tr>";
+                                html += "<td>" + content[i].bt + "</td>";
+                                var score = parseInt(content[i].questionnum) * 20 + parseInt(content[i].answernum) * 30 + parseInt(content[i].samequestionnum) * 10;
+                                html += "<td><a onclick='loadStudentScore(" + content[i].bcid + ")'>" + score + "</a></td>";
+                                html += "</tr>";
+                            }
+                        } else {
+                            datalength = 0;
+                            html += "<tr>";
+                            html += "<td colspan='2' style='text-align:center;'>暂无数据</td>";
+                            html += "</tr>";
+                        }
+                    }
+                    $("#tbody").html(html);
+                }
+            });
+        }
+
+        function goBack() {
+            $("#mainQuery").attr("style", "");
+            $("#mainContent").attr("style", "");
+            $("#studentDiv").attr("style", "display:none;");
+            $("#student").attr("style", "display:none;");
+        }
+
+        function countStar(score)
+        {
+            var htmlStar = "";
+            if (score >= 480) {
+                for (var i = 0; i < 5; i++) {
+                    htmlStar += "<i class='icon-star'></i>";
+                }
+            }
+            else if (score >= 360) {
+                for (var i = 0; i < 4; i++) {
+                    htmlStar += "<i class='icon-star'></i>";
+                }
+                htmlStar += "<i class='icon-star-half'></i>";
+            }
+            else if (score >= 240) {
+                for (var i = 0; i < 4; i++) {
+                    htmlStar += "<i class='icon-star'></i>";
+                }
+            }
+            else if (score >= 180) {
+                for (var i = 0; i < 3; i++) {
+                    htmlStar += "<i class='icon-star'></i>";
+                }
+                htmlStar += "<i class='icon-star-half'></i>";
+            }
+            else if (score >= 120) {
+                for (var i = 0; i < 3; i++) {
+                    htmlStar += "<i class='icon-star'></i>";
+                }
+            }
+            else if (score >= 90) {
+                for (var i = 0; i < 2; i++) {
+                    htmlStar += "<i class='icon-star'></i>";
+                }
+                htmlStar += "<i class='icon-star-half'></i>";
+            }
+            else if (score >= 60) {
+                for (var i = 0; i < 2; i++) {
+                    htmlStar += "<i class='icon-star'></i>";
+                }
+            }
+            else if (score >= 30) {
+                for (var i = 0; i < 1; i++) {
+                    htmlStar += "<i class='icon-star'></i>";
+                }
+                htmlStar += "<i class='icon-star-half'></i>";
+            }
+            else if (score >= 10) {
+                for (var i = 0; i < 1; i++) {
+                    htmlStar += "<i class='icon-star'></i>";
+                }
+            }
+            else if (score >= 5) {
+                htmlStar += "<i class='icon-star'></i>";
+            }
+            else if (score > 0) {
+                htmlStar += "<i class='icon-star-outline'></i>";
+            }
+
+            return htmlStar;
+        }
+
+        function loadStudentScore(classid) {
+
+            $("#mainQuery").attr("style", "display:none;");
+            $("#mainContent").attr("style", "display:none;");
+            $("#studentDiv").attr("style", "");
+            $("#student").attr("style", "");
+
+            var html = "";
+            $.ajax({
+                type: "post",
+                url: "backHtmlHelp.ashx",
+                data: { bcid: classid, func: "getStudengScoreData" },
+                success: function (data) {
+                    if (data != "" && data != null) {
+                        var content = eval("(" + data + ")");
+                        if (content.length > 0) {
+                            for (var i = 0; i < content.length; i++) {
+                                html += "<tr>";
+                                html += "<td>" + content[i].xm + "</td>";
+                                var score = parseInt(content[i].questionnum) * 20 + parseInt(content[i].answernum) * 30 + parseInt(content[i].samequestionnum) * 10;
+                                var star = countStar(score);
+                                html += "<td>" + star + "</td>";
+                                html += "<td>" + score + "</td>";
+                                html += "</tr>";
+                            }
+                        } else {
+                            html += "<tr>";
+                            html += "<td colspan='3' style='text-align:center;'>暂无数据</td>";
+                            html += "</tr>";
+                        }
+                    }
+                    $("#studentbody").html(html);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var premonth = date.getMonth();
+            var day = date.getDate();
+
+            $("#start").val(year + "-" + premonth + "-" + day);
+            $("#end").val(year + "-" + month + "-" + day);
+            firstLoad();
+
+        })
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="span2">
+                <div class="well" style="padding: 8px 0;">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">
+                            统计分析
+                        </li>
+                        <li>
+                            <a href="Analysis.html"><i class="icon-home"></i> 总体状态</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisCompare.html"><i class="icon-refresh"></i> 对比统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisLogin.html"><i class="icon-folder-open"></i> 登录统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisFunction.html"><i class="icon-check"></i> 访问统计</a>
+                        </li>
+                        <li>
+                            <a href="DemandInfo.html"><i class="icon-envelope"></i> 需求统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisQuestion.html"><i class="icon-file"></i> 问答统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisMenu.html"><i class="icon-list-alt"></i> 栏目统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisContent.html"><i class="icon-user"></i> 内容统计</a>
+                        </li>
+                        <li class="active">
+                            <a href="#"><i class="icon-cog"></i> 积分统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisGroup.html"><i class="icon-info-sign"></i> 群组统计</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span11">
+                <legend>积分统计</legend>
+                <div class="nav-collapse" id="mainQuery">
+                    <a>班次开始时间</a>
+                    <input class="Wdate" id="start" type="text" onclick="WdatePicker()">~~<input class="Wdate" id="end" type="text" onclick="WdatePicker()">
+                    <input type="button" class="btn btn-small" style="float:right;" onclick="firstLoad()" value="查询" />
+                </div>
+                <div class="row" id="mainContent">
+                    <div class="span12">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        班级名称
+                                    </th>
+                                    <th>
+                                        积分
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="nav-collapse" id="studentDiv" style="display:none;">
+                    <input type="button" class="btn btn-small" style="float:right;" onclick="goBack()" value="返回" />
+                </div>
+                <div class="row" id="student" style="display:none;">
+                    <div class="span12">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        姓名
+                                    </th>
+                                    <th>
+                                        级别
+                                    </th>
+                                    <th>
+                                        积分
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/site.js"></script>
+</body>
+</html>

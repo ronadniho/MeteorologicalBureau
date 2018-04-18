@@ -1,0 +1,85 @@
+﻿
+<ion-view>
+    <go-back my-title="移动点名"></go-back>
+    <ion-content class="has-header has-footer">
+        <div class="list yddmPage" ng-show="showQdArea">
+            <div class="size-16 bottom-15 clearfix">
+                <label class="kcdmSelected" ng-click="changeType()">
+                    <input type="radio" name="dm" value="kc" ng-model="formData.dm"><span class="size-16">课程点名</span>
+                </label>
+                <label class="sjdmSelected" ng-click="changeType()">
+                    <input type="radio" name="dm" value="sj" ng-model="formData.dm"><span class="size-16">随机点名</span>
+                </label>
+            </div>
+            <div ng-show="showKcArea">
+                <span class="size-16">课程名称：</span>
+                <select name="data" id="data_select" class="haveMargin commonSelect" ng-show="showddl">
+                    <option ng-repeat="item in kclist" value="{{item.lessonid}}">{{item.bt}}</option>
+                </select>
+                {{bt}}
+                <span class="size-16" style="color:red;" ng-show="showMess">今日无课程</span>
+                <!--<br />
+            <span class="size-16">备注：</span>
+            <input type="text" placeholder="备注1" ng-model="addfqqd.lessonaddress" class="ng-pristine ng-untouched ng-valid" style="border:1px solid #CECECE;width:100%;" />-->
+            </div>
+            <!--<div class="form-group">
+            <span class="size-16">开始时间：</span>
+            <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+                <input class="form-control" placeholder="开始日期" id="rq1" size="16" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <input type="hidden" id="dtp_input1" value="" />
+            <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                <input class="form-control" placeholder="开始时间" size="16" id="rq3" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+            </div>
+            <input type="hidden" id="dtp_input3" value="" />
+
+            <br />
+            <span class="size-16">结束时间：</span>
+            <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input class="form-control" placeholder="结束日期" size="16" id="rq2" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <input type="hidden" id="dtp_input2" value="" />
+            <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input4" data-link-format="hh:ii">
+                <input class="form-control" placeholder="结束时间" size="16" id="rq4" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+            </div>
+            <input type="hidden" id="dtp_input4" value="" />
+        </div>-->
+            <!--<div class="center" ng-show="!showMess" ng-if="addfqqd.iskq!=1">
+            <button class="btn btn-success" ng-show="addfqqd.iskq==1" ng-click="AddKq()">发起签到</button>
+            <button class="btn btn-default" ng-show="addfqqd.iskq==0" ng-click="closeModal()">结束签到</button>
+        </div>-->
+            <div class="top-100 clearfix">
+                <span class="btnStyle btnStyle2" ng-click="AddKq()">发起点名</span>
+                <span class="btnStyle btnStyle2" ng-click="historyDm()">历史点名</span>
+            </div>
+        </div>
+        <div class="list yddmPage" ng-show="!showQdArea">
+            <div class="yddmTitle">
+                <span class="size-18">{{kqdata[0].lessonname}}</span>
+            </div>
+            <div class="clearfix">
+                <span class="wdCount">未到：<a class="red" ng-click="viewStudent(1);">{{kqdata[0].xycount-kqdata[0].yqcount}}</a></span>
+                <span class="ydCount">已到：<a class="red" ng-click="viewStudent(0);">{{kqdata[0].yqcount}}</a></span>
+            </div>
+            <div class="bottom-15">
+                <span>发起人：{{kqdata[0].fqrname}}</span>
+            </div>
+            <div class="bottom-50">
+                <span>发起时间：{{kqdata[0].signbegin|date:'yyyy.MM.dd HH:mm'}}</span>
+            </div>
+            <div class="center clearfix">
+                <span class="btnStyle" ng-click="reflashData()">刷 新</span>
+                <span class="btnStyle" ng-click="closeDm()">结束点名</span>
+                <span class="btnStyle" ng-click="historyDm()">历史点名</span>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

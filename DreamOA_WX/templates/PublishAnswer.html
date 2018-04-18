@@ -1,0 +1,23 @@
+﻿<ion-modal-view>
+	<ion-content>
+		<div class="list" style="background-color:#fff;">
+			<!--<label class="item item-input" style="border-bottom:1px solid #d1cece;border-top:0px solid #d1cece;">
+				
+				<textarea rows="11" ng-model="answer.answerText" placeholder="请输入内容" style="font-size:25px; line-height:28px; padding-top:10px;"></textarea>
+			</label>-->
+			<limit-text-area text-value="answer.answerText" size="20" style="padding:10px;" max-length="500" rows="5"></limit-text-area>
+			<div class="row">
+				<div class="col">
+					<button class="button button-assertive button-my" ng-disabled="enablePublish" ng-click="PublishAnswer(question);" style="width:100%;">
+						发表观点
+					</button>
+				</div>
+				<div class="col">
+					<button class="button button-stable" ng-click="closeAnswerModal();" style="width:100%;">
+						取消
+					</button>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-modal-view>

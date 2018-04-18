@@ -1,0 +1,80 @@
+﻿<ion-view title="" style="background:url(../content/bg.png)  no-repeat;background-size:100% 300px;font-size:30px; ">
+	<!--<main-header my-title="我" style="background:rgba(0,0,0,0);border-bottom:none;"></main-header>-->
+	<ion-content class="has-tabs" style="background:rgba(0,0,0,0);">
+		<!--<ion-list style="background:rgba(0,0,0,0)">
+			<div style="padding:0px;background:rgba(0,0,0,0);">
+				<div class="item" style="border:none;text-align:center;background:rgba(0,0,0,0);background-size:100% 100%;">
+					<div style="" ng-click="goUser()">
+						<img style="width:60px;height:60px;border-radius:60px;border-radius:50px;overflow:hidden;" src="../staticresource/userphoto/{{user.userphoto}}" style="width:100%;height:100%;border-radius:50px;" />
+					</div>
+					<div style="color:#fff;">
+						<div ng-bind="user.username" style="display:inline-block;font-size:18px;"></div>
+						<div style="display:inline-block"><span ng-repeat="star in userInfo.starArr"><i ng-class="star.starClass" style="color:#FFE38C"></i></span></div>
+					</div>
+				</div>
+			</div>
+		</ion-list>-->
+		<ion-list>
+			<div style="padding:0px;background:rgba(0,0,0,0);">
+				<div class="item" style="border:none;text-align:center;background:rgba(0,0,0,0);background-size:100% 100%;">
+					<div style="" ng-click="goUser()">
+						<img style="width:60px;height:60px;border-radius:60px;border-radius:50px;overflow:hidden;" src="{{myImg}}" style="width:100%;height:100%;border-radius:50px;" />
+					</div>
+					<div style="color:#fff;">
+						<div ng-bind="user.username" style="display:inline-block;font-size:18px;"></div>
+						<div style="display:inline-block"><span ng-repeat="star in userInfo.starArr"><i ng-class="star.starClass" style="color:#FFE38C"></i></span></div>
+					</div>
+				</div>
+			</div>
+			<div class="transparent-bg">
+                <div class="item item-text-wrap" style="border-bottom:0px; padding-bottom:0px;" ng-click="selectbc();">
+                    {{classname}}<span style="margin-left:5px;" ng-show="ShowSelectBtn"><i class="icon ion-arrow-down-b"></i></span>
+                </div>
+				<div class="item" style="border-top:0px;padding-top:10px;color:#C0C3C5;">
+					{{datestr}}
+				</div>
+				<!--<ion-item class="item transparent-bg" style="height:110px;padding-top:8px;border:none;border-top:1px solid #D55738; border-bottom:none;">-->
+
+				<a class="item " ng-click="HrefTo('userinfo');">
+					<i class="icon ion-android-person" style="color:#f00;font-size:20px;"></i>
+					&nbsp;&nbsp;我的信息
+					<span class="more"><i class="icon ion-ios-arrow-right"></i></span>
+				</a>
+				<a class="item" ng-click="HrefTo('myquestion');">
+					<i class="icon ion-help" style="color:#f00;font-size:20px;"></i>
+					&nbsp;&nbsp;我的提问
+					<span class="badge badge-assertive">{{userInfo.questionnum}}</span>
+				</a>
+				<a class="item" ng-click="HrefTo('answerqst');">
+					<i class="icon ion-social-twitch-outline" style="color:#f00;font-size:20px;"></i>
+					&nbsp;&nbsp;我的观点
+					<span class="badge badge-assertive">{{userInfo.answernum}}</span>
+				</a>
+				<a class="item" ng-click="HrefTo('samequestion');">
+					<i class="icon ion-thumbsup" style="color:#f00;font-size:20px;"></i>
+					&nbsp;&nbsp;我的同问
+					<span class="badge badge-assertive">{{userInfo.samequestionnum}}</span>
+				</a>
+                <a class="item" ng-show="{{hasZJlist}}" ng-click="HrefTo('mymark');">
+                    <i class="ion-android-bookmark" style="color:#f00;font-size:20px;"></i>
+                    &nbsp;&nbsp;我的订阅
+                    <span class="badge badge-assertive">{{userInfo.mymark}}</span>
+                </a>
+                <a class="item" ng-click="HrefTo('mylike');">
+                    <i class="ion-android-favorite" style="color:#f00;font-size:20px;"></i>
+                    &nbsp;&nbsp;我的收藏
+                    <span class="badge badge-assertive">{{userInfo.mylike}}</span>
+                </a>
+				<a class="item" ng-click="HrefTo('guidelineNetwork');">
+					<i class="icon ion-android-wifi" style="color:#f00;font-size:20px;"></i>
+					&nbsp;&nbsp;Wifi账户
+					<span class="more"><i class="icon ion-ios-arrow-forward"></i></span>
+				</a>
+			</div>
+            <button class="button button-full button-my " ng-show="!formweixin" ng-click="Logout();">
+                <!--ng-show="!formweixin"-->
+                安全退出
+            </button>
+		</ion-list>
+	</ion-content>
+</ion-view>

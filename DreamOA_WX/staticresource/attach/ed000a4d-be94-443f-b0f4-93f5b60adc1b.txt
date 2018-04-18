@@ -1,0 +1,51 @@
+
+
+
+<div id="u41" class="ax_table">     
+                          <div id="u42" class="ax_table_cell">
+                            <img id="u42_img" class="img " src="../images/u42.png"/>
+                            <div id="u43" class="text">
+                              <p><span>个人论文</span></p>
+                            </div>
+                          </div>
+
+                          <div id="u44" class="ax_table_cell">
+                            <img id="u44_img" class="img " src="../images/u44.png"/>
+                            <div id="u45" class="text">
+                              <p><span>个人案例</span></p>
+                            </div>
+                          </div>
+
+
+
+个人论文 数据表
+
+grlw
+
+info_id nvarchar(50)  --主键
+lw_type nvarchar(10)  -- 类型 
+onecard 
+ngrname nvarchar(20)   --拟稿人
+classname nvarchar(20)   --班级名称
+bt nvarchar2(50)   --标题
+keyname nvarchar(20)   --关键字
+lw_content BLOB  --论文内容
+createtime date   --上传日期
+
+个人案例
+
+gral
+
+info_id  nvarchar(50) -- 主键
+ngrname nvatchar(20)  -- 拟稿人名称
+danwei  nvarchar(50)  --单位或职务
+telphone nvarchar(15) --联系方式
+zt  nvarchar(50)  --主题
+gaishu  nvarchar(50) --概述
+beijing  nvarchar(200)  --背景
+zuofa  nvarchar(200) --做法
+xiaoguo  nvarchar(200)  --效果
+qishi  nvarchar(200)  --启示
+sikaoti nvarchar(200)  --思考题
+createtime date  --上传日期
+

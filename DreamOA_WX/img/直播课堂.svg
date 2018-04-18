@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="图层_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="72px" height="72px"
+	 viewBox="0 0 72 72" enable-background="new 0 0 72 72" xml:space="preserve">
+<title>成组 copy 25</title>
+<desc>Created with Sketch.</desc>
+<g id="Page-2" sketch:type="MSPage">
+	<g id="Artboard-1" transform="translate(-1191.000000, -1297.000000)" sketch:type="MSArtboardGroup">
+		<g id="成组-copy-5" transform="translate(1191.000000, 1303.000000)" sketch:type="MSLayerGroup">
+			<path id="矩形-519" sketch:type="MSShapeGroup" fill="#89DA70" d="M2,25.247h2.545c1.104,0,2,0.896,2,2v10.961
+				c0,1.104-0.896,2-2,2H2c-1.104,0-2-0.896-2-2V27.247C0,26.142,0.896,25.247,2,25.247z"/>
+			<path id="Shape" sketch:type="MSShapeGroup" fill="#01B25E" d="M27.225,17.926c-6.204,0-12.407-0.002-18.611,0.004
+				c-0.439,0-0.884,0.034-1.316,0.102c-2.537,0.396-4.487,2.386-4.488,4.603c-0.007,8.768-0.004,17.534-0.001,26.301
+				c0,0.789,0.215,1.537,0.672,2.213c1.153,1.705,2.889,2.515,5.109,2.516c12.445,0.004,24.89,0.002,37.334,0.002
+				c3.24,0,5.902-2.354,5.902-5.22c0.001-8.435,0.001-16.868,0-25.303c0-2.864-2.664-5.216-5.905-5.216
+				C39.689,17.926,33.457,17.926,27.225,17.926z"/>
+			<path id="Path" sketch:type="MSShapeGroup" fill="#89DA70" d="M71.686,49.051c-0.752,0-1.504,0.009-2.256-0.005
+				c-0.176-0.003-0.373-0.048-0.523-0.127c-4.658-2.466-9.311-4.938-13.967-7.406c-0.177-0.093-0.236-0.196-0.236-0.375
+				c0.007-3.235,0.008-6.472,0-9.706c-0.001-0.196,0.075-0.295,0.256-0.391c4.52-2.395,9.039-4.79,13.549-7.2
+				c0.436-0.232,0.859-0.357,1.369-0.335c0.701,0.029,1.404,0.007,2.123,0.007v25.538H71.686L71.686,49.051z"/>
+			<ellipse id="圆形" sketch:type="MSShapeGroup" fill="#01B25E" cx="17.577" cy="8.054" rx="7.336" ry="7.384">
+			</ellipse>
+			<ellipse id="圆形-copy" sketch:type="MSShapeGroup" fill="#89DA70" cx="33.382" cy="10.437" rx="4.718" ry="4.748">
+			</ellipse>
+			<path id="Path-829" sketch:type="MSShapeGroup" fill="#FFFFFF" d="M25.796,28.788c-1.877-1.166-3.399-0.324-3.399,1.888v8.261
+				c0,2.208,1.458,2.942,3.239,1.651l5.609-4.062c1.789-1.296,1.721-3.288-0.16-4.456L25.796,28.788z"/>
+		</g>
+	</g>
+</g>
+</svg>

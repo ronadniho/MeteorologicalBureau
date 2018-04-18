@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <title>学在中浦院后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap/css/site.css" rel="stylesheet">
+    <script src="bootstrap/js/Chart.js"></script>
+    <script src="../Script/ztree/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript">
+        var menu = [];
+        var menudata = [];
+
+        var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+
+        function loadData()
+        {
+            var tyear = $("#selYear option:selected").text();
+            var tmonth = $("#selMonth option:selected").text();
+
+            var ctx = document.getElementById("canvas").getContext("2d");
+            var barChartData = {};
+            menu = [];
+            menudata = [];
+            $.ajax({
+                type: "post",
+                url: "backHtmlHelp.ashx",
+                data: {tyear:tyear,tmonth:tmonth, func: "getFuntionData" },
+                success: function (data) {
+                    if (data != "" && data != null) {
+                        var content = eval("(" + data + ")");
+                        if (content.length > 0) {
+                            for (var i = 0; i < content.length; i++) {
+                                menu.push(content[i].itemname.replace("访问模块:", ""));
+                                menudata.push(content[i].fw);
+                            }
+                            barChartData = {
+                                labels: menu,
+                                datasets: [
+                                    {
+                                        fillColor: "rgba(151,187,205,0.5)",
+                                        strokeColor: "rgba(151,187,205,0.8)",
+                                        highlightFill: "rgba(151,187,205,0.75)",
+                                        highlightStroke: "rgba(151,187,205,1)",
+                                        data: menudata //[randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+                                    }
+                                ]
+                            }                           
+                        }
+                        else {
+                            barChartData = {
+                                labels: menu,
+                                datasets: [
+                                    {
+                                        fillColor: "rgba(151,187,205,0.5)",
+                                        strokeColor: "rgba(151,187,205,0.8)",
+                                        highlightFill: "rgba(151,187,205,0.75)",
+                                        highlightStroke: "rgba(151,187,205,1)",
+                                        data: ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"] //[randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+                                    }
+                                ]
+                            }
+                        }
+                        window.myBar = new Chart(ctx).Bar(barChartData, {
+                            responsive: true
+                        });
+                    }
+                }
+            });
+        }
+
+        window.onload = function () {
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var option = "";
+            for (var i = 0; i < 5; i++) {
+                option += "<option value='" + (year - i) + "'>" + (year - i) + "</option>";
+            }
+            $("#selYear").append(option);
+            
+            loadData();
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="span2">
+                <div class="well" style="padding: 8px 0;">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">
+                            统计分析
+                        </li>
+                        <li>
+                            <a href="Analysis.html"><i class="icon-home"></i> 总体状态</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisCompare.html"><i class="icon-refresh"></i> 对比统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisLogin.html"><i class="icon-folder-open"></i> 登录统计</a>
+                        </li>
+                        <li class="active">
+                            <a href="tasks.htm"><i class="icon-check"></i> 访问统计</a>
+                        </li>
+                        <li>
+                            <a href="DemandInfo.html"><i class="icon-envelope"></i> 需求统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisQuestion.html"><i class="icon-file"></i> 问答统计</a>
+                        </li>
+                        <li >
+                            <a href="AnalysisMenu.html"><i class="icon-list-alt"></i> 栏目统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisContent.html"><i class="icon-user"></i> 内容统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisGrades.html"><i class="icon-cog"></i> 积分统计</a>
+                        </li>
+                        <li>
+                            <a href="AnalysisGroup.html"><i class="icon-info-sign"></i> 群组统计</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span11">
+                <legend>访问统计</legend>
+                <div class="nav-collapse" style="display:none;">
+                    <a>登录时间</a>
+                    <select class="btn btn-default dropdown-toggle" style="width:90px;" id="selYear"></select>
+                    <select class="btn btn-default dropdown-toggle" style="width:70px;" id="selMonth">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12" selected="selected">12</option>
+                    </select>                  
+                    <input type="button" class="btn btn-small" style="float:right;" onclick="loadData()" value="查询" />
+
+                </div>
+                <div class="row">
+                    <div class="span12">
+                        <canvas id="canvas" height="300" width="600" ></canvas> <!--style="background-color:navy;"-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/site.js"></script>
+</body>
+</html>

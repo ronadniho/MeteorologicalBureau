@@ -1,0 +1,26 @@
+﻿<ion-view title="请假单">
+    <gomain></gomain>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-plus" style="font-size:12px" ng-click="newQingjia()"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list">
+            <div class="item" ng-repeat="item in qingjiaData" style="padding:10px">
+
+                <h2>{{item.CONTENT}}</h2>
+
+                <div class="row" style="padding:2px">
+                    <div class="col">
+                        {{item.SDATE|date:'MM-dd'}}
+                    </div>
+                    <div class="col">
+                        {{item.EDATE|date:'MM-dd'}}
+                    </div>
+                    <div class="col">
+                        {{item.SPZT|SPZTFilter}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

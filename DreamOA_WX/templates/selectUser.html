@@ -1,0 +1,15 @@
+﻿<ion-view title="选择">
+    <go-back my-title="选择">
+        <button class="button button-assertive" ng-click="ok()">确定</button>
+    </go-back>
+    <ion-content class="has-header">
+        <ul class="list">
+            <li class="item" ng-click="selectone()" ng-class="{true:'item-checkbox checkbox-assertive',false:''}[type!='single']" ng-repeat="user in users">
+                <label class="checkbox">
+                    <input type="checkbox" ng-model="user.checked">
+                </label>
+                <h3>{{user.bt}}</h3>
+            </li>
+        </ul>
+    </ion-content>
+</ion-view>

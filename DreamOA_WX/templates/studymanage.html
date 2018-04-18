@@ -1,0 +1,79 @@
+﻿<ion-view title="学习管理" style="background:url(../content/bg.png)  no-repeat;background-size:100% 300px;font-size:30px; ">
+    <main-header my-title="学习管理" style="background:rgba(0,0,0,0);border-bottom:none;"></main-header>
+    <ion-content class="has-header has-footer">
+        <!--<ion-list>
+            <div style="padding:5px; color:white;background-color:gray;font-size:12px;">
+                <span ng-bind="user.classname"></span>
+            </div>
+        </ion-list>-->
+        <!--<ion-list>
+            <div class="item">
+                <div style="float:left;" ng-click="goUser()">
+                    <img style="width:60px;height:60px;border-radius:60px" src="../staticresource/userphoto/{{user.userphoto}}" />
+                </div>
+                <div style="float:left;height:60px;padding-top:25px;margin-left:10px;">
+                    <span ng-bind="user.username"></span>
+                </div>
+            </div>
+        </ion-list>-->
+        <ion-list style="background:rgba(0,0,0,0)">
+            <div style="padding:0px;background:rgba(0,0,0,0);">
+                <div class="item" style="border:none;text-align:center;background:rgba(0,0,0,0);background-size:100% 100%;">              
+                    <div style="color:#fff;">
+                        <div ng-bind="user.username" style="display:inline-block"></div>                      
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+        <ion-list>
+            <div style="padding:0px;background:rgba(0,0,0,0);">
+                <ion-item class="item" style="height:110px;padding-top:8px;border:none;border-top:1px solid #D55738; border-bottom:none;background:rgba(0,0,0,0)">
+                    <div class="row">
+                        <div class="col text-center" ng-repeat="dataRow in dataMySource" ng-click="gosub(dataRow)">
+                            <div style="position:relative;">
+                                <i class="icon {{dataRow.image}}" style="font-size:50px;color:#fff">
+                                </i>
+                                <div class="mystydy-announ-elective-number" ng-show="dataRow.title=='训中提问'&&dataRow.showicon">
+                                    <div style="width:8px ;height:8px ;background:#f00;border-radius:50px;margin:3px "> </div>
+                                </div>
+                            </div>
+                            <p style="color:#fff;">{{dataRow.title}}</p>
+                        </div>
+                    </div>
+                </ion-item>
+            </div>
+            <div style="padding:0px;background:#f3f3f3;">
+                <ion-item class="item" style="border:none;padding:0;overflow:hidden;height:300px">
+                    <div class="row" style="padding:0;" ng-repeat="dataRepeat in datameSource">
+                        <div class="text-center col mystudyBorder" style="" ng-repeat="dataRow in dataRepeat.data" ng-click="gosub(dataRow)">
+                            <img style="width:60px; height:60px;" ng-src="{{dataRow.image}}">
+                            <p>{{dataRow.title}}</p>
+                        </div>
+                    </div>
+                </ion-item>
+            </div>
+        </ion-list>
+
+        <!-- 
+        <ion-list>
+            <ion-item class="item" style="height:130px;">
+                <div class="row">
+                    <div class="col text-center" ng-repeat="dataRow in dataMySource" ng-click="gosub(dataRow)">
+                        <i class="icon {{dataRow.image}}" style="font-size:50px;color:#e60000">
+                        </i>
+                        <span class="badge badge-assertive">0</span>
+                        <p>{{dataRow.title}}</p>
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item class="item">
+                <div class="row" ng-repeat="dataRepeat in datameSource">
+                    <div class="text-center col" style="float:left;margin-bottom:10px;" ng-repeat="dataRow in dataRepeat.data" ng-click="gosub(dataRow)">
+                        <img style="width:60px; height:60px;" ng-src="{{dataRow.image}}">
+                        <p>{{dataRow.title}}</p>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list> -->
+    </ion-content>
+</ion-view>

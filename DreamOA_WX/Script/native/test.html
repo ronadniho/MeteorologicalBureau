@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        var cordovaRef = window.PhoneGap || window.Cordova || window.cordova;
+        function success (result) {
+            alert(result);
+        }
+        function fail (result) {
+            alert(result);
+        }
+		function onDeviceReady() {
+            alert('onDeviceReady');
+            /*window.echo("echome", function(echoValue) {
+                        alert(echoValue == "echome"); // should alert true.
+                        });
+          
+            */
+
+        }
+        var test = {
+            map: function(success, fail, str) {
+                cordova.exec(success, fail, "test", "map", [str]);
+            }
+            
+        };
+        function test1(str){
+            alert(str);
+            test.map(function(echoValue){
+                            alert(echoValue == "home");
+                            alert(echoValue);
+                         },
+                         function(err) {
+                            alert(err);
+                         },str);
+        }
+        function test2(){
+            cordova.exec(success, fail, "Test", "abc", ['ok111']);
+        }
+    function test3(){
+        cordova.exec(success, fail, "HelloPlugin", "setFileContents", ['ok']);
+        cordova.exec(success, fail, "HelloPlugin", "getFileContents", []);
+    }
+    </script>
+</head>
+<body>
+<p id="geolocation">test</p>
+    <input type="button" onclick="test2()" value="test1" />
+</body>
+</html>

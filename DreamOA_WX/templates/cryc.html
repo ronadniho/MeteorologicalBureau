@@ -1,0 +1,39 @@
+﻿
+<ion-view>
+    <go-back my-title="出入异常"></go-back>
+    <ion-content class="has-header consumeInfo">
+        <ion-list>
+            <div class="left" id="selectedDate">
+                <span class="demo-wrapper demo-wrapper-datetimeDate">
+                    <input id="datetimeDate-demo" placeholder="请选择日期" />
+                </span>
+                <button class="submit" ng-click="loadMoreInOutList()">搜索</button>
+            </div>
+            <div class="left">
+                <label class="item item-input" style="padding:1px">
+                    <i class="icon ion-search placeholder-icon" style="font-size:x-large; padding-left:5px"></i>
+                    <input type="text" placeholder="可按姓名查找" ng-model="keyxmword" maxlength="10">
+                </label>
+            </div>
+        </ion-list>
+        <div ng-show="false" style="font-size:30px;color:#ccc;text-align:center;padding:50px 0px 0px;">
+            <i class="ion-clipboard" style="font-size:90px"></i><br /><br />
+        </div>
+        <table class="classList">
+            <tr>
+                <th>姓名</th>
+                <th>刷卡点</th>
+                <th>刷卡时间</th>
+            </tr>
+            <tr ng-repeat="item in InOutlist|queryStuList:keyxmword">
+                <td>{{item.bt}}</td>
+                <td>{{item.oplocation}}</td>
+                <td>{{item.opertime|date:'yyyy-MM-dd HH:mm'}}</td>
+            </tr>
+            <tr ng-show="InOutlist.length==0">
+                <td colspan="3" style="text-align:center;">无出入异常信息</td>
+            </tr>
+        </table>
+    </ion-content>
+</ion-view>
+

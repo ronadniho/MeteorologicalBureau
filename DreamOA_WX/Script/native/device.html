@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+
+<script type="text/javascript" charset="utf-8" src="native.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+	//debugger;
+    document.addEventListener("deviceready", onDeviceReady, false);
+    ///
+    function onDeviceReady() {
+        alert('onDeviceReady');
+        alert('platform:' + device.platform);
+        alert('version:' + device.version);
+        alert('uuid:' + device.uuid);
+        alert('model:' + device.model);
+
+    }
+
+    </script>
+  </head>
+  <body>
+
+    <p>checkConnection</p>
+<p><a href="index.html">index</a></p>
+  </body>
+</html>

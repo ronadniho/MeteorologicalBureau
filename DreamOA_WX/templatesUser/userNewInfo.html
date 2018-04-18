@@ -1,0 +1,68 @@
+﻿<ion-header-bar class="bar bar-header bar-positive"><h1 class="title" style="text-align:center">个人中心</h1></ion-header-bar>
+<ion-view title="">
+    <ion-content class="has-tabs" style="background:#e4e4e4;">
+        <ion-list>
+            <div class="item myCenterHeader">
+                <p class="clearfix">
+                    <span class="myPic" ng-click="goUser()"><img src="{{myImg}}" width="100%" /></span>
+                    <span class="myName" ng-bind="userName"></span>
+                </p>
+                <p class="myDepartment"><span>{{deptname}}</span></p>
+            </div>
+            <div class="transparent-bg">
+                <a class="item myCenterList" ng-click="HrefTo('userinfo');">
+                    <p class="clearfix" style="height:26px;">
+                        <i class="myIcon wdxxIcon"></i>
+                        <span class="myCenterName">我的信息</span>
+                        <span class="more"><i class="icon ion-ios-arrow-right"></i></span>
+                    </p>
+                </a>
+                <a class="item myCenterList" ng-click="HrefTo('myFocus');">
+                    <i class="myIcon wdscIcon"></i>
+                    <span class="myCenterName">我的关注</span>
+                    <span class="more"><i class="icon ion-ios-arrow-right"></i></span>
+                </a>
+                <!--
+                <a class="item myCenterList" ng-click="gotoOneCardList(user.workno);">
+                    <i class="myIcon yemxIcon"></i>
+                    <span class="myCenterName">一卡通余额明细</span>
+                    <span class="more"><i class="icon ion-ios-arrow-right"></i></span>
+                </a>
+                <a class="item myCenterList" ng-click="gotoOneCard(user.workno);">
+                    <i class="myIcon jfmxIcon"></i>
+                    <span class="myCenterName">一卡通积分明细</span>
+                    <span class="more"><i class="icon ion-ios-arrow-right"></i></span>
+                </a>
+                <a class="item myCenterList" ng-click="HrefTo('mylike');">
+                    <i class="myIcon wdscIcon"></i>
+                    <span class="myCenterName">我的收藏</span>
+                    <span class="more"><i class="icon ion-ios-arrow-right"></i></span>
+                </a>
+                <a class="item myCenterList" ng-click="HrefTo('wifiInfo');">
+                    <i class="myIcon wifiIcon"></i>
+                    <span class="myCenterName">Wifi账户</span>
+                    <span class="more"><i class="icon ion-ios-arrow-right"></i></span>
+                </a>
+                <li class="item item-toggle myCenterList">
+                    <i class="myIcon ssmmIcon"></i>
+                    <span class="myCenterName">开启手势密码</span>
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" ng-model="ischecked.checked" ng-click="gotohandLogin()">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </li>
+                <a class="item myCenterList" ng-click="HrefTo('xiaoLi');">
+                    <i class="myIcon xlIcon"></i>
+                    <span class="myCenterName">校历</span>
+                    <span class="more"><i class="icon ion-ios-arrow-right"></i></span>
+                </a>
+                -->
+            </div>
+            <button ng-if="showLogout" class="button button-full button-my " ng-click="Logout();">
+                安全退出
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-view>
