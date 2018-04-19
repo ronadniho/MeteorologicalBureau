@@ -1,0 +1,81 @@
+ion-view ion-header-bar.bar-padding {
+  height: .67rem;
+  padding: 0 .35rem;
+}
+ion-view ion-header-bar.bar-padding .icon {
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  display: inline-block;
+  height: 100%;
+}
+ion-view ion-header-bar.bar-padding .icon-back {
+  background-image: url("../img/component/todolist/back.png");
+  background-size: .34rem .29rem;
+  width: .34rem;
+}
+ion-view ion-header-bar.bar-padding .icon-searchs {
+  background-image: url("../img/component/todolist/search.png");
+  width: .33rem;
+  background-size: .34rem .33rem;
+  position: absolute;
+  right: .35rem;
+}
+ion-view ion-header-bar.bar-padding h3 {
+  height: 100%;
+  line-height: .67rem;
+  left: .88rem;
+  right: .88rem;
+  position: absolute;
+  text-align: center;
+  font-size: .26rem;
+  color: #fff;
+}
+ion-view .has-header {
+  top: .67rem;
+}
+ion-view ion-content ion-list ion-item.todoContainer {
+  padding: .21rem .34rem .30rem .34rem;
+  margin: 0 0 .18rem 0;
+}
+ion-view ion-content ion-list ion-item.todoContainer .todo_title {
+  width: 100%;
+  margin-bottom: .15rem;
+}
+ion-view ion-content ion-list ion-item.todoContainer .todo_title .lt img {
+  vertical-align: middle;
+  width: .26rem;
+  height: .26rem;
+}
+ion-view ion-content ion-list ion-item.todoContainer .todo_title .lt img.icon-middle {
+  width: .50rem;
+  height: .50rem;
+}
+ion-view ion-content ion-list ion-item.todoContainer .todo_title .lt span {
+  vertical-align: middle;
+  font-size: .25rem;
+  color: #333;
+  margin: 0 .08rem;
+}
+ion-view ion-content ion-list ion-item.todoContainer .todo_title .rt {
+  text-align: right;
+}
+ion-view ion-content ion-list ion-item.todoContainer .todo_title .rt img {
+  vertical-align: middle;
+  width: .17rem;
+  height: .17rem;
+}
+ion-view ion-content ion-list ion-item.todoContainer .todo_title .rt span {
+  vertical-align: middle;
+  color: #999;
+  font-size: .17rem;
+}
+ion-view ion-content ion-list ion-item.todoContainer .clearfix p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: normal;
+  color: #333;
+  font-size: .24rem;
+}

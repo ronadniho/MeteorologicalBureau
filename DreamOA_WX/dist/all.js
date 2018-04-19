@@ -10384,6 +10384,12 @@ APPController.controller("testDataController", function ($scope, getDataSource) 
     $scope.loginData.logname = '';
     $scope.loginData.password = '';
 
+    /TODO 开发设置的账号密码/
+    localStorage.logname='guanliyuan';
+    localStorage.password='11111111';
+    /******结束**********/
+
+
     if(localStorage.logname&&localStorage.password){
         $('#myCheck').prop('checked',true);
         $scope.loginData.logname = localStorage.logname;
@@ -18537,6 +18543,8 @@ APPController.controller("welcomeuserController", function($rootScope, $scope, $
 
 
         $scope.godetail = function(item) {
+            console.log(item)
+            debugger
             if (dotNet) {
                 $state.go("xformTabComment", {
                     formId: item.formId,
